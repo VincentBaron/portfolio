@@ -69,45 +69,11 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
               aria-label="2 Weeks to Solve It - Home"
             >
-              <div className="transform group-hover:scale-105 transition-transform">
-                <svg 
-                  className="h-8 sm:h-10 w-auto" 
-                  viewBox="0 0 580 180" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style={{ stopColor: '#2563eb', stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: '#9333ea', stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <text 
-                    x="290" 
-                    y="70" 
-                    fontFamily="Inter, sans-serif" 
-                    fontSize="80" 
-                    fontWeight="800" 
-                    fill="url(#logo-gradient)"
-                    letterSpacing="-0.02em"
-                    textAnchor="middle"
-                  >
-                    (2 WEEKS)
-                  </text>
-                  <text 
-                    x="290" 
-                    y="150" 
-                    fontFamily="Inter, sans-serif" 
-                    fontSize="80" 
-                    fontWeight="800" 
-                    fill="url(#logo-gradient)"
-                    letterSpacing="-0.02em"
-                    textAnchor="middle"
-                  >
-                    TO SOLVE IT
-                  </text>
-                </svg>
-              </div>
+              <img 
+                src="/logoBrand.png" 
+                alt="2 Weeks to Solve It Logo" 
+                className="h-14 sm:h-20 w-auto transform group-hover:scale-105 transition-transform"
+              />
             </a>
           </div>
 

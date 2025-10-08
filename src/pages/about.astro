@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About - 2 Weeks to Solve It"
+  description="Meet the founder behind 2 Weeks to Solve It. Full-stack builder, Go expert, and AI specialist helping businesses ship fast and scale smart."
+>
+  <div class="pt-16 sm:pt-20 min-h-screen bg-blue-50">
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        {/* Heading */}
+        <div class="text-center mb-16">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Hi, I'm Vincent
+          </h1>
+          <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed">
+            I build production-ready software in 2 weeks—fast, scalable, and AI-powered.
+          </p>
+        </div>
+
+        {/* Bio Section */}
+        <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-xl border-2 border-gray-100 mb-12">
+          <div class="prose prose-lg max-w-none">
+            <p class="text-lg text-gray-700 leading-relaxed mb-4">
+              I'm a <span class="font-semibold text-blue-600">full-stack builder</span> with a deep focus on 
+              <span class="font-semibold"> Go backends</span>, <span class="font-semibold">AI integration</span> (RAG, LLMs), 
+              and shipping products that scale from day one.
+            </p>
+            
+            <p class="text-lg text-gray-700 leading-relaxed mb-4">
+              Over the years, I've helped startups and businesses move from idea to production in weeks, not months. 
+              My approach is simple: <span class="font-semibold">solve the right problem, ship fast, iterate smart</span>.
+            </p>
+            
+            <p class="text-lg text-gray-700 leading-relaxed mb-4">
+              I believe in <span class="font-semibold text-purple-600">building in public</span>, sharing what I learn, 
+              and using technology as a force for good. That's why <a href="/impact" class="text-blue-600 hover:text-purple-600 underline decoration-2 underline-offset-2 transition-colors duration-200">5% of profits go to social and environmental impact</a>.
+            </p>
+
+            <p class="text-lg text-gray-700 leading-relaxed">
+              When I'm not coding, you'll find me exploring new AI models, contributing to open source, 
+              or thinking about how we can make tech more accessible and impactful.
+            </p>
+          </div>
+        </div>
+
+        {/* Visual Pillars */}
+        <div class="mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 text-center mb-10">
+            What I Stand For
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Speed */}
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-blue-100 hover:border-blue-300 transition-colors duration-200">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Speed</h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    Move fast without breaking things. Ship in 2 weeks, not 2 months.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Scalability */}
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-purple-100 hover:border-purple-300 transition-colors duration-200">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Scalability</h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    Built to handle growth from day one. No rewrites, no regrets.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* AI */}
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-indigo-100 hover:border-indigo-300 transition-colors duration-200">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">AI-Powered</h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    Leverage RAG, LLMs, and modern AI to solve real problems smartly.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Purpose */}
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-green-100 hover:border-green-300 transition-colors duration-200">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Purpose</h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    Business as a force for good. Tech that makes a positive impact.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Links */}
+        <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 sm:p-10">
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">
+            Want to learn more?
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <a
+              href="/services"
+              class="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg border-2 border-transparent hover:border-blue-300 transition-all duration-200 group"
+            >
+              <svg class="w-8 h-8 text-blue-600 mb-3 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+              </svg>
+              <span class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">Services</span>
+            </a>
+
+            <a
+              href="/work"
+              class="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg border-2 border-transparent hover:border-purple-300 transition-all duration-200 group"
+            >
+              <svg class="w-8 h-8 text-purple-600 mb-3 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+              </svg>
+              <span class="text-lg font-semibold text-gray-900 group-hover:text-purple-600 transition-colors duration-200">Case Studies</span>
+            </a>
+
+            <a
+              href="/impact"
+              class="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg border-2 border-transparent hover:border-green-300 transition-all duration-200 group"
+            >
+              <svg class="w-8 h-8 text-green-600 mb-3 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+              <span class="text-lg font-semibold text-gray-900 group-hover:text-green-600 transition-colors duration-200">Our Impact</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

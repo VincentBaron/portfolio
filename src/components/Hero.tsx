@@ -9,7 +9,8 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         {/* Headline */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
           Built fast.{' '}
-          <span className="block sm:inline">Built to scale.</span>{' '}
+          <span className="block sm:inline">Built to scale.</span>
+          <br />
           <span className="text-gradient">Built with AI.</span>
         </h1>
 
@@ -20,10 +21,10 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             <span className="font-semibold text-blue-600">2 weeks</span>.
           </p>
           <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-            Scalable Go backends • AI-powered solutions (RAG/LLM) • Production-ready code
+            Scalable MVPs • AI-powered solutions (RAG/LLM) • Production-ready features
           </p>
           <p className="text-sm sm:text-base text-purple-600 font-medium mt-4">
-            🌍 5% of net profit donated to Ramina
+            🌍 5% of net profits invested in projects driving social and environmental impact.
           </p>
         </div>
 

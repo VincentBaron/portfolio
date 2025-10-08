@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
 import ValueProps from '../components/ValueProps';
+import StackBadges from '../components/StackBadges';
 import SprintTimeline from '../components/SprintTimeline';
 ---
 
@@ -9,6 +10,7 @@ import SprintTimeline from '../components/SprintTimeline';
   <div class="pt-16 sm:pt-20 min-h-screen bg-blue-50">
     <Hero client:load calendarLink="https://cal.com/2weekstosolve" />
     <ValueProps />
+    <StackBadges client:load />
     <SprintTimeline />
   </div>
 </BaseLayout>
