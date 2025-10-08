@@ -1,34 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero';
+import ValueProps from '../components/ValueProps';
+import SprintTimeline from '../components/SprintTimeline';
 ---
 
 <BaseLayout>
-  <div class="pt-16 sm:pt-20 min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-    <!-- Hero Section - Temporary placeholder -->
-    <section class="min-h-[80vh] flex items-center justify-center">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-          Build something
-          <span class="text-gradient"> Remarkable</span>
-        </h1>
-        <p class="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
-          Transform your vision into reality in just 2 weeks. Fast, scalable, AI-powered solutions that deliver real results.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="/contact"
-            class="inline-flex items-center px-8 py-4 rounded-lg text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Book a Call
-          </a>
-          <a
-            href="/work"
-            class="inline-flex items-center px-8 py-4 rounded-lg text-lg font-semibold text-gray-700 bg-white hover:bg-gray-50 border-2 border-gray-300 hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200"
-          >
-            View Our Work
-          </a>
-        </div>
-      </div>
-    </section>
+  <div class="pt-16 sm:pt-20 min-h-screen bg-blue-50">
+    <Hero client:load calendarLink="https://cal.com/2weekstosolve" />
+    <ValueProps />
+    <SprintTimeline />
   </div>
 </BaseLayout>

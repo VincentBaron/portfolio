@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../styles/global.css';
 
 interface Props {
@@ -53,5 +54,6 @@ const canonicalURL = new URL(currentPath, Astro.site);
     <main class="min-h-screen">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
