@@ -23,7 +23,7 @@ export default function CaseStudyCard({
     >
       {/* Thumbnail */}
       {thumbnail ? (
-        <div className="relative h-48 sm:h-56 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
+        <div className="relative h-32 sm:h-40 lg:h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
           <img
             src={thumbnail}
             alt=""
@@ -32,7 +32,7 @@ export default function CaseStudyCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       ) : (
-        <div className="h-48 sm:h-56 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
+        <div className="h-32 sm:h-40 lg:h-48 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
           <svg
             className="w-16 h-16 text-gray-400 group-hover:text-blue-500 transition-colors duration-300"
             fill="none"
@@ -50,10 +50,10 @@ export default function CaseStudyCard({
       )}
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-3 sm:p-4 lg:p-6">
         {/* Tags */}
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-3">
             {tags.map((tag, index) => (
               <span
                 key={index}
@@ -66,12 +66,12 @@ export default function CaseStudyCard({
         )}
 
         {/* Title */}
-        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">
           {title}
         </h3>
 
         {/* Summary */}
-        <p className="text-base text-gray-600 leading-relaxed mb-4 line-clamp-3">
+        <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4 line-clamp-3">
           {summary}
         </p>
 

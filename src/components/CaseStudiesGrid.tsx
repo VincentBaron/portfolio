@@ -1,5 +1,6 @@
 import React from 'react';
 import CaseStudyCard from './CaseStudyCard';
+import ServicesCTA from './ServicesCTA';
 
 export default function CaseStudiesGrid() {
   const caseStudies = [
@@ -24,20 +25,17 @@ export default function CaseStudiesGrid() {
   ];
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8">
+    <section className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-10">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
             Case Studies
           </h1>
-          <p className="text-xl text-gray-600">
-            Real projects, real results—see how I've helped businesses ship fast and scale smart
-          </p>
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {caseStudies.map((study, index) => (
             <CaseStudyCard
               key={index}
@@ -50,31 +48,15 @@ export default function CaseStudiesGrid() {
         </div>
 
         {/* Empty State / Coming Soon */}
-        <div className="mt-10 text-center">
-          <p className="text-gray-500 mb-4">
-            More case studies coming soon. Want to be featured?
-          </p>
-          <a
-            href="https://cal.com/2weekstosolve"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Start Your Project
-            <svg
-              className="w-5 h-5 ml-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </a>
+        <div className="mt-6 sm:mt-8 lg:mt-10 text-center">
+          <div className="flex justify-center">
+            <ServicesCTA 
+              variant="purple"
+              label="Start Your Project"
+              showArrow={true}
+              className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
+            />
+          </div>
         </div>
       </div>
     </section>

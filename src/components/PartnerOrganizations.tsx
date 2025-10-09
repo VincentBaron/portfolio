@@ -52,59 +52,52 @@ export default function PartnerOrganizations() {
   ];
 
   return (
-    <div className="mt-16">
+    <div className="mt-6 sm:mt-8 lg:mt-12">
       {/* Funding Counter */}
-      <div className="mb-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border-2 border-blue-100">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mb-6 sm:mb-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 sm:p-6 border-2 border-blue-100">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex-1">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Impact Investment
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2">
+              Total funds raised
             </h3>
-            <p className="text-gray-600">
-              Total funding contributed to my partner organizations
-            </p>
           </div>
           <div className="text-center">
-            <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
               ${count.toLocaleString()}
             </div>
-            <p className="text-sm text-gray-500 mt-2">and growing</p>
           </div>
         </div>
       </div>
 
       {/* Section Header */}
-      <div className="mb-8">
-        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+      <div className="mb-4 sm:mb-6">
+        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
           My Partners
         </h3>
-        <p className="text-base text-gray-600 max-w-3xl">
-          I'm proud to collaborate with organizations making a real difference in the world
-        </p>
       </div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {partners.map((partner, index) => (
             <a
               key={index}
               href={partner.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 hover:border-blue-300 transform hover:-translate-y-1"
+              className="group bg-white rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 hover:border-blue-300 transform hover:-translate-y-1"
             >
               {/* Focus Badge */}
-              <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-semibold mb-4">
+              <div className="inline-block px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 {partner.focus}
               </div>
 
               {/* Partner Name */}
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
                 {partner.name}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
                 {partner.description}
               </p>
 

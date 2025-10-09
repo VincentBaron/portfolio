@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CalendlyModal from './CalendlyModal';
 
 interface HeroProps {
   calendarLink?: string;
@@ -9,6 +10,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
   const [currentSentence, setCurrentSentence] = useState(0);
   const [showButtons, setShowButtons] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const sentences = [
     "I took note of your issue 🙏",
@@ -58,22 +60,21 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
   };
 
   const handleBookCall = () => {
-    const encodedPainpoint = encodeURIComponent(painpoint);
-    window.open(`${calendarLink}?painpoint=${encodedPainpoint}`, '_blank');
+    setIsModalOpen(true);
   };
 
   return (
-    <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 pb-0">
+    <section className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-0">
       <div className="max-w-7xl mx-auto w-full pb-0">
         {/* Hero Content with Profile Picture */}
-        <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-center mb-10">
+        <div className="grid lg:grid-cols-[250px_1fr] gap-4 sm:gap-6 lg:gap-8 items-center mb-3 sm:mb-4 lg:mb-6">
           {/* Left Side - Profile Picture */}
           <div className="flex justify-center lg:justify-start order-2 lg:order-1">
             <div className="relative">
               {/* Decorative gradient background */}
               <div className="absolute -inset-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-20 blur-xl"></div>
               {/* Profile image container */}
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56">
                 <img
                   src="/profilePic.png"
                   alt="Vincent Baron - Founder"
@@ -87,22 +88,22 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
               Built fast.{' '}
               <span className="block sm:inline">Built to scale.</span>
               <br />
               <span className="text-gradient">Built with AI.</span>
             </h1>
 
-            <div className="mb-8">
-              <p className="text-lg sm:text-xl text-gray-700 mb-3 leading-relaxed">
+            <div className="mb-2 sm:mb-3 lg:mb-4">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed">
                 Solve your painpoint in just{' '}
                 <span className="font-semibold text-blue-600">2 weeks</span>.
               </p>
-              <p className="text-base text-gray-600 leading-relaxed">
+              <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
                 Scalable MVPs • AI-powered solutions (RAG/LLM) • Production-ready features
               </p>
-              <p className="text-sm sm:text-base text-purple-600 font-medium mt-3">
+              <p className="text-xs sm:text-sm text-purple-600 font-medium mt-1 sm:mt-2">
                 🌍 5% of net profits invested in projects driving social and environmental impact.
               </p>
             </div>
@@ -110,7 +111,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         </div>
 
         {/* AI Input Section - ChatGPT Style */}
-        <div className="mb-8">
+        <div className="mb-2 sm:mb-4 lg:mb-6">
           <div className="max-w-3xl mx-auto text-center">
             {currentSentence === 0 && (
               <form onSubmit={handleSubmit}>
@@ -120,7 +121,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                     value={painpoint}
                     onChange={(e) => setPainpoint(e.target.value)}
                     placeholder="Describe your painpoint..."
-                    className="w-full rounded-full border-2 border-gray-300 px-6 py-4 pr-14 text-base focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-lg hover:shadow-xl bg-white"
+                    className="w-full rounded-full border-2 border-gray-300 px-4 sm:px-6 py-2 sm:py-3 lg:py-4 pr-12 sm:pr-14 text-sm sm:text-base focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-lg hover:shadow-xl bg-white"
                   />
                   <button
                     type="submit"
@@ -148,10 +149,10 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
             {/* AI Response - Sentences fade in one by one */}
             {currentSentence > 0 && !showButtons && (
-              <div className="min-h-[60px] flex items-center justify-center">
+              <div className="min-h-[40px] sm:min-h-[50px] lg:min-h-[60px] flex items-center justify-center">
                 <p 
                   key={currentSentence} 
-                  className={`text-lg sm:text-xl text-gray-800 font-medium animate-fade-in ${
+                  className={`text-sm sm:text-base lg:text-lg text-gray-800 font-medium animate-fade-in ${
                     isTransitioning ? 'animate-fade-out' : ''
                   }`}
                 >
@@ -165,7 +166,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center transition-all duration-700 ease-in-out opacity-0 animate-fade-in-slow">
                 <button
                   onClick={handleBookCall}
-                  className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 min-w-[220px] justify-center"
+                  className="group inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 min-w-[180px] sm:min-w-[220px] justify-center"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -239,13 +240,13 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         </div>
 
         {/* Testimonials */}
-        <div className="mt-6 pt-6 text-center">
-          <p className="text-sm text-gray-600 mb-4 font-medium">They Trusted Me</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto">
+        <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
+          <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">They Trusted Me</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
             {/* Testimonial 1 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-              <div className="text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-3 leading-relaxed">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+              <div className="text-lg sm:text-xl mb-1">"</div>
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
                 From concept to MVP in 2 weeks. The AI features Vincent built have already increased our conversions by 40%.
               </p>
               <div className="flex items-center gap-2">
@@ -260,9 +261,9 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-              <div className="text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-3 leading-relaxed">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+              <div className="text-lg sm:text-xl mb-1">"</div>
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
                 Vincent transformed our product vision into reality. His sprint methodology eliminated all the usual friction.
               </p>
               <div className="flex items-center gap-2">
@@ -277,9 +278,9 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-              <div className="text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-3 leading-relaxed">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+              <div className="text-lg sm:text-xl mb-1">"</div>
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
                 Exceptional technical skills combined with business acumen. Vincent delivered a scalable solution that grows with us.
               </p>
               <div className="flex items-center gap-2">
@@ -295,7 +296,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           </div>
 
           {/* Stats and Companies Section */}
-          <div className="mt-8 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+          <div className="mt-2 sm:mt-4 lg:mt-6 flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-8 xl:gap-12">
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-6 items-center">
               <div className="flex flex-col items-center">
@@ -362,6 +363,13 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           </div>
         </div>
       </div>
+
+      {/* Calendly Modal */}
+      <CalendlyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        painpoint={painpoint}
+      />
     </section>
   );
 }

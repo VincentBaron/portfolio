@@ -47,6 +47,16 @@
   .animation-delay-2000 {
     animation-delay: 2s;
   }
+
+  /* Modal z-index management */
+  body.modal-open header {
+    z-index: 40 !important;
+  }
+  
+  /* Ensure modal appears above everything */
+  .calendly-modal {
+    z-index: 999999 !important;
+  }
   
   .animation-delay-4000 {
     animation-delay: 4s;

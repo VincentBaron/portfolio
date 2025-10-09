@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CalendlyModal from './CalendlyModal';
 
 interface NavLink {
   label: string;
@@ -19,6 +20,7 @@ interface HeaderProps {
 export default function Header({ currentPath = '/' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,14 +140,12 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <a
-              href="https://cal.com/2weekstosolve"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setIsModalOpen(true)}
               className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
             >
               Book a Call
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -224,18 +224,24 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             );
           })}
           <div className="pt-4">
-            <a
-              href="https://cal.com/2weekstosolve"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsModalOpen(true);
+              }}
               className="block w-full text-center px-5 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 transition-all duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
             >
               Book a Call
-            </a>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Calendly Modal */}
+      <CalendlyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </header>
   );
 }
