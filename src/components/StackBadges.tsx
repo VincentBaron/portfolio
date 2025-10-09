@@ -83,7 +83,7 @@ export default function StackBadges() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Our Tech Stack pStackBa
+            My Tech Stack
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Modern, proven technologies that deliver performance, reliability, and scale

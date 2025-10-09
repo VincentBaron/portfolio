@@ -32,7 +32,7 @@ export default function CaseStudiesGrid() {
             Case Studies
           </h1>
           <p className="text-xl text-gray-600">
-            Real projects, real results—see how we've helped businesses ship fast and scale smart
+            Real projects, real results—see how I've helped businesses ship fast and scale smart
           </p>
         </div>
 

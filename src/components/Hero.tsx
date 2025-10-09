@@ -4,8 +4,8 @@ interface HeroProps {
 
 export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }: HeroProps) {
   return (
-    <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-7xl mx-auto w-full">
+    <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 pb-0">
+      <div className="max-w-7xl mx-auto w-full pb-0">
         {/* Hero Content with Profile Picture */}
         <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-center mb-10">
           {/* Left Side - Profile Picture */}
@@ -130,13 +130,13 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
         {/* Testimonials */}
         <div className="mt-6 pt-6 text-center">
-          <p className="text-sm text-gray-600 mb-4 font-medium">They Trusted Us</p>
+          <p className="text-sm text-gray-600 mb-4 font-medium">They Trusted Me</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto">
             {/* Testimonial 1 */}
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
               <div className="text-xl mb-1">"</div>
               <p className="text-xs text-gray-700 mb-3 leading-relaxed">
-                From concept to MVP in 2 weeks. The AI features they built have already increased our conversions by 40%.
+                From concept to MVP in 2 weeks. The AI features Vincent built have already increased our conversions by 40%.
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
@@ -153,7 +153,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
               <div className="text-xl mb-1">"</div>
               <p className="text-xs text-gray-700 mb-3 leading-relaxed">
-                They transformed our product vision into reality. Their sprint methodology eliminated all the usual friction.
+                Vincent transformed our product vision into reality. His sprint methodology eliminated all the usual friction.
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
@@ -170,7 +170,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
               <div className="text-xl mb-1">"</div>
               <p className="text-xs text-gray-700 mb-3 leading-relaxed">
-                Exceptional technical skills combined with business acumen. They delivered a scalable solution that grows with us.
+                Exceptional technical skills combined with business acumen. Vincent delivered a scalable solution that grows with us.
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">

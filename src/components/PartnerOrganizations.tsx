@@ -61,7 +61,7 @@ export default function PartnerOrganizations() {
               Impact Investment
             </h3>
             <p className="text-gray-600">
-              Total funding contributed to our partner organizations
+              Total funding contributed to my partner organizations
             </p>
           </div>
           <div className="text-center">
@@ -76,10 +76,10 @@ export default function PartnerOrganizations() {
       {/* Section Header */}
       <div className="mb-8">
         <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-          Our Partners
+          My Partners
         </h3>
         <p className="text-base text-gray-600 max-w-3xl">
-          We're proud to collaborate with organizations making a real difference in the world
+          I'm proud to collaborate with organizations making a real difference in the world
         </p>
       </div>
 
