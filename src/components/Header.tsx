@@ -6,13 +6,10 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Process', href: '/process' },
-  { label: 'Work', href: '/work' },
-  { label: 'Impact', href: '/impact' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', href: '#home' },
+  { label: 'Process', href: '#process' },
+  { label: 'Work', href: '#work' },
+  { label: 'Impact', href: '#impact' },
 ];
 
 interface HeaderProps {
@@ -46,10 +43,45 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     }
   };
 
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'process', 'work', 'impact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const isCurrentPage = (href: string) => {
-    if (href === '/' && currentPath === '/') return true;
-    if (href !== '/' && currentPath.startsWith(href)) return true;
-    return false;
+    const section = href.replace('#', '');
+    return section === activeSection;
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   return (
@@ -65,7 +97,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a
-              href="/"
+              href="#home"
+              onClick={(e) => handleNavClick(e, '#home')}
               className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
               aria-label="2 Weeks to Solve It - Home"
             >
@@ -85,6 +118,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                     isCurrent
                       ? 'text-blue-600'
@@ -101,7 +135,9 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <a
-              href="/contact"
+              href="https://cal.com/2weekstosolve"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
             >
               Book a Call
@@ -171,13 +207,13 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   isCurrent
                     ? 'text-blue-600'
                     : 'text-gray-700 hover:text-blue-600'
                 }`}
                 aria-current={isCurrent ? 'page' : undefined}
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
               </a>
@@ -185,7 +221,9 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
           })}
           <div className="pt-4">
             <a
-              href="/contact"
+              href="https://cal.com/2weekstosolve"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full text-center px-5 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >

@@ -24,20 +24,20 @@ export default function CaseStudiesGrid() {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
+    <section className="px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <div className="mb-10">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
             Case Studies
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+          </h1>
+          <p className="text-xl text-gray-600">
             Real projects, real results—see how we've helped businesses ship fast and scale smart
           </p>
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {caseStudies.map((study, index) => (
             <CaseStudyCard
               key={index}
@@ -50,12 +50,14 @@ export default function CaseStudiesGrid() {
         </div>
 
         {/* Empty State / Coming Soon */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-500 mb-6">
+        <div className="mt-10 text-center">
+          <p className="text-gray-500 mb-4">
             More case studies coming soon. Want to be featured?
           </p>
           <a
-            href="/contact"
+            href="https://cal.com/2weekstosolve"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
           >
             Start Your Project
