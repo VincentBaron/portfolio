@@ -1,8 +1,67 @@
+import { useState, useEffect } from 'react';
+
 interface HeroProps {
   calendarLink?: string;
 }
 
 export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }: HeroProps) {
+  const [painpoint, setPainpoint] = useState('');
+  const [currentSentence, setCurrentSentence] = useState(0);
+  const [showButtons, setShowButtons] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  const sentences = [
+    "I took note of your issue 🙏",
+    "I can help you fix that ✅",
+    "Want an actionable plan free of charge ? 🚀",
+  ];
+
+  useEffect(() => {
+    if (currentSentence > 0 && currentSentence < sentences.length) {
+      // Wait for sentence to display, then fade out and show next
+      const fadeOutTimeout = setTimeout(() => {
+        setIsTransitioning(true);
+      }, 1300); // Display for 1.3 seconds
+      
+      const nextSentenceTimeout = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentSentence(currentSentence + 1);
+      }, 1700); // Start fade out at 1.3s, complete transition by 1.7s
+      
+      return () => {
+        clearTimeout(fadeOutTimeout);
+        clearTimeout(nextSentenceTimeout);
+      };
+    } else if (currentSentence === sentences.length) {
+      // Fade out last sentence, then show buttons
+      const fadeOutTimeout = setTimeout(() => {
+        setIsTransitioning(true);
+      }, 1300);
+      
+      const showButtonsTimeout = setTimeout(() => {
+        setShowButtons(true);
+      }, 1700);
+      
+      return () => {
+        clearTimeout(fadeOutTimeout);
+        clearTimeout(showButtonsTimeout);
+      };
+    }
+  }, [currentSentence]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!painpoint.trim()) return;
+    
+    // Start showing sentences
+    setCurrentSentence(1);
+  };
+
+  const handleBookCall = () => {
+    const encodedPainpoint = encodeURIComponent(painpoint);
+    window.open(`${calendarLink}?painpoint=${encodedPainpoint}`, '_blank');
+  };
+
   return (
     <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 pb-0">
       <div className="max-w-7xl mx-auto w-full pb-0">
@@ -37,7 +96,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
             <div className="mb-8">
               <p className="text-lg sm:text-xl text-gray-700 mb-3 leading-relaxed">
-                Transform your vision into reality in just{' '}
+                Solve your painpoint in just{' '}
                 <span className="font-semibold text-blue-600">2 weeks</span>.
               </p>
               <p className="text-base text-gray-600 leading-relaxed">
@@ -47,84 +106,135 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                 🌍 5% of net profits invested in projects driving social and environmental impact.
               </p>
             </div>
+          </div>
+        </div>
 
-            {/* CTAs - Moved here */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
-              {/* Primary CTA */}
-              <a
-                href={calendarLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 min-w-[220px] justify-center"
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+        {/* AI Input Section - ChatGPT Style */}
+        <div className="mb-8">
+          <div className="max-w-3xl mx-auto text-center">
+            {currentSentence === 0 && (
+              <form onSubmit={handleSubmit}>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={painpoint}
+                    onChange={(e) => setPainpoint(e.target.value)}
+                    placeholder="Describe your painpoint..."
+                    className="w-full rounded-full border-2 border-gray-300 px-6 py-4 pr-14 text-base focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-lg hover:shadow-xl bg-white"
                   />
-                </svg>
-                Book a 20-min call
-                <svg
-                  className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </a>
+                  <button
+                    type="submit"
+                    disabled={!painpoint.trim()}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-30 disabled:cursor-not-allowed transition-all transform hover:scale-105 shadow-lg"
+                    title="Send"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2.5"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            )}
 
-              {/* Secondary CTA */}
-              <a
-                href="/work"
-                className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white/80 backdrop-blur-sm hover:bg-white border-2 border-gray-300 hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 min-w-[220px] justify-center"
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
+            {/* AI Response - Sentences fade in one by one */}
+            {currentSentence > 0 && !showButtons && (
+              <div className="min-h-[60px] flex items-center justify-center">
+                <p 
+                  key={currentSentence} 
+                  className={`text-lg sm:text-xl text-gray-800 font-medium animate-fade-in ${
+                    isTransitioning ? 'animate-fade-out' : ''
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                See case studies
-                <svg
-                  className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
+                  {sentences[currentSentence - 1]}
+                </p>
+              </div>
+            )}
+
+            {/* Buttons appear after all sentences */}
+            {showButtons && (
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center transition-all duration-700 ease-in-out opacity-0 animate-fade-in-slow">
+                <button
+                  onClick={handleBookCall}
+                  className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 min-w-[220px] justify-center"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </a>
-            </div>
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                    />
+                  </svg>
+                  Book a 20-min call
+                  <svg
+                    className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </button>
+
+                <a
+                  href="/work"
+                  className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white/80 backdrop-blur-sm hover:bg-white border-2 border-gray-300 hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 min-w-[220px] justify-center"
+                >
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  See case studies
+                  <svg
+                    className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
