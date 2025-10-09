@@ -20,7 +20,7 @@ export default function ServicesMainCTA() {
               className="px-6 py-3 text-base"
             />
             <a
-              href="/work"
+              href="#work"
               className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 border-2 border-gray-300 hover:border-blue-600 transition-all duration-200"
             >
               View Case Studies

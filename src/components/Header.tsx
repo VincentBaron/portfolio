@@ -45,6 +45,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     }
   };
 
+
+
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
@@ -57,17 +59,27 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
+            if (activeSection !== section) {
+              setActiveSection(section);
+              // Update URL hash without triggering navigation
+              window.history.replaceState(null, '', `#${section}`);
+            }
             break;
           }
         }
       }
     };
 
+    // Set initial active section from URL hash
+    const hash = window.location.hash.replace('#', '');
+    if (hash && ['home', 'process', 'work', 'impact'].includes(hash)) {
+      setActiveSection(hash);
+    }
+
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection]);
 
   const isCurrentPage = (href: string) => {
     const section = href.replace('#', '');
@@ -77,8 +89,13 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    const target = document.querySelector(href);
+    const targetId = href.replace('#', '');
+    const target = document.getElementById(targetId);
     if (target) {
+      // Update URL hash
+      window.history.pushState(null, '', href);
+      setActiveSection(targetId);
+      // Smooth scroll to target
       target.scrollIntoView({
         behavior: 'smooth',
         block: 'start'

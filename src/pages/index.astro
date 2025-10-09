@@ -47,17 +47,31 @@ import PartnerOrganizations from '../components/PartnerOrganizations';
 </BaseLayout>
 
 <script>
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+  // Handle initial page load with hash
+  document.addEventListener('DOMContentLoaded', function() {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
       if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        setTimeout(() => {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
       }
-    });
+    }
+  });
+
+  // Handle browser back/forward navigation
+  window.addEventListener('popstate', function() {
+    const hash = window.location.hash || '#home';
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   });
 </script>

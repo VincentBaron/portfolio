@@ -198,7 +198,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                 </button>
 
                 <a
-                  href="/work"
+                  href="#work"
                   className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white/80 backdrop-blur-sm hover:bg-white border-2 border-gray-300 hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 min-w-[220px] justify-center"
                 >
                   <svg
