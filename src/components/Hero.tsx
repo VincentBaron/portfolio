@@ -180,7 +180,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                       d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                     />
                   </svg>
-                  Book a 20-min call
+                  Book a 20-mins call
                   <svg
                     className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
                     fill="none"
@@ -294,31 +294,70 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             </div>
           </div>
 
-          {/* Stats Section */}
-          <div className="mt-8 flex flex-wrap justify-center gap-6 items-center">
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                50+
+          {/* Stats and Companies Section */}
+          <div className="mt-8 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center gap-6 items-center">
+              <div className="flex flex-col items-center">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  50+
+                </div>
+                <p className="text-xs text-gray-600 mt-1">Projects Delivered</p>
               </div>
-              <p className="text-xs text-gray-600 mt-1">Projects Delivered</p>
+              <div className="flex flex-col items-center">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  98%
+                </div>
+                <p className="text-xs text-gray-600 mt-1">Client Satisfaction</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  2 Weeks
+                </div>
+                <p className="text-xs text-gray-600 mt-1">Average Sprint Time</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  4.9/5
+                </div>
+                <p className="text-xs text-gray-600 mt-1">Average Rating</p>
+              </div>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                98%
+
+            {/* Vertical Divider */}
+            <div className="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-60"></div>
+
+            {/* Companies */}
+            <div className="text-center">
+              <p className="text-sm text-gray-600 font-medium mb-4">Companies I worked with</p>
+              <div className="flex items-center justify-center gap-6 md:gap-8">
+                {/* Qomon Logo */}
+                <div className="group transition-all duration-300 hover:scale-105">
+                  <img
+                    src="/qomonLogo.png"
+                    alt="Qomon"
+                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                  />
+                </div>
+                
+                {/* Side Logo */}
+                <div className="group transition-all duration-300 hover:scale-105">
+                  <img
+                    src="/sideLogo.png"
+                    alt="Side"
+                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                  />
+                </div>
+                
+                {/* Mitsubishi Logo */}
+                <div className="group transition-all duration-300 hover:scale-105">
+                  <img
+                    src="/mitsubishi.avif"
+                    alt="Mitsubishi"
+                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                  />
+                </div>
               </div>
-              <p className="text-xs text-gray-600 mt-1">Client Satisfaction</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                2 Weeks
-              </div>
-              <p className="text-xs text-gray-600 mt-1">Average Sprint Time</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                4.9/5
-              </div>
-              <p className="text-xs text-gray-600 mt-1">Average Rating</p>
             </div>
           </div>
         </div>
