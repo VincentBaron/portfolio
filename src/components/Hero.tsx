@@ -97,7 +97,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
               <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed">
-                Solve your painpoint in just{' '}
+                I'll solve your painpoint in just{' '}
                 <span className="font-semibold text-blue-600">2 weeks</span>.
               </p>
               <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
