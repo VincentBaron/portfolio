@@ -189,64 +189,82 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               </div>
             )}
 
-            {/* Result State - Inline Solution Cards */}
+            {/* Result State - Futuristic AI Solution Cards */}
             {flowState === 'result' && sprintPlan && (
-              <div className="max-w-5xl mx-auto">
-                <div className="grid md:grid-cols-3 gap-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-6">
                   {/* 1. Complete Solution */}
-                  <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-                    <div className="text-center mb-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
-                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
+                  <div className="group relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-indigo-100 rounded-2xl p-6 shadow-xl border border-blue-200 hover:border-blue-300 transition-all duration-500 hover:shadow-blue-200/50">
+                    {/* Animated background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Glowing orb effect */}
+                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200/30 rounded-full blur-xl group-hover:bg-blue-300/40 transition-all duration-500"></div>
+                    
+                    <div className="relative">
+                      {/* Time badge */}
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="px-3 py-1 bg-blue-100 border border-blue-300 rounded-full">
+                          <span className="text-xs font-medium text-blue-700">~1 month</span>
+                        </div>
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
+                          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                          </svg>
+                        </div>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Complete Solution</h3>
-                    </div>
-                    <p className="text-sm text-gray-700 text-center mb-3">
-                      AI helper to handle user feedback with smart categorization, sentiment analysis, and automated responses.
-                    </p>
-                    <div className="text-center text-xs text-gray-500">
-                      ~1 month timeline
+                      
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent mb-3">
+                        Complete AI Solution
+                      </h3>
+                      
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        Full AI ecosystem with intelligent feedback processing, sentiment analysis, automated categorization, and smart response generation.
+                      </p>
+                      
+                      {/* Tech indicators */}
+                      <div className="flex gap-2 mt-4">
+                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">AI/ML</div>
+                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">Analytics</div>
+                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">Automation</div>
+                      </div>
                     </div>
                   </div>
 
                   {/* 2. MVP Focus */}
-                  <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-                    <div className="text-center mb-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2">
-                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+                  <div className="group relative overflow-hidden bg-gradient-to-br from-white via-purple-50 to-pink-100 rounded-2xl p-6 shadow-xl border border-purple-200 hover:border-purple-300 transition-all duration-500 hover:shadow-purple-200/50">
+                    {/* Animated background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Glowing orb effect */}
+                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-200/30 rounded-full blur-xl group-hover:bg-purple-300/40 transition-all duration-500"></div>
+                    
+                    <div className="relative">
+                      {/* Time badge */}
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="px-3 py-1 bg-purple-100 border border-purple-300 rounded-full">
+                          <span className="text-xs font-medium text-purple-700">~10 days</span>
+                        </div>
+                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25">
+                          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        </div>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">MVP Focus</h3>
-                    </div>
-                    <p className="text-sm text-gray-700 text-center mb-3">
-                      Chatbot for direct questions using existing FAQs with smart routing to customer support when needed.
-                    </p>
-                    <div className="text-center text-xs text-gray-500">
-                      Core features only
-                    </div>
-                  </div>
-
-                  {/* 3. Project Timeline */}
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 p-5">
-                    <div className="text-center mb-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-2">
-                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Timeline</h3>
-                    </div>
-                    <div className="space-y-2 text-sm text-center">
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-600">MVP Duration:</span>
-                        <span className="font-medium text-green-700">~10 days</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-600">Full Solution:</span>
-                        <span className="font-medium text-green-700">~1 month</span>
+                      
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-purple-700 bg-clip-text text-transparent mb-3">
+                        MVP Launch
+                      </h3>
+                      
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        Smart chatbot with FAQ integration, instant responses, and seamless handoff to human support when needed.
+                      </p>
+                      
+                      {/* Tech indicators */}
+                      <div className="flex gap-2 mt-4">
+                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">Chatbot</div>
+                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">NLP</div>
+                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">FAQ</div>
                       </div>
                     </div>
                   </div>
