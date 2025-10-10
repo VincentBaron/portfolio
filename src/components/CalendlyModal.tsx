@@ -22,7 +22,7 @@ export default function CalendlyModal({ isOpen, onClose, painpoint }: CalendlyMo
             calendlyContainer.innerHTML = '';
             
             // Build Calendly URL with painpoint if provided
-            let calendlyUrl = 'https://calendly.com/vbaron4220/30min';
+            let calendlyUrl = 'https://calendly.com/vbaron4220/new-meeting';
             const urlParams = new URLSearchParams();
             
             if (painpoint) {
