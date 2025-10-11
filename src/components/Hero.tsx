@@ -31,7 +31,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
   });
 
   const webhookUrl =
-    import.meta.env.PUBLIC_N8N_WEBHOOK_URL ?? 'http://localhost:5678/webhook/planner';
+    import.meta.env.PUBLIC_N8N_WEBHOOK_URL ?? 'http://localhost:5678/webhook-test/planner';
 
   const buildPayload = useCallback((initial: string, clarifications: string[]) => {
     const sections = [`Original Painpoint:\n${initial}`];
