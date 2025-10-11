@@ -1,0 +1,83 @@
+{
+  "name": "Painpoint → Sprint Snapshot (Ollama, local)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "planner",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "Webhook_1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        80,
+        300
+      ],
+      "webhookId": "planner-webhook-import"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.OLLAMA_URL || 'http://localhost:11434/api/generate'}}",
+        "allowUnauthorizedCerts": true,
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{\nJSON.stringify({\n  model: $env.MODEL_NAME || 'qwen2.5:7b-instruct',\n  system: `You are a Staff Product Manager and Technical Lead.\n\nInput: a short painpoint from a user (any business or creative domain).\n\nYour goal:\n1) Understand the underlying problem.\n2) If there is enough context, infer sensible assumptions and produce a sprint plan.\n3) If there is NOT enough context to propose a concrete plan, ask up to three clarifying questions in the \"clarificationsNeeded\" field.\n4) In all cases, output STRICT JSON only (no markdown, no comments).\n\nSchema:\n{\n  \"status\": \"complete\" | \"needs_details\",\n  \"assumptions\": [string],\n  \"clarificationsNeeded\": [string],\n  \"generalSolution\": \"2–3 sentence high-level approach if status=complete, else empty string.\",\n  \"mvpSolution\": \"Concise 10-day MVP plan if status=complete, else empty string.\",\n  \"sprintDurationDays\": number,\n  \"ctaCopy\": \"Engaging one-liner encouraging the user to continue.\",\n  \"followUpQuestions\": [string]\n}\n\nRules:\n- Always return valid JSON.\n- If the input is clear enough, set status to \"complete\".\n- If the input is too vague, set status to \"needs_details\" and provide specific clarifying questions.\n- Never ask clarifications and produce a plan at the same time.\n- Be concise, constructive, and actionable.\n`,\n  prompt: $json.painpoint || '',\n  format: 'json',\n  stream: false,\n  options: { temperature: 0.3, num_predict: 600 }\n})\n}}"
+      },
+      "id": "HTTP_Request_1",
+      "name": "Ollama (Generate JSON)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        410,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse Ollama response and enforce minimal schema\n// Ollama returns the generated text in json.response\nlet raw = items[0].json.response;\nif (typeof raw !== 'string') {\n  raw = JSON.stringify(raw);\n}\n\nlet plan;\ntry {\n  plan = JSON.parse(raw);\n} catch (e) {\n  throw new Error('Model returned invalid JSON');\n}\n\n// Minimal schema validation\nconst mustHave = ['status','assumptions','clarificationsNeeded','generalSolution','mvpSolution','sprintDurationDays','ctaCopy','followUpQuestions'];\nfor (const k of mustHave) {\n  if (plan[k] === undefined) throw new Error(`Missing key: ${k}`);\n}\n\n// Coerce types / sanitize\nif (typeof plan.sprintDurationDays !== 'number') {\n  const n = parseInt(plan.sprintDurationDays, 10);\n  if (Number.isNaN(n)) throw new Error('Invalid sprintDurationDays');\n  plan.sprintDurationDays = n;\n}\n\nplan.status = (plan.status === 'complete') ? 'complete' : (plan.status === 'needs_details' ? 'needs_details' : 'needs_details');\n\n// Keep texts tidy\nconst clamp = (s, max) => String(s || '').slice(0, max);\nplan.generalSolution = clamp(plan.generalSolution, 600);\nplan.mvpSolution = clamp(plan.mvpSolution, 800);\nplan.ctaCopy = clamp(plan.ctaCopy, 160);\n\n// Ensure arrays\nplan.assumptions = Array.isArray(plan.assumptions) ? plan.assumptions : [];\nplan.clarificationsNeeded = Array.isArray(plan.clarificationsNeeded) ? plan.clarificationsNeeded : [];\nplan.followUpQuestions = Array.isArray(plan.followUpQuestions) ? plan.followUpQuestions : [];\n\nreturn [{ json: { plan } }];"
+      },
+      "id": "Function_Validate_1",
+      "name": "Parse & Validate JSON",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Ollama (Generate JSON)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama (Generate JSON)": {
+      "main": [
+        [
+          {
+            "node": "Parse & Validate JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "timezone": "Europe/Paris"
+  },
+  "staticData": {}
+}

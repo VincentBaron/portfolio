@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import CalendlyModal from './CalendlyModal';
 
 interface SprintPlan {
-  projectTitle: string;
-  description: string;
+  status: 'complete' | 'needs_details';
+  assumptions: string[];
+  clarificationsNeeded: string[];
+  generalSolution: string;
+  mvpSolution: string;
+  sprintDurationDays: number;
+  ctaCopy: string;
+  followUpQuestions: string[];
 }
 
-type FlowState = 'input' | 'loading' | 'result' | 'error';
+type FlowState = 'input' | 'loading' | 'result' | 'error' | 'clarify';
 
 interface HeroProps {
   calendarLink?: string;
@@ -18,6 +24,71 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
   const [sprintPlan, setSprintPlan] = useState<SprintPlan | null>(null);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [clarificationInput, setClarificationInput] = useState('');
+  const [conversation, setConversation] = useState<{ initial: string; clarifications: string[] }>({
+    initial: '',
+    clarifications: [],
+  });
+
+  const webhookUrl =
+    import.meta.env.PUBLIC_N8N_WEBHOOK_URL ?? 'http://localhost:5678/webhook/planner';
+
+  const buildPayload = useCallback((initial: string, clarifications: string[]) => {
+    const sections = [`Original Painpoint:\n${initial}`];
+    clarifications.forEach((detail, index) => {
+      sections.push(`Additional Detail ${index + 1}:\n${detail}`);
+    });
+    return sections.join('\n\n');
+  }, []);
+
+  const requestPlan = useCallback(
+    async (payload: string) => {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ painpoint: payload }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `n8n webhook error (${response.status}): ${
+            errorText || response.statusText || 'Unexpected error'
+          }`
+        );
+      }
+
+      const data = await response.json();
+      if (!data || typeof data !== 'object' || !data.plan) {
+        throw new Error('Unexpected response from n8n webhook');
+      }
+
+      const plan = data.plan as Partial<SprintPlan>;
+      const status =
+        plan.status === 'complete'
+          ? 'complete'
+          : plan.status === 'needs_details'
+          ? 'needs_details'
+          : 'needs_details';
+
+      return {
+        status,
+        assumptions: Array.isArray(plan.assumptions) ? plan.assumptions : [],
+        clarificationsNeeded: Array.isArray(plan.clarificationsNeeded) ? plan.clarificationsNeeded : [],
+        generalSolution: plan.generalSolution ?? '',
+        mvpSolution: plan.mvpSolution ?? '',
+        sprintDurationDays:
+          typeof plan.sprintDurationDays === 'number'
+            ? plan.sprintDurationDays
+            : Number.parseInt(String(plan.sprintDurationDays ?? 0), 10) || 0,
+        ctaCopy: plan.ctaCopy ?? '',
+        followUpQuestions: Array.isArray(plan.followUpQuestions) ? plan.followUpQuestions : [],
+      } as SprintPlan;
+    },
+    [webhookUrl]
+  );
   const validateInput = (input: string): string | null => {
     if (!input.trim()) return 'Please describe your painpoint';
     if (input.trim().length < 10) return 'Please provide more details about your painpoint';
@@ -25,7 +96,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
     return null;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const validationError = validateInput(painpoint);
@@ -36,24 +107,80 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
 
     setError('');
     setFlowState('loading');
+    const trimmed = painpoint.trim();
+    setConversation({ initial: trimmed, clarifications: [] });
 
-    // Show loading for 2 seconds then show results
-    setTimeout(() => {
-      // Simple mock plan - we only need basic structure for the display
-      const mockPlan = {
-        projectTitle: `Solution for: ${painpoint.substring(0, 50)}${painpoint.length > 50 ? '...' : ''}`,
-        description: 'A comprehensive 2-week sprint to address your painpoint and deliver a scalable solution.',
-      };
-
-      setSprintPlan(mockPlan);
-      setFlowState('result');
-    }, 2000);
+    try {
+      const payload = buildPayload(trimmed, []);
+      const plan = await requestPlan(payload);
+      setSprintPlan(plan);
+      if (plan.status === 'complete') {
+        setFlowState('result');
+      } else {
+        setFlowState('clarify');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to reach n8n webhook';
+      setError(message);
+      setFlowState('error');
+    }
   };
+
+  const clarificationHistory = conversation.clarifications;
+  const generalSolutionLines =
+    sprintPlan?.generalSolution
+      ?.split(/\n+/)
+      .map((line) => line.trim())
+      .filter(Boolean) ?? [];
+  const mvpItems =
+    sprintPlan?.mvpSolution
+      ?.split(/\n+/)
+      .map((line) => line.trim())
+      .filter(Boolean) ?? [];
 
   const handleRetry = () => {
     setError('');
     setFlowState('input');
     setSprintPlan(null);
+    setClarificationInput('');
+    setConversation({ initial: '', clarifications: [] });
+  };
+
+  const handleClarificationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const additionalDetails = clarificationInput.trim();
+    if (!additionalDetails) {
+      setError('Please provide additional details before resubmitting.');
+      return;
+    }
+
+    const basePainpoint = conversation.initial;
+    if (!basePainpoint) {
+      setError('Original painpoint missing. Please start over.');
+      setFlowState('error');
+      return;
+    }
+
+    setError('');
+    const nextClarifications = [...conversation.clarifications, additionalDetails];
+    setConversation({ initial: basePainpoint, clarifications: nextClarifications });
+    setClarificationInput('');
+    setFlowState('loading');
+
+    try {
+      const payload = buildPayload(basePainpoint, nextClarifications);
+      const plan = await requestPlan(payload);
+      setSprintPlan(plan);
+      if (plan.status === 'complete') {
+        setFlowState('result');
+      } else {
+        setFlowState('clarify');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to reach n8n webhook';
+      setError(message);
+      setFlowState('error');
+    }
   };
 
 
@@ -157,6 +284,90 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               </div>
             )}
 
+            {/* Clarify State */}
+            {flowState === 'clarify' && sprintPlan && (
+              <div className="bg-white/90 backdrop-blur-sm border border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xl max-w-4xl mx-auto">
+                <div className="flex flex-col gap-4 text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.8}
+                          d="M8.257 3.099c.765-1.36 2.718-1.36 3.482 0l6.516 11.591c.75 1.334-.213 2.986-1.742 2.986H3.483c-1.53 0-2.492-1.652-1.742-2.986L8.257 3.1z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-blue-700 uppercase tracking-wider">
+                        Needs Clarification
+                      </p>
+                      <h3 className="text-xl font-bold text-gray-900">
+                        I need a bit more context to craft the sprint.
+                      </h3>
+                    </div>
+                  </div>
+
+                  {sprintPlan.clarificationsNeeded.length > 0 && (
+                    <div>
+                      <p className="text-sm text-gray-700 mb-2">
+                        Please answer the following so I can propose a concrete plan:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                        {sprintPlan.clarificationsNeeded.map((question, index) => (
+                          <li key={`clarification-${index}`}>{question}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {clarificationHistory.length > 0 && (
+                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                      <p className="text-sm font-medium text-blue-800 mb-2">Details you've already shared:</p>
+                      <ul className="space-y-2 text-sm text-blue-900">
+                        {clarificationHistory.map((detail, index) => (
+                          <li key={`clarification-history-${index}`}>
+                            <span className="font-semibold">Update {index + 1}:</span> {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleClarificationSubmit} className="space-y-3">
+                    <label className="block text-sm font-medium text-gray-800">
+                      Add more details
+                      <textarea
+                        value={clarificationInput}
+                        onChange={(e) => setClarificationInput(e.target.value)}
+                        className="mt-2 w-full rounded-2xl border-2 border-blue-200 focus:border-blue-500 focus:ring-blue-200 px-4 py-3 text-sm text-gray-900 shadow-inner resize-y min-h-[120px]"
+                        placeholder="Share additional context, constraints, or goals..."
+                      />
+                    </label>
+                    {error && (
+                      <p className="text-red-600 text-sm">{error}</p>
+                    )}
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        type="submit"
+                        className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all"
+                      >
+                        Resubmit with more context
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleRetry}
+                        className="px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        Start over
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
             {/* Loading State */}
             {flowState === 'loading' && (
               <div className="text-center py-8">
@@ -189,130 +400,105 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               </div>
             )}
 
-            {/* Result State - Futuristic AI Solution Cards */}
+            {/* Result State */}
             {flowState === 'result' && sprintPlan && (
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-4xl mx-auto space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
-                  {/* 1. Complete Solution */}
                   <div className="group relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-indigo-100 rounded-2xl p-6 shadow-xl border border-blue-200 hover:border-blue-300 transition-all duration-500 hover:shadow-blue-200/50">
-                    {/* Animated background gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    {/* Glowing orb effect */}
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200/30 rounded-full blur-xl group-hover:bg-blue-300/40 transition-all duration-500"></div>
-                    
                     <div className="relative">
-                      {/* Time badge */}
                       <div className="flex justify-between items-start mb-4">
                         <div className="px-3 py-1 bg-blue-100 border border-blue-300 rounded-full">
                           <span className="text-xs font-medium text-blue-700">~1 month</span>
                         </div>
                         <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
                           <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2" />
                           </svg>
                         </div>
                       </div>
-                      
+
                       <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent mb-3">
-                        Complete AI Solution
+                        Full Implementation
                       </h3>
-                      
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        Full AI ecosystem with intelligent feedback processing, sentiment analysis, automated categorization, and smart response generation.
-                      </p>
-                      
-                      {/* Tech indicators */}
-                      <div className="flex gap-2 mt-4">
-                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">AI/ML</div>
-                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">Analytics</div>
-                        <div className="px-2 py-1 bg-blue-100 rounded-md text-xs text-blue-700 border border-blue-200">Automation</div>
+
+                      <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
+                        {generalSolutionLines.length > 0 ? (
+                          generalSolutionLines.map((line, index) => (
+                            <p key={`general-solution-${index}`}>{line}</p>
+                          ))
+                        ) : (
+                          <p>{sprintPlan.generalSolution}</p>
+                        )}
                       </div>
+
                     </div>
                   </div>
 
-                  {/* 2. MVP Focus */}
                   <div className="group relative overflow-hidden bg-gradient-to-br from-white via-purple-50 to-pink-100 rounded-2xl p-6 shadow-xl border border-purple-200 hover:border-purple-300 transition-all duration-500 hover:shadow-purple-200/50">
-                    {/* Animated background gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    {/* Glowing orb effect */}
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-200/30 rounded-full blur-xl group-hover:bg-purple-300/40 transition-all duration-500"></div>
-                    
                     <div className="relative">
-                      {/* Time badge */}
                       <div className="flex justify-between items-start mb-4">
                         <div className="px-3 py-1 bg-purple-100 border border-purple-300 rounded-full">
-                          <span className="text-xs font-medium text-purple-700">~10 days</span>
+                          <span className="text-xs font-medium text-purple-700">
+                            {`~${sprintPlan.sprintDurationDays || 10} days`}
+                          </span>
                         </div>
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25">
                           <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
                       </div>
-                      
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-purple-700 bg-clip-text text-transparent mb-3">
-                        MVP Launch
+
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-purple-700 bg-clip-text text-transparent mb-4">
+                        MVP Sprint Outline
                       </h3>
-                      
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        Smart chatbot with FAQ integration, instant responses, and seamless handoff to human support when needed.
-                      </p>
-                      
-                      {/* Tech indicators */}
-                      <div className="flex gap-2 mt-4">
-                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">Chatbot</div>
-                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">NLP</div>
-                        <div className="px-2 py-1 bg-purple-100 rounded-md text-xs text-purple-700 border border-purple-200">FAQ</div>
-                      </div>
+
+                      {mvpItems.length > 0 ? (
+                        <ul className="space-y-2 text-sm text-gray-700">
+                          {mvpItems.map((item, index) => (
+                            <li key={`mvp-item-${index}`} className="flex items-start gap-2">
+                              <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-purple-500"></span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-gray-700 leading-relaxed">{sprintPlan.mvpSolution}</p>
+                      )}
                     </div>
                   </div>
                 </div>
 
-                {/* CTA */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <button
                     onClick={handleBookCall}
-                    className="group inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 min-w-[220px] justify-center"
+                    className="inline-flex items-center px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 justify-center"
                   >
+                    Book a call
                     <svg
-                      className="w-4 h-4 mr-2"
+                      className="w-4 h-4 ml-2"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth="2"
                       stroke="currentColor"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                      />
-                    </svg>
-                    Let's discuss your project
-                    <svg
-                      className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </button>
-
                   <button
                     onClick={() => {
                       setPainpoint('');
                       setFlowState('input');
                       setSprintPlan(null);
+                      setClarificationInput('');
+                      setConversation({ initial: '', clarifications: [] });
                       setError('');
                     }}
-                    className="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 min-w-[220px] justify-center hover:bg-gray-50"
+                    className="inline-flex items-center px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     Try another painpoint
                   </button>
