@@ -300,14 +300,14 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              Eliminate up to 80% of repetitive work —{' '}
+              Eliminate up to 80% of manual work.{' '}
               <br />
-              <span className="text-gradient">without hiring more.</span>
+              <span className="text-gradient">Save up to 40% on operations.</span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
               <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-3 leading-relaxed">
-                I build intelligent backend and AI systems that reduce operational costs by up to 40% and make your business run itself.
+                Manual processes cost you time, money, and focus. I build backend and AI systems that make your operations run themselves — faster, leaner, and smarter.
               </p>
               
               {/* Technology Badges */}
@@ -328,13 +328,8 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                   🧠 RAG
                 </span>
               </div>
-              
-              <p className="text-xs sm:text-sm text-gray-500 italic mb-2">
-                Fast results, clean architecture, lasting impact.
-              </p>
-              
               <p className="text-base sm:text-lg text-purple-600 font-semibold mt-1 sm:mt-2">
-                🌍 5% of net profits invested in projects driving social and environmental impact.
+                🌍 5% of my profits invested in projects driving social and environmental impact.
               </p>
             </div>
           </div>
