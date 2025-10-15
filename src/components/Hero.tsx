@@ -48,7 +48,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
   const [loadingStep, setLoadingStep] = useState(0);
 
   const webhookUrl =
-    import.meta.env.PUBLIC_N8N_WEBHOOK_URL ?? 'http://localhost:5678/webhook/planner';
+    import.meta.env.PUBLIC_N8N_WEBHOOK_URL ?? 'http://localhost:5678/webhook-test/planner';
 
   const buildPayload = useCallback((initial: string, clarifications: string[]) => {
     const sections = [`${initial}`];
@@ -88,7 +88,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
       let status: SprintPlan['status'];
       if (rawStatus === 'unvalid' || rawStatus === 'invalid') {
         status = 'invalid';
-      } else if (rawStatus === 'complete') {
+      } else if (rawStatus === 'complete' || rawStatus === 'success') {
         status = 'complete';
       } else if (rawStatus === 'needs_details') {
         status = 'needs_details';
@@ -300,23 +300,42 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              Built fast.{' '}
-              <span className="block sm:inline">Built to scale.</span>
+              Eliminate up to 80% of repetitive work —{' '}
               <br />
-              <span className="text-gradient">Built with AI.</span>
+              <span className="text-gradient">without hiring more.</span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed">
-                I'll solve your painpoint in just{' '}
-                <span className="font-semibold text-blue-600">2 weeks</span>.
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-3 leading-relaxed">
+                I build intelligent backend and AI systems that reduce operational costs by up to 40% and make your business run itself.
               </p>
-              <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
-                Scalable MVPs • AI-powered solutions (RAG/LLM) • Production-ready features
+              
+              {/* Technology Badges */}
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-3">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-100 text-blue-700 border border-blue-300 rounded-full text-xs sm:text-sm font-semibold">
+                  ⚡ Go
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-100 text-indigo-700 border border-indigo-300 rounded-full text-xs sm:text-sm font-semibold">
+                  🐍 Python
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 text-red-700 border border-red-300 rounded-full text-xs sm:text-sm font-semibold">
+                  🔗 n8n
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-100 text-pink-700 border border-pink-300 rounded-full text-xs sm:text-sm font-semibold">
+                  ✨ LLMs
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 text-purple-700 border border-purple-300 rounded-full text-xs sm:text-sm font-semibold">
+                  🧠 RAG
+                </span>
+              </div>
+              
+              <p className="text-xs sm:text-sm text-gray-500 italic mb-2">
+                Fast results, clean architecture, lasting impact.
               </p>
-                <p className="text-base sm:text-lg text-purple-600 font-semibold mt-1 sm:mt-2">
+              
+              <p className="text-base sm:text-lg text-purple-600 font-semibold mt-1 sm:mt-2">
                 🌍 5% of net profits invested in projects driving social and environmental impact.
-                </p>
+              </p>
             </div>
           </div>
         </div>
