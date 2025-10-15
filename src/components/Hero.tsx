@@ -618,90 +618,59 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             {/* Result State */}
             {flowState === 'result' && sprintPlan && (
               <div className="max-w-4xl mx-auto space-y-6">
-                <div className="group relative overflow-hidden bg-gradient-to-br from-white via-emerald-50 to-teal-100 rounded-2xl p-6 shadow-xl border border-emerald-200 hover:border-emerald-300 transition-all duration-500 hover:shadow-emerald-200/50">
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-200/30 rounded-full blur-xl group-hover:bg-emerald-300/40 transition-all duration-500"></div>
+                {/* Business Context Card - Full Width */}
+                <div className="group relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-indigo-100 rounded-2xl p-6 shadow-xl border border-blue-200 hover:border-blue-300 transition-all duration-500 hover:shadow-blue-200/50">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200/30 rounded-full blur-xl group-hover:bg-blue-300/40 transition-all duration-500"></div>
                   <div className="relative">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="px-3 py-1 bg-emerald-100 border border-emerald-300 rounded-full">
-                        <span className="text-xs font-medium text-emerald-700">Assumptions</span>
+                    <div className="flex items-start justify-between gap-3 mb-4">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <div className="px-3 py-1 bg-blue-100 border border-blue-300 rounded-full">
+                          <span className="text-xs font-medium text-blue-700">Business Context</span>
+                        </div>
+                        <div className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-600 text-xs font-semibold">
+                          {fullSolutionBadgeText}
+                        </div>
                       </div>
-                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3a1 1 0 00-1 1v1.07a7.002 7.002 0 00-4.9 9.33l.1.27a3 3 0 002.83 1.93H9l-.34 1.36a1 1 0 00.97 1.24h4.74a1 1 0 00.97-1.24L15 16.6h.97a3 3 0 002.83-1.93l.1-.27a7.002 7.002 0 00-4.9-9.33V4a1 1 0 00-1-1h-2z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       </div>
                     </div>
-                    {sprintPlan.assumptions.length > 0 ? (
-                      <ul className="space-y-2 text-sm text-emerald-900 list-disc list-inside">
-                        {sprintPlan.assumptions.map((assumption, index) => (
-                          <li key={`assumption-${index}`}>{assumption}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-sm text-emerald-800">
-                        No explicit assumptions were returned alongside this snapshot.
-                      </p>
-                    )}
+
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent mb-3">
+                      Full Implementation Solution
+                    </h3>
+
+                    <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
+                      {generalSolutionLines.length > 0 ? (
+                        generalSolutionLines.map((line, index) => (
+                          <p key={`general-solution-${index}`}>{line}</p>
+                        ))
+                      ) : (
+                        <p>{sprintPlan.generalSolution}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="group relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-indigo-100 rounded-2xl p-6 shadow-xl border border-blue-200 hover:border-blue-300 transition-all duration-500 hover:shadow-blue-200/50">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200/30 rounded-full blur-xl group-hover:bg-blue-300/40 transition-all duration-500"></div>
-                    <div className="relative">
-                      <div className="flex items-start justify-between gap-3 mb-4">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <div className="px-3 py-1 bg-blue-100 border border-blue-300 rounded-full">
-                            <span className="text-xs font-medium text-blue-700">{fullSolutionBadgeText}</span>
-                          </div>
-                          <div className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-600 text-xs font-semibold">
-                            {fullImplementationPrice !== null ? `≈ €${fullImplementationPrice.toLocaleString('en-US')}` : 'Custom quote'}
-                          </div>
-                        </div>
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
-                          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2" />
-                          </svg>
-                        </div>
-                      </div>
-
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent mb-3">
-                        Full Implementation
-                      </h3>
-
-                      <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
-                        {generalSolutionLines.length > 0 ? (
-                          generalSolutionLines.map((line, index) => (
-                            <p key={`general-solution-${index}`}>{line}</p>
-                          ))
-                        ) : (
-                          <p>{sprintPlan.generalSolution}</p>
-                        )}
-                      </div>
-
-                    </div>
-                  </div>
-
+                {/* Sprint Card and Output Card - Horizontal Layout */}
+                <div className="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
+                  {/* Sprint Card - Left Side */}
                   <div className="group relative overflow-hidden bg-gradient-to-br from-white via-purple-50 to-pink-100 rounded-2xl p-6 shadow-xl border border-purple-200 hover:border-purple-300 transition-all duration-500 hover:shadow-purple-200/50">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-200/30 rounded-full blur-xl group-hover:bg-purple-300/40 transition-all duration-500"></div>
                     <div className="relative">
                       <div className="flex items-start justify-between gap-3 mb-4">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <div className="px-3 py-1 bg-purple-100 border border-purple-300 rounded-full">
-                            <span className="text-xs font-medium text-purple-700">
-                              {`~${mvpDurationDays} days`}
-                            </span>
-                          </div>
-                          <div className="px-3 py-1 bg-purple-50 border border-purple-200 rounded-full text-purple-700 text-xs font-semibold">
-                            {`≈ €${mvpPrice.toLocaleString('en-US')}`}
-                          </div>
+                        <div className="px-3 py-1 bg-purple-100 border border-purple-300 rounded-full">
+                          <span className="text-xs font-medium text-purple-700">
+                            {`~${mvpDurationDays} days`}
+                          </span>
                         </div>
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25">
                           <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                           </svg>
                         </div>
                       </div>
@@ -722,6 +691,81 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                       ) : (
                         <p className="text-sm text-gray-700 leading-relaxed">{sprintPlan.mvpSolution}</p>
                       )}
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex justify-center items-center">
+                    <svg className="w-8 h-8 text-gray-400 rotate-0 md:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </div>
+
+                  {/* Output Card - Right Side */}
+                  <div className="group relative overflow-hidden bg-gradient-to-br from-white via-emerald-50 to-teal-100 rounded-2xl p-6 shadow-xl border border-emerald-200 hover:border-emerald-300 transition-all duration-500 hover:shadow-emerald-200/50">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-200/30 rounded-full blur-xl group-hover:bg-emerald-300/40 transition-all duration-500"></div>
+                    <div className="relative">
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <div className="px-3 py-1 bg-emerald-100 border border-emerald-300 rounded-full">
+                          <span className="text-xs font-medium text-emerald-700">Impact Analysis</span>
+                        </div>
+                        <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-emerald-700 bg-clip-text text-transparent mb-4">
+                        Expected Outcomes
+                      </h3>
+
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-900">Time Savings</p>
+                            <p className="text-xs text-emerald-700 mt-0.5">
+                              {fullSolutionDays !== null && fullSolutionDays > mvpDurationDays 
+                                ? `Reduce delivery time by ${Math.round(((fullSolutionDays - mvpDurationDays) / fullSolutionDays) * 100)}% with MVP approach`
+                                : 'Fast time-to-market with MVP approach'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-900">Cost Reduction</p>
+                            <p className="text-xs text-emerald-700 mt-0.5">
+                              {fullImplementationPrice !== null 
+                                ? `Save ≈ €${(fullImplementationPrice - mvpPrice).toLocaleString('en-US')} upfront vs full build`
+                                : 'Significant cost savings vs traditional development'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-900">Risk Mitigation</p>
+                            <p className="text-xs text-emerald-700 mt-0.5">Validate core features before full investment</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
