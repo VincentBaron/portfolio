@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import CalendlyModal from './CalendlyModal';
 
+interface ImpactEstimation {
+  timeSavedPercent: number;
+  costReductionPercent: number;
+  sources?: string[];
+}
+
 interface SprintPlan {
   status: 'complete' | 'needs_details' | 'invalid';
   assumptions: string[];
@@ -11,6 +17,7 @@ interface SprintPlan {
   sprintDurationDays: number;
   ctaCopy: string;
   followUpQuestions: string[];
+  impactEstimation?: ImpactEstimation;
 }
 
 type FlowState = 'input' | 'loading' | 'result' | 'error' | 'clarify' | 'invalid';
@@ -110,6 +117,27 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         fullSolutionTimeEstimationHours = Number.isFinite(parsed) && parsed > 0 ? parsed : null;
       }
 
+      // Parse impactEstimation if present
+      let impactEstimation: ImpactEstimation | undefined;
+      const rawImpact = (plan as { impactEstimation?: unknown }).impactEstimation;
+      if (rawImpact && typeof rawImpact === 'object') {
+        const impact = rawImpact as Partial<ImpactEstimation>;
+        const timeSaved = typeof impact.timeSavedPercent === 'number' 
+          ? impact.timeSavedPercent 
+          : Number.parseFloat(String(impact.timeSavedPercent ?? 0)) || 0;
+        const costReduction = typeof impact.costReductionPercent === 'number'
+          ? impact.costReductionPercent
+          : Number.parseFloat(String(impact.costReductionPercent ?? 0)) || 0;
+        
+        if (timeSaved > 0 || costReduction > 0) {
+          impactEstimation = {
+            timeSavedPercent: timeSaved,
+            costReductionPercent: costReduction,
+            sources: Array.isArray(impact.sources) ? impact.sources : undefined,
+          };
+        }
+      }
+
       return {
         status,
         assumptions: Array.isArray(plan.assumptions) ? plan.assumptions : [],
@@ -123,6 +151,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         ctaCopy: plan.ctaCopy ?? '',
         followUpQuestions: Array.isArray(plan.followUpQuestions) ? plan.followUpQuestions : [],
         fullSolutionTimeEstimationHours,
+        impactEstimation,
       } as SprintPlan;
     },
     [webhookUrl]
@@ -302,7 +331,12 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
               Eliminate up to 80% of manual work.{' '}
               <br />
-              <span className="text-gradient">Save up to 40% on operations.</span>
+              <span className="inline-flex items-center gap-2 sm:gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-purple-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                <span className="text-gradient">Save up to 40% on operations costs.</span>
+              </span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
@@ -717,42 +751,119 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                       </h3>
 
                       <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                            <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        {/* Time Savings with percentage */}
+                        {sprintPlan.impactEstimation && sprintPlan.impactEstimation.timeSavedPercent > 0 ? (
+                          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-4 border border-emerald-200">
+                            <div className="grid grid-cols-[40px_1fr] gap-3 items-start mb-2">
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md">
+                                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                              </div>
+                              <div>
+                                <p className="text-sm font-bold text-emerald-900 mb-1">Time Savings</p>
+                                <div className="flex items-baseline gap-2">
+                                  <span className="text-3xl font-black text-emerald-600 leading-none tabular-nums">
+                                    {sprintPlan.impactEstimation.timeSavedPercent}%
+                                  </span>
+                                  <span className="text-xs text-emerald-700 font-medium leading-tight">reduction in manual work</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="w-full bg-emerald-200 rounded-full h-2 mt-3 overflow-hidden">
+                              <div 
+                                className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full transition-all duration-1000 ease-out shadow-inner"
+                                style={{ width: `${sprintPlan.impactEstimation.timeSavedPercent}%` }}
+                              ></div>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm font-semibold text-emerald-900">Time Savings</p>
-                            <p className="text-xs text-emerald-700 mt-0.5">
-                              {fullSolutionDays !== null && fullSolutionDays > mvpDurationDays 
-                                ? `Reduce delivery time by ${Math.round(((fullSolutionDays - mvpDurationDays) / fullSolutionDays) * 100)}% with MVP approach`
-                                : 'Fast time-to-market with MVP approach'}
-                            </p>
+                        ) : (
+                          <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-emerald-900">Time Savings</p>
+                              <p className="text-xs text-emerald-700 mt-0.5">
+                                {fullSolutionDays !== null && fullSolutionDays > mvpDurationDays 
+                                  ? `Reduce delivery time by ${Math.round(((fullSolutionDays - mvpDurationDays) / fullSolutionDays) * 100)}% with MVP approach`
+                                  : 'Fast time-to-market with MVP approach'}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                        )}
 
-                        <div className="flex items-start gap-3">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                            <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        {/* Cost Reduction with percentage */}
+                        {sprintPlan.impactEstimation && sprintPlan.impactEstimation.costReductionPercent > 0 ? (
+                          <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-4 border border-teal-200">
+                            <div className="grid grid-cols-[40px_1fr] gap-3 items-start mb-2">
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-md">
+                                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                              </div>
+                              <div>
+                                <p className="text-sm font-bold text-teal-900 mb-1">Cost Reduction</p>
+                                <div className="flex items-baseline gap-2">
+                                  <span className="text-3xl font-black text-teal-600 leading-none tabular-nums">
+                                    {sprintPlan.impactEstimation.costReductionPercent}%
+                                  </span>
+                                  <span className="text-xs text-teal-700 font-medium leading-tight">lower operational costs</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="w-full bg-teal-200 rounded-full h-2 mt-3 overflow-hidden">
+                              <div 
+                                className="bg-gradient-to-r from-teal-500 to-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out shadow-inner"
+                                style={{ width: `${sprintPlan.impactEstimation.costReductionPercent}%` }}
+                              ></div>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm font-semibold text-emerald-900">Cost Reduction</p>
-                            <p className="text-xs text-emerald-700 mt-0.5">
-                              {fullImplementationPrice !== null 
-                                ? `Save ≈ €${(fullImplementationPrice - mvpPrice).toLocaleString('en-US')} upfront vs full build`
-                                : 'Significant cost savings vs traditional development'}
-                            </p>
+                        ) : (
+                          <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-emerald-900">Cost Reduction</p>
+                              <p className="text-xs text-emerald-700 mt-0.5">
+                                {fullImplementationPrice !== null 
+                                  ? `Save ≈ €${(fullImplementationPrice - mvpPrice).toLocaleString('en-US')} upfront vs full build`
+                                  : 'Significant cost savings vs traditional development'}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                        )}
 
-                        <div className="flex items-start gap-3">
+                        {/* Sources if available */}
+                        {sprintPlan.impactEstimation?.sources && sprintPlan.impactEstimation.sources.length > 0 && (
+                          <div className="pt-2 border-t border-emerald-200">
+                            <p className="text-xs text-emerald-600 font-medium mb-1">Based on industry data:</p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {sprintPlan.impactEstimation.sources.map((source, index) => (
+                                <span 
+                                  key={`source-${index}`}
+                                  className="inline-flex items-center gap-1 px-2 py-1 bg-white/80 border border-emerald-200 rounded-md text-xs text-emerald-700"
+                                >
+                                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                  </svg>
+                                  {source}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Risk Mitigation - Always show */}
+                        <div className="flex items-start gap-3 pt-2">
                           <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
                             <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                           </div>
                           <div>
