@@ -329,19 +329,23 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              Eliminate up to 80% of manual work.{' '}
+              <span className="inline-block">Eliminate up to 80% of manual work.</span>{' '}
               <br />
               <span className="inline-flex items-center gap-2 sm:gap-3">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-purple-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  <span className="inline-block text-right w-[2.2ch]"></span><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-                <span className="text-gradient">Save up to 40% on operations costs.</span>
+                <div>
+                  <span className="text-gradient">
+                    <span className="inline-block">Save up to 40% on operations costs.</span>
+                  </span>
+                </div>
               </span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
               <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-3 leading-relaxed">
-                Manual processes cost you time, money, and focus. I build backend and AI systems that make your operations run themselves — faster, leaner, and smarter.
+                Manual processes cost you time, money, and frustration. I build backend and AI systems that make your operations run themselves. With a 5 years track record as a software engineer, my business focused expertise will enable you to find solutions to your painpoints in a week. 
               </p>
               
               {/* Technology Badges */}
@@ -363,7 +367,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                 </span>
               </div>
               <p className="text-base sm:text-lg text-purple-600 font-semibold mt-1 sm:mt-2">
-                🌍 5% of my profits invested in projects driving social and environmental impact.
+                🌍<span className="inline-block text-right w-[1ch]"></span>5% of my net profits are invested in projects driving social and environmental impact.
               </p>
             </div>
           </div>
@@ -927,47 +931,83 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
         <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
           <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">They Trusted Me</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
-            {/* Testimonial 1 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-              <div className="text-lg sm:text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                From concept to MVP in 2 weeks. The AI features Vincent built have already increased our conversions by 40%.
+            {/* Testimonial 1 - Holy from Side */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 flex flex-col h-full">
+              <div className="flex justify-center gap-0.5 mb-2 text-yellow-400">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed flex-grow">
+                "Vincent managed to automatise manual processes taking up to 30 hours a week of our ops team's bandwith. His mix of technical depth and business sense made him a great asset in the product team."
               </p>
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
-                  👨‍💼
-                </div>
+              <div className="flex items-center gap-2 mt-auto">
+                <img 
+                  src="/holy.jpeg" 
+                  alt="Holy - Head of Product at Side"
+                  className="w-7 h-7 rounded-full object-cover"
+                />
                 <div className="text-left">
-                  <p className="text-xs font-semibold text-gray-900">David Kim</p>
-                  <p className="text-xs text-gray-600">VP, RetailTech Pro</p>
+                  <p className="text-xs font-semibold text-gray-900">Holy Sicard-Razaka</p>
+                  <p className="text-xs text-gray-600">Head of Product @ Side</p>
                 </div>
               </div>
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-              <div className="text-lg sm:text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                Vincent transformed our product vision into reality. His sprint methodology eliminated all the usual friction.
+            {/* Testimonial 2 - Guillaume from Qomon */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 flex flex-col h-full">
+              <div className="flex justify-center gap-0.5 mb-2 text-yellow-400">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed flex-grow">
+                "Vincent played a key role in scaling our backend infrastructure and streamlining our workflows. His work on complex API integrations with external stakeholders had a direct impact on our operational bottlenecks."
               </p>
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
-                  👩‍💼
-                </div>
+              <div className="flex items-center gap-2 mt-auto">
+                <img 
+                  src="/guillaume.jpeg" 
+                  alt="Guillaume Forgue - Lead Developer at Qomon"
+                  className="w-7 h-7 rounded-full object-cover"
+                />
                 <div className="text-left">
-                  <p className="text-xs font-semibold text-gray-900">Sarah Chen</p>
-                  <p className="text-xs text-gray-600">CEO, TechVision AI</p>
+                  <p className="text-xs font-semibold text-gray-900">Guillaume Forgue</p>
+                  <p className="text-xs text-gray-600">Lead Developer @ Qomon</p>
                 </div>
               </div>
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 flex flex-col h-full">
               <div className="text-lg sm:text-xl mb-1">"</div>
-              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
+              <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed flex-grow">
                 Exceptional technical skills combined with business acumen. Vincent delivered a scalable solution that grows with us.
               </p>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mt-auto">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
                   👩‍🔬
                 </div>
@@ -985,27 +1025,9 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
             <div className="flex flex-wrap justify-center gap-6 items-center">
               <div className="flex flex-col items-center">
                 <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  50+
+                  30+
                 </div>
                 <p className="text-xs text-gray-600 mt-1">Projects Delivered</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  98%
-                </div>
-                <p className="text-xs text-gray-600 mt-1">Client Satisfaction</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  2 Weeks
-                </div>
-                <p className="text-xs text-gray-600 mt-1">Average Sprint Time</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  4.9/5
-                </div>
-                <p className="text-xs text-gray-600 mt-1">Average Rating</p>
               </div>
             </div>
 
