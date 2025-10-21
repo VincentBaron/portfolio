@@ -1,71 +1,93 @@
 import { useState } from 'react';
+import { useLanguage } from '../lib/language';
 
-interface Badge {
-  name: string;
-  description: string;
-  color: string;
-  icon?: string;
-}
+const BADGES = [
+  {
+    name: 'Go',
+    description: {
+      en: 'Concurrency & reliability—handle millions of requests with minimal resources',
+      fr: 'Concurrence et fiabilité — gère des millions de requêtes avec un minimum de ressources',
+    },
+    color: 'blue',
+    icon: '⚡',
+  },
+  {
+    name: 'PostgreSQL',
+    description: {
+      en: 'Battle-tested relational database with ACID guarantees and powerful querying',
+      fr: 'Base de données relationnelle éprouvée avec garanties ACID et requêtes puissantes',
+    },
+    color: 'indigo',
+    icon: '🐘',
+  },
+  {
+    name: 'Next.js',
+    description: {
+      en: 'React framework for production—SEO, performance, and developer experience',
+      fr: 'Framework React taillé pour la production — SEO, performance et expérience développeur',
+    },
+    color: 'gray',
+    icon: '▲',
+  },
+  {
+    name: 'TypeScript',
+    description: {
+      en: 'Type safety catches bugs before production and improves maintainability',
+      fr: 'Le typage fort évite les bugs avant la prod et améliore la maintenabilité',
+    },
+    color: 'blue',
+    icon: '📘',
+  },
+  {
+    name: 'n8n',
+    description: {
+      en: 'Workflow automation—connect systems and automate processes without code',
+      fr: 'Automatisation des workflows — connecte les systèmes et automatise les processus sans code',
+    },
+    color: 'red',
+    icon: '🔗',
+  },
+  {
+    name: 'RAG',
+    description: {
+      en: 'Retrieval-Augmented Generation—AI with context from your own data sources',
+      fr: 'Retrieval-Augmented Generation — une IA qui s’appuie sur vos propres données',
+    },
+    color: 'purple',
+    icon: '🧠',
+  },
+  {
+    name: 'LLMs',
+    description: {
+      en: 'Large Language Models—leverage GPT, Claude, and others for intelligent features',
+      fr: 'Large Language Models — exploitez GPT, Claude et consorts pour des fonctionnalités intelligentes',
+    },
+    color: 'pink',
+    icon: '✨',
+  },
+  {
+    name: 'Docker',
+    description: {
+      en: 'Containerization ensures consistent deployments across all environments',
+      fr: 'La containerisation garantit des déploiements cohérents sur tous les environnements',
+    },
+    color: 'cyan',
+    icon: '🐳',
+  },
+  {
+    name: 'Vercel',
+    description: {
+      en: 'Edge network deployment for lightning-fast global performance',
+      fr: 'Déploiement sur réseau edge pour des performances fulgurantes partout dans le monde',
+    },
+    color: 'gray',
+    icon: '▲',
+  },
+] as const;
 
 export default function StackBadges() {
   const [hoveredBadge, setHoveredBadge] = useState<string | null>(null);
-
-  const badges: Badge[] = [
-    {
-      name: 'Go',
-      description: 'Concurrency & reliability—handle millions of requests with minimal resources',
-      color: 'blue',
-      icon: '⚡',
-    },
-    {
-      name: 'PostgreSQL',
-      description: 'Battle-tested relational database with ACID guarantees and powerful querying',
-      color: 'indigo',
-      icon: '🐘',
-    },
-    {
-      name: 'Next.js',
-      description: 'React framework for production—SEO, performance, and developer experience',
-      color: 'gray',
-      icon: '▲',
-    },
-    {
-      name: 'TypeScript',
-      description: 'Type safety catches bugs before production and improves maintainability',
-      color: 'blue',
-      icon: '📘',
-    },
-    {
-      name: 'n8n',
-      description: 'Workflow automation—connect systems and automate processes without code',
-      color: 'red',
-      icon: '🔗',
-    },
-    {
-      name: 'RAG',
-      description: 'Retrieval-Augmented Generation—AI with context from your own data sources',
-      color: 'purple',
-      icon: '🧠',
-    },
-    {
-      name: 'LLMs',
-      description: 'Large Language Models—leverage GPT, Claude, and others for intelligent features',
-      color: 'pink',
-      icon: '✨',
-    },
-    {
-      name: 'Docker',
-      description: 'Containerization ensures consistent deployments across all environments',
-      color: 'cyan',
-      icon: '🐳',
-    },
-    {
-      name: 'Vercel',
-      description: 'Edge network deployment for lightning-fast global performance',
-      color: 'gray',
-      icon: '▲',
-    },
-  ];
+  const { language } = useLanguage();
 
   const colorClasses = {
     blue: 'bg-blue-100 text-blue-700 border-blue-300 hover:bg-blue-200',
@@ -83,16 +105,18 @@ export default function StackBadges() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            My Tech Stack
+            {language === 'fr' ? 'Mon stack technologique' : 'My Tech Stack'}
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Modern, proven technologies that deliver performance, reliability, and scale
+            {language === 'fr'
+              ? 'Des technologies modernes et éprouvées pour la performance, la fiabilité et la montée en charge'
+              : 'Modern, proven technologies that deliver performance, reliability, and scale'}
           </p>
         </div>
 
         {/* Badges */}
         <div className="flex flex-wrap gap-3 justify-center items-center">
-          {badges.map((badge, index) => {
+          {BADGES.map((badge, index) => {
             const colors = colorClasses[badge.color as keyof typeof colorClasses];
             const isHovered = hoveredBadge === badge.name;
             
@@ -105,7 +129,7 @@ export default function StackBadges() {
                   onFocus={() => setHoveredBadge(badge.name)}
                   onBlur={() => setHoveredBadge(null)}
                   aria-describedby={`tooltip-${badge.name}`}
-                  title={badge.description}
+                  title={badge.description[language]}
                 >
                   {badge.icon && (
                     <span className="text-lg" aria-hidden="true">
@@ -123,7 +147,7 @@ export default function StackBadges() {
                     className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-4 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-xl max-w-xs w-max pointer-events-none"
                   >
                     <div className="relative">
-                      {badge.description}
+                      {badge.description[language]}
                       {/* Tooltip arrow */}
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
                         <div className="border-4 border-transparent border-t-gray-900" />
@@ -139,7 +163,9 @@ export default function StackBadges() {
         {/* Bottom Note */}
         <div className="mt-12 text-center">
           <p className="text-sm text-gray-500">
-            And many more tools tailored to your specific needs
+            {language === 'fr'
+              ? 'Et bien d’autres outils adaptés à vos besoins spécifiques'
+              : 'And many more tools tailored to your specific needs'}
           </p>
         </div>
       </div>

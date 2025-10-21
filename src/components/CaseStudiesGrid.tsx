@@ -1,19 +1,22 @@
-import React from 'react';
-import { caseStudies } from '../data/caseStudies';
+import { caseStudies, type LocalizedString } from '../data/caseStudies';
 import CaseStudyCard from './CaseStudyCard';
 import ServicesCTA from './ServicesCTA';
+import { useLanguage } from '../lib/language';
 
 interface CaseStudiesGridProps {
-  heading?: string;
+  heading?: LocalizedString;
   limit?: number;
   showCTA?: boolean;
 }
 
 export default function CaseStudiesGrid({
-  heading = 'Case Studies',
+  heading,
   limit,
   showCTA = true,
 }: CaseStudiesGridProps) {
+  const { language } = useLanguage();
+  const sectionHeading = heading ? heading[language] : language === 'fr' ? 'Études de cas' : 'Case Studies';
+  const ctaLabel = language === 'fr' ? 'Lancer votre projet' : 'Start Your Project';
   const items = typeof limit === 'number' ? caseStudies.slice(0, limit) : caseStudies;
 
   return (
@@ -22,7 +25,7 @@ export default function CaseStudiesGrid({
         {/* Section Header */}
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
-            {heading}
+            {sectionHeading}
           </h1>
         </div>
 
@@ -31,11 +34,12 @@ export default function CaseStudiesGrid({
           {items.map((study, index) => (
             <CaseStudyCard
               key={index}
-              title={study.title}
-              summary={study.summary}
+              title={study.title[language]}
+              summary={study.summary[language]}
               slug={study.slug}
               thumbnail={study.heroImage}
               tags={study.tags}
+              readLabel={language === 'fr' ? 'Voir le projet' : 'Read case study'}
             />
           ))}
         </div>
@@ -46,7 +50,7 @@ export default function CaseStudiesGrid({
             <div className="flex justify-center">
               <ServicesCTA
                 variant="purple"
-                label="Start Your Project"
+                label={ctaLabel}
                 showArrow={true}
                 className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
               />

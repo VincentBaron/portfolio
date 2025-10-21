@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import SprintTimeline from '../components/SprintTimeline';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
 import PartnerOrganizations from '../components/PartnerOrganizations';
+import ImpactIntro from '../components/ImpactIntro';
 ---
 
 <BaseLayout>
@@ -25,20 +26,7 @@ import PartnerOrganizations from '../components/PartnerOrganizations';
     <!-- Impact Section -->
     <section id="impact" class="py-6 sm:py-8 lg:py-12 px-4 sm:px-6 lg:px-8 scroll-mt-20">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-6 sm:mb-8 lg:mb-10">
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
-            Business as a Force for Good
-          </h2>
-          <p class="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            I believe technology should drive positive change. That's why{' '}
-            <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              5% of my profits
-            </span>{' '}
-            are invested in projects driving{''}<span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              social and environmental impact.
-            </span>{' '}
-          </p>
-        </div>
+        <ImpactIntro client:load />
 
         <!-- Partner Organizations -->
         <PartnerOrganizations client:load />

@@ -1,36 +1,110 @@
 import ServicesCTA from './ServicesCTA';
+import { useLanguage, type Language } from '../lib/language';
+
+interface TimelineStep {
+  days: string;
+  title: string;
+  description: string;
+  expectation: string;
+  color: 'blue' | 'purple' | 'pink' | 'indigo';
+}
+
+const COPY: Record<Language, {
+  heading: string;
+  subheading: string;
+  steps: TimelineStep[];
+  prompt: string;
+  ctaLabel: string;
+  stepLabel: (current: number, total: number) => string;
+}> = {
+  en: {
+    heading: 'The 2-Week Sprint',
+    subheading: 'A proven process that delivers production-ready solutions in 14 days',
+    prompt: 'Ready to transform your idea into reality?',
+    ctaLabel: 'Start Your Sprint',
+    stepLabel: (current, total) => `Step ${current} of ${total}`,
+    steps: [
+      {
+        days: 'Days 1–2',
+        title: 'Scope & Plan',
+        description:
+          'I dive deep into your requirements, define clear deliverables, and create a detailed technical roadmap.',
+        expectation: 'Expect: A concrete project plan, architecture decisions, and aligned expectations.',
+        color: 'blue',
+      },
+      {
+        days: 'Days 3–10',
+        title: 'Build & Iterate',
+        description:
+          'I build your solution using AI/ML frameworks, and modern best practices. Daily progress updates to keep you in the loop.',
+        expectation: 'Expect: Working features, regular demos, and continuous feedback integration.',
+        color: 'purple',
+      },
+      {
+        days: 'Days 11–13',
+        title: 'Hardening & Testing',
+        description:
+          'I polish the experience, fix edge cases, conduct thorough testing, and optimize performance for production.',
+        expectation: 'Expect: Battle-tested code, performance benchmarks, and deployment-ready artifacts.',
+        color: 'pink',
+      },
+      {
+        days: 'Day 14',
+        title: 'Handover & Launch',
+        description:
+          'Complete documentation, deployment support, and knowledge transfer ensure your team can maintain the solution.',
+        expectation: 'Expect: Full documentation, deployment guide, and optional training session.',
+        color: 'indigo',
+      },
+    ],
+  },
+  fr: {
+    heading: 'Le sprint de 2 semaines',
+    subheading: 'Un processus éprouvé pour livrer une solution prête en 14 jours',
+    prompt: 'Prêt à transformer votre idée en réalité ?',
+    ctaLabel: 'Lancer votre sprint',
+    stepLabel: (current, total) => `Étape ${current} sur ${total}`,
+    steps: [
+      {
+        days: 'Jours 1–2',
+        title: 'Cadrage & planification',
+        description:
+          'J’analyse vos besoins, je définis des livrables clairs et j’établis une feuille de route technique détaillée.',
+        expectation: 'Livrables : plan projet concret, décisions d’architecture et attentes alignées.',
+        color: 'blue',
+      },
+      {
+        days: 'Jours 3–10',
+        title: 'Construction & itérations',
+        description:
+          'Je développe la solution avec les frameworks IA/ML et les meilleures pratiques modernes. Un point quotidien vous tient informé.',
+        expectation: 'Livrables : fonctionnalités opérationnelles, démos régulières et intégration continue de vos retours.',
+        color: 'purple',
+      },
+      {
+        days: 'Jours 11–13',
+        title: 'Renforcement & tests',
+        description:
+          'Je peaufine l’expérience, corrige les cas limites, réalise des tests approfondis et optimise les performances pour la production.',
+        expectation: 'Livrables : code prêt pour la production, métriques de performance et artefacts de déploiement.',
+        color: 'pink',
+      },
+      {
+        days: 'Jour 14',
+        title: 'Transmission & lancement',
+        description:
+          'Documentation complète, support au déploiement et transfert de connaissances pour que votre équipe prenne le relais.',
+        expectation: 'Livrables : documentation complète, guide de déploiement et session de formation optionnelle.',
+        color: 'indigo',
+      },
+    ],
+  },
+};
 
 export default function SprintTimeline() {
-  const steps = [
-    {
-      days: 'Days 1–2',
-      title: 'Scope & Plan',
-      description: 'I dive deep into your requirements, define clear deliverables, and create a detailed technical roadmap.',
-      expectation: 'Expect: A concrete project plan, architecture decisions, and aligned expectations.',
-      color: 'blue',
-    },
-    {
-      days: 'Days 3–10',
-      title: 'Build & Iterate',
-      description: 'I build your solution using AI/ML frameworks, and modern best practices. Daily progress updates to keep you in the loop.',
-      expectation: 'Expect: Working features, regular demos, and continuous feedback integration.',
-      color: 'purple',
-    },
-    {
-      days: 'Days 11–13',
-      title: 'Hardening & Testing',
-      description: 'I polish the experience, fix edge cases, conduct thorough testing, and optimize performance for production.',
-      expectation: 'Expect: Battle-tested code, performance benchmarks, and deployment-ready artifacts.',
-      color: 'pink',
-    },
-    {
-      days: 'Day 14',
-      title: 'Handover & Launch',
-      description: 'Complete documentation, deployment support, and knowledge transfer ensure your team can maintain the solution.',
-      expectation: 'Expect: Full documentation, deployment guide, and optional training session.',
-      color: 'indigo',
-    },
-  ];
+  const { language } = useLanguage();
+  const copy = COPY[language];
+  const steps = copy.steps;
 
   const colorClasses = {
     blue: {
@@ -69,10 +143,10 @@ export default function SprintTimeline() {
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-4">
-            The 2-Week Sprint
+            {copy.heading}
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
-            A proven process that delivers production-ready solutions in 14 days
+            {copy.subheading}
           </p>
         </div>
 
@@ -104,7 +178,7 @@ export default function SprintTimeline() {
                         {step.days}
                       </div>
                       <div className="text-xs text-gray-500">
-                        Step {index + 1} of 4
+                        {copy.stepLabel(index + 1, steps.length)}
                       </div>
                     </div>
                   </div>
@@ -134,12 +208,12 @@ export default function SprintTimeline() {
         {/* Bottom CTA */}
         <div className="mt-8 sm:mt-12 text-center">
           <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 lg:mb-6">
-            Ready to transform your idea into reality?
+            {copy.prompt}
           </p>
           <div className="flex justify-center">
             <ServicesCTA 
               variant="purple"
-              label="Start Your Sprint"
+              label={copy.ctaLabel}
               showArrow={true}
               className="px-8 py-4 text-lg shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
             />

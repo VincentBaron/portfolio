@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  title = '2 Weeks to Solve It - Fast, Scalable, AI-Powered Solutions',
+  title = 'vincentbaron.ai',
   description = 'Transform your business in just 2 weeks. We build scalable, AI-powered solutions that deliver real results. 5% of revenue pledged to Ramina.',
   ogImage = '/og-image.jpg',
 } = Astro.props;
@@ -20,7 +20,7 @@ const canonicalURL = new URL(currentPath, Astro.site);
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-language="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +51,7 @@ const canonicalURL = new URL(currentPath, Astro.site);
     <meta property="twitter:image" content={new URL(ogImage, Astro.site)} />
     
     <!-- Plausible Analytics (cookieless) -->
-    <script defer data-domain="2weekstosolve.it" src="https://plausible.io/js/script.js"></script>
+    <script is:inline defer data-domain="2weekstosolve.it" src="https://plausible.io/js/script.js"></script>
   </head>
   <body class="relative">
     <!-- Global Artistic Gradient Background -->

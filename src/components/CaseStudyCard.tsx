@@ -1,11 +1,10 @@
-import React from 'react';
-
 interface CaseStudyCardProps {
   title: string;
   summary: string;
   slug: string;
   thumbnail?: string;
   tags?: string[];
+  readLabel?: string;
 }
 
 export default function CaseStudyCard({
@@ -14,16 +13,17 @@ export default function CaseStudyCard({
   slug,
   thumbnail,
   tags = [],
+  readLabel = 'Read case study',
 }: CaseStudyCardProps) {
   return (
     <a
       href={`/work/${slug}`}
       className="group block bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-      aria-label={`Read case study: ${title}`}
+      aria-label={`${readLabel}: ${title}`}
     >
       {/* Thumbnail */}
       {thumbnail ? (
-        <div className="relative h-32 sm:h-40 lg:h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
+        <div className="relative h-28 sm:h-32 lg:h-40 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
           <img
             src={thumbnail}
             alt=""
@@ -32,7 +32,7 @@ export default function CaseStudyCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       ) : (
-        <div className="h-32 sm:h-40 lg:h-48 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
+        <div className="h-28 sm:h-32 lg:h-40 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
           <svg
             className="w-16 h-16 text-gray-400 group-hover:text-blue-500 transition-colors duration-300"
             fill="none"
@@ -77,7 +77,7 @@ export default function CaseStudyCard({
 
         {/* Read More Link */}
         <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
-          <span>Read case study</span>
+          <span>{readLabel}</span>
           <svg
             className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
             fill="none"

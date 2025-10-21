@@ -1,17 +1,57 @@
 import { useState, useEffect } from 'react';
 import CalendlyModal from './CalendlyModal';
+import { useLanguage, type Language } from '../lib/language';
 
-interface NavLink {
-  label: string;
+interface NavItem {
+  id: 'home' | 'process' | 'work' | 'impact';
   href: string;
 }
 
-const navLinks: NavLink[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Process', href: '#process' },
-  { label: 'Work', href: '#work' },
-  { label: 'Impact', href: '#impact' },
+const NAV_ITEMS: NavItem[] = [
+  { id: 'home', href: '#home' },
+  { id: 'process', href: '#process' },
+  { id: 'work', href: '#work' },
+  { id: 'impact', href: '#impact' },
 ];
+
+const HEADER_COPY: Record<
+  Language,
+  {
+    nav: Record<NavItem['id'], string>;
+    bookCall: string;
+    logoAria: string;
+    mobileOpen: string;
+    mobileClose: string;
+    toggleMenuAria: string;
+  }
+> = {
+  en: {
+    nav: {
+      home: 'Home',
+      process: 'Process',
+      work: 'Work',
+      impact: 'Impact',
+    },
+    bookCall: 'Book a Call',
+    logoAria: '2 Weeks to Solve It - Home',
+    mobileOpen: 'Open menu',
+    mobileClose: 'Close menu',
+    toggleMenuAria: 'Toggle navigation menu',
+  },
+  fr: {
+    nav: {
+      home: 'Accueil',
+      process: 'Méthode',
+      work: 'Projets',
+      impact: 'Impact',
+    },
+    bookCall: 'Réserver un appel',
+    logoAria: '2 Weeks to Solve It - Accueil',
+    mobileOpen: 'Ouvrir le menu',
+    mobileClose: 'Fermer le menu',
+    toggleMenuAria: 'Basculer le menu de navigation',
+  },
+};
 
 interface HeaderProps {
   currentPath?: string;
@@ -21,6 +61,45 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const copy = HEADER_COPY[language];
+  const navLinks = NAV_ITEMS.map((item) => ({
+    href: item.href,
+    label: copy.nav[item.id],
+  }));
+  const languageOptions: Array<{ code: Language; label: string; flag: string; sr: string }> = [
+    { code: 'en', label: 'EN', flag: '🇬🇧', sr: 'English / Anglais' },
+    { code: 'fr', label: 'FR', flag: '🇫🇷', sr: 'French / Français' },
+  ];
+  const renderLanguageSelector = (variant: 'desktop' | 'mobile', className = '') => (
+    <div
+      className={`${
+        variant === 'desktop' ? 'hidden md:flex' : 'flex md:hidden'
+      } items-center gap-1 rounded-full border border-gray-200 bg-white/80 px-1 py-0.5 shadow-sm backdrop-blur ${className}`}
+    >
+      {languageOptions.map(({ code, label, flag, sr }) => {
+        const isActive = language === code;
+        return (
+          <button
+            key={code}
+            type="button"
+            onClick={() => setLanguage(code)}
+            className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+              isActive
+                ? 'bg-white text-blue-600 shadow-sm'
+                : 'text-gray-500 hover:text-gray-700'
+            } ${variant === 'desktop' ? 'md:text-xs' : 'text-xs'}`}
+            aria-pressed={isActive}
+            aria-label={sr}
+            title={sr}
+          >
+            <span aria-hidden="true">{flag}</span>
+            <span className="hidden sm:inline">{label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -129,6 +208,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
       }`}
       onKeyDown={handleKeyDown}
     >
+      {renderLanguageSelector('desktop', 'absolute top-2 right-4 z-50')}
+      {renderLanguageSelector('mobile', 'absolute top-2 right-4 z-50')}
       <nav
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
@@ -140,7 +221,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
               className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
-              aria-label="2 Weeks to Solve It - Home"
+              aria-label={copy.logoAria}
             >
               <img 
                 src="/logoBrand.png" 
@@ -150,82 +231,84 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-1">
-            {navLinks.map((link) => {
-              const isCurrent = isCurrentPage(link.href);
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                    isCurrent
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
-                      : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
-                  }`}
-                  aria-current={isCurrent ? 'page' : undefined}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
-          </div>
+          <div className="flex flex-1 items-center justify-center gap-3">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex md:items-center md:space-x-1">
+              {navLinks.map((link) => {
+                const isCurrent = isCurrentPage(link.href);
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                      isCurrent
+                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
+                        : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
+                    }`}
+                    aria-current={isCurrent ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
+            </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:block">
+            {/* CTA Button - Desktop */}
+            <div className="hidden md:block">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
+              >
+                {copy.bookCall}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
+              type="button"
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={copy.toggleMenuAria}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              Book a Call
+              <span className="sr-only">
+                {isMobileMenuOpen ? copy.mobileClose : copy.mobileOpen}
+              </span>
+              {!isMobileMenuOpen ? (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
             </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label="Toggle navigation menu"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <span className="sr-only">
-              {isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            </span>
-            {!isMobileMenuOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            )}
-          </button>
         </div>
       </nav>
 
@@ -265,7 +348,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               }}
               className="block w-full text-center px-5 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 transition-all duration-200"
             >
-              Book a Call
+              {copy.bookCall}
             </button>
           </div>
         </div>
