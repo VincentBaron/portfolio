@@ -390,52 +390,55 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">They Trusted Me</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
                 {/* Testimonial 1 */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="text-lg sm:text-xl mb-1">"</div>
-                  <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                    From concept to MVP in 2 weeks. The AI features Vincent built have already increased our conversions by 40%.
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left">
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes. His focus on operational efficiency had a clear impact on how we delivered projects.
                   </p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
-                      👨‍💼
-                    </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <img
+                      src="/holy.jpeg"
+                      alt="Holy, Head of Product at Side"
+                      className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
+                    />
                     <div className="text-left">
-                      <p className="text-xs font-semibold text-gray-900">David Kim</p>
-                      <p className="text-xs text-gray-600">VP, RetailTech Pro</p>
+                      <p className="text-xs sm:text-sm font-semibold text-gray-900">Holy Sicard-Razaka</p>
+                      <p className="text-[11px] sm:text-xs text-gray-600">Head of Product @ Side</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Testimonial 2 */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="text-lg sm:text-xl mb-1">"</div>
-                  <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                    Vincent transformed our product vision into reality. His sprint methodology eliminated all the usual friction.
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left">
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates. It streamlined our delivery process and reduced manual coordination.
                   </p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
-                      👩‍💼
-                    </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <img
+                      src="/alexis.jpeg"
+                      alt="Alexis, Full-Stack Developer at Side"
+                      className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
+                    />
                     <div className="text-left">
-                      <p className="text-xs font-semibold text-gray-900">Sarah Chen</p>
-                      <p className="text-xs text-gray-600">CEO, TechVision AI</p>
+                      <p className="text-xs sm:text-sm font-semibold text-gray-900">Alexis Doroszkiewicz</p>
+                      <p className="text-[11px] sm:text-xs text-gray-600">Full-Stack Developer @ Side</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Testimonial 3 */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 sm:p-3 lg:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="text-lg sm:text-xl mb-1">"</div>
-                  <p className="text-xs text-gray-700 mb-2 sm:mb-3 leading-relaxed">
-                    Exceptional technical skills combined with business acumen. Vincent delivered a scalable solution that grows with us.
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left">
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    Vincent proved highly effective at navigating our microservices environment to ensure smooth implementation. His work was crucial for expanding our platform's capabilities.
                   </p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-xs">
-                      👩‍🔬
-                    </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <img
+                      src="/guillaume.jpeg"
+                      alt="Guillaume Forgue, Lead Developer at Qomon"
+                      className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
+                    />
                     <div className="text-left">
-                      <p className="text-xs font-semibold text-gray-900">Emily Thompson</p>
-                      <p className="text-xs text-gray-600">CTO, DataFlow</p>
+                      <p className="text-xs sm:text-sm font-semibold text-gray-900">Guillaume Forgue</p>
+                      <p className="text-[11px] sm:text-xs text-gray-600">Lead Developer @ Qomon</p>
                     </div>
                   </div>
                 </div>

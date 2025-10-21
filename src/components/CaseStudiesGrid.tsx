@@ -34,6 +34,7 @@ export default function CaseStudiesGrid({
               title={study.title}
               summary={study.summary}
               slug={study.slug}
+              thumbnail={study.heroImage}
               tags={study.tags}
             />
           ))}

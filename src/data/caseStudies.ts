@@ -21,118 +21,121 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: 'wingit-ai-marketplace',
-    title: 'WingIt.ai Wingfoil Gear Aggregator',
-    summary:
-      'Built an aggregator that sits on top of leading wingfoiling marketplaces, layering skill-based filters, curated bundles, and an Ollama + Mistral concierge that surfaces the right kit in seconds.',
-    publishedAt: '2024-07-08',
-    tags: ['Next.js', 'Supabase', 'Python', 'Playwright', 'Ollama', 'Mistral Large'],
-    metrics: [
-      { label: 'Conversion rate uplift', value: '+32%' },
-      { label: 'Curated gear profiles', value: '18 rider archetypes' },
-      { label: 'Inventory coverage', value: '4.5k SKUs' },
-    ],
-    contentSections: [
-      {
-        heading: 'Problem',
-        body: [
-          'Wingfoiling exploded in popularity, but the gear landscape remained fragmented across niche marketplaces and forum listings. Riders bounced between tabs, normalized specs by hand, and struggled to see which bundles made sense for their skill level.',
-          'WingIt.ai wanted an aggregator that felt as personal as walking into a pro shop: single search, consistent data, tailored recommendations, and a smarter way to surface demo programs and coaching packages pulled from partner stores.',
-        ],
-      },
-      {
-        heading: 'Approach',
-        body: [
-          'Designed an aggregation layer on Next.js backed by Supabase for normalized product records, partner marketplace metadata, and event-sourced updates. A lightweight edge API delivers near-real-time availability without exposing partner credentials.',
-          'Built Python-based scrapers using Playwright and rotating proxies to ingest catalog data from approved marketplaces, then enriched it with computer-vision generated alt text and NLP signals before dropping the output into Supabase.',
-          'The Ollama concierge (running Mistral Large) uses retrieval-augmented generation against normalized specs and rider archetypes to recommend quivers based on wind range, weight, and progression goals. Specialty filters—foil size, wing canopy tension, travel weight—plus prompt telemetry dashboards let the team tune workloads without downtime.',
-        ],
-      },
-      {
-        heading: 'Impact',
-        body: [
-          'Time-to-cart dropped from minutes of browsing to under 40 seconds for guided shoppers, and bundle attachment rate jumped to 58% as the assistant recommended complementary foils and leashes.',
-          'Retail partners use the shared analytics workspace to see which rider personas convert best, which in turn informed exclusive inventory allocations ahead of peak season.',
-          'Support tickets about “what gear should I buy?” fell by 71%, freeing the founders to focus on regional launch partnerships and pro team endorsements.',
-        ],
-      },
-    ],
-  },
+  slug: 'cloud-reconciliation-agent',
+  title: 'Cloud Reconciliation Agent — Eliminating Hidden Infrastructure Costs',
+  heroImage: '/cloud_reconciliation.png',
+  summary:
+    'Built an automated reconciliation system using Python and Temporal.io to align client sales references with the actual deployed cloud infrastructure. The agent detected unbilled or orphaned resources in real time, preventing multi-million-euro losses.',
+  publishedAt: '2024-10-10',
+  tags: ['Python', 'Temporal.io', 'Cloud Infrastructure', 'Automation', 'Cost Optimization'],
+  metrics: [
+    { label: 'Revenue leakage prevented', value: '€2M+ annually' },
+    { label: 'Detection frequency', value: 'Daily sync cycles' },
+    { label: 'Divergence resolution automation', value: '100%' },
+  ],
+  contentSections: [
+    {
+      heading: 'Problem',
+      body: [
+        'The reference data for client subscriptions often diverged from the actual state of the deployed cloud infrastructure. Some clients retained access to active compute and storage resources that were no longer listed in the sales system.',
+        'This mismatch led to substantial unbilled usage and inefficiencies in cost tracking, resulting in millions of euros in annual losses and heavy manual reconciliation work for the ops and billing teams.',
+      ],
+    },
+    {
+      heading: 'Approach',
+      body: [
+        'Designed a Python-based reconciliation agent orchestrated with Temporal.io to automatically cross-check client references against live infrastructure states.',
+        'The system ran daily sync workflows that detected and flagged discrepancies, automatically classifying them as “orphaned,” “unbilled,” or “mismatched” resources.',
+        'Integrated alerting and reporting to internal dashboards so financial and ops teams could act immediately—or trigger automated cleanup and billing adjustments when safe to do so.',
+      ],
+    },
+    {
+      heading: 'Impact',
+      body: [
+        'Eliminated recurring revenue leakage by automatically identifying and resolving infrastructure discrepancies before billing cycles closed.',
+        'Reduced manual auditing and data reconciliation to near-zero, freeing engineers to focus on proactive infrastructure optimization.',
+        'Recovered millions of euros in previously lost revenue and established a long-term safeguard against untracked cloud resource drift.',
+      ],
+    },
+  ],
+},
   {
-    slug: 'portfolio-experience-relaunch',
-    title: 'Personal Portfolio Growth Engine',
-    summary:
-      'Relaunched my portfolio into a performant Astro + React experience with narrative case studies, automated Calendly booking, and scroll-aware navigation that lifts inbound conversions.',
-    publishedAt: '2024-05-27',
-    tags: ['Astro', 'React', 'TailwindCSS', 'Calendly API', 'Plausible'],
-    heroImage: '/portfolio-case-study-cover.svg',
-    metrics: [
-      { label: 'Time to relaunch', value: '12 days' },
-      { label: 'Qualified leads lift', value: '+46%' },
-      { label: 'Core Web Vitals pass rate', value: '99%' },
-    ],
-    contentSections: [
-      {
-        heading: 'Problem',
-        body: [
-          'The previous site was a static landing page that buried case studies, lacked clear calls-to-action, and took nearly seven seconds to load on mobile—potential clients dropped before seeing any proof of work.',
-          'It also forced manual back-and-forth to schedule intro calls, and there was no analytics instrumentation to understand what prospective founders cared about most.',
-        ],
-      },
-      {
-        heading: 'Approach',
-        body: [
-          'Mapped the buyer journey end-to-end, then rebuilt the site on Astro for fast static delivery while using React islands for interactive components like the sprint timeline and Calendly modal.',
-          'Created a component library in Tailwind that aligned the brand palette, introduced responsive typography, and added scroll-triggered sections so visitors can navigate directly to process, impact, or work.',
-          'Hooked in Plausible analytics, structured data tags, automated sitemap generation, and SEO-friendly case study routes so the content footprint scales without extra tooling.',
-        ],
-      },
-      {
-        heading: 'Impact',
-        body: [
-          'Lead-to-call conversion jumped 46% after launch because key proof points and the booking flow are always one click away, even on mobile.',
-          'Average page load dropped under one second, and the site now scores 99+ across Core Web Vitals, unlocking better organic performance.',
-          'The modular content system means adding new offers or deep-dives takes minutes, not hours—future sprints fuel the portfolio without code rewrites.',
-        ],
-      },
-    ],
-  },
+  slug: 'radar-ops-automation',
+  title: 'Radar — Automated Worker Matching for On-Demand Staffing',
+  summary:
+    'Designed and shipped a feature that let the operations team automatically surface qualified worker profiles for last-minute missions in the food industry. The system replaced 50+ hours of manual search and outreach per week with an automated pipeline powered by Go, React, and Customer.io.',
+  publishedAt: '2024-03-18',
+  tags: ['Go', 'React', 'Customer.io', 'Automation', 'Operations'],
+  heroImage: '/radar_staffing.png',
+  metrics: [
+    { label: 'Ops workload reduction', value: '−95%' },
+    { label: 'Weekly time saved', value: '≈47 hours' },
+    { label: 'Notification automation rate', value: '100%' },
+  ],
+  contentSections: [
+    {
+      heading: 'Problem',
+      body: [
+        'The operations team was responsible for sourcing and confirming workers for last-minute food industry missions—sometimes 50 to 60 profiles in under 24 hours.',
+        'The manual process of browsing candidate databases, filtering by domain and price range, and individually contacting each worker consumed over 50 hours per week and often delayed client response times.',
+      ],
+    },
+    {
+      heading: 'Approach',
+      body: [
+        'Built “Radar,” an internal feature that lets ops instantly generate candidate lists based on mission parameters—industry, availability, rate, and experience level—directly from the dashboard.',
+        'Implemented a matching engine in Go that filters and ranks profiles in real time, with a React frontend enabling dynamic search and live mission tracking.',
+        'Integrated Customer.io for automated outreach, triggering personalized notifications to workers that match a mission’s requirements and collecting confirmations automatically.',
+      ],
+    },
+    {
+      heading: 'Impact',
+      body: [
+        'Reduced weekly manual ops time from 50+ hours to under 3 hours by automating the sourcing and notification process.',
+        'Enabled near-instant staffing for urgent client missions, improving responsiveness and reliability across multiple accounts.',
+        'Freed the operations team to focus on higher-value relationship management instead of repetitive matching tasks.',
+      ],
+    },
+  ],
+},
   {
-    slug: 'ecommerce-automation',
-    title: 'E-commerce Order Automation',
-    summary:
-      'Integrated n8n workflows to automate order processing, inventory management, and customer notifications, saving 20+ hours weekly.',
-    publishedAt: '2023-11-18',
-    tags: ['n8n', 'Shopify', 'PostgreSQL', 'APIs'],
-    metrics: [
-      { label: 'Hours saved weekly', value: '20+' },
-      { label: 'Order accuracy', value: '99.4%' },
-      { label: 'Manual touchpoints', value: '-80%' },
-    ],
-    contentSections: [
-      {
-        heading: 'Problem',
-        body: [
-          'A boutique watersports brand struggled to keep up with order volume during seasonal spikes. Inventory, fulfillment, and customer messaging lived in disconnected systems, forcing nightly spreadsheet reconciliations.',
-          'VIP customers were missing restock alerts, and partner warehouses had no live view into bundle availability—leading to costly split shipments and refunds.',
-        ],
-      },
-      {
-        heading: 'Approach',
-        body: [
-          'Mapped every operational handoff from checkout to last-mile updates, scoring each touchpoint by automation readiness and customer impact.',
-          'Implemented n8n to orchestrate Shopify events, 3PL APIs, and a lightweight PostgreSQL ledger that keeps inventory and purchase orders in sync across channels.',
-          'Introduced proactive customer notifications with guardrails—SMS, email, and WhatsApp fallbacks fire automatically, while exceptions trigger human review queues.',
-        ],
-      },
-      {
-        heading: 'Impact',
-        body: [
-          'The operations team reclaimed 22 hours each week, reinvesting the time into wholesale partnerships and community events.',
-          'Stockouts and double-shipped orders virtually disappeared because every channel reads from the same source of truth.',
-          'Customers rave about proactive updates, helping increase repeat purchase rate by 14% in the first quarter after launch.',
-        ],
-      },
-    ],
-  },
+  slug: 'automated-hours-validation',
+  title: 'Automated Hours Validation System for Mission Tracking',
+  heroImage: '/hours_import.png',
+  summary:
+    'Developed a smart import and validation system that automated the reconciliation of worker hours across client Excel files, database records, and worker confirmations. The AI-assisted process reduced weekly ops time from 50 hours to under 3 hours.',
+  publishedAt: '2024-05-02',
+  tags: ['Go', 'Python', 'AI Automation', 'N8n', 'LLM Integration'],
+  metrics: [
+    { label: 'Ops workload reduction', value: '−94%' },
+    { label: 'Weekly time saved', value: '≈47 hours' },
+    { label: 'File automation accuracy', value: '99%+' },
+  ],
+  contentSections: [
+    {
+      heading: 'Problem',
+      body: [
+        'Large enterprise clients in the food industry submitted mission-hour reports as massive Excel files—sometimes thousands of lines long—listing worker names, dates, and logged hours.',
+        'The operations team had to manually input and cross-check every record against internal databases and worker confirmations, consuming over 50 hours per week and leaving room for human error.',
+      ],
+    },
+    {
+      heading: 'Approach',
+      body: [
+        'Built an automated import and validation system allowing clients to directly upload their hour tracking files through a secure interface.',
+        'Implemented a Go and Python backend pipeline that parsed, matched, and verified data against internal mission records, flagging inconsistencies for review.',
+        'Integrated an LLM-based reformatter via N8n to automatically correct or normalize column structures, date formats, and field naming before ingestion.',
+        'Developed a parallel worker-facing interface so each worker could directly confirm or correct their hours, removing the need for manual ops intervention.',
+      ],
+    },
+    {
+      heading: 'Impact',
+      body: [
+        'Reduced weekly manual input time from 50+ hours to under 3 hours, limiting human intervention only to conflict resolution.',
+        'Increased validation accuracy and reduced payroll discrepancies through automated reconciliation and cross-check logic.',
+        'Freed operations bandwidth to focus on strategic client relationships and scaling mission volume without adding headcount.',
+      ],
+    },
+  ],
+},
 ];
