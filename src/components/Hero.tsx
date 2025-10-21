@@ -146,22 +146,35 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              Reduce by up to 80% manual work.{' '}
+              Eliminate up to 80% of manual work{' '}
               <br />
-              <span className="text-gradient">Save up to 40% on operational costs.</span>
+              <span className="text-gradient">Reduce operational costs by up to 40%</span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
               <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed">
-                I'll solve your painpoint in just{' '}
-                <span className="font-semibold text-blue-600">2 weeks</span>.
+                Manual processes cost you time, money, and frustration. I design scalable backend and AI systems that make
+                your operations run themselves.
               </p>
               <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
-                Scalable MVPs • AI-powered solutions (RAG/LLM) • Production-ready features
+                With over five years of experience as a software engineer, I combine deep technical expertise with a
+                business-first mindset to uncover inefficiencies and deliver practical, production-ready MVPs in focused
+                two-week sprints.
               </p>
-                <p className="text-base sm:text-lg text-purple-600 font-semibold mt-1 sm:mt-2">
-                🌍 5% of net profits invested in projects driving social and environmental impact.
-                </p>
+              <div className="mt-3 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
+                  <span role="img" aria-label="Go">🐹</span> Go
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
+                  <span role="img" aria-label="Python">🐍</span> Python
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
+                  <span role="img" aria-label="n8n">🔁</span> n8n
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
+                  <span role="img" aria-label="LLMs and RAG">🧠</span> LLMs &amp; RAG
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -296,6 +309,82 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
               </div>
             )}
 
+            {/* Email Submitted State */}
+            {flowState === 'email_submitted' && (
+              <div className="max-w-4xl mx-auto space-y-4">
+                <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-white/10">
+                  <div className="flex items-start gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.8}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold">
+                        Check your inbox
+                      </p>
+                      <h3 className="text-xl font-bold">
+                        I’ll send the audit and implementation plan to {submittedEmail}.
+                      </h3>
+                    </div>
+                  </div>
+
+                  {capturedPainpoint && (
+                    <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-white/90 mb-4">
+                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-2">
+                        What I’m reviewing
+                      </p>
+                      <p className="leading-relaxed">{capturedPainpoint}</p>
+                    </div>
+                  )}
+
+                  <p className="text-sm text-white/80 mb-6">
+                    Expect a response within one business day. In the meantime, feel free to book a call or dive into
+                    relevant case studies.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={handleBookCall}
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-blue-600 font-semibold shadow-lg hover:text-blue-700 transition-all"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V5a3 3 0 016 0v2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3zm2-2a1 1 0 112 0v2h-2V5z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6" />
+                      </svg>
+                      Book a 20-min call
+                    </button>
+                    <a
+                      href="#work"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/40 font-semibold hover:bg-white/20 transition-all"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                      See case studies
+                    </a>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <button
+                    onClick={handleRetry}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 5A8.001 8.001 0 004.582 9H9m0 11v-5h-.582" />
+                    </svg>
+                    Share another painpoint
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Testimonials */}
             <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
               <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">They Trusted Me</p>
@@ -352,111 +441,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <button
-                  onClick={handleBookCall}
-                  className="inline-flex items-center px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200 justify-center gap-2"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.8"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V5a3 3 0 016 0v2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3zm2-2a1 1 0 112 0v2h-2V5z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 13h6" />
-                  </svg>
-                  Book a 20-min call
-                </button>
-                <a
-                  href="#work"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.383 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-4.925 7-9.542 7s-8.268-2.943-9.542-7z" />
-                  </svg>
-                  See use cases
-                </a>
-              </div>
             </div>
-
-            {/* Email Submitted State */}
-            {flowState === 'email_submitted' && (
-              <div className="max-w-4xl mx-auto space-y-4">
-                <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-white/10">
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.8}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold">
-                        Check your inbox
-                      </p>
-                      <h3 className="text-xl font-bold">
-                        I’ll send the audit and implementation plan to {submittedEmail}.
-                      </h3>
-                    </div>
-                  </div>
-
-                  {capturedPainpoint && (
-                    <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-white/90 mb-4">
-                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-2">
-                        What I’m reviewing
-                      </p>
-                      <p className="leading-relaxed">{capturedPainpoint}</p>
-                    </div>
-                  )}
-
-                  <p className="text-sm text-white/80 mb-6">
-                    Expect a response within one business day. In the meantime, feel free to book a call or dive into
-                    relevant case studies.
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <button
-                      onClick={handleBookCall}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-blue-600 font-semibold shadow-lg hover:text-blue-700 transition-all"
-                    >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V5a3 3 0 016 0v2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3zm2-2a1 1 0 112 0v2h-2V5z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6" />
-                      </svg>
-                      Book a call
-                    </button>
-                    <a
-                      href="#work"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/40 font-semibold hover:bg-white/20 transition-all"
-                    >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                      </svg>
-                      View case studies
-                    </a>
-                  </div>
-                </div>
-
-                <div className="text-center">
-                  <button
-                    onClick={handleRetry}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 5A8.001 8.001 0 004.582 9H9m0 11v-5h-.582" />
-                    </svg>
-                    Share another painpoint
-                  </button>
-                </div>
-              </div>
-            )}
 
             {/* Stats and Companies Section */}
             <div className="mt-2 sm:mt-4 lg:mt-6 flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-8 xl:gap-12">
