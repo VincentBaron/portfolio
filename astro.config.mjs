@@ -10,6 +10,6 @@ export default defineConfig({
       applyBaseStyles: false,
     })
   ],
-  output: 'static',
+  output: 'server',
   site: 'https://2weekstosolve.it',
 });

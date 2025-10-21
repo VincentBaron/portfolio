@@ -1,7 +1,8 @@
 /// <reference path="../.astro/types.d.ts" />
 
 interface ImportMetaEnv {
-  readonly PUBLIC_N8N_WEBHOOK_URL?: string;
+  readonly NOTION_SECRET?: string;
+  readonly NOTION_DATABASE_ID?: string;
 }
 
 interface ImportMeta {
