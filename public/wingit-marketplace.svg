@@ -1,0 +1,95 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0EA5E9"/>
+      <stop offset="0.52" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="boardGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.9)"/>
+      <stop offset="1" stop-color="rgba(148,163,184,0.9)"/>
+    </linearGradient>
+    <linearGradient id="wingGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
+
+  <g opacity="0.45">
+    <circle cx="220" cy="140" r="160" fill="white" fill-opacity="0.12"/>
+    <circle cx="1020" cy="520" r="190" fill="white" fill-opacity="0.12"/>
+    <circle cx="960" cy="140" r="110" fill="white" fill-opacity="0.08"/>
+  </g>
+
+  <g transform="translate(150 120)">
+    <rect x="0" y="0" width="420" height="435" rx="28" fill="rgba(15,23,42,0.35)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+    <g transform="translate(40 48)">
+      <rect x="0" y="0" width="340" height="56" rx="16" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="28" cy="28" r="11" fill="#38BDF8"/>
+      <rect x="52" y="17" width="148" height="12" rx="6" fill="rgba(255,255,255,0.6)"/>
+      <rect x="52" y="35" width="104" height="10" rx="5" fill="rgba(255,255,255,0.35)"/>
+    </g>
+    <g transform="translate(40 132)">
+      <rect x="0" y="0" width="340" height="202" rx="24" fill="rgba(2,6,23,0.35)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+      <g transform="translate(24 32)">
+        <rect x="0" y="0" width="96" height="140" rx="18" fill="url(#boardGradient)"/>
+        <path d="M48 20C62 46 70 82 70 118C70 142 54 150 48 150C42 150 26 142 26 118C26 82 34 46 48 20Z" fill="rgba(15,23,42,0.12)"/>
+      </g>
+      <g transform="translate(144 32)">
+        <path d="M0 98C0 55 34 20 76 20H118C143 20 164 41 164 66V116C164 140 145 160 121 160H44C19 160 0 141 0 116V98Z" fill="url(#wingGradient)"/>
+        <path d="M38 56H134" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M44 84H126" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M56 112H114" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+    <g transform="translate(40 360)">
+      <rect x="0" y="0" width="340" height="60" rx="18" fill="rgba(255,255,255,0.16)"/>
+      <rect x="24" y="18" width="120" height="12" rx="6" fill="rgba(255,255,255,0.55)"/>
+      <rect x="24" y="36" width="190" height="10" rx="5" fill="rgba(255,255,255,0.3)"/>
+      <rect x="226" y="16" width="90" height="28" rx="14" fill="#0EA5E9"/>
+    </g>
+  </g>
+
+  <g transform="translate(620 160)">
+    <rect x="0" y="0" width="420" height="320" rx="28" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+    <g transform="translate(40 46)">
+      <rect x="0" y="0" width="190" height="16" rx="8" fill="rgba(15,23,42,0.55)"/>
+      <rect x="0" y="28" width="132" height="12" rx="6" fill="rgba(15,23,42,0.35)"/>
+    </g>
+    <g transform="translate(40 108)">
+      <rect x="0" y="0" width="340" height="60" rx="18" fill="rgba(2,6,23,0.18)"/>
+      <rect x="24" y="20" width="160" height="10" rx="5" fill="rgba(255,255,255,0.45)"/>
+      <rect x="24" y="36" width="210" height="8" rx="4" fill="rgba(255,255,255,0.28)"/>
+      <rect x="250" y="16" width="76" height="28" rx="14" fill="#F97316"/>
+    </g>
+    <g transform="translate(40 196)">
+      <rect x="0" y="0" width="340" height="60" rx="18" fill="rgba(2,6,23,0.18)"/>
+      <rect x="24" y="20" width="148" height="10" rx="5" fill="rgba(255,255,255,0.45)"/>
+      <rect x="24" y="36" width="180" height="8" rx="4" fill="rgba(255,255,255,0.28)"/>
+      <rect x="250" y="16" width="76" height="28" rx="14" fill="#22D3EE"/>
+    </g>
+    <g transform="translate(40 284)">
+      <rect x="0" y="0" width="200" height="12" rx="6" fill="rgba(15,23,42,0.35)"/>
+      <rect x="0" y="24" width="260" height="8" rx="4" fill="rgba(15,23,42,0.22)"/>
+    </g>
+  </g>
+
+  <g transform="translate(640 520)">
+    <rect x="0" y="0" width="360" height="92" rx="24" fill="rgba(15,23,42,0.28)" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+    <circle cx="56" cy="46" r="26" fill="#0EA5E9"/>
+    <path d="M56 28L68 52H44L56 28Z" fill="white" fill-opacity="0.85"/>
+    <g transform="translate(110 26)">
+      <rect x="0" y="0" width="152" height="12" rx="6" fill="rgba(255,255,255,0.6)"/>
+      <rect x="0" y="22" width="220" height="10" rx="5" fill="rgba(255,255,255,0.32)"/>
+    </g>
+  </g>
+
+  <text x="180" y="610" fill="rgba(255,255,255,0.82)" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">
+    WingIt.ai — AI assisted wingfoil marketplace
+  </text>
+  <text x="180" y="642" fill="rgba(255,255,255,0.58)" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="400">
+    Skill-based filters · Ollama + Mistral Large concierge · Inventory intelligence
+  </text>
+</svg>

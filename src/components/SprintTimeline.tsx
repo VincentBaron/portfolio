@@ -12,7 +12,7 @@ export default function SprintTimeline() {
     {
       days: 'Days 3–10',
       title: 'Build & Iterate',
-      description: 'I build your solution using Go, AI/ML frameworks, and modern best practices. Daily progress updates keep you in the loop.',
+      description: 'I build your solution using AI/ML frameworks, and modern best practices. Daily progress updates to keep you in the loop.',
       expectation: 'Expect: Working features, regular demos, and continuous feedback integration.',
       color: 'purple',
     },
@@ -26,7 +26,7 @@ export default function SprintTimeline() {
     {
       days: 'Day 14',
       title: 'Handover & Launch',
-      description: 'Complete documentation, deployment support, and knowledge transfer ensure your team can run and maintain the solution.',
+      description: 'Complete documentation, deployment support, and knowledge transfer ensure your team can maintain the solution.',
       expectation: 'Expect: Full documentation, deployment guide, and optional training session.',
       color: 'indigo',
     },

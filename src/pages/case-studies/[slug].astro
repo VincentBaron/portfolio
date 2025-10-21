@@ -1,0 +1,17 @@
+---
+import { caseStudies } from '../../data/caseStudies';
+
+export const getStaticPaths = () =>
+  caseStudies.map((study) => ({
+    params: { slug: study.slug },
+  }));
+
+const { slug } = Astro.params;
+const caseStudy = caseStudies.find((study) => study.slug === slug);
+
+if (!caseStudy) {
+  return Astro.redirect('/#work', 302);
+}
+
+return Astro.redirect(`/work/${caseStudy.slug}`, 301);
+---

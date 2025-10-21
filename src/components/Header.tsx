@@ -50,6 +50,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
+    if (currentPath !== '/') {
+      return;
+    }
+
     const handleScroll = () => {
       const sections = ['home', 'process', 'work', 'impact'];
       const scrollPosition = window.scrollY + 100;
@@ -79,28 +83,41 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection]);
+  }, [activeSection, currentPath]);
 
   const isCurrentPage = (href: string) => {
+    if (href === '#work' && currentPath.startsWith('/work')) {
+      return true;
+    }
+
     const section = href.replace('#', '');
-    return section === activeSection;
+    return currentPath === '/' && section === activeSection;
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    const targetId = href.replace('#', '');
-    const target = document.getElementById(targetId);
-    if (target) {
-      // Update URL hash
-      window.history.pushState(null, '', href);
-      setActiveSection(targetId);
-      // Smooth scroll to target
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    if (href.startsWith('#')) {
+      if (currentPath !== '/') {
+        window.location.href = `/${href}`;
+        return;
+      }
+      const targetId = href.replace('#', '');
+      const target = document.getElementById(targetId);
+      if (target) {
+        // Update URL hash
+        window.history.pushState(null, '', href);
+        setActiveSection(targetId);
+        // Smooth scroll to target
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+      return;
     }
+
+    window.location.href = href;
   };
 
   return (

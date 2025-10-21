@@ -300,8 +300,7 @@ export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }:
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              Built fast.{' '}
-              <span className="block sm:inline">Built to scale.</span>
+              Scale your business with AI and automation.{' '}
               <br />
               <span className="text-gradient">Built with AI.</span>
             </h1>
