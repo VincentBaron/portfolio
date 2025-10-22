@@ -5,7 +5,7 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 const buildClient = () => {
-  const secret = import.meta.env.NOTION_SECRET;
+  const secret = process.env.PUBLIC_NOTION_SECRET;
   if (!secret) return null;
   return new Client({ auth: secret });
 };
@@ -62,7 +62,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const databaseId = import.meta.env.NOTION_DATABASE_ID;
+  const databaseId = process.env.PUBLIC_NOTION_DATABASE_ID;
   if (!databaseId) {
     return new Response(JSON.stringify({ error: 'Notion database ID is missing on the server.' }), {
       status: 500,
