@@ -4,8 +4,18 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
+const getNotionSecret = () =>
+  process.env.NOTION_SECRET ??
+  process.env.PUBLIC_NOTION_SECRET ??
+  import.meta.env.PUBLIC_NOTION_SECRET;
+
+const getDatabaseId = () =>
+  process.env.NOTION_DATABASE_ID ??
+  process.env.PUBLIC_NOTION_DATABASE_ID ??
+  import.meta.env.PUBLIC_NOTION_DATABASE_ID;
+
 const buildClient = () => {
-  const secret = process.env.PUBLIC_NOTION_SECRET;
+  const secret = getNotionSecret();
   if (!secret) return null;
   return new Client({ auth: secret });
 };
@@ -62,7 +72,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const databaseId = process.env.PUBLIC_NOTION_DATABASE_ID;
+  const databaseId = getDatabaseId();
   if (!databaseId) {
     return new Response(JSON.stringify({ error: 'Notion database ID is missing on the server.' }), {
       status: 500,
@@ -80,11 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const properties: CreatePageParameters['properties'] = {
     email: {
-      title: [
-        {
-          text: { content: email },
-        },
-      ],
+      email: email,
     },
     painpoint: {
       rich_text: [
