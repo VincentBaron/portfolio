@@ -150,7 +150,7 @@ export default function CaseStudyDetail({ caseStudy, relatedStudies }: CaseStudy
           <p className="text-base text-gray-600 mb-6">{copy.ctaBody}</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="https://calendly.com/vbaron4220/30min"
+              href="https://cal.com/vincent-baron/30mins-meeting"
               className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:-translate-y-0.5 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/40"
             >
               {copy.ctaPrimary}

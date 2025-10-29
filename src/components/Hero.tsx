@@ -247,7 +247,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
 };
 
-export default function Hero({ calendarLink = 'https://cal.com/2weekstosolve' }: HeroProps) {
+export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30mins-meeting' }: HeroProps) {
   const [painpoint, setPainpoint] = useState('');
   const [flowState, setFlowState] = useState<FlowState>('input');
   const [error, setError] = useState('');
