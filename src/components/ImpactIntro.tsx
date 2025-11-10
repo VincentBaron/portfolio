@@ -11,7 +11,7 @@ const COPY = {
   fr: {
     heading: 'Entreprendre pour le bien commun',
     textBefore: 'Je suis convaincu que la technologie doit générer un impact positif. C’est pourquoi ',
-    highlightOne: '5 % de mes profits',
+    highlightOne: '7.5% de mes profits',
     textMiddle: 'sont investis dans des projets à impact ',
     highlightTwo: 'social et environnemental.',
   },

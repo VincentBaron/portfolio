@@ -10,13 +10,17 @@ interface Props {
 }
 
 const {
-  title = 'vincentbaron.ai',
+  title = "Vincent Baron's portfolio",
   description = 'Transform your business in just 2 weeks. We build scalable, AI-powered solutions that deliver real results. 5% of revenue pledged to Ramina.',
   ogImage = '/profilePic.png',
 } = Astro.props;
 
+const siteOrigin = Astro.url.origin;
 const currentPath = Astro.url.pathname;
-const canonicalURL = new URL(currentPath, Astro.site);
+const canonicalURL = new URL(currentPath, siteOrigin);
+const resolvedOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteOrigin}${ogImage}`;
 ---
 
 <!DOCTYPE html>
@@ -41,14 +45,14 @@ const canonicalURL = new URL(currentPath, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image" content={resolvedOgImage} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="twitter:image" content={resolvedOgImage} />
     
     <!-- Plausible Analytics (cookieless) -->
     <script is:inline defer data-domain="2weekstosolve.it" src="https://plausible.io/js/script.js"></script>

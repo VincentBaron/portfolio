@@ -36,7 +36,7 @@ const COPY: Record<Language, {
         days: 'Days 3–10',
         title: 'Build & Iterate',
         description:
-          'I build your solution using AI/ML frameworks, and modern best practices. Daily progress updates to keep you in the loop.',
+          'I build your solution using modern best practices. Daily progress updates to keep you in the loop.',
         expectation: 'Expect: Working features, regular demos, and continuous feedback integration.',
         color: 'purple',
       },
@@ -77,7 +77,7 @@ const COPY: Record<Language, {
         days: 'Jours 3–10',
         title: 'Construction & itérations',
         description:
-          'Je développe la solution avec les frameworks IA/ML et les meilleures pratiques modernes. Un point quotidien vous tient informé.',
+          'Je développe la solution avec les meilleures pratiques modernes. Un point quotidien vous tient informé.',
         expectation: 'Livrables : fonctionnalités opérationnelles, démos régulières et intégration continue de vos retours.',
         color: 'purple',
       },

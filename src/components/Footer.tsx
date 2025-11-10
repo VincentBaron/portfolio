@@ -9,7 +9,7 @@ const FOOTER_COPY = {
   },
   fr: {
     rights: 'Tous droits réservés.',
-    pledgePrefix: '5 % du bénéfice net reversé à',
+    pledgePrefix: '7.5% du bénéfice net reversé à',
     privacy: 'Confidentialité',
     terms: 'Conditions',
   },
@@ -27,7 +27,7 @@ export default function Footer() {
           {/* Copyright and Pledge */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
             <p className="text-sm text-gray-600">
-              © {currentYear} 2 Weeks to Solve It. {copy.rights}
+              © {currentYear} 1 Week to Solve It. {copy.rights}
             </p>
             <span className="hidden sm:inline text-gray-400">•</span>
             <p className="text-sm font-medium text-purple-600">

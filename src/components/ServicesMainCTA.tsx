@@ -3,7 +3,7 @@ import { useLanguage } from '../lib/language';
 
 const COPY = {
   en: {
-    heading: 'Ready to start your 2-week sprint?',
+    heading: 'Ready to start your 1-week sprint?',
     body: 'Book a call to discuss your project and get started.',
     book: 'Book a Call',
     view: 'View Case Studies',
