@@ -44,16 +44,16 @@ const COPY: Record<Language, {
         days: 'Days 11–13',
         title: 'Hardening & Testing',
         description:
-          'I polish the experience, fix edge cases, conduct thorough testing, and optimize performance for production.',
-        expectation: 'Expect: Battle-tested code, performance benchmarks, and deployment-ready artifacts.',
+          'I publish the solution, fix edge cases, conduct thorough testing, and optimize performance for production.',
+        expectation: 'Expect: Solution in production and performance benchmarks.',
         color: 'pink',
       },
       {
         days: 'Day 14',
         title: 'Handover & Launch',
         description:
-          'Complete documentation, deployment support, and knowledge transfer ensure your team can maintain the solution.',
-        expectation: 'Expect: Full documentation, deployment guide, and optional training session.',
+          'Complete documentation and knowledge transfer to ensure your team can maintain the solution.',
+        expectation: 'Expect: Full documentation, and optional training session.',
         color: 'indigo',
       },
     ],
@@ -85,16 +85,16 @@ const COPY: Record<Language, {
         days: 'Jours 11–13',
         title: 'Renforcement & tests',
         description:
-          'Je peaufine l’expérience, corrige les cas limites, réalise des tests approfondis et optimise les performances pour la production.',
-        expectation: 'Livrables : code prêt pour la production, métriques de performance et artefacts de déploiement.',
+          'Mise en production, correction de edge cases, optimisation des performances pour la production.',
+        expectation: 'Livrables : Solution en production, métriques de performance.',
         color: 'pink',
       },
       {
         days: 'Jour 14',
         title: 'Transmission & lancement',
         description:
-          'Documentation complète, support au déploiement et transfert de connaissances pour que votre équipe prenne le relais.',
-        expectation: 'Livrables : documentation complète, guide de déploiement et session de formation optionnelle.',
+          'Documentation complète et transfert de connaissances pour que votre équipe prenne le relais.',
+        expectation: 'Livrables : documentation complète, session de formation optionnelle.',
         color: 'indigo',
       },
     ],

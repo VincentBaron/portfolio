@@ -208,7 +208,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     testimonials: [
       {
         quote:
-          'Vincent a amélioré nos outils internes et nos workflows, permettant à l’équipe Ops de gagner un temps considérable au quotidien. Son obsession pour l’efficacité opérationnelle a eu un impact direct sur nos livraisons.',
+          'Vincent a amélioré nos outils internes et nos workflows, permettant à l’équipe Ops de gagner un temps considérable au quotidien. Son focus en efficacité opérationnelle a eu un impact direct sur notre delivery.',
         author: 'Holy Sicard-Razaka',
         role: 'Head of Product chez Side',
         image: '/holy.jpeg',
