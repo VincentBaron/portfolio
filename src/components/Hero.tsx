@@ -160,7 +160,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
   fr: {
     headline: {
-      primary: 'Éliminez jusqu’à 80 % de vos tâches manuelle',
+      primary: 'Éliminez jusqu’à 80 % de vos tâches manuelles',
       highlight: 'Réduisez de 40% vos coûts opérationnels',
     },
     intro: {
@@ -669,13 +669,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
               </div>
               <div className="flex flex-col items-center">
                 <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  98%
-                </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.satisfaction}</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  2 Weeks
+                  {language === 'fr' ? '2 semaines' : '2 Weeks'}
                 </div>
                 <p className="text-xs text-gray-600 mt-1">{copy.stats.sprint}</p>
               </div>
