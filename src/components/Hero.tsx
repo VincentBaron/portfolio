@@ -37,6 +37,7 @@ interface HeroCopy {
     emailPlaceholder: string;
     sending: string;
     send: string;
+    shareAnother: string;
   };
   emailSubmitted: {
     badge: string;
@@ -99,6 +100,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       emailPlaceholder: 'you@company.com',
       sending: 'Sending...',
       send: 'Send it',
+      shareAnother: 'Share a different painpoint',
     },
     emailSubmitted: {
       badge: 'Check your inbox',
@@ -158,12 +160,12 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
   fr: {
     headline: {
-      primary: 'Éliminez jusqu’à 80 % du travail manuel',
-      highlight: 'Réduisez vos coûts opérationnels jusqu’à 40 %',
+      primary: 'Éliminez jusqu’à 80 % de vos tâches manuelle',
+      highlight: 'Réduisez de 40% vos coûts opérationnels',
     },
     intro: {
       primary:
-        'Les processus manuels vous coûtent du temps, de l’argent et de la frustration. Je conçois des systèmes backend et IA évolutifs qui automatisent vos opérations.',
+        'Les processus manuels vous coûtent du temps, de l’argent et de la frustration. Je conçois des automatisations sans que vous ayez à changer vos outils.',
       secondary:
         'Fort de cinq ans d’expérience en ingénierie logicielle, je combine expertise technique et vision business pour identifier les inefficacités et livrer des MVP prêts pour la production en sprints ciblés de deux semaines.',
     },
@@ -188,6 +190,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       emailPlaceholder: 'vous@entreprise.com',
       sending: 'Envoi...',
       send: 'Envoyer',
+      shareAnother: 'Partager un autre problème',
     },
     emailSubmitted: {
       badge: 'Vérifiez votre boîte mail',
@@ -545,7 +548,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       onClick={handleRetry}
                       className="px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                     >
-                      Share a different painpoint
+                      {copy.emailStep.shareAnother}
                     </button>
                   </div>
                 </div>
