@@ -3,7 +3,7 @@ import { useLanguage } from '../lib/language';
 const FOOTER_COPY = {
   en: {
     rights: 'All rights reserved.',
-    pledgePrefix: '5% of net profit donated to',
+    pledgePrefix: '7.5% of net profit donated to',
     privacy: 'Privacy',
     terms: 'Terms',
   },

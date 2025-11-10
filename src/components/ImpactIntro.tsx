@@ -4,7 +4,7 @@ const COPY = {
   en: {
     heading: 'Business as a Force for Good',
     textBefore: "I believe technology should drive positive change. That's why ",
-    highlightOne: '5% of my profits',
+    highlightOne: '7.5% of my profits',
     textMiddle: 'are invested in projects driving ',
     highlightTwo: 'social and environmental impact.',
   },
