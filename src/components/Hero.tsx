@@ -2,6 +2,13 @@ import { useState } from 'react';
 import CalendlyModal from './CalendlyModal';
 import { useLanguage, type Language } from '../lib/language';
 
+const EMPLOYER_CHARGE_RATE = 0.44;
+const EMPLOYER_CHARGE_PERCENT = Math.round(EMPLOYER_CHARGE_RATE * 100);
+const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
+const HIGHLIGHT_FOCUS_TOKENS = ['35h/week', '35h/semaine'];
+
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 type FlowState = 'input' | 'collect_email' | 'email_submitted';
 
 interface HeroProps {
@@ -9,6 +16,22 @@ interface HeroProps {
 }
 
 interface HeroCopy {
+  calculator: {
+    title: string;
+    description: string;
+    hoursLabel: string;
+    hoursPlaceholder: string;
+    peopleLabel: string;
+    peoplePlaceholder: string;
+    salaryLabel: string;
+    salaryPlaceholder: string;
+    submitCta: string;
+    resultTitle: string;
+    monthlyLabel: string;
+    annualLabel: string;
+    assumption: string;
+    currencySymbol: string;
+  };
   headline: {
     primary: string;
     highlight: string;
@@ -17,8 +40,6 @@ interface HeroCopy {
     primary: string;
     secondary: string;
   };
-  painpointPlaceholder: string;
-  generateTitle: string;
   validation: {
     empty: string;
     short: string;
@@ -34,10 +55,16 @@ interface HeroCopy {
     heading: string;
     capturedLabel: string;
     instructions: string;
+    emailLabel: string;
     emailPlaceholder: string;
+    phoneLabel: string;
+    phoneOptional: string;
+    phonePlaceholder: string;
     sending: string;
     send: string;
     shareAnother: string;
+    unlockHint: string;
+    formHint: string;
   };
   emailSubmitted: {
     badge: string;
@@ -46,7 +73,6 @@ interface HeroCopy {
     followUp: string;
     buttons: {
       bookCall: string;
-      caseStudies: string;
       shareAnother: string;
     };
   };
@@ -61,7 +87,6 @@ interface HeroCopy {
   stats: {
     projects: string;
     satisfaction: string;
-    sprint: string;
     rating: string;
   };
   companiesTitle: string;
@@ -69,9 +94,26 @@ interface HeroCopy {
 
 const HERO_COPY: Record<Language, HeroCopy> = {
   en: {
+    calculator: {
+      title: 'Manual process cost calculator',
+      description:
+        'Estimate the true cost of this workflow. Enter weekly hours, headcount, and gross salary—I’ll add 44% employer charges for you.',
+      hoursLabel: 'Hours per person every week',
+      hoursPlaceholder: 'e.g. 6',
+      peopleLabel: 'People involved',
+      peoplePlaceholder: 'e.g. 3',
+      salaryLabel: 'Avg gross monthly salary (€)',
+      salaryPlaceholder: 'e.g. 4000',
+      submitCta: 'Calculate cost impact',
+      resultTitle: 'Estimated cost of this manual process',
+      monthlyLabel: 'Monthly cost',
+      annualLabel: 'Annual cost',
+      assumption: 'Assumes a 40h workweek and adds +44% employer charges on top of the gross salary.',
+      currencySymbol: '€',
+    },
     headline: {
-      primary: 'Eliminate up to 80% of manual work',
-      highlight: 'Reduce operational costs by up to 40%',
+      primary: 'Manual processes steal up to 35h/week of productive time.',
+      highlight: 'I identify your bottlenecks and implement your first automation for free within 5 days.',
     },
     intro: {
       primary:
@@ -79,39 +121,41 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       secondary:
         'With over five years of experience as a software engineer, I combine deep technical expertise with a business-first mindset to uncover inefficiencies and deliver practical, production-ready MVPs in focused two-week sprints.',
     },
-    painpointPlaceholder: 'Describe your painpoint...',
-    generateTitle: 'Generate Sprint Plan',
     validation: {
-      empty: 'Please describe your painpoint',
-      short: 'Please provide more details about your painpoint',
-      long: 'Please keep your painpoint under 500 characters',
+      empty: 'Please fill in every field to estimate the cost.',
+      short: 'All values must be greater than zero.',
+      long: 'Please enter realistic numbers (hours < 80, salary < 50,000).',
       emailEmpty: 'Please provide your email address',
       emailInvalid: 'Please enter a valid email address',
-      missingPainpoint: 'Please describe your painpoint before sharing your email.',
+      missingPainpoint: 'Please run the cost calculator before sharing your email.',
       submissionFailed: 'Unable to save your details. Please try again.',
       unexpected: 'Unexpected error while sending your details. Please try again.',
     },
     emailStep: {
       badge: 'Almost there',
-      heading: 'Where should I send your detailed audit and implementation plan?',
-      capturedLabel: 'Painpoint received',
+      heading: 'Where should I send your automation audit and ROI breakdown?',
+      capturedLabel: 'Manual process details',
       instructions:
-        'I’ll review this and send a deeper breakdown with timelines, quick wins, and the two-week sprint structure straight to your inbox.',
+        'I’ll review these numbers, challenge assumptions, and reply with automation ideas, timelines, and ROI projections.',
+      emailLabel: 'Work email',
       emailPlaceholder: 'you@company.com',
+      phoneLabel: 'Phone number',
+      phoneOptional: '(optional)',
+      phonePlaceholder: '+1 415 555 1234',
       sending: 'Sending...',
       send: 'Send it',
-      shareAnother: 'Share a different painpoint',
+      shareAnother: 'Adjust the numbers',
+      unlockHint: 'Share your work email to unlock the monthly and annual cost (gross salary + 44% employer charges).',
+      formHint: 'I’ll reply with automation ideas tailored to this process.',
     },
     emailSubmitted: {
       badge: 'Check your inbox',
       headingTemplate: 'I’ll send the audit and implementation plan to {{email}}.',
-      reviewingLabel: 'What I’m reviewing',
-      followUp:
-        'Expect a response within one business day. In the meantime, feel free to book a call or dive into relevant case studies.',
+      reviewingLabel: 'Cost breakdown I’m reviewing',
+      followUp: 'I’ll send the automation audit shortly. Feel free to book a call while I dig in.',
       buttons: {
         bookCall: 'Book a 20-min call',
-        caseStudies: 'See case studies',
-        shareAnother: 'Share another painpoint',
+        shareAnother: 'Recalculate another process',
       },
     },
     testimonialsTitle: 'They Trusted Me',
@@ -159,49 +203,66 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     companiesTitle: 'Companies I worked with',
   },
   fr: {
+    calculator: {
+      title: 'Calculez le coût de votre processus manuel',
+      hoursLabel: 'Heures par personne et par semaine',
+      hoursPlaceholder: 'ex. 6',
+      peopleLabel: 'Nombre de personnes concernées',
+      peoplePlaceholder: 'ex. 3',
+      salaryLabel: 'Salaire brut mensuel moyen (€)',
+      salaryPlaceholder: 'ex. 4000',
+      submitCta: 'Estimer le coût',
+      resultTitle: 'Coût estimé de ce processus manuel',
+      monthlyLabel: 'Coût mensuel',
+      annualLabel: 'Coût annuel',
+      assumption: 'Hypothèse : 40h/semaine + 44 % de charges patronales ajoutées au salaire brut.',
+      currencySymbol: '€',
+    },
     headline: {
-    primary: 'Vos process manuels vous coûtent plus que vous ne le pensez',
-    highlight: 'Découvrez où vous perdez du temps et comment l’automatiser en 5 jours',
+    primary: 'Vous perdez jusqu’à 35h/semaine dans des process manuels',
+    highlight: 'J\' identifie vos blocages et vous implemente une première automatisation gratuitement en 5 jours',
   },
   intro: {
     primary:
-      'La plupart des TPE/PME perdent plusieurs heures par jour sur des tâches qui pourraient être automatisées : devis, relances, reporting, transferts d’infos.',
+      'Ces pertes de temps représentent souvent plusieurs milliers d’euros par an en salaires et opportunités non saisies. Devis, relances, saisies, reporting… autant de tâches répétitives qui freinent votre croissance.',
     secondary:
-      'Mon audit gratuit identifie vos points de friction et propose une première automatisation concrète, livrée en 2 semaines, adaptée à vos outils actuels.',
+      'Mon approche : détecter vos points de friction les plus coûteux, les chiffrer, puis mettre en place des automatisations simples qui libèrent du temps et de la marge, sans changer vos outils existants.',
   },
-    painpointPlaceholder: 'Décrivez votre problème...',
-    generateTitle: 'Générer le plan de sprint',
     validation: {
-      empty: 'Merci de décrire votre problème',
-      short: 'Merci d’ajouter davantage de détails sur votre problème',
-      long: 'Limitez votre description à 500 caractères',
+      empty: 'Merci de remplir tous les champs pour estimer le coût.',
+      short: 'Toutes les valeurs doivent être supérieures à zéro.',
+      long: 'Merci d’entrer des valeurs réalistes (heures < 80, salaire < 50 000).',
       emailEmpty: 'Merci d’indiquer votre adresse e-mail',
       emailInvalid: 'Merci d’entrer une adresse e-mail valide',
-      missingPainpoint: 'Merci de décrire votre problème avant d’indiquer votre e-mail.',
+      missingPainpoint: 'Merci de lancer le calcul avant d’indiquer votre e-mail.',
       submissionFailed: 'Impossible d’enregistrer vos informations. Merci de réessayer.',
       unexpected: 'Erreur inattendue lors de l’envoi de vos informations. Merci de réessayer.',
     },
     emailStep: {
       badge: 'On y est presque',
-      heading: 'Où dois-je vous envoyer l’audit détaillé et le plan de mise en œuvre ?',
-      capturedLabel: 'Problème bien reçu',
+      heading: 'Où dois-je vous envoyer l’audit d’automatisation et l’estimation de ROI ?',
+      capturedLabel: 'Détails du processus',
       instructions:
-        'Je vais analyser tout cela et vous envoyer un plan détaillé avec chronologie, quick wins et structure du sprint de deux semaines, directement dans votre boîte mail.',
+        'J’analyse ces chiffres, je challenge les hypothèses et je vous réponds avec des idées d’automatisation, un planning et le ROI attendu.',
+      emailLabel: 'Email professionnel',
       emailPlaceholder: 'vous@entreprise.com',
+      phoneLabel: 'Numéro de téléphone',
+      phoneOptional: '(optionnel)',
+      phonePlaceholder: '+33 6 12 34 56 78',
       sending: 'Envoi...',
       send: 'Envoyer',
-      shareAnother: 'Partager un autre problème',
+      shareAnother: 'Ajuster les chiffres',
+      unlockHint: 'Partagez votre e-mail pro pour recevoir le détail des coûts (salaire brut + 44 % de charges).',
+      formHint: 'Je vous recontacte avec des idées d’automatisation adaptées à ce process.',
     },
     emailSubmitted: {
       badge: 'Vérifiez votre boîte mail',
       headingTemplate: 'J’envoie l’audit et le plan de mise en œuvre à {{email}}.',
       reviewingLabel: 'Ce que j’analyse',
-      followUp:
-        'Vous recevrez une réponse sous un jour ouvré. En attendant, réservez un appel ou consultez les études de cas.',
+      followUp: 'Je vous envoie l’audit très vite. En attendant, réservez un appel.',
       buttons: {
         bookCall: 'Réserver un appel de 20 minutes',
-        caseStudies: 'Voir les études de cas',
-        shareAnother: 'Partager un autre problème',
+        shareAnother: 'Recalculer un autre process',
       },
     },
     testimonialsTitle: 'Ils m’ont fait confiance',
@@ -251,26 +312,84 @@ const HERO_COPY: Record<Language, HeroCopy> = {
 };
 
 export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30mins-meeting' }: HeroProps) {
-  const [painpoint, setPainpoint] = useState('');
+  const [hoursPerWeek, setHoursPerWeek] = useState('');
+  const [peopleCount, setPeopleCount] = useState('');
+  const [monthlyCostPerPerson, setMonthlyCostPerPerson] = useState('');
+  const [calculatedMonthlyCost, setCalculatedMonthlyCost] = useState<number | null>(null);
+  const [calculatedAnnualCost, setCalculatedAnnualCost] = useState<number | null>(null);
+  const [lockedInputs, setLockedInputs] = useState<{
+    hours: number;
+    people: number;
+    grossSalary: number;
+  } | null>(null);
   const [flowState, setFlowState] = useState<FlowState>('input');
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [capturedPainpoint, setCapturedPainpoint] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [submittedEmail, setSubmittedEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
   const { language } = useLanguage();
   const copy = HERO_COPY[language];
+  const locale = language === 'fr' ? 'fr-FR' : 'en-US';
+  const currencyCode = copy.calculator.currencySymbol === '$' ? 'USD' : 'EUR';
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currencyCode,
+      maximumFractionDigits: 0,
+    }).format(Math.round(value));
+  const formatHours = (value: number) =>
+    Number.isInteger(value) ? value.toString() : value.toFixed(1);
+  const peopleWord = (count: number) =>
+    language === 'fr'
+      ? count > 1
+        ? 'personnes'
+        : 'personne'
+      : count > 1
+        ? 'people'
+        : 'person';
   const confirmationHeading = copy.emailSubmitted.headingTemplate.replace(
     '{{email}}',
     submittedEmail || copy.emailStep.emailPlaceholder,
   );
-  const validateInput = (input: string): string | null => {
-    if (!input.trim()) return copy.validation.empty;
-    if (input.trim().length < 10) return copy.validation.short;
-    if (input.trim().length > 500) return copy.validation.long;
+  const headlineFocusToken = HIGHLIGHT_FOCUS_TOKENS.find((token) =>
+    copy.headline.highlight.toLowerCase().includes(token.toLowerCase()),
+  );
+  const highlightedHeadline = headlineFocusToken
+    ? copy.headline.highlight
+        .split(new RegExp(`(${escapeRegExp(headlineFocusToken)})`, 'i'))
+        .filter(Boolean)
+        .map((segment, index) =>
+          segment.toLowerCase() === headlineFocusToken.toLowerCase() ? (
+            <span
+              key={`focus-${index}`}
+              className="bg-white text-blue-700 px-2 py-0.5 rounded-full shadow-sm font-semibold"
+            >
+              {segment}
+            </span>
+          ) : (
+            <span key={`segment-${index}`}>{segment}</span>
+          ),
+        )
+    : copy.headline.highlight;
+  const validateCalculatorInputs = (
+    hours: number,
+    people: number,
+    grossSalary: number,
+  ): string | null => {
+    if (!Number.isFinite(hours) || !Number.isFinite(people) || !Number.isFinite(grossSalary)) {
+      return copy.validation.empty;
+    }
+    if (hours <= 0 || people <= 0 || grossSalary <= 0) {
+      return copy.validation.short;
+    }
+    if (hours > 80 || grossSalary > 50000 || people > 1000) {
+      return copy.validation.long;
+    }
     return null;
   };
 
@@ -283,19 +402,35 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const validationError = validateInput(painpoint);
+    const hours = parseFloat(hoursPerWeek);
+    const people = Math.round(parseFloat(peopleCount));
+    const grossSalary = parseFloat(monthlyCostPerPerson);
+    const validationError = validateCalculatorInputs(hours, people, grossSalary);
     if (validationError) {
       setError(validationError);
       return;
     }
 
+    const monthlyEmployerCostPerPerson = grossSalary * EMPLOYER_MULTIPLIER;
+    const monthlyCost = monthlyEmployerCostPerPerson * (hours / 40) * people;
+    const annualCost = monthlyCost * 12;
+    const summary =
+      language === 'fr'
+        ? `Estimation : ${formatHours(hours)}h/semaine × ${people} ${peopleWord(people)} à ${formatCurrency(grossSalary)} brut/mois (+${EMPLOYER_CHARGE_PERCENT}% de charges) → ${formatCurrency(monthlyCost)}/mois (${formatCurrency(annualCost)}/an).`
+        : `Estimate: ${formatHours(hours)}h/week × ${people} ${peopleWord(people)} at ${formatCurrency(grossSalary)} gross/month (+${EMPLOYER_CHARGE_PERCENT}% employer charges) → ${formatCurrency(monthlyCost)} per month (${formatCurrency(annualCost)} per year).`;
+
     setError('');
     setEmailError('');
     setSubmissionError('');
     setIsSubmitting(false);
-    const trimmed = painpoint.trim();
-    setCapturedPainpoint(trimmed);
-    setPainpoint('');
+    setCalculatedMonthlyCost(monthlyCost);
+    setCalculatedAnnualCost(annualCost);
+    setLockedInputs({
+      hours,
+      people,
+      grossSalary,
+    });
+    setCapturedPainpoint(summary);
     setFlowState('collect_email');
   };
 
@@ -309,13 +444,14 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
     setEmailError('');
     setSubmissionError('');
-    if (!capturedPainpoint) {
+    if (!capturedPainpoint || !lockedInputs) {
       setError(copy.validation.missingPainpoint);
       setFlowState('input');
       return;
     }
 
     const trimmedEmail = email.trim();
+    const trimmedPhone = phone.trim();
     setIsSubmitting(true);
 
     console.log("Submitting email:", trimmedEmail, "for painpoint:", capturedPainpoint);
@@ -328,6 +464,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
         },
         body: JSON.stringify({
           email: trimmedEmail,
+          phone: trimmedPhone || undefined,
           painpoint: capturedPainpoint,
         }),
       });
@@ -345,6 +482,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
       setSubmittedEmail(trimmedEmail);
       setEmail('');
+      setPhone('');
       setSubmissionError('');
       setFlowState('email_submitted');
     } catch {
@@ -358,7 +496,11 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
     setError('');
     setFlowState('input');
     setCapturedPainpoint('');
+    setLockedInputs(null);
+    setCalculatedMonthlyCost(null);
+    setCalculatedAnnualCost(null);
     setEmail('');
+    setPhone('');
     setSubmittedEmail('');
     setEmailError('');
     setSubmissionError('');
@@ -394,10 +536,16 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-              {copy.headline.primary}
-              <br />
-              <span className="text-gradient">{copy.headline.highlight}</span>
+            <h1 className="space-y-2 sm:space-y-3 mb-2 sm:mb-3">
+              <span className="block bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-transparent text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
+                {copy.headline.primary}
+              </span>
+              <span className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-lg">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 6v12M6 12h12" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {highlightedHeadline}
+              </span>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
@@ -432,45 +580,122 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
             
             {/* Input State */}
             {flowState === 'input' && (
-              <div className="text-center">
-                <form onSubmit={handleSubmit}>
-                  <div className="relative max-w-3xl mx-auto">
-                    <input
-                      type="text"
-                      value={painpoint}
-                      onChange={(e) => setPainpoint(e.target.value)}
-                      placeholder={copy.painpointPlaceholder}
-                      className={`w-full rounded-full border-2 px-4 sm:px-6 py-2 sm:py-3 lg:py-4 pr-12 sm:pr-14 text-sm sm:text-base focus:outline-none focus:ring-4 transition-all shadow-lg hover:shadow-xl bg-white ${
-                        error 
-                          ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10' 
-                          : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500/10'
-                      }`}
-                    />
-                    <button
-                      type="submit"
-                      disabled={!painpoint.trim()}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-30 disabled:cursor-not-allowed transition-all transform hover:scale-105 shadow-lg"
-                      title={copy.generateTitle}
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"
-                        />
-                      </svg>
-                    </button>
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-white/90 backdrop-blur-sm border border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 text-left">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">
+                      {copy.calculator.title}
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-700">
+                      {copy.calculator.description}
+                    </p>
                   </div>
-                  {error && (
-                    <p className="text-red-600 text-sm mt-2 animate-fade-in">{error}</p>
-                  )}
-                </form>
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <div>
+                        <label htmlFor="hoursPerWeek" className="block text-sm font-semibold text-gray-800 mb-1">
+                          {copy.calculator.hoursLabel}
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="hoursPerWeek"
+                            type="number"
+                            min="0"
+                            step="0.5"
+                            inputMode="decimal"
+                            value={hoursPerWeek}
+                            onChange={(e) => {
+                              setHoursPerWeek(e.target.value);
+                              if (error) setError('');
+                            }}
+                            placeholder={copy.calculator.hoursPlaceholder}
+                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 pr-16 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                          />
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500">
+                            {language === 'fr' ? 'h/sem.' : 'h/week'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="peopleCount" className="block text-sm font-semibold text-gray-800 mb-1">
+                          {copy.calculator.peopleLabel}
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="peopleCount"
+                            type="number"
+                            min="1"
+                            step="1"
+                            inputMode="numeric"
+                            value={peopleCount}
+                            onChange={(e) => {
+                              setPeopleCount(e.target.value);
+                              if (error) setError('');
+                            }}
+                            placeholder={copy.calculator.peoplePlaceholder}
+                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                          />
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500">
+                            {language === 'fr' ? 'pers.' : 'ppl'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="monthlyCostPerPerson" className="block text-sm font-semibold text-gray-800 mb-1">
+                          {copy.calculator.salaryLabel}
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-500">
+                            {copy.calculator.currencySymbol}
+                          </span>
+                          <input
+                            id="monthlyCostPerPerson"
+                            type="number"
+                            min="0"
+                            step="100"
+                            inputMode="decimal"
+                            value={monthlyCostPerPerson}
+                            onChange={(e) => {
+                              setMonthlyCostPerPerson(e.target.value);
+                              if (error) setError('');
+                            }}
+                            placeholder={copy.calculator.salaryPlaceholder}
+                            className="w-full rounded-xl border-2 border-gray-200 pl-10 pr-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {error && <p className="text-red-600 text-sm animate-fade-in">{error}</p>}
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <p className="text-xs text-gray-500">{copy.calculator.assumption}</p>
+                      <button
+                        type="submit"
+                        disabled={
+                          !hoursPerWeek ||
+                          !peopleCount ||
+                          !monthlyCostPerPerson
+                        }
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        {copy.calculator.submitCta}
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             )}
             {/* Email Collection State */}
@@ -498,10 +723,36 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     </div>
                   </div>
 
-                  {capturedPainpoint && (
-                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-800">
-                      <p className="font-semibold text-blue-900 mb-1">{copy.emailStep.capturedLabel}</p>
-                      <p className="leading-relaxed">{capturedPainpoint}</p>
+                  {lockedInputs && (
+                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-800 space-y-3">
+                      <p className="font-semibold text-blue-900">{copy.emailStep.capturedLabel}</p>
+                      <div className="grid gap-3 sm:grid-cols-3">
+                        <div className="bg-white/60 rounded-lg p-3 text-blue-900">
+                          <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.hoursLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {formatHours(lockedInputs.hours)} {language === 'fr' ? 'h/sem.' : 'h/week'}
+                          </p>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-3 text-blue-900">
+                          <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.peopleLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {lockedInputs.people} {peopleWord(lockedInputs.people)}
+                          </p>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-3 text-blue-900">
+                          <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.salaryLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {formatCurrency(lockedInputs.grossSalary)}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-blue-700/80">{copy.emailStep.unlockHint}</p>
                     </div>
                   )}
 
@@ -509,37 +760,65 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     {copy.emailStep.instructions}
                   </p>
 
-                  <form onSubmit={handleEmailSubmit} className="space-y-3">
-                    <div className="relative max-w-lg">
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          if (emailError) setEmailError('');
-                          if (submissionError) setSubmissionError('');
-                        }}
-                        placeholder={copy.emailStep.emailPlaceholder}
-                        disabled={isSubmitting}
-                        className={`w-full rounded-full border-2 px-4 sm:px-6 py-3 pr-28 text-sm sm:text-base focus:outline-none focus:ring-4 transition-all shadow-lg hover:shadow-xl bg-white ${
-                          emailError || submissionError
-                            ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10'
-                            : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500/10'
-                        } ${isSubmitting ? 'opacity-80 cursor-progress' : ''}`}
-                      />
+                  <form onSubmit={handleEmailSubmit} className="space-y-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-1">
+                        <label htmlFor="workEmail" className="text-sm font-semibold text-gray-800">
+                          {copy.emailStep.emailLabel}
+                        </label>
+                        <input
+                          id="workEmail"
+                          type="email"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (emailError) setEmailError('');
+                            if (submissionError) setSubmissionError('');
+                          }}
+                          placeholder={copy.emailStep.emailPlaceholder}
+                          disabled={isSubmitting}
+                          aria-invalid={Boolean(emailError)}
+                          className={`w-full rounded-xl border-2 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 transition-all shadow-sm ${
+                            emailError
+                              ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10'
+                              : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500/10'
+                          } ${isSubmitting ? 'opacity-80 cursor-progress' : ''}`}
+                        />
+                        {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
+                      </div>
+                      <div className="space-y-1">
+                        <label htmlFor="phoneNumber" className="text-sm font-semibold text-gray-800">
+                          {copy.emailStep.phoneLabel}{' '}
+                          <span className="text-gray-400">{copy.emailStep.phoneOptional}</span>
+                        </label>
+                        <input
+                          id="phoneNumber"
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => {
+                            setPhone(e.target.value);
+                            if (submissionError) setSubmissionError('');
+                          }}
+                          placeholder={copy.emailStep.phonePlaceholder}
+                          disabled={isSubmitting}
+                          className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
+                        />
+                      </div>
+                    </div>
+                    {submissionError && !emailError && (
+                      <p className="text-red-600 text-sm">{submissionError}</p>
+                    )}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                       <button
                         type="submit"
                         disabled={isSubmitting}
                         aria-busy={isSubmitting}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 text-sm font-semibold rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? copy.emailStep.sending : copy.emailStep.send}
                       </button>
+                      <p className="text-xs text-gray-500">{copy.emailStep.formHint}</p>
                     </div>
-                    {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
-                    {submissionError && !emailError && (
-                      <p className="text-red-600 text-sm">{submissionError}</p>
-                    )}
                   </form>
 
                   <div className="flex flex-wrap gap-3">
@@ -580,12 +859,63 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     </div>
                   </div>
 
-                  {capturedPainpoint && (
-                    <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-white/90 mb-4">
+                  {typeof calculatedMonthlyCost === 'number' && typeof calculatedAnnualCost === 'number' && (
+                    <div className="mb-4">
                       <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-2">
+                        {copy.calculator.resultTitle}
+                      </p>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                      <div className="bg-white/10 border border-white/20 rounded-xl p-4">
+                        <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
+                          {copy.calculator.monthlyLabel}
+                        </p>
+                        <p className="text-2xl font-bold">{formatCurrency(calculatedMonthlyCost)}</p>
+                      </div>
+                      <div className="bg-white/10 border border-white/20 rounded-xl p-4">
+                        <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
+                          {copy.calculator.annualLabel}
+                        </p>
+                        <p className="text-2xl font-bold">{formatCurrency(calculatedAnnualCost)}</p>
+                      </div>
+                    </div>
+                    </div>
+                  )}
+
+                  {lockedInputs && (
+                    <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-white/90 mb-4 space-y-3">
+                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold">
                         {copy.emailSubmitted.reviewingLabel}
                       </p>
-                      <p className="leading-relaxed">{capturedPainpoint}</p>
+                      <div className="grid gap-3 sm:grid-cols-3">
+                        <div className="bg-white/5 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-white/60 font-semibold mb-1">
+                            {copy.calculator.hoursLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {formatHours(lockedInputs.hours)} {language === 'fr' ? 'h/sem.' : 'h/week'}
+                          </p>
+                        </div>
+                        <div className="bg-white/5 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-white/60 font-semibold mb-1">
+                            {copy.calculator.peopleLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {lockedInputs.people} {peopleWord(lockedInputs.people)}
+                          </p>
+                        </div>
+                        <div className="bg-white/5 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-white/60 font-semibold mb-1">
+                            {copy.calculator.salaryLabel}
+                          </p>
+                          <p className="text-lg font-bold">
+                            {formatCurrency(lockedInputs.grossSalary)}
+                          </p>
+                        </div>
+                      </div>
+                      {capturedPainpoint && (
+                        <p className="leading-relaxed text-white/80">{capturedPainpoint}</p>
+                      )}
+                      <p className="text-[11px] text-white/70">{copy.calculator.assumption}</p>
                     </div>
                   )}
 
@@ -593,7 +923,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     {copy.emailSubmitted.followUp}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex justify-center">
                     <button
                       onClick={handleBookCall}
                       className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-blue-600 font-semibold shadow-lg hover:text-blue-700 transition-all"
@@ -604,15 +934,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       </svg>
                       {copy.emailSubmitted.buttons.bookCall}
                     </button>
-                    <a
-                      href="#work"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/40 font-semibold hover:bg-white/20 transition-all"
-                    >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                      </svg>
-                      {copy.emailSubmitted.buttons.caseStudies}
-                    </a>
                   </div>
                 </div>
 
@@ -725,7 +1046,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
       <CalendlyModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        painpoint={capturedPainpoint || painpoint}
+        painpoint={capturedPainpoint}
         calendarLink={calendarLink}
       />
     </section>

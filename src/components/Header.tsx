@@ -3,13 +3,12 @@ import CalendlyModal from './CalendlyModal';
 import { useLanguage, type Language } from '../lib/language';
 
 interface NavItem {
-  id: 'home' | 'process' | 'work' | 'impact';
+  id: 'home' | 'work' | 'impact';
   href: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
   { id: 'home', href: '#home' },
-  { id: 'process', href: '#process' },
   { id: 'work', href: '#work' },
   { id: 'impact', href: '#impact' },
 ];
@@ -28,7 +27,6 @@ const HEADER_COPY: Record<
   en: {
     nav: {
       home: 'Home',
-      process: 'Process',
       work: 'Work',
       impact: 'Impact',
     },
@@ -41,7 +39,6 @@ const HEADER_COPY: Record<
   fr: {
     nav: {
       home: 'Accueil',
-      process: 'Méthode',
       work: 'Projets',
       impact: 'Impact',
     },
@@ -134,7 +131,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     }
 
     const handleScroll = () => {
-      const sections = ['home', 'process', 'work', 'impact'];
+      const sections = ['home', 'work', 'impact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -155,7 +152,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
 
     // Set initial active section from URL hash
     const hash = window.location.hash.replace('#', '');
-    if (hash && ['home', 'process', 'work', 'impact'].includes(hash)) {
+    if (hash && ['home', 'work', 'impact'].includes(hash)) {
       setActiveSection(hash);
     }
 

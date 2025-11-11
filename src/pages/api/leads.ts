@@ -23,6 +23,7 @@ const buildClient = () => {
 type LeadPayload = {
   email?: unknown;
   painpoint?: unknown;
+  phone?: unknown;
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -64,6 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const email = typeof payload.email === 'string' ? payload.email.trim() : '';
   const painpoint = typeof payload.painpoint === 'string' ? payload.painpoint.trim() : '';
+  const phone = typeof payload.phone === 'string' ? payload.phone.trim() : '';
 
   if (!email || !painpoint) {
     return new Response(JSON.stringify({ error: 'Email and painpoint are required.' }), {
@@ -100,6 +102,16 @@ export const POST: APIRoute = async ({ request }) => {
       ],
     },
   };
+
+  if (phone) {
+    properties.phone = {
+      rich_text: [
+        {
+          text: { content: phone },
+        },
+      ],
+    };
+  }
 
   try {
     const page = await client.pages.create({

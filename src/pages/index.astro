@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
-import SprintTimeline from '../components/SprintTimeline';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
 import PartnerOrganizations from '../components/PartnerOrganizations';
 import ImpactIntro from '../components/ImpactIntro';
@@ -12,11 +11,6 @@ import ImpactIntro from '../components/ImpactIntro';
   <section id="home" class="pt-12 sm:pt-16 lg:pt-20 min-h-[60vh] lg:min-h-[70vh] xl:min-h-[80vh] pb-6 sm:pb-8">
     <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" />
   </section>
-
-    <!-- Process Section -->
-    <section id="process" class="pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-16">
-      <SprintTimeline client:load />
-    </section>
 
     <!-- Work Section -->
     <section id="work" class="py-4 sm:py-6 lg:py-8 scroll-mt-20">
