@@ -160,15 +160,15 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
   fr: {
     headline: {
-      primary: 'Éliminez jusqu’à 80 % de vos tâches manuelles',
-      highlight: 'Réduisez de 40% vos coûts opérationnels',
-    },
-    intro: {
-      primary:
-        'Les processus manuels vous coûtent du temps, de l’argent et de la frustration. Je conçois des automatisations sans que vous ayez à changer vos outils.',
-      secondary:
-        'Fort de cinq ans d’expérience en ingénierie logicielle, je combine expertise technique et vision business pour identifier les inefficacités et livrer des MVP prêts pour la production en sprints ciblés de deux semaines.',
-    },
+    primary: 'Vos process manuels vous coûtent plus que vous ne le pensez',
+    highlight: 'Découvrez où vous perdez du temps et comment l’automatiser en 5 jours',
+  },
+  intro: {
+    primary:
+      'La plupart des TPE/PME perdent plusieurs heures par jour sur des tâches qui pourraient être automatisées : devis, relances, reporting, transferts d’infos.',
+    secondary:
+      'Mon audit gratuit identifie vos points de friction et propose une première automatisation concrète, livrée en 2 semaines, adaptée à vos outils actuels.',
+  },
     painpointPlaceholder: 'Décrivez votre problème...',
     generateTitle: 'Générer le plan de sprint',
     validation: {
