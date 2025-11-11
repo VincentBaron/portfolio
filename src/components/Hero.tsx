@@ -112,14 +112,14 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       currencySymbol: '€',
     },
     headline: {
-      primary: 'Manual processes steal up to 35h/week of productive time.',
+      primary: 'Manual processes cost you up to 35h/week of productive time.',
       highlight: 'I identify your bottlenecks and implement your first automation for free within 5 days.',
     },
     intro: {
       primary:
-        'Manual processes cost you time, money, and frustration. I design scalable backend and AI systems that make your operations run themselves.',
+        'Those lost hours quietly drain thousands of euros every year — in salaries, delays, and missed opportunities.\nQuotes, follow-ups, data entry, reporting… all the repetitive work that eats your time and holds back your growth.',
       secondary:
-        'With over five years of experience as a software engineer, I combine deep technical expertise with a business-first mindset to uncover inefficiencies and deliver practical, production-ready MVPs in focused two-week sprints.',
+        'My approach: surface your most expensive bottlenecks, quantify them, then ship simple automations that free up time and margin without replacing your existing tools.',
     },
     validation: {
       empty: 'Please fill in every field to estimate the cost.',
@@ -536,20 +536,35 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
           {/* Right Side - Headline and Text */}
           <div className="text-center lg:text-left order-1 lg:order-2">
-            <h1 className="space-y-2 sm:space-y-3 mb-2 sm:mb-3">
+            <h1 className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 lg:mb-8">
               <span className="block bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-transparent text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
                 {copy.headline.primary}
               </span>
-              <span className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-lg">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 6v12M6 12h12" strokeLinecap="round" strokeLinejoin="round" />
+              <button
+                type="button"
+                onClick={handleBookCall}
+                aria-label={language === 'fr' ? "Ouvrir le module d'agenda" : 'Open the agenda modal'}
+                className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-lg transition-transform hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+              >
+                <svg
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5A2.25 2.25 0 0021 19.5v-1.26a1.125 1.125 0 00-.852-1.09l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a.75.75 0 01-1.21.038 12.036 12.036 0 01-3.173-3.173.75.75 0 01.038-1.21l1.293-.97a1.125 1.125 0 00.417-1.173L7.85 3.102A1.125 1.125 0 006.76 2.25H5.5A2.25 2.25 0 003.25 4.5v2.25z"
+                  />
                 </svg>
                 {highlightedHeadline}
-              </span>
+              </button>
             </h1>
 
             <div className="mb-2 sm:mb-3 lg:mb-4">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed whitespace-pre-line">
                 {copy.intro.primary}
               </p>
               <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
@@ -566,7 +581,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                   <span role="img" aria-label="n8n">🔁</span> n8n
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="LLMs and RAG">🧠</span> LLMs &amp; RAG
+                  <span role="img" aria-label="Make">⚙️</span> Make
                 </span>
                 
               </div>
