@@ -25,6 +25,8 @@ interface HeroCopy {
     peoplePlaceholder: string;
     salaryLabel: string;
     salaryPlaceholder: string;
+    descriptionLabel: string;
+    descriptionPlaceholder: string;
     submitCta: string;
     resultTitle: string;
     monthlyLabel: string;
@@ -102,6 +104,8 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       peoplePlaceholder: 'e.g. 3',
       salaryLabel: 'Avg gross monthly salary (€)',
       salaryPlaceholder: 'e.g. 4000',
+      descriptionLabel: 'Describe the manual process',
+      descriptionPlaceholder: 'e.g. Client invoice creation.',
       submitCta: 'Calculate cost impact',
       resultTitle: 'Estimated cost of this manual process',
       monthlyLabel: 'Monthly cost',
@@ -209,6 +213,8 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       peoplePlaceholder: 'ex. 3',
       salaryLabel: 'Salaire brut mensuel moyen (€)',
       salaryPlaceholder: 'ex. 4000',
+      descriptionLabel: 'Décrivez ce processus',
+      descriptionPlaceholder: 'ex. Création de devis clients',
       submitCta: 'Estimer le coût',
       resultTitle: 'Coût estimé de ce processus manuel',
       monthlyLabel: 'Coût mensuel',
@@ -313,12 +319,14 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
   const [hoursPerWeek, setHoursPerWeek] = useState('');
   const [peopleCount, setPeopleCount] = useState('');
   const [monthlyCostPerPerson, setMonthlyCostPerPerson] = useState('');
+  const [processDescription, setProcessDescription] = useState('');
   const [calculatedMonthlyCost, setCalculatedMonthlyCost] = useState<number | null>(null);
   const [calculatedAnnualCost, setCalculatedAnnualCost] = useState<number | null>(null);
   const [lockedInputs, setLockedInputs] = useState<{
     hours: number;
     people: number;
     grossSalary: number;
+    description: string;
   } | null>(null);
   const [flowState, setFlowState] = useState<FlowState>('input');
   const [error, setError] = useState('');
@@ -403,6 +411,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
     const hours = parseFloat(hoursPerWeek);
     const people = Math.round(parseFloat(peopleCount));
     const grossSalary = parseFloat(monthlyCostPerPerson);
+    const trimmedDescription = processDescription.trim();
     const validationError = validateCalculatorInputs(hours, people, grossSalary);
     if (validationError) {
       setError(validationError);
@@ -416,7 +425,14 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
       language === 'fr'
         ? `Estimation : ${formatHours(hours)}h/semaine × ${people} ${peopleWord(people)} à ${formatCurrency(grossSalary)} brut/mois (+${EMPLOYER_CHARGE_PERCENT}% de charges) → ${formatCurrency(monthlyCost)}/mois (${formatCurrency(annualCost)}/an).`
         : `Estimate: ${formatHours(hours)}h/week × ${people} ${peopleWord(people)} at ${formatCurrency(grossSalary)} gross/month (+${EMPLOYER_CHARGE_PERCENT}% employer charges) → ${formatCurrency(monthlyCost)} per month (${formatCurrency(annualCost)} per year).`;
+    const descriptionLine = trimmedDescription
+      ? language === 'fr'
+        ? `Processus : ${trimmedDescription}`
+        : `Process: ${trimmedDescription}`
+      : '';
+    const combinedSummary = descriptionLine ? `${descriptionLine}\n${summary}` : summary;
 
+    setProcessDescription(trimmedDescription);
     setError('');
     setEmailError('');
     setSubmissionError('');
@@ -427,8 +443,9 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
       hours,
       people,
       grossSalary,
+      description: trimmedDescription,
     });
-    setCapturedPainpoint(summary);
+    setCapturedPainpoint(combinedSummary);
     setFlowState('collect_email');
   };
 
@@ -679,6 +696,23 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       </div>
                     </div>
 
+                    <div>
+                      <label htmlFor="processDescription" className="block text-sm font-semibold text-gray-800 mb-1">
+                        {copy.calculator.descriptionLabel}
+                      </label>
+                      <textarea
+                        id="processDescription"
+                        rows={3}
+                        value={processDescription}
+                        onChange={(e) => {
+                          setProcessDescription(e.target.value);
+                          if (error) setError('');
+                        }}
+                        placeholder={copy.calculator.descriptionPlaceholder}
+                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm resize-none"
+                      />
+                    </div>
+
                     {error && <p className="text-red-600 text-sm animate-fade-in">{error}</p>}
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -761,6 +795,14 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           </p>
                         </div>
                       </div>
+                      {lockedInputs.description && (
+                        <div className="bg-white/60 rounded-lg p-3 text-blue-900">
+                          <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.descriptionLabel}
+                          </p>
+                          <p className="text-sm">{lockedInputs.description}</p>
+                        </div>
+                      )}
                       <p className="text-xs text-blue-700/80">{copy.emailStep.unlockHint}</p>
                     </div>
                   )}
@@ -921,8 +963,16 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           </p>
                         </div>
                       </div>
+                      {lockedInputs.description && (
+                        <div className="bg-white/5 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-white/60 font-semibold mb-1">
+                            {copy.calculator.descriptionLabel}
+                          </p>
+                          <p className="text-sm text-white/90">{lockedInputs.description}</p>
+                        </div>
+                      )}
                       {capturedPainpoint && (
-                        <p className="leading-relaxed text-white/80">{capturedPainpoint}</p>
+                        <p className="leading-relaxed text-white/80 whitespace-pre-line">{capturedPainpoint}</p>
                       )}
                     </div>
                   )}
