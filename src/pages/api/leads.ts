@@ -101,15 +101,20 @@ export const POST: APIRoute = async ({ request }) => {
         },
       ],
     },
+    Source: {
+      select: { name: 'website' },
+    },
+    Priority: {
+      select: { name: 'High' },
+    },
+    Status: {
+      select: { name: 'Lead' },
+    },
   };
 
   if (phone) {
     properties.phone = {
-      rich_text: [
-        {
-          text: { content: phone },
-        },
-      ],
+      phone_number: phone,
     };
   }
 

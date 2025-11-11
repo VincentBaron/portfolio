@@ -143,7 +143,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       emailPlaceholder: 'you@company.com',
       phoneLabel: 'Phone number',
       phoneOptional: '(optional)',
-      phonePlaceholder: '+1 415 555 1234',
+      phonePlaceholder: '+33 7 68 12 34 56',
       sending: 'Sending...',
       send: 'Send it',
       shareAnother: 'Adjust the numbers',
@@ -682,7 +682,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                             id="monthlyCostPerPerson"
                             type="number"
                             min="0"
-                            step="100"
+                            step="any"
                             inputMode="decimal"
                             value={monthlyCostPerPerson}
                             onChange={(e) => {
