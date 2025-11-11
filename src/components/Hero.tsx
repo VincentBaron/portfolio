@@ -96,8 +96,6 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   en: {
     calculator: {
       title: 'Manual process cost calculator',
-      description:
-        'Estimate the true cost of this workflow. Enter weekly hours, headcount, and gross salary—I’ll add 44% employer charges for you.',
       hoursLabel: 'Hours per person every week',
       hoursPlaceholder: 'e.g. 6',
       peopleLabel: 'People involved',
@@ -601,9 +599,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">
                       {copy.calculator.title}
                     </p>
-                    <p className="text-sm sm:text-base text-gray-700">
-                      {copy.calculator.description}
-                    </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -687,7 +682,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     {error && <p className="text-red-600 text-sm animate-fade-in">{error}</p>}
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                      <p className="text-xs text-gray-500">{copy.calculator.assumption}</p>
                       <button
                         type="submit"
                         disabled={
@@ -930,7 +924,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       {capturedPainpoint && (
                         <p className="leading-relaxed text-white/80">{capturedPainpoint}</p>
                       )}
-                      <p className="text-[11px] text-white/70">{copy.calculator.assumption}</p>
                     </div>
                   )}
 
