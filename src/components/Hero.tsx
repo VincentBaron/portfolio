@@ -18,7 +18,6 @@ interface HeroProps {
 interface HeroCopy {
   calculator: {
     title: string;
-    description: string;
     hoursLabel: string;
     hoursPlaceholder: string;
     peopleLabel: string;
@@ -89,6 +88,7 @@ interface HeroCopy {
   stats: {
     projects: string;
     satisfaction: string;
+    sprint: string;
     rating: string;
   };
   companiesTitle: string;
@@ -115,13 +115,13 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     },
     headline: {
       primary: 'Manual processes cost you up to 35h/week of productive time.',
-      highlight: 'I identify your bottlenecks and implement your first automation for free within 5 days.',
+      highlight: 'I identify your bottlenecks and implement your first system within 14 days.',
     },
     intro: {
       primary:
         'Those lost hours quietly drain thousands of euros every year — in salaries, delays, and missed opportunities.\nQuotes, follow-ups, data entry, reporting… all the repetitive work that eats your time and holds back your growth.',
       secondary:
-        'My approach: surface your most expensive bottlenecks, quantify them, then ship simple automations that free up time and margin without replacing your existing tools.',
+        'My approach: surface your most expensive bottlenecks, quantify them, then ship a simple system that free up time and margin without replacing your existing tools.',
     },
     validation: {
       empty: 'Please fill in every field to estimate the cost.',
@@ -147,7 +147,8 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       sending: 'Sending...',
       send: 'Send it',
       shareAnother: 'Adjust the numbers',
-      unlockHint: 'Share your work email to unlock the monthly and annual cost (gross salary + 44% employer charges).',
+      unlockHint:
+        "Share your work email and I'll send a detailed automation audit with ROI projections (gross salary + 44% employer charges included).",
       formHint: 'I’ll reply with automation ideas tailored to this process.',
     },
     emailSubmitted: {
@@ -224,13 +225,13 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     },
     headline: {
     primary: 'Vous perdez jusqu’à 35h/semaine dans des process manuels',
-    highlight: 'J\' identifie vos blocages et vous implemente une première automatisation gratuitement en 5 jours',
+    highlight: 'J\' identifie vos blocages et vous implemente un premier système en 14 jours',
   },
   intro: {
     primary:
       'Ces pertes de temps représentent souvent plusieurs milliers d’euros par an en salaires et opportunités non saisies. Devis, relances, saisies, reporting… autant de tâches répétitives qui freinent votre croissance.',
     secondary:
-      'Mon approche : détecter vos points de friction les plus coûteux, les chiffrer, puis mettre en place des automatisations simples qui libèrent du temps et de la marge, sans changer vos outils existants.',
+      'Mon approche : détecter vos points de friction les plus coûteux, les chiffrer, puis mettre en place un système simple qui libèrent du temps et de la marge, sans changer vos outils existants.',
   },
     validation: {
       empty: 'Merci de remplir tous les champs pour estimer le coût.',
@@ -256,7 +257,8 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       sending: 'Envoi...',
       send: 'Envoyer',
       shareAnother: 'Ajuster les chiffres',
-      unlockHint: 'Partagez votre e-mail pro pour recevoir le détail des coûts (salaire brut + 44 % de charges).',
+      unlockHint:
+        "Partagez votre e-mail pro pour recevoir l'audit d'automatisation et le détail du ROI (salaire brut + 44 % de charges).",
       formHint: 'Je vous recontacte avec des idées d’automatisation adaptées à ce process.',
     },
     emailSubmitted: {
@@ -700,16 +702,16 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       <label htmlFor="processDescription" className="block text-sm font-semibold text-gray-800 mb-1">
                         {copy.calculator.descriptionLabel}
                       </label>
-                      <textarea
+                      <input
                         id="processDescription"
-                        rows={3}
+                        type="text"
                         value={processDescription}
                         onChange={(e) => {
                           setProcessDescription(e.target.value);
                           if (error) setError('');
                         }}
                         placeholder={copy.calculator.descriptionPlaceholder}
-                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm resize-none"
+                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
                       />
                     </div>
 
@@ -804,6 +806,33 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                         </div>
                       )}
                       <p className="text-xs text-blue-700/80">{copy.emailStep.unlockHint}</p>
+                    </div>
+                  )}
+
+                  {typeof calculatedMonthlyCost === 'number' && typeof calculatedAnnualCost === 'number' && (
+                    <div className="bg-white border border-blue-100 rounded-xl p-4 sm:p-5 shadow-sm space-y-3">
+                      <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold">
+                        {copy.calculator.resultTitle}
+                      </p>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        <div className="bg-blue-50 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.monthlyLabel}
+                          </p>
+                          <p className="text-2xl font-bold text-blue-900">
+                            {formatCurrency(calculatedMonthlyCost)}
+                          </p>
+                        </div>
+                        <div className="bg-blue-50 rounded-lg p-3">
+                          <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                            {copy.calculator.annualLabel}
+                          </p>
+                          <p className="text-2xl font-bold text-blue-900">
+                            {formatCurrency(calculatedAnnualCost)}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-blue-700/80">{copy.calculator.assumption}</p>
                     </div>
                   )}
 
