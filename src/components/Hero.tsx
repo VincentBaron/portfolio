@@ -97,7 +97,7 @@ interface HeroCopy {
 const HERO_COPY: Record<Language, HeroCopy> = {
   en: {
     calculator: {
-      title: 'Manual process cost calculator',
+      title: 'Back-office manual process cost calculator',
       hoursLabel: 'Hours per person every week',
       hoursPlaceholder: 'e.g. 6',
       peopleLabel: 'People involved',
@@ -105,23 +105,25 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       salaryLabel: 'Avg gross monthly salary (€)',
       salaryPlaceholder: 'e.g. 4000',
       descriptionLabel: 'Describe the manual process',
-      descriptionPlaceholder: 'e.g. Client invoice creation.',
+      descriptionPlaceholder: 'e.g. Time-tracking validation in the back-office.',
       submitCta: 'Calculate cost impact',
       resultTitle: 'Estimated cost of this manual process',
       monthlyLabel: 'Monthly cost',
       annualLabel: 'Annual cost',
-      assumption: 'Assumes a 40h workweek and adds +44% employer charges on top of the gross salary.',
+      assumption:
+        'Assumes a 40h workweek and adds +44% employer charges on top of the gross salary.',
       currencySymbol: '€',
     },
     headline: {
-      primary: 'Manual processes cost you up to 35h/week of productive time.',
-      highlight: 'I identify your bottlenecks and implement your first system within 14 days.',
+      primary: 'Your back-office is losing up to 35h/week on manual processes.',
+      highlight:
+        'I audit your internal operations and implement a simple system in 14 days so you can scale without hiring.',
     },
     intro: {
       primary:
-        'Those lost hours quietly drain thousands of euros every year — in salaries, delays, and missed opportunities.\nQuotes, follow-ups, data entry, reporting… all the repetitive work that eats your time and holds back your growth.',
+        'Those lost hours in your back-office quietly drain tens of thousands of euros every year — in salaries, delays, rework, and missed opportunities.\nQuotes, follow-ups, data entry, reporting… all the repetitive work that eats capacity and holds back your growth.',
       secondary:
-        'My approach: surface your most expensive bottlenecks, quantify them, then ship a simple system that free up time and margin without replacing your existing tools.',
+        'My approach: surface your most expensive bottlenecks, quantify them, then ship a simple system that frees up time and margin — without replacing your existing tools.',
     },
     validation: {
       empty: 'Please fill in every field to estimate the cost.',
@@ -135,10 +137,10 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     },
     emailStep: {
       badge: 'Almost there',
-      heading: 'Where should I send your automation audit and ROI breakdown?',
+      heading: 'Where should I send your back-office audit and ROI breakdown?',
       capturedLabel: 'Manual process details',
       instructions:
-        'I’ll review these numbers, challenge assumptions, and reply with automation ideas, timelines, and ROI projections.',
+        "I'll review these numbers, challenge assumptions, and reply with system ideas, timelines, and ROI projections.",
       emailLabel: 'Work email',
       emailPlaceholder: 'you@company.com',
       phoneLabel: 'Phone number',
@@ -148,14 +150,15 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       send: 'Send it',
       shareAnother: 'Adjust the numbers',
       unlockHint:
-        "Share your work email and I'll send a detailed automation audit with ROI projections (gross salary + 44% employer charges included).",
-      formHint: 'I’ll reply with automation ideas tailored to this process.',
+        "Share your work email and I'll send a detailed back-office systems audit with ROI projections (gross salary + 44% employer charges included).",
+      formHint: 'I’ll reply with concrete system and automation ideas tailored to this process.',
     },
     emailSubmitted: {
       badge: 'Check your inbox',
-      headingTemplate: 'I’ll send the audit and implementation plan to {{email}}.',
+      headingTemplate: "I'll send the audit and implementation plan to {{email}}.",
       reviewingLabel: 'Cost breakdown I’m reviewing',
-      followUp: 'I’ll send the automation audit shortly. Feel free to book a call while I dig in.',
+      followUp:
+        'I’ll send the back-office audit shortly. Feel free to book a call while I dig in.',
       buttons: {
         bookCall: 'Book a 20-min call',
         shareAnother: 'Recalculate another process',
@@ -207,7 +210,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
   fr: {
     calculator: {
-      title: 'Calculez le coût de votre processus manuel',
+      title: 'Calculez le coût de votre processus manuel de back-office',
       hoursLabel: 'Heures par personne et par semaine',
       hoursPlaceholder: 'ex. 6',
       peopleLabel: 'Nombre de personnes concernées',
@@ -215,24 +218,26 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       salaryLabel: 'Salaire brut mensuel moyen (€)',
       salaryPlaceholder: 'ex. 4000',
       descriptionLabel: 'Décrivez ce processus',
-      descriptionPlaceholder: 'ex. Création de devis clients',
+      descriptionPlaceholder: 'ex. Validation des heures d’intérimaires.',
       submitCta: 'Estimer le coût',
       resultTitle: 'Coût estimé de ce processus manuel',
       monthlyLabel: 'Coût mensuel',
       annualLabel: 'Coût annuel',
-      assumption: 'Hypothèse : 40h/semaine + 44 % de charges patronales ajoutées au salaire brut.',
+      assumption:
+        'Hypothèse : 40h/semaine + 44 % de charges patronales ajoutées au salaire brut.',
       currencySymbol: '€',
     },
     headline: {
-    primary: 'Vous perdez jusqu’à 35h/semaine dans des process manuels',
-    highlight: 'J\' identifie vos blocages et vous implemente un premier système en 14 jours',
-  },
-  intro: {
-    primary:
-      'Ces pertes de temps représentent souvent plusieurs milliers d’euros par an en salaires et opportunités non saisies. Devis, relances, saisies, reporting… autant de tâches répétitives qui freinent votre croissance.',
-    secondary:
-      'Mon approche : détecter vos points de friction les plus coûteux, les chiffrer, puis mettre en place un système simple qui libèrent du temps et de la marge, sans changer vos outils existants.',
-  },
+      primary: 'Votre back-office perd jusqu’à 35h/semaine dans des process manuels.',
+      highlight:
+        'J’audite vos opérations internes et je mets en place un premier système en 14 jours pour vous permettre de scaler sans recruter.',
+    },
+    intro: {
+      primary:
+        'Ces pertes de temps dans le back-office représentent souvent plusieurs dizaines de milliers d’euros par an en salaires, retards et opportunités manquées. Devis, relances, saisies, reporting… autant de tâches répétitives qui saturent vos équipes et freinent votre croissance.',
+      secondary:
+        'Mon approche : détecter vos points de friction les plus coûteux, les chiffrer, puis mettre en place un système simple qui libère du temps et de la marge — sans changer vos outils existants.',
+    },
     validation: {
       empty: 'Merci de remplir tous les champs pour estimer le coût.',
       short: 'Toutes les valeurs doivent être supérieures à zéro.',
@@ -245,10 +250,11 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     },
     emailStep: {
       badge: 'On y est presque',
-      heading: 'Où dois-je vous envoyer l’audit d’automatisation et l’estimation de ROI ?',
+      heading:
+        'Où dois-je vous envoyer l’audit de votre back-office et l’estimation de ROI ?',
       capturedLabel: 'Détails du processus',
       instructions:
-        'J’analyse ces chiffres, je challenge les hypothèses et je vous réponds avec des idées d’automatisation, un planning et le ROI attendu.',
+        'J’analyse ces chiffres, je challenge les hypothèses et je vous réponds avec des idées de système, un planning et le ROI attendu.',
       emailLabel: 'Email professionnel',
       emailPlaceholder: 'vous@entreprise.com',
       phoneLabel: 'Numéro de téléphone',
@@ -258,14 +264,16 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       send: 'Envoyer',
       shareAnother: 'Ajuster les chiffres',
       unlockHint:
-        "Partagez votre e-mail pro pour recevoir l'audit d'automatisation et le détail du ROI (salaire brut + 44 % de charges).",
-      formHint: 'Je vous recontacte avec des idées d’automatisation adaptées à ce process.',
+        "Partagez votre e-mail pro pour recevoir un audit de votre back-office et le détail du ROI (salaire brut + 44 % de charges).",
+      formHint:
+        'Je vous recontacte avec des idées de systèmes et d’automatisation adaptées à ce process.',
     },
     emailSubmitted: {
       badge: 'Vérifiez votre boîte mail',
       headingTemplate: 'J’envoie l’audit et le plan de mise en œuvre à {{email}}.',
       reviewingLabel: 'Ce que j’analyse',
-      followUp: 'Je vous envoie l’audit très vite. En attendant, réservez un appel.',
+      followUp:
+        'Je vous envoie l’audit très vite. En attendant, vous pouvez réserver un appel.',
       buttons: {
         bookCall: 'Réserver un appel de 20 minutes',
         shareAnother: 'Recalculer un autre process',
@@ -425,8 +433,18 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
     const annualCost = monthlyCost * 12;
     const summary =
       language === 'fr'
-        ? `Estimation : ${formatHours(hours)}h/semaine × ${people} ${peopleWord(people)} à ${formatCurrency(grossSalary)} brut/mois (+${EMPLOYER_CHARGE_PERCENT}% de charges) → ${formatCurrency(monthlyCost)}/mois (${formatCurrency(annualCost)}/an).`
-        : `Estimate: ${formatHours(hours)}h/week × ${people} ${peopleWord(people)} at ${formatCurrency(grossSalary)} gross/month (+${EMPLOYER_CHARGE_PERCENT}% employer charges) → ${formatCurrency(monthlyCost)} per month (${formatCurrency(annualCost)} per year).`;
+        ? `Estimation : ${formatHours(hours)}h/semaine × ${people} ${peopleWord(
+            people,
+          )} à ${formatCurrency(grossSalary)} brut/mois (+${EMPLOYER_CHARGE_PERCENT}% de charges) → ${formatCurrency(
+            monthlyCost,
+          )}/mois (${formatCurrency(annualCost)}/an).`
+        : `Estimate: ${formatHours(hours)}h/week × ${people} ${peopleWord(
+            people,
+          )} at ${formatCurrency(
+            grossSalary,
+          )} gross/month (+${EMPLOYER_CHARGE_PERCENT}% employer charges) → ${formatCurrency(
+            monthlyCost,
+          )} per month (${formatCurrency(annualCost)} per year).`;
     const descriptionLine = trimmedDescription
       ? language === 'fr'
         ? `Processus : ${trimmedDescription}`
@@ -471,7 +489,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
     const trimmedPhone = phone.trim();
     setIsSubmitting(true);
 
-    console.log("Submitting email:", trimmedEmail, "for painpoint:", capturedPainpoint);
+    console.log('Submitting email:', trimmedEmail, 'for painpoint:', capturedPainpoint);
 
     try {
       const response = await fetch('/api/leads', {
@@ -560,7 +578,11 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
               <button
                 type="button"
                 onClick={handleBookCall}
-                aria-label={language === 'fr' ? "Ouvrir le module d'agenda" : 'Open the agenda modal'}
+                aria-label={
+                  language === 'fr'
+                    ? "Ouvrir le module d'agenda"
+                    : 'Open the agenda modal'
+                }
                 className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-lg transition-transform hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
               >
                 <svg
@@ -589,18 +611,29 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
               </p>
               <div className="mt-3 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Go">🐹</span> Go
+                  <span role="img" aria-label="Go">
+                    🐹
+                  </span>{' '}
+                  Go
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Python">🐍</span> Python
+                  <span role="img" aria-label="Python">
+                    🐍
+                  </span>{' '}
+                  Python
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="n8n">🔁</span> n8n
+                  <span role="img" aria-label="n8n">
+                    🔁
+                  </span>{' '}
+                  n8n
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Make">⚙️</span> Make
+                  <span role="img" aria-label="Make">
+                    ⚙️
+                  </span>{' '}
+                  Make
                 </span>
-                
               </div>
             </div>
           </div>
@@ -609,7 +642,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
         {/* Painpoint to Plan Flow */}
         <div className="mb-2 sm:mb-4 lg:mb-6">
           <div className="max-w-6xl mx-auto">
-            
             {/* Input State */}
             {flowState === 'input' && (
               <div className="max-w-4xl mx-auto">
@@ -623,7 +655,10 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div>
-                        <label htmlFor="hoursPerWeek" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label
+                          htmlFor="hoursPerWeek"
+                          className="block text-sm font-semibold text-gray-800 mb-1"
+                        >
                           {copy.calculator.hoursLabel}
                         </label>
                         <div className="relative">
@@ -648,7 +683,10 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       </div>
 
                       <div>
-                        <label htmlFor="peopleCount" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label
+                          htmlFor="peopleCount"
+                          className="block text-sm font-semibold text-gray-800 mb-1"
+                        >
                           {copy.calculator.peopleLabel}
                         </label>
                         <div className="relative">
@@ -673,7 +711,10 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       </div>
 
                       <div>
-                        <label htmlFor="monthlyCostPerPerson" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label
+                          htmlFor="monthlyCostPerPerson"
+                          className="block text-sm font-semibold text-gray-800 mb-1"
+                        >
                           {copy.calculator.salaryLabel}
                         </label>
                         <div className="relative">
@@ -699,7 +740,10 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     </div>
 
                     <div>
-                      <label htmlFor="processDescription" className="block text-sm font-semibold text-gray-800 mb-1">
+                      <label
+                        htmlFor="processDescription"
+                        className="block text-sm font-semibold text-gray-800 mb-1"
+                      >
                         {copy.calculator.descriptionLabel}
                       </label>
                       <input
@@ -720,11 +764,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                       <button
                         type="submit"
-                        disabled={
-                          !hoursPerWeek ||
-                          !peopleCount ||
-                          !monthlyCostPerPerson
-                        }
+                        disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         {copy.calculator.submitCta}
@@ -735,7 +775,11 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           strokeWidth="2"
                           stroke="currentColor"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 12h14M12 5l7 7-7 7"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -770,14 +814,17 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
                   {lockedInputs && (
                     <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-800 space-y-3">
-                      <p className="font-semibold text-blue-900">{copy.emailStep.capturedLabel}</p>
+                      <p className="font-semibold text-blue-900">
+                        {copy.emailStep.capturedLabel}
+                      </p>
                       <div className="grid gap-3 sm:grid-cols-3">
                         <div className="bg-white/60 rounded-lg p-3 text-blue-900">
                           <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold mb-1">
                             {copy.calculator.hoursLabel}
                           </p>
                           <p className="text-lg font-bold">
-                            {formatHours(lockedInputs.hours)} {language === 'fr' ? 'h/sem.' : 'h/week'}
+                            {formatHours(lockedInputs.hours)}{' '}
+                            {language === 'fr' ? 'h/sem.' : 'h/week'}
                           </p>
                         </div>
                         <div className="bg-white/60 rounded-lg p-3 text-blue-900">
@@ -805,36 +852,41 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           <p className="text-sm">{lockedInputs.description}</p>
                         </div>
                       )}
-                      <p className="text-xs text-blue-700/80">{copy.emailStep.unlockHint}</p>
+                      <p className="text-xs text-blue-700/80">
+                        {copy.emailStep.unlockHint}
+                      </p>
                     </div>
                   )}
 
-                  {typeof calculatedMonthlyCost === 'number' && typeof calculatedAnnualCost === 'number' && (
-                    <div className="bg-white border border-blue-100 rounded-xl p-4 sm:p-5 shadow-sm space-y-3">
-                      <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold">
-                        {copy.calculator.resultTitle}
-                      </p>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="bg-blue-50 rounded-lg p-3">
-                          <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
-                            {copy.calculator.monthlyLabel}
-                          </p>
-                          <p className="text-2xl font-bold text-blue-900">
-                            {formatCurrency(calculatedMonthlyCost)}
-                          </p>
+                  {typeof calculatedMonthlyCost === 'number' &&
+                    typeof calculatedAnnualCost === 'number' && (
+                      <div className="bg-white border border-blue-100 rounded-xl p-4 sm:p-5 shadow-sm space-y-3">
+                        <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold">
+                          {copy.calculator.resultTitle}
+                        </p>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          <div className="bg-blue-50 rounded-lg p-3">
+                            <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                              {copy.calculator.monthlyLabel}
+                            </p>
+                            <p className="text-2xl font-bold text-blue-900">
+                              {formatCurrency(calculatedMonthlyCost)}
+                            </p>
+                          </div>
+                          <div className="bg-blue-50 rounded-lg p-3">
+                            <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
+                              {copy.calculator.annualLabel}
+                            </p>
+                            <p className="text-2xl font-bold text-blue-900">
+                              {formatCurrency(calculatedAnnualCost)}
+                            </p>
+                          </div>
                         </div>
-                        <div className="bg-blue-50 rounded-lg p-3">
-                          <p className="text-[11px] uppercase tracking-wide text-blue-600 font-semibold mb-1">
-                            {copy.calculator.annualLabel}
-                          </p>
-                          <p className="text-2xl font-bold text-blue-900">
-                            {formatCurrency(calculatedAnnualCost)}
-                          </p>
-                        </div>
+                        <p className="text-xs text-blue-700/80">
+                          {copy.calculator.assumption}
+                        </p>
                       </div>
-                      <p className="text-xs text-blue-700/80">{copy.calculator.assumption}</p>
-                    </div>
-                  )}
+                    )}
 
                   <p className="text-sm text-gray-700">
                     {copy.emailStep.instructions}
@@ -843,7 +895,10 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                   <form onSubmit={handleEmailSubmit} className="space-y-4">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-1">
-                        <label htmlFor="workEmail" className="text-sm font-semibold text-gray-800">
+                        <label
+                          htmlFor="workEmail"
+                          className="text-sm font-semibold text-gray-800"
+                        >
                           {copy.emailStep.emailLabel}
                         </label>
                         <input
@@ -864,12 +919,19 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                               : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500/10'
                           } ${isSubmitting ? 'opacity-80 cursor-progress' : ''}`}
                         />
-                        {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
+                        {emailError && (
+                          <p className="text-red-600 text-sm">{emailError}</p>
+                        )}
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="phoneNumber" className="text-sm font-semibold text-gray-800">
+                        <label
+                          htmlFor="phoneNumber"
+                          className="text-sm font-semibold text-gray-800"
+                        >
                           {copy.emailStep.phoneLabel}{' '}
-                          <span className="text-gray-400">{copy.emailStep.phoneOptional}</span>
+                          <span className="text-gray-400">
+                            {copy.emailStep.phoneOptional}
+                          </span>
                         </label>
                         <input
                           id="phoneNumber"
@@ -897,7 +959,9 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       >
                         {isSubmitting ? copy.emailStep.sending : copy.emailStep.send}
                       </button>
-                      <p className="text-xs text-gray-500">{copy.emailStep.formHint}</p>
+                      <p className="text-xs text-gray-500">
+                        {copy.emailStep.formHint}
+                      </p>
                     </div>
                   </form>
 
@@ -939,27 +1003,32 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     </div>
                   </div>
 
-                  {typeof calculatedMonthlyCost === 'number' && typeof calculatedAnnualCost === 'number' && (
-                    <div className="mb-4">
-                      <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-2">
-                        {copy.calculator.resultTitle}
-                      </p>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                      <div className="bg-white/10 border border-white/20 rounded-xl p-4">
-                        <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
-                          {copy.calculator.monthlyLabel}
+                  {typeof calculatedMonthlyCost === 'number' &&
+                    typeof calculatedAnnualCost === 'number' && (
+                      <div className="mb-4">
+                        <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-2">
+                          {copy.calculator.resultTitle}
                         </p>
-                        <p className="text-2xl font-bold">{formatCurrency(calculatedMonthlyCost)}</p>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          <div className="bg-white/10 border border-white/20 rounded-xl p-4">
+                            <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
+                              {copy.calculator.monthlyLabel}
+                            </p>
+                            <p className="text-2xl font-bold">
+                              {formatCurrency(calculatedMonthlyCost)}
+                            </p>
+                          </div>
+                          <div className="bg-white/10 border border-white/20 rounded-xl p-4">
+                            <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
+                              {copy.calculator.annualLabel}
+                            </p>
+                            <p className="text-2xl font-bold">
+                              {formatCurrency(calculatedAnnualCost)}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-white/10 border border-white/20 rounded-xl p-4">
-                        <p className="text-xs uppercase tracking-wide text-white/70 font-semibold mb-1">
-                          {copy.calculator.annualLabel}
-                        </p>
-                        <p className="text-2xl font-bold">{formatCurrency(calculatedAnnualCost)}</p>
-                      </div>
-                    </div>
-                    </div>
-                  )}
+                    )}
 
                   {lockedInputs && (
                     <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-white/90 mb-4 space-y-3">
@@ -972,7 +1041,8 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                             {copy.calculator.hoursLabel}
                           </p>
                           <p className="text-lg font-bold">
-                            {formatHours(lockedInputs.hours)} {language === 'fr' ? 'h/sem.' : 'h/week'}
+                            {formatHours(lockedInputs.hours)}{' '}
+                            {language === 'fr' ? 'h/sem.' : 'h/week'}
                           </p>
                         </div>
                         <div className="bg-white/5 rounded-lg p-3">
@@ -997,11 +1067,15 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           <p className="text-[11px] uppercase tracking-wide text-white/60 font-semibold mb-1">
                             {copy.calculator.descriptionLabel}
                           </p>
-                          <p className="text-sm text-white/90">{lockedInputs.description}</p>
+                          <p className="text-sm text-white/90">
+                            {lockedInputs.description}
+                          </p>
                         </div>
                       )}
                       {capturedPainpoint && (
-                        <p className="leading-relaxed text-white/80 whitespace-pre-line">{capturedPainpoint}</p>
+                        <p className="leading-relaxed text-white/80 whitespace-pre-line">
+                          {capturedPainpoint}
+                        </p>
                       )}
                     </div>
                   )}
@@ -1015,9 +1089,24 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       onClick={handleBookCall}
                       className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-blue-600 font-semibold shadow-lg hover:text-blue-700 transition-all"
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V5a3 3 0 016 0v2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3zm2-2a1 1 0 112 0v2h-2V5z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6" />
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7V5a3 3 0 016 0v2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3zm2-2a1 1 0 112 0v2h-2V5z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 13h6"
+                        />
                       </svg>
                       {copy.emailSubmitted.buttons.bookCall}
                     </button>
@@ -1029,8 +1118,18 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     onClick={handleRetry}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 5A8.001 8.001 0 004.582 9H9m0 11v-5h-.582" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 4v5h.582m15.356 5A8.001 8.001 0 004.582 9H9m0 11v-5h-.582"
+                      />
                     </svg>
                     {copy.emailSubmitted.buttons.shareAnother}
                   </button>
@@ -1040,14 +1139,18 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
 
             {/* Testimonials */}
             <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
-              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">{copy.testimonialsTitle}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">
+                {copy.testimonialsTitle}
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
                 {copy.testimonials.map((testimonial) => (
                   <div
                     key={testimonial.author}
                     className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left"
                   >
-                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{testimonial.quote}</p>
+                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                      {testimonial.quote}
+                    </p>
                     <div className="mt-4 flex items-center gap-3">
                       <img
                         src={testimonial.image}
@@ -1055,75 +1158,80 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
                       />
                       <div className="text-left">
-                        <p className="text-xs sm:text-sm font-semibold text-gray-900">{testimonial.author}</p>
-                        <p className="text-[11px] sm:text-xs text-gray-600">{testimonial.role}</p>
+                        <p className="text-xs sm:text-sm font-semibold text-gray-900">
+                          {testimonial.author}
+                        </p>
+                        <p className="text-[11px] sm:text-xs text-gray-600">
+                          {testimonial.role}
+                        </p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-
             </div>
 
             {/* Stats and Companies Section */}
             <div className="mt-2 sm:mt-4 lg:mt-6 flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-8 xl:gap-12">
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-6 items-center">
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  50+
+              {/* Stats */}
+              <div className="flex flex-wrap justify-center gap-6 items-center">
+                <div className="flex flex-col items-center">
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    50+
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">{copy.stats.projects}</p>
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.projects}</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  {language === 'fr' ? '2 semaines' : '2 Weeks'}
+                <div className="flex flex-col items-center">
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    {language === 'fr' ? '2 semaines' : '2 Weeks'}
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">{copy.stats.sprint}</p>
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.sprint}</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  4.9/5
+                <div className="flex flex-col items-center">
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    4.9/5
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">{copy.stats.rating}</p>
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.rating}</p>
               </div>
-            </div>
 
-            {/* Vertical Divider */}
-            <div className="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-60"></div>
+              {/* Vertical Divider */}
+              <div className="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-60"></div>
 
-            {/* Companies */}
-            <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium mb-4">{copy.companiesTitle}</p>
-              <div className="flex items-center justify-center gap-6 md:gap-8">
-                {/* Qomon Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/qomonLogo.png"
-                    alt="Qomon"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                
-                {/* Side Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/sideLogo.png"
-                    alt="Side"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                
-                {/* Mitsubishi Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/mitsubishi.avif"
-                    alt="Mitsubishi"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
+              {/* Companies */}
+              <div className="text-center">
+                <p className="text-sm text-gray-600 font-medium mb-4">
+                  {copy.companiesTitle}
+                </p>
+                <div className="flex items-center justify-center gap-6 md:gap-8">
+                  {/* Qomon Logo */}
+                  <div className="group transition-all duration-300 hover:scale-105">
+                    <img
+                      src="/qomonLogo.png"
+                      alt="Qomon"
+                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                    />
+                  </div>
+
+                  {/* Side Logo */}
+                  <div className="group transition-all duration-300 hover:scale-105">
+                    <img
+                      src="/sideLogo.png"
+                      alt="Side"
+                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                    />
+                  </div>
+
+                  {/* Mitsubishi Logo */}
+                  <div className="group transition-all duration-300 hover:scale-105">
+                    <img
+                      src="/mitsubishi.avif"
+                      alt="Mitsubishi"
+                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
