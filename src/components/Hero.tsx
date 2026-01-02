@@ -44,7 +44,6 @@ interface HeroCopy {
   validation: {
     empty: string;
     short: string;
-    long: string;
     emailEmpty: string;
     emailInvalid: string;
     missingPainpoint: string;
@@ -115,20 +114,19 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       currencySymbol: '€',
     },
     headline: {
-      primary: 'Your back-office is losing up to 35h/week on manual processes.',
+      primary: 'Increase your Net Margin Per Recruiter\nwith AI',
       highlight:
-        'I audit your internal operations and implement a simple system in 14 days so you can scale without hiring.',
+        'I audit your recruiting operations and implement AI-powered systems in 14 days to boost margins without hiring more staff.',
     },
     intro: {
       primary:
-        'Those lost hours in your back-office quietly drain tens of thousands of euros every year — in salaries, delays, rework, and missed opportunities.\nQuotes, follow-ups, data entry, reporting… all the repetitive work that eats capacity and holds back your growth.',
+        'Manual recruiting processes drain productivity and compress margins. Profile sourcing, candidate screening, follow-ups, reporting… repetitive tasks that limit your recruiters\' capacity and revenue per head.',
       secondary:
-        'My approach: surface your most expensive bottlenecks, quantify them, then ship a simple system that frees up time and margin — without replacing your existing tools.',
+        'My approach: identify your highest-impact bottlenecks, quantify the opportunity, then deploy AI systems that amplify each recruiter\'s output and profitability — working alongside your existing tools.',
     },
     validation: {
       empty: 'Please fill in every field to estimate the cost.',
       short: 'All values must be greater than zero.',
-      long: 'Please enter realistic numbers (hours < 80, salary < 50,000).',
       emailEmpty: 'Please provide your email address',
       emailInvalid: 'Please enter a valid email address',
       missingPainpoint: 'Please run the cost calculator before sharing your email.',
@@ -403,9 +401,6 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
     if (hours <= 0 || people <= 0 || grossSalary <= 0) {
       return copy.validation.short;
     }
-    if (hours > 80 || grossSalary > 50000 || people > 1000) {
-      return copy.validation.long;
-    }
     return null;
   };
 
@@ -547,50 +542,63 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
   };
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-0">
-      <div className="max-w-7xl mx-auto w-full pb-0">
-        {/* Hero Content with Profile Picture */}
-        <div className="grid lg:grid-cols-[250px_1fr] gap-4 sm:gap-6 lg:gap-8 items-center mb-3 sm:mb-4 lg:mb-6">
-          {/* Left Side - Profile Picture */}
-          <div className="flex justify-center lg:justify-start order-2 lg:order-1">
-            <div className="relative">
-              {/* Decorative gradient background */}
-              <div className="absolute -inset-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-20 blur-xl"></div>
-              {/* Profile image container */}
-              <div className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56">
-                <img
-                  src="/profilePic.png"
-                  alt={language === 'fr' ? 'Vincent Baron — fondateur' : 'Vincent Baron - Founder'}
-                  className="w-full h-full object-cover rounded-full shadow-2xl border-4 border-white"
-                />
-                {/* Decorative ring */}
-                <div className="absolute -inset-1 border-2 border-blue-600/30 rounded-full"></div>
+    <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto w-full">
+        {/* Hero Content */}
+        <div className="grid lg:grid-cols-1 gap-8 sm:gap-10 lg:gap-16 items-center mb-12 sm:mb-16 lg:mb-20">
+          {/* Headline and Text */}
+          <div className="text-center">
+            {/* Agents Badge */}
+            <div className="mb-6 sm:mb-8 flex items-center justify-center">
+              <div className="inline-flex items-center gap-4">
+                {/* Avatar Stack */}
+                <div className="flex -space-x-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+                {/* Count Badge */}
+                <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  {language === 'fr' ? '9 agents' : '9 agents'}
+                </span>
               </div>
             </div>
-          </div>
-
-          {/* Right Side - Headline and Text */}
-          <div className="text-center lg:text-left order-1 lg:order-2">
-            <h1 className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 lg:mb-8">
-              <span className="block bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-transparent text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
+            
+            {/* Main Headline */}
+            <h1 className="mb-6 sm:mb-8 pb-2">
+              <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
                 {copy.headline.primary}
               </span>
+            </h1>
+
+            {/* CTA Button */}
+            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <button
                 type="button"
                 onClick={handleBookCall}
-                aria-label={
-                  language === 'fr'
-                    ? "Ouvrir le module d'agenda"
-                    : 'Open the agenda modal'
-                }
-                className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-lg transition-transform hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  className="w-5 h-5 transition-transform group-hover:rotate-12"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.8"
+                  strokeWidth="2"
                 >
                   <path
                     strokeLinecap="round"
@@ -598,66 +606,31 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5A2.25 2.25 0 0021 19.5v-1.26a1.125 1.125 0 00-.852-1.09l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a.75.75 0 01-1.21.038 12.036 12.036 0 01-3.173-3.173.75.75 0 01.038-1.21l1.293-.97a1.125 1.125 0 00.417-1.173L7.85 3.102A1.125 1.125 0 006.76 2.25H5.5A2.25 2.25 0 003.25 4.5v2.25z"
                   />
                 </svg>
-                {highlightedHeadline}
+                {language === 'fr' ? 'Réserver un appel gratuit' : 'Book a free call'}
               </button>
-            </h1>
-
-            <div className="mb-2 sm:mb-3 lg:mb-4">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 leading-relaxed whitespace-pre-line">
-                {copy.intro.primary}
-              </p>
-              <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
-                {copy.intro.secondary}
-              </p>
-              <div className="mt-3 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
-                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Go">
-                    🐹
-                  </span>{' '}
-                  Go
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Python">
-                    🐍
-                  </span>{' '}
-                  Python
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="n8n">
-                    🔁
-                  </span>{' '}
-                  n8n
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-medium text-gray-700">
-                  <span role="img" aria-label="Make">
-                    ⚙️
-                  </span>{' '}
-                  Make
-                </span>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Painpoint to Plan Flow */}
-        <div className="mb-2 sm:mb-4 lg:mb-6">
-          <div className="max-w-6xl mx-auto">
+        <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+          <div className="max-w-5xl mx-auto">
             {/* Input State */}
             {flowState === 'input' && (
               <div className="max-w-4xl mx-auto">
-                <div className="bg-white/90 backdrop-blur-sm border border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 text-left">
+                <div className="bg-white rounded-3xl border-2 border-gray-100 p-8 sm:p-10 shadow-2xl shadow-blue-500/10 space-y-8">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">
+                    <p className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-1">
                       {copy.calculator.title}
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid gap-4 sm:grid-cols-3">
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div className="grid gap-5 sm:grid-cols-3">
                       <div>
                         <label
                           htmlFor="hoursPerWeek"
-                          className="block text-sm font-semibold text-gray-800 mb-1"
+                          className="block text-sm font-bold text-gray-900 mb-2"
                         >
                           {copy.calculator.hoursLabel}
                         </label>
@@ -674,9 +647,9 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.hoursPlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 pr-16 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 pr-20 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
                           />
-                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500">
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-400">
                             {language === 'fr' ? 'h/sem.' : 'h/week'}
                           </span>
                         </div>
@@ -685,7 +658,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       <div>
                         <label
                           htmlFor="peopleCount"
-                          className="block text-sm font-semibold text-gray-800 mb-1"
+                          className="block text-sm font-bold text-gray-900 mb-2"
                         >
                           {copy.calculator.peopleLabel}
                         </label>
@@ -702,9 +675,9 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.peoplePlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
                           />
-                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500">
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-400">
                             {language === 'fr' ? 'pers.' : 'ppl'}
                           </span>
                         </div>
@@ -713,12 +686,12 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                       <div>
                         <label
                           htmlFor="monthlyCostPerPerson"
-                          className="block text-sm font-semibold text-gray-800 mb-1"
+                          className="block text-sm font-bold text-gray-900 mb-2"
                         >
                           {copy.calculator.salaryLabel}
                         </label>
                         <div className="relative">
-                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-500">
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-400">
                             {copy.calculator.currencySymbol}
                           </span>
                           <input
@@ -733,7 +706,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.salaryPlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 pl-10 pr-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                            className="w-full rounded-xl border-2 border-gray-200 pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
                           />
                         </div>
                       </div>
@@ -742,7 +715,7 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                     <div>
                       <label
                         htmlFor="processDescription"
-                        className="block text-sm font-semibold text-gray-800 mb-1"
+                        className="block text-sm font-bold text-gray-900 mb-2"
                       >
                         {copy.calculator.descriptionLabel}
                       </label>
@@ -755,17 +728,17 @@ export default function Hero({ calendarLink = 'https://cal.com/vincent-baron/30m
                           if (error) setError('');
                         }}
                         placeholder={copy.calculator.descriptionPlaceholder}
-                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-white shadow-sm"
+                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
                       />
                     </div>
 
-                    {error && <p className="text-red-600 text-sm animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-600 text-sm font-semibold animate-fade-in">{error}</p>}
 
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
                       <button
                         type="submit"
                         disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-bold shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105"
                       >
                         {copy.calculator.submitCta}
                         <svg
