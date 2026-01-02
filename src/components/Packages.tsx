@@ -183,14 +183,14 @@ export default function Packages() {
   };
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+    <section className="px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6">
             {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {language === 'fr' 
               ? 'Choisissez le forfait qui correspond à vos besoins et accélérez votre croissance' 
               : 'Choose the package that fits your needs and accelerate your growth'}
@@ -198,15 +198,15 @@ export default function Packages() {
         </div>
 
         {/* Packages Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
-              className="group relative"
+              className="group relative flex"
             >
               {/* Package Card */}
               <div
-                className={`relative overflow-hidden rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
+                className={`relative overflow-hidden rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
                     ? `border-transparent shadow-2xl scale-[1.02] ${pkg.color.bg}`
                     : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg'
@@ -214,14 +214,14 @@ export default function Packages() {
                 onClick={() => togglePackage(pkg.id)}
               >
                 {/* Gradient Header */}
-                <div className={`bg-gradient-to-br ${pkg.color.gradient} p-6 text-white relative`}>
+                <div className={`bg-gradient-to-br ${pkg.color.gradient} p-8 text-white relative`}>
                   {/* Dino Icon */}
-                  <div className="w-16 h-16 mb-4 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 shadow-xl overflow-hidden flex items-center justify-center p-2">
+                  <div className="w-20 h-20 mb-5 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 shadow-xl overflow-hidden flex items-center justify-center p-3">
                     <img src="/logoBrand.png" alt={pkg.name} className="w-full h-full object-contain" />
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-sm opacity-90">{pkg.subtitle}</p>
+                  <h3 className="text-2xl font-bold mb-3">{pkg.name}</h3>
+                  <p className="text-base opacity-90 leading-relaxed">{pkg.subtitle}</p>
 
                   {/* Expand/Collapse Icon */}
                   <div className="absolute top-6 right-6">
@@ -246,12 +246,12 @@ export default function Packages() {
                 </div>
 
                 {/* Price Badge */}
-                <div className="px-6 py-4 border-b border-gray-200">
-                  <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${pkg.color.bg}`}>
-                    <svg className={`w-5 h-5 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="px-8 py-5 border-b border-gray-200">
+                  <div className={`inline-flex items-center gap-3 px-5 py-3 rounded-xl ${pkg.color.bg}`}>
+                    <svg className={`w-6 h-6 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className={`font-bold ${pkg.color.text}`}>{pkg.price}</span>
+                    <span className={`font-bold text-lg ${pkg.color.text}`}>{pkg.price}</span>
                   </div>
                 </div>
 
@@ -261,7 +261,7 @@ export default function Packages() {
                     expandedId === pkg.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="p-6 space-y-6">
+                  <div className="p-8 space-y-6">
                     {/* Calculator for Cost Cutter Dino */}
                     {pkg.hasCalculator && expandedId === pkg.id ? (
                       <div className="space-y-6">
@@ -480,13 +480,13 @@ export default function Packages() {
 
                 {/* Collapsed Preview */}
                 {expandedId !== pkg.id && (
-                  <div className="p-6">
-                    <p className="text-gray-600 text-sm line-clamp-2">
+                  <div className="p-8 flex-grow flex flex-col">
+                    <p className="text-gray-600 text-base line-clamp-2 leading-relaxed flex-grow">
                       {pkg.description}
                     </p>
-                    <div className={`mt-4 text-sm font-medium ${pkg.color.text} flex items-center gap-1`}>
+                    <div className={`mt-5 text-base font-medium ${pkg.color.text} flex items-center gap-2`}>
                       <span>{language === 'fr' ? 'Cliquez pour en savoir plus' : 'Click to learn more'}</span>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>

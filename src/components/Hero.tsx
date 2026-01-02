@@ -173,11 +173,11 @@ const HERO_COPY: Record<Language, HeroCopy> = {
         quote:
           'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes. His focus on operational efficiency had a clear impact on how we delivered projects.',
         author: 'Holy Sicard-Razaka',
-        role: 'Head of Product @ Side',
+        role: 'Head of Product @ Randstad',
         image: '/holy.jpeg',
         alt: {
-          en: 'Holy Sicard-Razaka, Head of Product at Side',
-          fr: 'Holy Sicard-Razaka, Head of Product chez Side',
+          en: 'Holy Sicard-Razaka, Head of Product at Randstads',
+          fr: 'Holy Sicard-Razaka, Head of Product chez Randstads',
         },
       },
       {
@@ -586,7 +586,7 @@ export default function Hero({
                   </div>
                   {/* Count Badge */}
                   <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    {language === 'fr' ? '9 agents' : '9 agents'}
+                    {language === 'fr' ? 'Micro Agents' : 'Micro Agents'}
                   </span>
                 </div>
               </div>
@@ -639,56 +639,56 @@ export default function Hero({
   // If showing with testimonials, render intro + testimonials/companies but not calculator
   if (showWithTestimonials) {
     return (
-      <section className="px-4 sm:px-6 lg:px-8 py-0 pt-20 sm:pt-24">
+      <section className="px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           {/* Hero Content */}
-          <div className="flex flex-col gap-2 sm:gap-3 items-center mb-0">
+          <div className="flex flex-col gap-6 sm:gap-8 items-center mb-12 sm:mb-16">
             {/* Headline and Text */}
-            <div className="text-center flex flex-col gap-2 sm:gap-3">
+            <div className="text-center flex flex-col gap-6 sm:gap-8">
               {/* Agents Badge */}
-              <div className="flex items-center justify-center">
-                <div className="inline-flex items-center gap-4">
+              <div className="flex items-center justify-center mb-2">
+                <div className="inline-flex items-center gap-6">
                   {/* Avatar Stack */}
-                  <div className="flex -space-x-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                  <div className="flex -space-x-4">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
                       <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
                     </div>
                   </div>
                   {/* Count Badge */}
-                  <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    {language === 'fr' ? '9 agents' : '9 agents'}
+                  <span className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    {language === 'fr' ? 'Micro Agents' : 'Micro Agents'}
                   </span>
                 </div>
               </div>
               
               {/* Main Headline */}
               <h1 className="mb-0 pb-0">
-                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
+                <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line">
                   {copy.headline.primary}
                 </span>
               </h1>
 
               {/* CTA Button */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
                 <button
                   type="button"
                   onClick={handleBookCall}
-                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   <svg
                     className="w-5 h-5 transition-transform group-hover:rotate-12"
@@ -710,30 +710,30 @@ export default function Hero({
           </div>
 
           {/* Testimonials */}
-          <div className="mt-0 pt-0 text-center flex flex-col gap-1 sm:gap-2">
-            <p className="text-xs sm:text-sm text-gray-600 mb-0 font-medium">
+          <div className="text-center flex flex-col gap-6">
+            <p className="text-sm sm:text-base text-gray-600 font-medium">
               {copy.testimonialsTitle}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto">
               {copy.testimonials.map((testimonial) => (
                 <div
                   key={testimonial.author}
-                  className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left"
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-left hover:border-gray-200"
                 >
-                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                     {testimonial.quote}
                   </p>
-                  <div className="mt-4 flex items-center gap-3">
+                  <div className="mt-5 flex items-center gap-4">
                     <img
                       src={testimonial.image}
                       alt={testimonial.alt[language]}
-                      className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
+                      className="h-12 w-12 rounded-full object-cover border-2 border-gray-200 shadow-sm"
                     />
                     <div className="text-left">
-                      <p className="text-xs sm:text-sm font-semibold text-gray-900">
+                      <p className="text-sm font-semibold text-gray-900">
                         {testimonial.author}
                       </p>
-                      <p className="text-[11px] sm:text-xs text-gray-600">
+                      <p className="text-xs text-gray-600">
                         {testimonial.role}
                       </p>
                     </div>
@@ -744,35 +744,35 @@ export default function Hero({
           </div>
 
           {/* Stats and Companies Section */}
-          <div className="mt-0 sm:mt-1 lg:mt-2 flex flex-col lg:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8">
+          <div className="mt-12 sm:mt-16 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-4 items-center">
+            <div className="flex flex-wrap justify-center gap-8 items-center">
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   50+
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.projects}</p>
+                <p className="text-sm text-gray-600 mt-2">{copy.stats.projects}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   {language === 'fr' ? '2 semaines' : '2 Weeks'}
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.sprint}</p>
+                <p className="text-sm text-gray-600 mt-2">{copy.stats.sprint}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   4.9/5
                 </div>
-                <p className="text-xs text-gray-600 mt-1">{copy.stats.rating}</p>
+                <p className="text-sm text-gray-600 mt-2">{copy.stats.rating}</p>
               </div>
             </div>
 
             {/* Vertical Divider */}
-            <div className="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-60"></div>
+            <div className="hidden lg:block w-px h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
 
             {/* Companies */}
             <div className="text-center">
-              <p className="text-sm text-gray-600 font-medium mb-4">
+              <p className="text-base text-gray-600 font-medium mb-6">
                 {copy.companiesTitle}
               </p>
               <div className="flex items-center justify-center gap-6 md:gap-8">
@@ -856,7 +856,7 @@ export default function Hero({
                 </div>
                 {/* Count Badge */}
                 <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  {language === 'fr' ? '9 agents' : '9 agents'}
+                  {language === 'fr' ? 'Micro agents' : 'Micro agents'}
                 </span>
               </div>
             </div>

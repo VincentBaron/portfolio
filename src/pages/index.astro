@@ -9,28 +9,18 @@ import ImpactIntro from '../components/ImpactIntro';
 
 <BaseLayout>
   <!-- Home Section with Packages -->
-  <section id="home" class="pt-2 sm:pt-4 lg:pt-6 pb-0">
+  <section id="home" class="pt-16 sm:pt-20 lg:pt-24 pb-0">
     <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" showWithTestimonials={true} />
   </section>
 
   <!-- Packages Section -->
-  <section id="packages" class="py-0 scroll-mt-20">
+  <section id="packages" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
     <Packages client:load />
   </section>
 
     <!-- Work Section -->
-    <section id="work" class="py-0 scroll-mt-20">
+    <section id="work" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
       <CaseStudiesGrid client:load />
-    </section>
-
-    <!-- Impact Section -->
-    <section id="impact" class="py-0 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-      <div class="max-w-6xl mx-auto">
-        <ImpactIntro client:load />
-
-        <!-- Partner Organizations -->
-        <PartnerOrganizations client:load />
-      </div>
     </section>
 </BaseLayout>
 
