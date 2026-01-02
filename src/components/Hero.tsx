@@ -560,6 +560,13 @@ export default function Hero({
           <div className="flex flex-col gap-2 sm:gap-3 items-center">
             {/* Headline and Text */}
             <div className="text-center flex flex-col gap-2 sm:gap-3">
+              {/* Badge */}
+              <div className="flex justify-center mb-2 mt-4 sm:mt-6">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                  Process Optimisation
+                </span>
+              </div>
+              
               {/* Main Headline */}
               <h1 className="mb-0 pb-0">
                 <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
@@ -614,6 +621,13 @@ export default function Hero({
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-12 sm:mb-16">
             {/* Headline and Text */}
             <div className="text-center flex flex-col gap-6 sm:gap-8">
+              {/* Badge */}
+              <div className="flex justify-center mb-2 mt-4 sm:mt-6">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                  Process Optimisation
+                </span>
+              </div>
+              
               {/* Main Headline */}
               <h1 className="mb-0 pb-0">
                 <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line">
@@ -768,6 +782,13 @@ export default function Hero({
         <div className="flex flex-col gap-2 sm:gap-3 items-center mb-0">
           {/* Headline and Text */}
           <div className="text-center flex flex-col gap-2 sm:gap-3">
+            {/* Badge */}
+            <div className="flex justify-center mb-2 mt-4 sm:mt-6">
+              <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                Process Optimisation
+              </span>
+            </div>
+            
             {/* Main Headline */}
             <h1 className="mb-0 pb-0">
               <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line tracking-tight">

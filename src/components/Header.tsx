@@ -210,12 +210,12 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
       {renderLanguageSelector('desktop', 'absolute top-2 right-4 z-50')}
       {renderLanguageSelector('mobile', 'absolute top-2 right-4 z-50')}
       <nav
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
+        <div className="flex items-center justify-center h-16 sm:h-20">
+          {/* Logo - Absolute positioned on the left */}
+          <div className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2">
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
@@ -225,12 +225,13 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               <img 
                 src="/logoBrand.png" 
                 alt="2 Weeks to Solve It Logo" 
-                className="h-14 sm:h-20 w-auto transform group-hover:scale-105 transition-transform"
+                className="h-12 sm:h-16 w-auto transform group-hover:scale-105 transition-transform"
               />
             </a>
           </div>
 
-          <div className="flex flex-1 items-center justify-center gap-3">
+          {/* Centered Navigation Container */}
+          <div className="flex items-center justify-center gap-3">
             {/* Desktop Navigation */}
             <div className="hidden md:flex md:items-center md:space-x-1">
               {navLinks.map((link) => {
