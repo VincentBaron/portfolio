@@ -554,14 +554,14 @@ export default function Hero({
   // If showing only intro, render just the headline and CTA
   if (showOnlyIntro) {
     return (
-      <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <section className="px-4 sm:px-6 lg:px-8 py-0 pt-20 sm:pt-24">
         <div className="max-w-7xl mx-auto w-full">
           {/* Hero Content */}
-          <div className="grid lg:grid-cols-1 gap-8 sm:gap-10 lg:gap-16 items-center">
+          <div className="flex flex-col gap-2 sm:gap-3 items-center">
             {/* Headline and Text */}
-            <div className="text-center">
+            <div className="text-center flex flex-col gap-2 sm:gap-3">
               {/* Agents Badge */}
-              <div className="mb-6 sm:mb-8 flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <div className="inline-flex items-center gap-4">
                   {/* Avatar Stack */}
                   <div className="flex -space-x-3">
@@ -592,14 +592,14 @@ export default function Hero({
               </div>
               
               {/* Main Headline */}
-              <h1 className="mb-6 sm:mb-8 pb-2">
+              <h1 className="mb-0 pb-0">
                 <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
                   {copy.headline.primary}
                 </span>
               </h1>
 
               {/* CTA Button */}
-              <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <button
                   type="button"
                   onClick={handleBookCall}
@@ -639,14 +639,14 @@ export default function Hero({
   // If showing with testimonials, render intro + testimonials/companies but not calculator
   if (showWithTestimonials) {
     return (
-      <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <section className="px-4 sm:px-6 lg:px-8 py-0 pt-20 sm:pt-24">
         <div className="max-w-7xl mx-auto w-full">
           {/* Hero Content */}
-          <div className="grid lg:grid-cols-1 gap-8 sm:gap-10 lg:gap-16 items-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="flex flex-col gap-2 sm:gap-3 items-center mb-0">
             {/* Headline and Text */}
-            <div className="text-center">
+            <div className="text-center flex flex-col gap-2 sm:gap-3">
               {/* Agents Badge */}
-              <div className="mb-6 sm:mb-8 flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <div className="inline-flex items-center gap-4">
                   {/* Avatar Stack */}
                   <div className="flex -space-x-3">
@@ -677,14 +677,14 @@ export default function Hero({
               </div>
               
               {/* Main Headline */}
-              <h1 className="mb-6 sm:mb-8 pb-2">
+              <h1 className="mb-0 pb-0">
                 <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
                   {copy.headline.primary}
                 </span>
               </h1>
 
               {/* CTA Button */}
-              <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <button
                   type="button"
                   onClick={handleBookCall}
@@ -710,11 +710,11 @@ export default function Hero({
           </div>
 
           {/* Testimonials */}
-          <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
-            <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">
+          <div className="mt-0 pt-0 text-center flex flex-col gap-1 sm:gap-2">
+            <p className="text-xs sm:text-sm text-gray-600 mb-0 font-medium">
               {copy.testimonialsTitle}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 mx-auto">
               {copy.testimonials.map((testimonial) => (
                 <div
                   key={testimonial.author}
@@ -744,9 +744,9 @@ export default function Hero({
           </div>
 
           {/* Stats and Companies Section */}
-          <div className="mt-2 sm:mt-4 lg:mt-6 flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-8 xl:gap-12">
+          <div className="mt-0 sm:mt-1 lg:mt-2 flex flex-col lg:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8">
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-6 items-center">
+            <div className="flex flex-wrap justify-center gap-4 items-center">
               <div className="flex flex-col items-center">
                 <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   50+
@@ -822,16 +822,16 @@ export default function Hero({
   const showIntroSection = !showOnlyCalculator;
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+    <section className="px-4 sm:px-6 lg:px-8 py-0 pt-20 sm:pt-24">
       <div className="max-w-7xl mx-auto w-full">
         {showIntroSection && (
           <>
         {/* Hero Content */}
-        <div className="grid lg:grid-cols-1 gap-8 sm:gap-10 lg:gap-16 items-center mb-12 sm:mb-16 lg:mb-20">
+        <div className="flex flex-col gap-2 sm:gap-3 items-center mb-0">
           {/* Headline and Text */}
-          <div className="text-center">
+          <div className="text-center flex flex-col gap-2 sm:gap-3">
             {/* Agents Badge */}
-            <div className="mb-6 sm:mb-8 flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <div className="inline-flex items-center gap-4">
                 {/* Avatar Stack */}
                 <div className="flex -space-x-3">
@@ -862,14 +862,14 @@ export default function Hero({
             </div>
             
             {/* Main Headline */}
-            <h1 className="mb-6 sm:mb-8 pb-2">
+            <h1 className="mb-0 pb-0">
               <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
                 {copy.headline.primary}
               </span>
             </h1>
 
             {/* CTA Button */}
-            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
               <button
                 type="button"
                 onClick={handleBookCall}
@@ -898,7 +898,7 @@ export default function Hero({
 
         {/* Painpoint to Plan Flow */}
         {!showOnlyIntro && (
-        <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+        <div className="mb-0 mt-2 sm:mt-3">
           <div className="max-w-5xl mx-auto">
             {/* Input State */}
             {flowState === 'input' && (
@@ -1394,103 +1394,6 @@ export default function Hero({
                 </div>
               </div>
             )}
-
-            {/* Testimonials */}
-            <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 text-center">
-              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 font-medium">
-                {copy.testimonialsTitle}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mx-auto">
-                {copy.testimonials.map((testimonial) => (
-                  <div
-                    key={testimonial.author}
-                    className="bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-200 text-left"
-                  >
-                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                      {testimonial.quote}
-                    </p>
-                    <div className="mt-4 flex items-center gap-3">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.alt[language]}
-                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover border border-white shadow"
-                      />
-                      <div className="text-left">
-                        <p className="text-xs sm:text-sm font-semibold text-gray-900">
-                          {testimonial.author}
-                        </p>
-                        <p className="text-[11px] sm:text-xs text-gray-600">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats and Companies Section */}
-            <div className="mt-2 sm:mt-4 lg:mt-6 flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-8 xl:gap-12">
-              {/* Stats */}
-              <div className="flex flex-wrap justify-center gap-6 items-center">
-                <div className="flex flex-col items-center">
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    50+
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">{copy.stats.projects}</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    {language === 'fr' ? '2 semaines' : '2 Weeks'}
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">{copy.stats.sprint}</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    4.9/5
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">{copy.stats.rating}</p>
-                </div>
-              </div>
-
-              {/* Vertical Divider */}
-              <div className="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent opacity-60"></div>
-
-              {/* Companies */}
-              <div className="text-center">
-                <p className="text-sm text-gray-600 font-medium mb-4">
-                  {copy.companiesTitle}
-                </p>
-                <div className="flex items-center justify-center gap-6 md:gap-8">
-                  {/* Qomon Logo */}
-                  <div className="group transition-all duration-300 hover:scale-105">
-                    <img
-                      src="/qomonLogo.png"
-                      alt="Qomon"
-                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                    />
-                  </div>
-
-                  {/* Side Logo */}
-                  <div className="group transition-all duration-300 hover:scale-105">
-                    <img
-                      src="/sideLogo.png"
-                      alt="Side"
-                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                    />
-                  </div>
-
-                  {/* Mitsubishi Logo */}
-                  <div className="group transition-all duration-300 hover:scale-105">
-                    <img
-                      src="/mitsubishi.avif"
-                      alt="Mitsubishi"
-                      className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         )}

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useLanguage } from '../lib/language';
 
+const EMPLOYER_CHARGE_RATE = 0.44;
+const EMPLOYER_CHARGE_PERCENT = Math.round(EMPLOYER_CHARGE_RATE * 100);
+const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
+
 interface Package {
   id: number;
   name: string;
@@ -13,6 +17,7 @@ interface Package {
     bg: string;
     text: string;
   };
+  hasCalculator?: boolean;
 }
 
 const packages: Package[] = [
@@ -35,6 +40,24 @@ const packages: Package[] = [
   },
   {
     id: 2,
+    name: 'Cost Cutter Dino',
+    subtitle: 'The "ROI Calculator" Tool',
+    description: 'Calculate the real cost of your manual back-office processes. This interactive tool helps you quantify the hidden expenses in repetitive tasks—from time-tracking validation to invoice processing. Perfect for identifying where automation can deliver immediate ROI.',
+    outputs: [
+      'Instant Cost Analysis: See monthly and annual costs of manual processes.',
+      'Full Breakdown: Includes gross salary + employer charges (44%).',
+      'Custom Report: Get a detailed audit and implementation recommendations via email.'
+    ],
+    price: 'Free Tool',
+    color: {
+      gradient: 'from-orange-400 to-orange-600',
+      bg: 'bg-orange-50',
+      text: 'text-orange-600'
+    },
+    hasCalculator: true
+  },
+  {
+    id: 3,
     name: 'Reverse Sourcing Dino',
     subtitle: 'The "Market Intelligence" Agent',
     description: 'An AI-powered agent designed for aggressive growth. This tool scans competitor job listings and uses advanced logic to identify the end clients behind the postings. It moves you from a reactive to a proactive sales posture.',
@@ -50,7 +73,7 @@ const packages: Package[] = [
     }
   },
   {
-    id: 3,
+    id: 4,
     name: 'Protective Dino',
     subtitle: 'The "Process Security" Audit',
     description: 'Defensive AI for your intellectual property. We analyze your existing job listings to see if they are vulnerable to the same reverse-sourcing techniques used by competitors. This ensures your hard-earned client relationships stay protected.',
@@ -66,7 +89,7 @@ const packages: Package[] = [
     }
   },
   {
-    id: 4,
+    id: 5,
     name: 'Sprint Dino',
     subtitle: 'The "Custom Builder" Package',
     description: 'Focused, high-impact implementation for agencies ready to scale. Whether you need to integrate messy tools or build custom AI agents, we deliver production-ready code using a modern stack (React, TypeScript, Golang, Python). This is for Level 2 or 3 agencies needing specific, heavy-lifting solutions.',
@@ -82,7 +105,7 @@ const packages: Package[] = [
     }
   },
   {
-    id: 5,
+    id: 6,
     name: 'Fractional Dino',
     subtitle: 'The "Embedded Operator" Package',
     description: 'Ongoing operational excellence. You get a fractional COO to continuously optimize your systems, automate repetitive tasks, and elevate how your team operates. We think like operators, not just tool-pushers, ensuring your tech evolves with your business.',
@@ -104,8 +127,59 @@ export default function Packages() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const { language } = useLanguage();
 
+  // Calculator state
+  const [hoursPerWeek, setHoursPerWeek] = useState('');
+  const [peopleCount, setPeopleCount] = useState('');
+  const [monthlyCostPerPerson, setMonthlyCostPerPerson] = useState('');
+  const [processDescription, setProcessDescription] = useState('');
+  const [calculatedMonthlyCost, setCalculatedMonthlyCost] = useState<number | null>(null);
+  const [calculatedAnnualCost, setCalculatedAnnualCost] = useState<number | null>(null);
+  const [error, setError] = useState('');
+
   const togglePackage = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
+    // Reset calculator when closing
+    if (expandedId === id) {
+      setHoursPerWeek('');
+      setPeopleCount('');
+      setMonthlyCostPerPerson('');
+      setProcessDescription('');
+      setCalculatedMonthlyCost(null);
+      setCalculatedAnnualCost(null);
+      setError('');
+    }
+  };
+
+  const handleCalculatorSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const hours = parseFloat(hoursPerWeek);
+    const people = Math.round(parseFloat(peopleCount));
+    const grossSalary = parseFloat(monthlyCostPerPerson);
+
+    if (!Number.isFinite(hours) || !Number.isFinite(people) || !Number.isFinite(grossSalary)) {
+      setError(language === 'fr' ? 'Merci de remplir tous les champs.' : 'Please fill in all fields.');
+      return;
+    }
+    if (hours <= 0 || people <= 0 || grossSalary <= 0) {
+      setError(language === 'fr' ? 'Les valeurs doivent être positives.' : 'Values must be positive.');
+      return;
+    }
+
+    const monthlyEmployerCostPerPerson = grossSalary * EMPLOYER_MULTIPLIER;
+    const monthlyCost = monthlyEmployerCostPerPerson * (hours / 40) * people;
+    const annualCost = monthlyCost * 12;
+
+    setError('');
+    setCalculatedMonthlyCost(monthlyCost);
+    setCalculatedAnnualCost(annualCost);
+  };
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'en-US', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumFractionDigits: 0,
+    }).format(Math.round(value));
   };
 
   return (
@@ -184,56 +258,223 @@ export default function Packages() {
                 {/* Expandable Content */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    expandedId === pkg.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                    expandedId === pkg.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="p-6 space-y-6">
-                    {/* Description */}
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        {language === 'fr' ? 'Description' : 'Description'}
-                      </h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {pkg.description}
-                      </p>
-                    </div>
+                    {/* Calculator for Cost Cutter Dino */}
+                    {pkg.hasCalculator && expandedId === pkg.id ? (
+                      <div className="space-y-6">
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-2">
+                            {language === 'fr' ? 'Calculez votre coût' : 'Calculate Your Cost'}
+                          </h4>
+                          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                            {pkg.description}
+                          </p>
+                        </div>
 
-                    {/* Outputs */}
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">
-                        {language === 'fr' ? 'Livrables' : 'Output'}
-                      </h4>
-                      <ul className="space-y-2">
-                        {pkg.outputs.map((output, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
-                            <svg
-                              className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
+                        <form onSubmit={handleCalculatorSubmit} className="space-y-4">
+                          <div className="grid gap-4 sm:grid-cols-3">
+                            <div>
+                              <label htmlFor="hours" className="block text-sm font-semibold text-gray-700 mb-1">
+                                {language === 'fr' ? 'Heures/semaine' : 'Hours/week'}
+                              </label>
+                              <input
+                                id="hours"
+                                type="number"
+                                min="0"
+                                step="0.5"
+                                value={hoursPerWeek}
+                                onChange={(e) => {
+                                  setHoursPerWeek(e.target.value);
+                                  setError('');
+                                }}
+                                placeholder={language === 'fr' ? 'ex. 6' : 'e.g. 6'}
+                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                               />
-                            </svg>
-                            <span>{output}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                            </div>
 
-                    {/* CTA Button */}
-                    <button
-                      className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        // Add your contact/booking logic here
-                        window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
-                      }}
-                    >
-                      {language === 'fr' ? 'Réserver un appel' : 'Book a Call'}
-                    </button>
+                            <div>
+                              <label htmlFor="people" className="block text-sm font-semibold text-gray-700 mb-1">
+                                {language === 'fr' ? 'Personnes' : 'People'}
+                              </label>
+                              <input
+                                id="people"
+                                type="number"
+                                min="1"
+                                step="1"
+                                value={peopleCount}
+                                onChange={(e) => {
+                                  setPeopleCount(e.target.value);
+                                  setError('');
+                                }}
+                                placeholder={language === 'fr' ? 'ex. 3' : 'e.g. 3'}
+                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              />
+                            </div>
+
+                            <div>
+                              <label htmlFor="salary" className="block text-sm font-semibold text-gray-700 mb-1">
+                                {language === 'fr' ? 'Salaire brut/mois (€)' : 'Gross salary/mo (€)'}
+                              </label>
+                              <input
+                                id="salary"
+                                type="number"
+                                min="0"
+                                step="any"
+                                value={monthlyCostPerPerson}
+                                onChange={(e) => {
+                                  setMonthlyCostPerPerson(e.target.value);
+                                  setError('');
+                                }}
+                                placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
+                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-1">
+                              {language === 'fr' ? 'Description du processus' : 'Process description'}
+                            </label>
+                            <input
+                              id="description"
+                              type="text"
+                              value={processDescription}
+                              onChange={(e) => setProcessDescription(e.target.value)}
+                              placeholder={language === 'fr' ? 'ex. Validation des heures' : 'e.g. Time-tracking validation'}
+                              className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                            />
+                          </div>
+
+                          {error && <p className="text-red-600 text-sm font-semibold">{error}</p>}
+
+                          <button
+                            type="submit"
+                            disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
+                            className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100`}
+                          >
+                            {language === 'fr' ? 'Calculer le coût' : 'Calculate Cost'}
+                          </button>
+                        </form>
+
+                        {calculatedMonthlyCost !== null && calculatedAnnualCost !== null && (
+                          <div className={`${pkg.color.bg} border-2 border-${pkg.color.text.replace('text-', '')} rounded-lg p-4 space-y-3`}>
+                            <h5 className={`font-bold ${pkg.color.text} text-sm uppercase tracking-wide`}>
+                              {language === 'fr' ? 'Coût estimé' : 'Estimated Cost'}
+                            </h5>
+                            <div className="grid gap-3 sm:grid-cols-2">
+                              <div className="bg-white/80 rounded-lg p-3">
+                                <p className="text-xs text-gray-600 font-semibold mb-1">
+                                  {language === 'fr' ? 'Par mois' : 'Monthly'}
+                                </p>
+                                <p className={`text-2xl font-bold ${pkg.color.text}`}>
+                                  {formatCurrency(calculatedMonthlyCost)}
+                                </p>
+                              </div>
+                              <div className="bg-white/80 rounded-lg p-3">
+                                <p className="text-xs text-gray-600 font-semibold mb-1">
+                                  {language === 'fr' ? 'Par an' : 'Annually'}
+                                </p>
+                                <p className={`text-2xl font-bold ${pkg.color.text}`}>
+                                  {formatCurrency(calculatedAnnualCost)}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-xs text-gray-600 italic">
+                              {language === 'fr' 
+                                ? `Hypothèse : 40h/semaine + ${EMPLOYER_CHARGE_PERCENT}% de charges patronales`
+                                : `Assumes 40h/week + ${EMPLOYER_CHARGE_PERCENT}% employer charges`}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Outputs */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3">
+                            {language === 'fr' ? 'Ce que vous obtenez' : 'What You Get'}
+                          </h4>
+                          <ul className="space-y-2">
+                            {pkg.outputs.map((output, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                                <svg
+                                  className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <span>{output}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* CTA Button */}
+                        <button
+                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
+                          }}
+                        >
+                          {language === 'fr' ? 'Discuter de mes résultats' : 'Discuss My Results'}
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Description */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-2">
+                            {language === 'fr' ? 'Description' : 'Description'}
+                          </h4>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {pkg.description}
+                          </p>
+                        </div>
+
+                        {/* Outputs */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3">
+                            {language === 'fr' ? 'Livrables' : 'Output'}
+                          </h4>
+                          <ul className="space-y-2">
+                            {pkg.outputs.map((output, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                                <svg
+                                  className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <span>{output}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* CTA Button */}
+                        <button
+                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
+                          }}
+                        >
+                          {language === 'fr' ? 'Réserver un appel' : 'Book a Call'}
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
 
