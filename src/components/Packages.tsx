@@ -8,7 +8,6 @@ const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
 interface Package {
   id: number;
   name: string;
-  subtitle: string;
   description: string;
   outputs: string[];
   price: string;
@@ -24,7 +23,6 @@ const packages: Package[] = [
   {
     id: 1,
     name: 'Audit Dino',
-    subtitle: 'The "Where do I start?" Package',
     description: 'A comprehensive deep dive into your agency\'s current state. We map your entire operational structure, tool stack, and team workflows to identify the exact bottlenecks causing "tool fatigue". This is designed for leaders who feel overwhelmed by multiple tools (ATS, CRM, spreadsheets) and lack a clear operational system.',
     outputs: [
       'Operational Map: A visual breakdown of your current friction points.',
@@ -41,7 +39,6 @@ const packages: Package[] = [
   {
     id: 2,
     name: 'Cost Cutter Dino',
-    subtitle: 'The "ROI Calculator" Tool',
     description: 'Calculate the real cost of your manual back-office processes. This interactive tool helps you quantify the hidden expenses in repetitive tasks—from time-tracking validation to invoice processing. Perfect for identifying where automation can deliver immediate ROI.',
     outputs: [
       'Instant Cost Analysis: See monthly and annual costs of manual processes.',
@@ -58,14 +55,13 @@ const packages: Package[] = [
   },
   {
     id: 3,
-    name: 'Reverse Sourcing Dino',
-    subtitle: 'The "Market Intelligence" Agent',
+    name: 'Offensive Dino',
     description: 'An AI-powered agent designed for aggressive growth. This tool scans competitor job listings and uses advanced logic to identify the end clients behind the postings. It moves you from a reactive to a proactive sales posture.',
     outputs: [
       'Lead Generation Engine: Automated identification of target accounts currently hiring.',
       'Competitor Insights: Real-time data on where your competitors are winning business.'
     ],
-    price: 'Contact for Custom Pricing',
+    price: 'Custom Pricing',
     color: {
       gradient: 'from-purple-400 to-purple-600',
       bg: 'bg-purple-50',
@@ -75,13 +71,12 @@ const packages: Package[] = [
   {
     id: 4,
     name: 'Protective Dino',
-    subtitle: 'The "Process Security" Audit',
     description: 'Defensive AI for your intellectual property. We analyze your existing job listings to see if they are vulnerable to the same reverse-sourcing techniques used by competitors. This ensures your hard-earned client relationships stay protected.',
     outputs: [
       'Vulnerability Report: Analysis of which listings reveal too much client data.',
       'Optimization Playbook: Guidelines for writing listings that attract talent without leaking client identities.'
     ],
-    price: 'Contact for Custom Pricing',
+    price: 'Custom Pricing',
     color: {
       gradient: 'from-indigo-400 to-indigo-600',
       bg: 'bg-indigo-50',
@@ -91,7 +86,6 @@ const packages: Package[] = [
   {
     id: 5,
     name: 'Sprint Dino',
-    subtitle: 'The "Custom Builder" Package',
     description: 'Focused, high-impact implementation for agencies ready to scale. Whether you need to integrate messy tools or build custom AI agents, we deliver production-ready code using a modern stack (React, TypeScript, Golang, Python). This is for Level 2 or 3 agencies needing specific, heavy-lifting solutions.',
     outputs: [
       'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
@@ -107,7 +101,6 @@ const packages: Package[] = [
   {
     id: 6,
     name: 'Fractional Dino',
-    subtitle: 'The "Embedded Operator" Package',
     description: 'Ongoing operational excellence. You get a fractional COO to continuously optimize your systems, automate repetitive tasks, and elevate how your team operates. We think like operators, not just tool-pushers, ensuring your tech evolves with your business.',
     outputs: [
       'Monthly Optimization: Continuous refinement of workflows and AI agents.',
@@ -198,7 +191,7 @@ export default function Packages() {
         </div>
 
         {/* Packages Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-start">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
@@ -208,40 +201,19 @@ export default function Packages() {
               <div
                 className={`relative overflow-hidden rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
-                    ? `border-transparent shadow-2xl scale-[1.02] ${pkg.color.bg}`
-                    : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg'
+                    ? `border-transparent shadow-2xl ${pkg.color.bg}`
+                    : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg h-full'
                 }`}
                 onClick={() => togglePackage(pkg.id)}
               >
                 {/* Gradient Header */}
                 <div className={`bg-gradient-to-br ${pkg.color.gradient} p-8 text-white relative`}>
-                  {/* Dino Icon */}
-                  <div className="w-20 h-20 mb-5 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 shadow-xl overflow-hidden flex items-center justify-center p-3">
-                    <img src="/logoBrand.png" alt={pkg.name} className="w-full h-full object-contain" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-3">{pkg.name}</h3>
-                  <p className="text-base opacity-90 leading-relaxed">{pkg.subtitle}</p>
-
-                  {/* Expand/Collapse Icon */}
-                  <div className="absolute top-6 right-6">
-                    <div className={`w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 ${
-                      expandedId === pkg.id ? 'rotate-45' : ''
-                    }`}>
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 4v16m8-8H4"
-                        />
-                      </svg>
+                  {/* Dino Icon and Title - Horizontally Aligned */}
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 shadow-xl overflow-hidden flex items-center justify-center p-3 flex-shrink-0">
+                      <img src="/logoBrand.png" alt={pkg.name} className="w-full h-full object-contain" />
                     </div>
+                    <h3 className="text-2xl font-bold">{pkg.name}</h3>
                   </div>
                 </div>
 
