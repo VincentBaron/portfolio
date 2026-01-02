@@ -1,15 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
+import Packages from '../components/Packages';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
 import PartnerOrganizations from '../components/PartnerOrganizations';
 import ImpactIntro from '../components/ImpactIntro';
 ---
 
 <BaseLayout>
-  <!-- Home Section -->
-  <section id="home" class="pt-12 sm:pt-16 lg:pt-20 min-h-[60vh] lg:min-h-[70vh] xl:min-h-[80vh] pb-6 sm:pb-8">
-    <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" />
+  <!-- Home Section with Packages -->
+  <section id="home" class="pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8">
+    <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" showWithTestimonials={true} />
+  </section>
+
+  <!-- Packages Section -->
+  <section id="packages" class="py-6 sm:py-8 lg:py-12 scroll-mt-20">
+    <Packages client:load />
+  </section>
+
+  <!-- Calculator Section -->
+  <section id="calculator" class="py-6 sm:py-8 lg:py-12 scroll-mt-20">
+    <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" showOnlyCalculator={true} />
   </section>
 
     <!-- Work Section -->
