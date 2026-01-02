@@ -240,7 +240,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                    className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                       isCurrent
                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
                         : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
@@ -257,7 +257,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             <div className="hidden md:block">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200"
               >
                 {copy.bookCall}
               </button>
@@ -328,7 +328,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                className={`block px-4 py-3 rounded-lg text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   isCurrent
                     ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
                     : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
@@ -345,7 +345,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 setIsMobileMenuOpen(false);
                 setIsModalOpen(true);
               }}
-              className="block w-full text-center px-5 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-lg shadow-blue-500/30 transition-all duration-200"
+              className="block w-full text-center px-5 py-3 rounded-lg text-base font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200"
             >
               {copy.bookCall}
             </button>

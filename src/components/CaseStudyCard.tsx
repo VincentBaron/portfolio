@@ -18,7 +18,7 @@ export default function CaseStudyCard({
   return (
     <a
       href={`/work/${slug}`}
-      className="group block bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+      className="group block bg-white rounded-2xl overflow-hidden border-4 border-gray-900 hover:border-blue-600 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
       aria-label={`${readLabel}: ${title}`}
     >
       {/* Thumbnail */}
@@ -57,7 +57,7 @@ export default function CaseStudyCard({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-md"
+                className="inline-block px-2 py-1 text-xs font-bold uppercase tracking-wide bg-blue-100 text-blue-700 rounded-md border-2 border-gray-900"
               >
                 {tag}
               </span>
@@ -66,23 +66,23 @@ export default function CaseStudyCard({
         )}
 
         {/* Title */}
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors tracking-tight">
           {title}
         </h3>
 
         {/* Summary */}
-        <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4 line-clamp-3">
+        <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3 sm:mb-4 line-clamp-3 font-medium">
           {summary}
         </p>
 
         {/* Read More Link */}
-        <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
+        <div className="flex items-center text-blue-600 font-black group-hover:text-blue-700 uppercase tracking-wide text-sm">
           <span>{readLabel}</span>
           <svg
             className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="2"
+            strokeWidth="2.5"
             stroke="currentColor"
           >
             <path

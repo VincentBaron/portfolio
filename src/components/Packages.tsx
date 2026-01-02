@@ -180,10 +180,10 @@ export default function Packages() {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 uppercase tracking-tight">
             {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
             {language === 'fr' 
               ? 'Choisissez le forfait qui correspond à vos besoins et accélérez votre croissance' 
               : 'Choose the package that fits your needs and accelerate your growth'}
@@ -199,31 +199,50 @@ export default function Packages() {
             >
               {/* Package Card */}
               <div
-                className={`relative overflow-hidden rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col w-full ${
+                className={`relative overflow-hidden rounded-3xl transition-all duration-500 cursor-pointer flex flex-col w-full transform hover:scale-[1.02] ${
                   expandedId === pkg.id
-                    ? `border-transparent shadow-2xl ${pkg.color.bg}`
-                    : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg h-full'
+                    ? `shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] ${pkg.color.bg} border-4 border-gray-900`
+                    : 'border-4 border-gray-900 bg-white hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.3)] h-full'
                 }`}
                 onClick={() => togglePackage(pkg.id)}
               >
-                {/* Gradient Header */}
-                <div className={`bg-gradient-to-br ${pkg.color.gradient} p-8 text-white relative`}>
-                  {/* Dino Icon and Title - Horizontally Aligned */}
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 shadow-xl overflow-hidden flex items-center justify-center p-3 flex-shrink-0">
-                      <img src="/logoBrand.png" alt={pkg.name} className="w-full h-full object-contain" />
-                    </div>
-                    <h3 className="text-2xl font-bold">{pkg.name}</h3>
-                  </div>
+                {/* Geometric Background Pattern */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-gray-900 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-gray-900 to-transparent rounded-full blur-2xl"></div>
                 </div>
 
-                {/* Price Badge */}
-                <div className="px-8 py-5 border-b border-gray-200">
-                  <div className={`inline-flex items-center gap-3 px-5 py-3 rounded-xl ${pkg.color.bg}`}>
+                {/* Gradient Header with Edgy Design */}
+                <div className={`bg-gradient-to-br ${pkg.color.gradient} p-8 text-white relative overflow-hidden`}>
+                  {/* Abstract Geometric Shapes */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute -top-12 -right-12 w-32 h-32 border-4 border-white/10 rotate-45 rounded-xl"></div>
+                    <div className="absolute -bottom-8 -left-8 w-24 h-24 border-4 border-white/10 rotate-12 rounded-lg"></div>
+                    <div className="absolute top-1/2 right-4 w-16 h-16 bg-white/5 rotate-45 rounded-lg"></div>
+                  </div>
+
+                  {/* Dino Icon and Title - Horizontally Aligned */}
+                  <div className="flex items-center gap-4 mb-3 relative z-10">
+                    <div className="w-16 h-16 rounded-2xl bg-black/30 backdrop-blur-md border-2 border-white/40 shadow-2xl overflow-hidden flex items-center justify-center p-3 flex-shrink-0 transform rotate-3 group-hover:rotate-6 transition-transform duration-300">
+                      <img src="/logoBrand.png" alt={pkg.name} className="w-full h-full object-contain transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300" />
+                    </div>
+                    <h3 className="text-2xl font-bold tracking-tight drop-shadow-lg">{pkg.name}</h3>
+                  </div>
+
+                  {/* Diagonal Accent Line */}
+                  <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-white/50"></div>
+                </div>
+
+                {/* Price Badge with Edgy Design */}
+                <div className="px-8 py-5 border-b-2 border-gray-900 relative">
+                  {/* Corner Accent */}
+                  <div className="absolute top-0 left-0 w-3 h-3 bg-gray-900 transform rotate-45 -translate-x-1.5 -translate-y-1.5"></div>
+                  
+                  <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-xl ${pkg.color.bg} border-2 border-gray-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]`}>
                     <svg className={`w-6 h-6 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className={`font-bold text-lg ${pkg.color.text}`}>{pkg.price}</span>
+                    <span className={`font-black text-lg tracking-wide ${pkg.color.text}`}>{pkg.price}</span>
                   </div>
                 </div>
 
@@ -238,7 +257,7 @@ export default function Packages() {
                     {pkg.hasCalculator && expandedId === pkg.id ? (
                       <div className="space-y-6">
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-2">
+                          <h4 className="font-black text-gray-900 mb-2 uppercase tracking-wide text-sm">
                             {language === 'fr' ? 'Calculez votre coût' : 'Calculate Your Cost'}
                           </h4>
                           <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -249,7 +268,7 @@ export default function Packages() {
                         <form onSubmit={handleCalculatorSubmit} className="space-y-4">
                           <div className="grid gap-4 sm:grid-cols-3">
                             <div>
-                              <label htmlFor="hours" className="block text-sm font-semibold text-gray-700 mb-1">
+                              <label htmlFor="hours" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
                                 {language === 'fr' ? 'Heures/semaine' : 'Hours/week'}
                               </label>
                               <input
@@ -263,12 +282,12 @@ export default function Packages() {
                                   setError('');
                                 }}
                                 placeholder={language === 'fr' ? 'ex. 6' : 'e.g. 6'}
-                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                               />
                             </div>
 
                             <div>
-                              <label htmlFor="people" className="block text-sm font-semibold text-gray-700 mb-1">
+                              <label htmlFor="people" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
                                 {language === 'fr' ? 'Personnes' : 'People'}
                               </label>
                               <input
@@ -282,12 +301,12 @@ export default function Packages() {
                                   setError('');
                                 }}
                                 placeholder={language === 'fr' ? 'ex. 3' : 'e.g. 3'}
-                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                               />
                             </div>
 
                             <div>
-                              <label htmlFor="salary" className="block text-sm font-semibold text-gray-700 mb-1">
+                              <label htmlFor="salary" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
                                 {language === 'fr' ? 'Salaire brut/mois (€)' : 'Gross salary/mo (€)'}
                               </label>
                               <input
@@ -301,13 +320,13 @@ export default function Packages() {
                                   setError('');
                                 }}
                                 placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
-                                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                               />
                             </div>
                           </div>
 
                           <div>
-                            <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-1">
+                            <label htmlFor="description" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
                               {language === 'fr' ? 'Description du processus' : 'Process description'}
                             </label>
                             <input
@@ -316,7 +335,7 @@ export default function Packages() {
                               value={processDescription}
                               onChange={(e) => setProcessDescription(e.target.value)}
                               placeholder={language === 'fr' ? 'ex. Validation des heures' : 'e.g. Time-tracking validation'}
-                              className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                             />
                           </div>
 
@@ -325,36 +344,36 @@ export default function Packages() {
                           <button
                             type="submit"
                             disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
-                            className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100`}
+                            className={`w-full py-3 px-6 rounded-xl bg-gradient-to-r ${pkg.color.gradient} text-white font-bold tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
                           >
                             {language === 'fr' ? 'Calculer le coût' : 'Calculate Cost'}
                           </button>
                         </form>
 
                         {calculatedMonthlyCost !== null && calculatedAnnualCost !== null && (
-                          <div className={`${pkg.color.bg} border-2 border-${pkg.color.text.replace('text-', '')} rounded-lg p-4 space-y-3`}>
-                            <h5 className={`font-bold ${pkg.color.text} text-sm uppercase tracking-wide`}>
+                          <div className={`${pkg.color.bg} border-4 border-gray-900 rounded-2xl p-5 space-y-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+                            <h5 className={`font-black ${pkg.color.text} text-sm uppercase tracking-wider`}>
                               {language === 'fr' ? 'Coût estimé' : 'Estimated Cost'}
                             </h5>
                             <div className="grid gap-3 sm:grid-cols-2">
-                              <div className="bg-white/80 rounded-lg p-3">
-                                <p className="text-xs text-gray-600 font-semibold mb-1">
+                              <div className="bg-white border-2 border-gray-900 rounded-xl p-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <p className="text-xs text-gray-600 font-bold mb-1 uppercase tracking-wide">
                                   {language === 'fr' ? 'Par mois' : 'Monthly'}
                                 </p>
-                                <p className={`text-2xl font-bold ${pkg.color.text}`}>
+                                <p className={`text-2xl font-black ${pkg.color.text}`}>
                                   {formatCurrency(calculatedMonthlyCost)}
                                 </p>
                               </div>
-                              <div className="bg-white/80 rounded-lg p-3">
-                                <p className="text-xs text-gray-600 font-semibold mb-1">
+                              <div className="bg-white border-2 border-gray-900 rounded-xl p-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <p className="text-xs text-gray-600 font-bold mb-1 uppercase tracking-wide">
                                   {language === 'fr' ? 'Par an' : 'Annually'}
                                 </p>
-                                <p className={`text-2xl font-bold ${pkg.color.text}`}>
+                                <p className={`text-2xl font-black ${pkg.color.text}`}>
                                   {formatCurrency(calculatedAnnualCost)}
                                 </p>
                               </div>
                             </div>
-                            <p className="text-xs text-gray-600 italic">
+                            <p className="text-xs text-gray-600 italic font-medium">
                               {language === 'fr' 
                                 ? `Hypothèse : 40h/semaine + ${EMPLOYER_CHARGE_PERCENT}% de charges patronales`
                                 : `Assumes 40h/week + ${EMPLOYER_CHARGE_PERCENT}% employer charges`}
@@ -364,12 +383,12 @@ export default function Packages() {
 
                         {/* Outputs */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-3">
+                          <h4 className="font-black text-gray-900 mb-3 uppercase tracking-wide text-sm">
                             {language === 'fr' ? 'Ce que vous obtenez' : 'What You Get'}
                           </h4>
                           <ul className="space-y-2">
                             {pkg.outputs.map((output, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 font-medium">
                                 <svg
                                   className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
                                   fill="currentColor"
@@ -389,7 +408,7 @@ export default function Packages() {
 
                         {/* CTA Button */}
                         <button
-                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105`}
+                          className={`w-full py-4 px-6 rounded-xl bg-gradient-to-r ${pkg.color.gradient} text-white font-black tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] uppercase text-sm`}
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
@@ -402,22 +421,22 @@ export default function Packages() {
                       <>
                         {/* Description */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-2">
+                          <h4 className="font-black text-gray-900 mb-2 uppercase tracking-wide text-sm">
                             {language === 'fr' ? 'Description' : 'Description'}
                           </h4>
-                          <p className="text-gray-600 text-sm leading-relaxed">
+                          <p className="text-gray-700 text-sm leading-relaxed font-medium">
                             {pkg.description}
                           </p>
                         </div>
 
                         {/* Outputs */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-3">
+                          <h4 className="font-black text-gray-900 mb-3 uppercase tracking-wide text-sm">
                             {language === 'fr' ? 'Livrables' : 'Output'}
                           </h4>
                           <ul className="space-y-2">
                             {pkg.outputs.map((output, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 font-medium">
                                 <svg
                                   className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
                                   fill="currentColor"
@@ -437,7 +456,7 @@ export default function Packages() {
 
                         {/* CTA Button */}
                         <button
-                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105`}
+                          className={`w-full py-4 px-6 rounded-xl bg-gradient-to-r ${pkg.color.gradient} text-white font-black tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] uppercase text-sm`}
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
@@ -452,14 +471,17 @@ export default function Packages() {
 
                 {/* Collapsed Preview */}
                 {expandedId !== pkg.id && (
-                  <div className="p-8 flex-grow flex flex-col">
-                    <p className="text-gray-600 text-base line-clamp-2 leading-relaxed flex-grow">
+                  <div className="p-8 flex-grow flex flex-col relative">
+                    {/* Subtle corner decoration */}
+                    <div className="absolute bottom-8 right-8 w-12 h-12 border-r-2 border-b-2 border-gray-900 opacity-10"></div>
+                    
+                    <p className="text-gray-700 text-base line-clamp-2 leading-relaxed flex-grow font-medium">
                       {pkg.description}
                     </p>
-                    <div className={`mt-5 text-base font-medium ${pkg.color.text} flex items-center gap-2`}>
-                      <span>{language === 'fr' ? 'Cliquez pour en savoir plus' : 'Click to learn more'}</span>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <div className={`mt-5 text-base font-bold ${pkg.color.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
+                      <span className="uppercase tracking-wide text-sm">{language === 'fr' ? 'En savoir plus' : 'Learn more'}</span>
+                      <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </div>

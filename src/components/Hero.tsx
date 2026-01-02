@@ -560,37 +560,6 @@ export default function Hero({
           <div className="flex flex-col gap-2 sm:gap-3 items-center">
             {/* Headline and Text */}
             <div className="text-center flex flex-col gap-2 sm:gap-3">
-              {/* Agents Badge */}
-              <div className="flex items-center justify-center">
-                <div className="inline-flex items-center gap-4">
-                  {/* Avatar Stack */}
-                  <div className="flex -space-x-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                  </div>
-                  {/* Count Badge */}
-                  <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    {language === 'fr' ? 'Micro Agents' : 'Micro Agents'}
-                  </span>
-                </div>
-              </div>
-              
               {/* Main Headline */}
               <h1 className="mb-0 pb-0">
                 <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
@@ -603,7 +572,7 @@ export default function Hero({
                 <button
                   type="button"
                   onClick={handleBookCall}
-                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-black uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   <svg
                     className="w-5 h-5 transition-transform group-hover:rotate-12"
@@ -645,37 +614,6 @@ export default function Hero({
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-12 sm:mb-16">
             {/* Headline and Text */}
             <div className="text-center flex flex-col gap-6 sm:gap-8">
-              {/* Agents Badge */}
-              <div className="flex items-center justify-center mb-2">
-                <div className="inline-flex items-center gap-6">
-                  {/* Avatar Stack */}
-                  <div className="flex -space-x-4">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-3 border-white shadow-xl overflow-hidden flex items-center justify-center p-2">
-                      <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                    </div>
-                  </div>
-                  {/* Count Badge */}
-                  <span className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    {language === 'fr' ? 'Micro Agents' : 'Micro Agents'}
-                  </span>
-                </div>
-              </div>
-              
               {/* Main Headline */}
               <h1 className="mb-0 pb-0">
                 <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line">
@@ -688,7 +626,7 @@ export default function Hero({
                 <button
                   type="button"
                   onClick={handleBookCall}
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-black uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   <svg
                     className="w-5 h-5 transition-transform group-hover:rotate-12"
@@ -718,7 +656,7 @@ export default function Hero({
               {copy.testimonials.map((testimonial) => (
                 <div
                   key={testimonial.author}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-left hover:border-gray-200"
+                  className="bg-white rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 text-left"
                 >
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                     {testimonial.quote}
@@ -727,7 +665,7 @@ export default function Hero({
                     <img
                       src={testimonial.image}
                       alt={testimonial.alt[language]}
-                      className="h-12 w-12 rounded-full object-cover border-2 border-gray-200 shadow-sm"
+                      className="h-12 w-12 rounded-full object-cover border-4 border-gray-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     />
                     <div className="text-left">
                       <p className="text-sm font-semibold text-gray-900">
@@ -830,40 +768,9 @@ export default function Hero({
         <div className="flex flex-col gap-2 sm:gap-3 items-center mb-0">
           {/* Headline and Text */}
           <div className="text-center flex flex-col gap-2 sm:gap-3">
-            {/* Agents Badge */}
-            <div className="flex items-center justify-center">
-              <div className="inline-flex items-center gap-4">
-                {/* Avatar Stack */}
-                <div className="flex -space-x-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-200/20 shadow-xl overflow-hidden flex items-center justify-center p-1.5">
-                    <img src="/logoBrand.png" alt="Agent" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-                {/* Count Badge */}
-                <span className="text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  {language === 'fr' ? 'Micro agents' : 'Micro agents'}
-                </span>
-              </div>
-            </div>
-            
             {/* Main Headline */}
             <h1 className="mb-0 pb-0">
-              <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
+              <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line tracking-tight">
                 {copy.headline.primary}
               </span>
             </h1>
@@ -873,7 +780,7 @@ export default function Hero({
               <button
                 type="button"
                 onClick={handleBookCall}
-                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-black uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 <svg
                   className="w-5 h-5 transition-transform group-hover:rotate-12"
@@ -903,9 +810,16 @@ export default function Hero({
             {/* Input State */}
             {flowState === 'input' && (
               <div className="max-w-4xl mx-auto">
-                <div className="bg-white rounded-3xl border-2 border-gray-100 p-8 sm:p-10 shadow-2xl shadow-blue-500/10 space-y-8">
-                  <div>
-                    <p className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-1">
+                <div className="bg-white rounded-3xl border-4 border-gray-900 p-8 sm:p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] space-y-8 relative overflow-hidden">
+                  {/* Geometric Background Pattern */}
+                  <div className="absolute inset-0 opacity-5 pointer-events-none">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-gray-900 to-transparent rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-gray-900 to-transparent rounded-full blur-2xl"></div>
+                    <div className="absolute -top-12 -right-12 w-32 h-32 border-4 border-gray-900/10 rotate-45 rounded-xl"></div>
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <p className="text-sm font-black uppercase tracking-wider text-blue-600 mb-1">
                       {copy.calculator.title}
                     </p>
                   </div>
@@ -915,7 +829,7 @@ export default function Hero({
                       <div>
                         <label
                           htmlFor="hoursPerWeek"
-                          className="block text-sm font-bold text-gray-900 mb-2"
+                          className="block text-sm font-black text-gray-900 mb-2 uppercase tracking-wide"
                         >
                           {copy.calculator.hoursLabel}
                         </label>
@@ -932,9 +846,9 @@ export default function Hero({
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.hoursPlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 pr-20 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
+                            className="w-full rounded-xl border-2 border-gray-900 px-4 py-3.5 pr-20 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                           />
-                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-400">
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-500">
                             {language === 'fr' ? 'h/sem.' : 'h/week'}
                           </span>
                         </div>
@@ -943,7 +857,7 @@ export default function Hero({
                       <div>
                         <label
                           htmlFor="peopleCount"
-                          className="block text-sm font-bold text-gray-900 mb-2"
+                          className="block text-sm font-black text-gray-900 mb-2 uppercase tracking-wide"
                         >
                           {copy.calculator.peopleLabel}
                         </label>
@@ -960,9 +874,9 @@ export default function Hero({
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.peoplePlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
+                            className="w-full rounded-xl border-2 border-gray-900 px-4 py-3.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                           />
-                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-400">
+                          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-500">
                             {language === 'fr' ? 'pers.' : 'ppl'}
                           </span>
                         </div>
@@ -971,12 +885,12 @@ export default function Hero({
                       <div>
                         <label
                           htmlFor="monthlyCostPerPerson"
-                          className="block text-sm font-bold text-gray-900 mb-2"
+                          className="block text-sm font-black text-gray-900 mb-2 uppercase tracking-wide"
                         >
                           {copy.calculator.salaryLabel}
                         </label>
                         <div className="relative">
-                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-400">
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-bold text-gray-500">
                             {copy.calculator.currencySymbol}
                           </span>
                           <input
@@ -991,7 +905,7 @@ export default function Hero({
                               if (error) setError('');
                             }}
                             placeholder={copy.calculator.salaryPlaceholder}
-                            className="w-full rounded-xl border-2 border-gray-200 pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
+                            className="w-full rounded-xl border-2 border-gray-900 pl-12 pr-4 py-3.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                           />
                         </div>
                       </div>
@@ -1000,7 +914,7 @@ export default function Hero({
                     <div>
                       <label
                         htmlFor="processDescription"
-                        className="block text-sm font-bold text-gray-900 mb-2"
+                        className="block text-sm font-black text-gray-900 mb-2 uppercase tracking-wide"
                       >
                         {copy.calculator.descriptionLabel}
                       </label>
@@ -1013,7 +927,7 @@ export default function Hero({
                           if (error) setError('');
                         }}
                         placeholder={copy.calculator.descriptionPlaceholder}
-                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-300"
+                        className="w-full rounded-xl border-2 border-gray-900 px-4 py-3.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-gray-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
 
@@ -1023,14 +937,14 @@ export default function Hero({
                       <button
                         type="submit"
                         disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-bold shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-black uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                       >
                         {copy.calculator.submitCta}
                         <svg
-                          className="w-4 h-4"
+                          className="w-5 h-5"
                           fill="none"
                           viewBox="0 0 24 24"
-                          strokeWidth="2"
+                          strokeWidth="2.5"
                           stroke="currentColor"
                         >
                           <path
