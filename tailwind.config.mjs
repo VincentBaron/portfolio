@@ -30,7 +30,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['"Varela Round"', 'system-ui', 'sans-serif'],
       },
     },
   },
