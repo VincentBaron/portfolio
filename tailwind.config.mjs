@@ -30,7 +30,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Varela Round"', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },

@@ -219,14 +219,17 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+              className="flex items-end gap-1 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
               aria-label={copy.logoAria}
             >
               <img 
                 src="/logoBrand.png" 
-                alt="2 Weeks to Solve It Logo" 
-                className="h-12 sm:h-16 w-auto transform group-hover:scale-105 transition-transform"
+                alt="StudioDino" 
+                className="h-10 w-auto transform group-hover:scale-105 transition-transform"
               />
+              <span className="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-200" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', color: '#4a3c5e' }}>
+                StudioDino
+              </span>
             </a>
           </div>
 
