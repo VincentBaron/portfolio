@@ -118,7 +118,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       currencySymbol: '€',
     },
     headline: {
-      primary: 'Increase your Net Margin Per Recruiter\nwith AI',
+      primary: 'Increase your Net Margin Per Recruiter',
       highlight:
         'I audit your recruiting operations and implement AI-powered systems in 14 days to boost margins without hiring more staff.',
     },
@@ -167,7 +167,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
         shareAnother: 'Recalculate another process',
       },
     },
-    testimonialsTitle: 'They Trusted Me',
+    testimonialsTitle: 'They Trusted Us',
     testimonials: [
       {
         quote:
@@ -209,7 +209,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       sprint: 'Average Sprint Time',
       rating: 'Average Rating',
     },
-    companiesTitle: 'Companies I worked with',
+    companiesTitle: 'Companies we worked with',
   },
   fr: {
     calculator: {
@@ -562,19 +562,22 @@ export default function Hero({
             <div className="text-center flex flex-col gap-2 sm:gap-3">
               {/* Badge */}
               <div className="flex justify-center mb-2 mt-4 sm:mt-6">
-                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
                   Process Optimisation
                 </span>
               </div>
               
               {/* Main Headline */}
-              <h1 className="mb-0 pb-0">
-                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line">
+              <div className="mb-6 pb-0">
+              <h1 className="mb-3 pb-0">
+                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line pb-2">
                   {copy.headline.primary}
                 </span>
               </h1>
-
-              {/* CTA Button */}
+              <span className="inline-block px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xl sm:text-2xl uppercase tracking-wide rounded-lg shadow-lg">
+                with AI
+              </span>
+            </div>              {/* CTA Button */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <button
                   type="button"
@@ -623,17 +626,22 @@ export default function Hero({
             <div className="text-center flex flex-col gap-6 sm:gap-8">
               {/* Badge */}
               <div className="flex justify-center mb-2 mt-4 sm:mt-6">
-                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
                   Process Optimisation
                 </span>
               </div>
               
               {/* Main Headline */}
-              <h1 className="mb-0 pb-0">
-                <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line">
-                  {copy.headline.primary}
+              <div className="mb-6 pb-0">
+                <h1 className="mb-3 pb-0">
+                  <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2">
+                    {copy.headline.primary}
+                  </span>
+                </h1>
+                <span className="inline-block px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xl sm:text-2xl uppercase tracking-wide rounded-lg shadow-lg">
+                  with AI
                 </span>
-              </h1>
+              </div>
 
               {/* CTA Button */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
@@ -670,7 +678,7 @@ export default function Hero({
               {copy.testimonials.map((testimonial) => (
                 <div
                   key={testimonial.author}
-                  className="bg-white rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 text-left"
+                  className="bg-white rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 text-left"
                 >
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                     {testimonial.quote}
@@ -701,7 +709,7 @@ export default function Hero({
             <div className="flex flex-wrap justify-center gap-8 items-center">
               <div className="flex flex-col items-center">
                 <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  50+
+                  30+
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.projects}</p>
               </div>
@@ -790,11 +798,16 @@ export default function Hero({
             </div>
             
             {/* Main Headline */}
-            <h1 className="mb-0 pb-0">
-              <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line tracking-tight">
-                {copy.headline.primary}
+            <div className="mb-6 pb-0">
+              <h1 className="mb-3">
+                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line tracking-tight">
+                  {copy.headline.primary}
+                </span>
+              </h1>
+              <span className="inline-block px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xl sm:text-2xl uppercase tracking-wide rounded-lg shadow-lg">
+                with AI
               </span>
-            </h1>
+            </div>
 
             {/* CTA Button */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">

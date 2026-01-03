@@ -52,7 +52,6 @@ export default function CaseStudiesGrid({
                 variant="purple"
                 label={ctaLabel}
                 showArrow={true}
-                className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
               />
             </div>
           </div>

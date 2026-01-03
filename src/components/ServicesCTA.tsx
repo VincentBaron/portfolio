@@ -36,17 +36,17 @@ export default function ServicesCTA({
     <>
       <button
         onClick={() => setIsModalOpen(true)}
-        className={`block w-full text-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white ${getVariantClasses()} focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 ${className} ${(showArrow || showCalendar) ? 'inline-flex items-center justify-center' : ''}`}
+        className={`group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-black uppercase tracking-wide text-white ${getVariantClasses()} shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${className}`}
       >
         {showCalendar && (
-          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+          <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
           </svg>
         )}
         {buttonLabel}
         {showArrow && (
           <svg
-            className="w-5 h-5 ml-2"
+            className="w-5 h-5 transition-transform group-hover:rotate-12"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="2"

@@ -27,19 +27,7 @@ export default function Footer() {
           {/* Copyright and Pledge */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
             <p className="text-sm text-gray-700 font-bold">
-              © {currentYear} 1 Week to Solve It. {copy.rights}
-            </p>
-            <span className="hidden sm:inline text-gray-900 font-black">•</span>
-            <p className="text-sm font-black text-purple-600 uppercase tracking-wide">
-              {copy.pledgePrefix}{' '}
-              <a
-                href="https://ramina.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 rounded transition-colors"
-              >
-                Ramina
-              </a>
+              © {currentYear} StudioDino. {copy.rights}
             </p>
           </div>
 
