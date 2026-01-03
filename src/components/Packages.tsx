@@ -39,7 +39,7 @@ const packages: Package[] = [
   {
     id: 2,
     name: 'Cost Cutter Dino',
-    description: 'Calculate the real cost of your manual back-office processes. This interactive tool helps you quantify the hidden expenses in repetitive tasks—from time-tracking validation to invoice processing. Perfect for identifying where automation can deliver immediate ROI.',
+    description: 'Calculate the real cost of your manual processes.',
     outputs: [
       'Instant Cost Analysis: See monthly and annual costs of manual processes.',
       'Full Breakdown: Includes gross salary + employer charges (44%).',
@@ -183,11 +183,6 @@ export default function Packages() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 uppercase tracking-tight">
             {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
-            {language === 'fr' 
-              ? 'Choisissez le forfait qui correspond à vos besoins et accélérez votre croissance' 
-              : 'Choose the package that fits your needs and accelerate your growth'}
-          </p>
         </div>
 
         {/* Packages Grid */}
@@ -266,7 +261,7 @@ export default function Packages() {
                         </div>
 
                         <form onSubmit={handleCalculatorSubmit} className="space-y-4">
-                          <div className="grid gap-4 sm:grid-cols-3">
+                          <div className="grid gap-4 sm:grid-cols-2">
                             <div>
                               <label htmlFor="hours" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
                                 {language === 'fr' ? 'Heures/semaine' : 'Hours/week'}
@@ -304,25 +299,25 @@ export default function Packages() {
                                 className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                               />
                             </div>
+                          </div>
 
-                            <div>
-                              <label htmlFor="salary" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
-                                {language === 'fr' ? 'Salaire brut/mois (€)' : 'Gross salary/mo (€)'}
-                              </label>
-                              <input
-                                id="salary"
-                                type="number"
-                                min="0"
-                                step="any"
-                                value={monthlyCostPerPerson}
-                                onChange={(e) => {
-                                  setMonthlyCostPerPerson(e.target.value);
-                                  setError('');
-                                }}
-                                placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
-                                className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
-                              />
-                            </div>
+                          <div>
+                            <label htmlFor="salary" className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
+                              {language === 'fr' ? 'Salaire brut/mois (€)' : 'Gross salary/mo (€)'}
+                            </label>
+                            <input
+                              id="salary"
+                              type="number"
+                              min="0"
+                              step="any"
+                              value={monthlyCostPerPerson}
+                              onChange={(e) => {
+                                setMonthlyCostPerPerson(e.target.value);
+                                setError('');
+                              }}
+                              placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
+                              className="w-full rounded-lg border-2 border-gray-900 px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                            />
                           </div>
 
                           <div>
@@ -380,31 +375,6 @@ export default function Packages() {
                             </p>
                           </div>
                         )}
-
-                        {/* Outputs */}
-                        <div>
-                          <h4 className="font-black text-gray-900 mb-3 uppercase tracking-wide text-sm">
-                            {language === 'fr' ? 'Ce que vous obtenez' : 'What You Get'}
-                          </h4>
-                          <ul className="space-y-2">
-                            {pkg.outputs.map((output, idx) => (
-                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 font-medium">
-                                <svg
-                                  className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`}
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                                <span>{output}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
 
                         {/* CTA Button */}
                         <button
@@ -479,7 +449,12 @@ export default function Packages() {
                       {pkg.description}
                     </p>
                     <div className={`mt-5 text-base font-bold ${pkg.color.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
-                      <span className="uppercase tracking-wide text-sm">{language === 'fr' ? 'En savoir plus' : 'Learn more'}</span>
+                      <span className="uppercase tracking-wide text-sm">
+                        {pkg.hasCalculator 
+                          ? (language === 'fr' ? 'Calculer maintenant' : 'Calculate now')
+                          : (language === 'fr' ? 'En savoir plus' : 'Learn more')
+                        }
+                      </span>
                       <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
