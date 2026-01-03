@@ -362,9 +362,9 @@ export default function Hero({
 
     return (
       <section className="px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-7xl mx-auto w-full flex flex-col">
           {/* Hero Content */}
-          <div className="flex flex-col gap-6 sm:gap-8 items-center mb-12 sm:mb-16">
+          <div className="flex flex-col gap-6 sm:gap-8 items-center mb-2">
             {/* Headline and Text */}
             <div className="text-center flex flex-col gap-6 sm:gap-8">
               {/* Badge */}
@@ -390,7 +390,7 @@ export default function Hero({
           </div>
 
           {/* Testimonials */}
-          <div className="text-center flex flex-col gap-6">
+          <div className="text-center flex flex-col gap-3">
             <p className="text-sm sm:text-base text-gray-600 font-medium">
               {copy.testimonialsTitle}
             </p>
@@ -424,7 +424,7 @@ export default function Hero({
           </div>
 
           {/* Stats and Companies Section */}
-          <div className="mt-12 sm:mt-16 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
+          <div className="mt-6 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-8 items-center">
               <div className="flex flex-col items-center">
@@ -452,10 +452,10 @@ export default function Hero({
 
             {/* Companies */}
             <div className="text-center">
-              <p className="text-base text-gray-600 font-medium mb-6">
+              <p className="text-base text-gray-600 font-medium mb-2">
                 {copy.companiesTitle}
               </p>
-              <div className="flex items-center justify-center gap-6 md:gap-8">
+              <div className="flex items-center justify-center gap-2">
                 {/* Qomon Logo */}
                 <div className="group transition-all duration-300 hover:scale-105">
                   <img
