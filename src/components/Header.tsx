@@ -68,12 +68,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     { code: 'en', label: 'EN', flag: '🇬🇧', sr: 'English / Anglais' },
     { code: 'fr', label: 'FR', flag: '🇫🇷', sr: 'French / Français' },
   ];
-  const renderLanguageSelector = (variant: 'desktop' | 'mobile', className = '') => (
-    <div
-      className={`${
-        variant === 'desktop' ? 'hidden md:flex' : 'flex md:hidden'
-      } items-center gap-1 rounded-full border border-gray-200 bg-white/80 px-1 py-0.5 shadow-sm backdrop-blur ${className}`}
-    >
+  const renderLanguageSelector = () => (
+    <div className="flex items-center gap-1.5 rounded-full border-2 border-gray-300 bg-white px-2 py-1.5 shadow-sm">
       {languageOptions.map(({ code, label, flag, sr }) => {
         const isActive = language === code;
         return (
@@ -81,17 +77,17 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             key={code}
             type="button"
             onClick={() => setLanguage(code)}
-            className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
               isActive
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
-            } ${variant === 'desktop' ? 'md:text-xs' : 'text-xs'}`}
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+            }`}
             aria-pressed={isActive}
             aria-label={sr}
             title={sr}
           >
-            <span aria-hidden="true">{flag}</span>
-            <span className="hidden sm:inline">{label}</span>
+            <span aria-hidden="true" className="text-base">{flag}</span>
+            <span>{label}</span>
           </button>
         );
       })}
@@ -196,94 +192,83 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     window.location.href = href;
   };
 
-  const showGlassEffect = isScrolled || isMobileMenuOpen;
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showGlassEffect
-          ? 'bg-white/70 backdrop-blur-lg shadow-lg border-b border-white/20' 
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       onKeyDown={handleKeyDown}
     >
-      {renderLanguageSelector('desktop', 'absolute top-2 right-4 z-50')}
-      {renderLanguageSelector('mobile', 'absolute top-2 right-4 z-50')}
-      <nav
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        aria-label="Main navigation"
-      >
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a
-              href="#home"
-              onClick={(e) => handleNavClick(e, '#home')}
-              className="flex items-end group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
-              aria-label={copy.logoAria}
-            >
-              <img 
-                src="/logoBrand.png" 
-                alt="StudioDino" 
-                className="h-10 w-auto transform group-hover:scale-105 transition-transform"
-              />
-              <span className="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-200 -ml-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', color: '#4a3c5e' }}>
-                StudioDino
-              </span>
-            </a>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="flex items-center gap-4">
+          <nav
+            className="relative bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-200 flex-1"
+            aria-label="Main navigation"
+          >
+            <div className="flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20">
+              {/* Logo */}
+              <div className="flex-shrink-0">
+                <a
+                  href="#home"
+                  onClick={(e) => handleNavClick(e, '#home')}
+                  className="flex items-end group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+                  aria-label={copy.logoAria}
+                >
+                  <img 
+                    src="/logoBrand.png" 
+                    alt="StudioDino" 
+                    className="h-10 w-auto transform group-hover:scale-105 transition-transform"
+                  />
+                  <span className="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-200 -ml-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', color: '#4a3c5e' }}>
+                    StudioDino
+                  </span>
+                </a>
+              </div>
 
-          {/* Navigation Container */}
-          <div className="flex items-center gap-3">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex md:items-center md:space-x-1">
-              {navLinks.map((link) => {
-                const isCurrent = isCurrentPage(link.href);
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                      isCurrent
-                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
-                        : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
-                    }`}
-                    aria-current={isCurrent ? 'page' : undefined}
-                  >
-                    {link.label}
-                  </a>
-                );
-              })}
-            </div>
+              {/* Navigation Container */}
+              <div className="flex items-center gap-3">
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex md:items-center md:space-x-1">
+                  {navLinks.map((link) => {
+                    const isCurrent = isCurrentPage(link.href);
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                          isCurrent
+                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
+                            : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
+                        }`}
+                        aria-current={isCurrent ? 'page' : undefined}
+                      >
+                        {link.label}
+                      </a>
+                    );
+                  })}
+                </div>
 
-            {/* CTA Button - Desktop */}
-            <div className="hidden md:block">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200"
-              >
-                {copy.bookCall}
-              </button>
-            </div>
+                {/* Language Selector - Desktop */}
+                <div className="hidden md:block">
+                  {renderLanguageSelector()}
+                </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              type="button"
-              className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors"
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={copy.toggleMenuAria}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              <span className="sr-only">
-                {isMobileMenuOpen ? copy.mobileClose : copy.mobileOpen}
-              </span>
-              {!isMobileMenuOpen ? (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
+                {/* Mobile Menu Button */}
+                <button
+                  type="button"
+                  className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors"
+                  aria-expanded={isMobileMenuOpen}
+                  aria-controls="mobile-menu"
+                  aria-label={copy.toggleMenuAria}
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  <span className="sr-only">
+                    {isMobileMenuOpen ? copy.mobileClose : copy.mobileOpen}
+                  </span>
+                  {!isMobileMenuOpen ? (
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
                   strokeWidth="2"
                   stroke="currentColor"
                   aria-hidden="true"
@@ -313,7 +298,19 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             </button>
           </div>
         </div>
-      </nav>
+        </nav>
+
+        {/* CTA Button - Desktop - Separated */}
+        <div className="hidden md:block">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200"
+          >
+            {copy.bookCall}
+          </button>
+        </div>
+      </div>
+      </div>
 
       {/* Mobile Menu */}
       <div
@@ -324,7 +321,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}
       >
-        <div className="px-4 pt-2 pb-6 space-y-1">
+        <div className="px-8 pt-2 pb-6 space-y-3">
           {navLinks.map((link) => {
             const isCurrent = isCurrentPage(link.href);
             return (
@@ -343,7 +340,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               </a>
             );
           })}
-          <div className="pt-4">
+          <div className="pt-2 flex justify-center">
+            {renderLanguageSelector()}
+          </div>
+          <div className="pt-2">
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
