@@ -361,7 +361,7 @@ export default function Hero({
   };
 
     return (
-      <section className="px-4 sm:px-6 lg:px-8 mt-48">
+      <section className="px-4 sm:px-6 lg:px-8 mt-24 sm:mt-26 lg:mt-40 mb-8 sm:mb-12 lg:mb-16">
         <div className="max-w-7xl mx-auto w-full flex flex-col gap-12">
           {/* Hero Content */}
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-2">
@@ -371,11 +371,11 @@ export default function Hero({
               {/* Main Headline */}
               <div className="mb-6 pb-0">
                 <h1 className="mb-3 pb-0">
-                  <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2" style={{ WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
+                  <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
                     {copy.headline.primary}
                   </span>
                 </h1>
-                <span className="inline-block px-6 py-2 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 border-4 border-gray-900 rounded-lg" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
+                <span className="inline-block px-6 py-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 border-4 border-gray-900 rounded-lg" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
                   with AI
                 </span>
               </div>
