@@ -452,110 +452,96 @@ export default function Hero({
 
             {/* Companies */}
             <div className="text-center w-full lg:w-auto">
-              <div className="relative overflow-hidden max-w-xl mx-auto py-4">
-                {/* Scrolling container */}
-                <div className="flex items-center animate-scroll whitespace-nowrap">
+              <div className="relative overflow-hidden max-w-xl mx-auto py-4 logo-slideshow">
+                {/* Scrolling container - will continuously scroll left */}
+                <div className="inline-flex items-center animate-scroll whitespace-nowrap">
                   {/* First set of logos */}
-                  <div className="flex items-center shrink-0 mr-12">
+                  <div className="inline-flex items-center shrink-0">
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/side.png"
                         alt="Side"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-32 flex items-center justify-center mx-6">
                       <img
                         src="/randstad.png"
                         alt="Randstad"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
                       />
                     </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-32 flex items-center justify-center mx-6">
                       <img
                         src="/qomon.png"
                         alt="Qomon"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/mitsubishi.webp"
                         alt="Mitsubishi"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/intermarche.png"
                         alt="Intermarché"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/freMobile.png"
                         alt="Free Mobile"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
-                      />
-                    </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
-                      <img
-                        src="/pmp.png"
-                        alt="PMP"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                   </div>
                   {/* Duplicate set for seamless loop */}
-                  <div className="flex items-center shrink-0">
+                  <div className="inline-flex items-center shrink-0">
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/side.png"
                         alt="Side"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-32 flex items-center justify-center mx-6">
                       <img
                         src="/randstad.png"
                         alt="Randstad"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
                       />
                     </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-32 flex items-center justify-center mx-6">
                       <img
                         src="/qomon.png"
                         alt="Qomon"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/mitsubishi.webp"
                         alt="Mitsubishi"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/intermarche.png"
                         alt="Intermarché"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                     <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
                       <img
                         src="/freMobile.png"
                         alt="Free Mobile"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
-                      />
-                    </div>
-                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
-                      <img
-                        src="/pmp.png"
-                        alt="PMP"
-                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                        className="max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
                       />
                     </div>
                   </div>

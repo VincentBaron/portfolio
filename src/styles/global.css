@@ -20,6 +20,59 @@
 }
 
 @layer utilities {
+  /* ============================================================
+   * LOGO SLIDESHOW CONFIGURATION
+   * ============================================================
+   * Centralized control for individual logo dimensions.
+   * 
+   * TO CHANGE A SPECIFIC LOGO SIZE:
+   * Edit the height value for that logo below (e.g., --logo-side: 2.5rem)
+   * All sizes use 'auto' width for proportional scaling.
+   * 
+   * Default: 3rem = 48px (Tailwind h-12)
+   *          2.5rem = 40px (Tailwind h-10)
+   * ============================================================ */
+  .logo-slideshow {
+    /* Individual logo heights - edit these to change specific logos */
+    --logo-side: 1.5rem;        /* Side logo */
+    --logo-randstad: 3rem;      /* Randstad logo */
+    --logo-qomon: 5rem;         /* Qomon logo */
+    --logo-mitsubishi: 3rem;    /* Mitsubishi logo */
+    --logo-intermarche: 3rem;   /* Intermarché logo */
+    --logo-fremobile: 1.75rem;   /* Free Mobile logo */
+  }
+
+  /* Apply sizes to specific logos by alt text */
+  .logo-slideshow img[alt="Side"] {
+    height: var(--logo-side);
+    width: auto;
+  }
+
+  .logo-slideshow img[alt="Randstad"] {
+    height: var(--logo-randstad);
+    width: auto;
+  }
+
+  .logo-slideshow img[alt="Qomon"] {
+    height: var(--logo-qomon);
+    width: auto;
+  }
+
+  .logo-slideshow img[alt="Mitsubishi"] {
+    height: var(--logo-mitsubishi);
+    width: auto;
+  }
+
+  .logo-slideshow img[alt="Intermarché"] {
+    height: var(--logo-intermarche);
+    width: auto;
+  }
+
+  .logo-slideshow img[alt="Free Mobile"] {
+    height: var(--logo-fremobile);
+    width: auto;
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 bg-clip-text text-transparent;
   }
