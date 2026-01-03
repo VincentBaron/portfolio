@@ -179,7 +179,7 @@ export default function Packages() {
     <section className="px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 uppercase tracking-tight">
             {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
           </h2>

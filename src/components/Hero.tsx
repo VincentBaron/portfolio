@@ -426,21 +426,21 @@ export default function Hero({
           {/* Stats and Companies Section */}
           <div className="mt-6 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-8 items-center">
+            <div className="flex flex-wrap justify-center gap-6 items-center">
               <div className="flex flex-col items-center">
-                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   30+
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.projects}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   {language === 'fr' ? '2 semaines' : '2 Weeks'}
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.sprint}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   4.9/5
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.rating}</p>
@@ -451,36 +451,114 @@ export default function Hero({
             <div className="hidden lg:block w-px h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
 
             {/* Companies */}
-            <div className="text-center">
-              <p className="text-base text-gray-600 font-medium mb-2">
-                {copy.companiesTitle}
-              </p>
-              <div className="flex items-center justify-center gap-2">
-                {/* Qomon Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/qomonLogo.png"
-                    alt="Qomon"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-
-                {/* Side Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/sideLogo.png"
-                    alt="Side"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-
-                {/* Mitsubishi Logo */}
-                <div className="group transition-all duration-300 hover:scale-105">
-                  <img
-                    src="/mitsubishi.avif"
-                    alt="Mitsubishi"
-                    className="h-8 w-auto opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0"
-                  />
+            <div className="text-center w-full lg:w-auto">
+              <div className="relative overflow-hidden max-w-xl mx-auto py-4">
+                {/* Scrolling container */}
+                <div className="flex items-center animate-scroll whitespace-nowrap">
+                  {/* First set of logos */}
+                  <div className="flex items-center shrink-0 mr-12">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/side.png"
+                        alt="Side"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/randstad.png"
+                        alt="Randstad"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/qomon.png"
+                        alt="Qomon"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/mitsubishi.webp"
+                        alt="Mitsubishi"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/intermarche.png"
+                        alt="Intermarché"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/freMobile.png"
+                        alt="Free Mobile"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/pmp.png"
+                        alt="PMP"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                  </div>
+                  {/* Duplicate set for seamless loop */}
+                  <div className="flex items-center shrink-0">
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/side.png"
+                        alt="Side"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/randstad.png"
+                        alt="Randstad"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain mix-blend-multiply"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/qomon.png"
+                        alt="Qomon"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/mitsubishi.webp"
+                        alt="Mitsubishi"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/intermarche.png"
+                        alt="Intermarché"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/freMobile.png"
+                        alt="Free Mobile"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                    <div className="group transition-all duration-300 hover:scale-105 shrink-0 w-24 flex items-center justify-center mx-6">
+                      <img
+                        src="/pmp.png"
+                        alt="PMP"
+                        className="h-12 w-auto max-w-full opacity-60 group-hover:opacity-90 transition-opacity duration-300 grayscale group-hover:grayscale-0 object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
