@@ -570,7 +570,7 @@ export default function Hero({
               {/* Main Headline */}
               <div className="mb-6 pb-0">
               <h1 className="mb-3 pb-0">
-                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line pb-2">
+                <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] whitespace-pre-line pb-2" style={{ WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
                   {copy.headline.primary}
                 </span>
               </h1>
@@ -634,7 +634,7 @@ export default function Hero({
               {/* Main Headline */}
               <div className="mb-6 pb-0">
                 <h1 className="mb-3 pb-0">
-                  <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2">
+                  <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2" style={{ WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
                     {copy.headline.primary}
                   </span>
                 </h1>
