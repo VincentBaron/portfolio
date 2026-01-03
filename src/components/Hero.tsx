@@ -381,10 +381,11 @@ export default function Hero({
                     {copy.headline.primary}
                   </span>
                 </h1>
-                <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2" style={{ WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
+                <span className="inline-block px-6 py-2 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 rounded-lg" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
                   with AI
                 </span>
               </div>
+              
 
 
               {/* CTA Button */}
