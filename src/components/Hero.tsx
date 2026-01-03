@@ -118,7 +118,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       currencySymbol: '€',
     },
     headline: {
-      primary: 'Increase your Net Margin Per Recruiter',
+      primary: 'Increase your Net Margin\nPer Recruiter',
       highlight:
         'I audit your recruiting operations and implement AI-powered systems in 14 days to boost margins without hiring more staff.',
     },
@@ -366,18 +366,33 @@ export default function Hero({
           {/* Hero Content */}
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-2">
             {/* Headline and Text */}
-            <div className="text-center flex flex-col gap-6 sm:gap-8">
+            <div className="text-center flex flex-col gap-10 sm:gap-12 max-w-6xl mx-auto relative">
+              
+              {/* Blur effect background */}
+              <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-orange-100/20 via-yellow-100/15 to-orange-100/20 rounded-full blur-[100px]"></div>
+              </div>
               
               {/* Main Headline */}
-              <div className="mb-6 pb-0">
-                <h1 className="mb-3 pb-0">
-                  <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight whitespace-pre-line pb-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', WebkitTextStroke: '0.5px rgba(79, 70, 229, 0.3)', paintOrder: 'stroke fill' }}>
-                    {copy.headline.primary}
-                  </span>
+              <div className="space-y-6 relative z-10">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] px-4">
+                  {language === 'en' ? (
+                    <>
+                      Increase your Net Margin<br />
+                      Per Recruiter{' '}
+                      <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold whitespace-nowrap">
+                        with AI
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      {copy.headline.primary}{' '}
+                      <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold">
+                        avec l'IA
+                      </span>
+                    </>
+                  )}
                 </h1>
-                <span className="inline-block px-6 py-2 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 border-4 border-gray-900 rounded-lg" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
-                  with AI
-                </span>
               </div>
 
             </div>
