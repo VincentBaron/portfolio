@@ -369,7 +369,7 @@ export default function Hero({
             <div className="text-center flex flex-col gap-6 sm:gap-8">
               {/* Badge */}
               <div className="flex justify-center mb-2 mt-4 sm:mt-6">
-                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 border-3 border-gray-900 text-gray-900 text-xs sm:text-sm font-black uppercase tracking-wider border-2 border-gray-900 rounded-lg">
                   Process Optimisation
                 </span>
               </div>
@@ -381,36 +381,11 @@ export default function Hero({
                     {copy.headline.primary}
                   </span>
                 </h1>
-                <span className="inline-block px-6 py-2 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 rounded-lg" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
+                <span className="inline-block px-6 py-2 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 leading-tight transform -skew-y-1 border-4 border-gray-900 rounded-lg" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2)' }}>
                   with AI
                 </span>
               </div>
-              
 
-
-              {/* CTA Button */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
-                <button
-                  type="button"
-                  onClick={handleBookCall}
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-black uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                >
-                  <svg
-                    className="w-5 h-5 transition-transform group-hover:rotate-12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5A2.25 2.25 0 0021 19.5v-1.26a1.125 1.125 0 00-.852-1.09l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a.75.75 0 01-1.21.038 12.036 12.036 0 01-3.173-3.173.75.75 0 01.038-1.21l1.293-.97a1.125 1.125 0 00.417-1.173L7.85 3.102A1.125 1.125 0 006.76 2.25H5.5A2.25 2.25 0 003.25 4.5v2.25z"
-                    />
-                  </svg>
-                  {language === 'fr' ? 'Réserver un appel gratuit' : 'Book a free call'}
-                </button>
-              </div>
             </div>
           </div>
 
