@@ -361,7 +361,7 @@ export default function Hero({
   };
 
     return (
-      <section className="px-4 sm:px-6 lg:px-8 mt-24 sm:mt-26 lg:mt-40 mb-8 sm:mb-12 lg:mb-16">
+      <section className="px-4 sm:px-6 lg:px-8 mt-24 sm:mt-26 lg:mt-34 mb-8 sm:mb-12 lg:mb-16">
         <div className="max-w-7xl mx-auto w-full flex flex-col gap-12">
           {/* Hero Content */}
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-2">
@@ -419,7 +419,7 @@ export default function Hero({
           </div>
 
           {/* Stats and Companies Section */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16 mt-12 sm:mt-16 lg:mt-8">
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-6 items-center">
               <div className="flex flex-col items-center">
