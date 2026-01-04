@@ -151,13 +151,13 @@ export default function CaseStudyDetail({ caseStudy, relatedStudies }: CaseStudy
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href="https://cal.com/vincent-baron/30mins-meeting"
-              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:-translate-y-0.5 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/40"
+              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-md hover:shadow-lg transition hover:from-blue-700 hover:to-indigo-700"
             >
               {copy.ctaPrimary}
             </a>
             <a
               href={caseStudiesAnchor}
-              className="inline-flex items-center justify-center rounded-lg border-2 border-gray-200 px-6 py-3 text-base font-semibold text-gray-700 transition hover:border-blue-600 hover:text-blue-600"
+              className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-6 py-3 text-base font-medium text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
             >
               {copy.ctaSecondary}
             </a>

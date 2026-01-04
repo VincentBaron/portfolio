@@ -408,16 +408,16 @@ export default function Hero({
               {copy.testimonials.map((testimonial) => (
                 <div
                   key={testimonial.author}
-                  className="bg-white rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 text-left"
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-left hover:shadow-md transition-shadow duration-200"
                 >
-                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {testimonial.quote}
                   </p>
                   <div className="mt-5 flex items-center gap-4">
                     <img
                       src={testimonial.image}
                       alt={testimonial.alt[language]}
-                      className="h-12 w-12 rounded-full object-cover border-4 border-gray-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      className="h-12 w-12 rounded-full object-cover border-2 border-gray-100 shadow-sm"
                     />
                     <div className="text-left">
                       <p className="text-sm font-semibold text-gray-900">
@@ -438,19 +438,19 @@ export default function Hero({
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-6 items-center">
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-semibold text-blue-700">
                   30+
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.projects}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-semibold text-blue-700">
                   {language === 'fr' ? '2 semaines' : '2 Weeks'}
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.sprint}</p>
               </div>
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="text-2xl font-semibold text-blue-700">
                   4.9/5
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.rating}</p>

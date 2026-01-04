@@ -24,11 +24,11 @@ export default function ServicesCTA({
   const getVariantClasses = () => {
     switch (variant) {
       case 'purple':
-        return 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700';
+        return 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white';
       case 'indigo':
-        return 'bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800';
+        return 'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white';
       default:
-        return 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800';
+        return 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white';
     }
   };
 
@@ -36,7 +36,7 @@ export default function ServicesCTA({
     <>
       <button
         onClick={() => setIsModalOpen(true)}
-        className={`group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lg font-black uppercase tracking-wide text-white ${getVariantClasses()} shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${className}`}
+        className={`group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg text-base font-semibold tracking-wide ${getVariantClasses()} shadow-md hover:shadow-lg transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${className}`}
       >
         {showCalendar && (
           <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">

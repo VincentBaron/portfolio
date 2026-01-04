@@ -163,7 +163,7 @@ export default function SprintTimeline() {
               return (
                 <div
                   key={index}
-                  className={`group relative bg-white rounded-2xl p-3 sm:p-4 lg:p-5 border-2 ${colors.border} ${colors.hoverBorder} transition-all duration-300 hover:shadow-xl hover:-translate-y-2 focus-within:ring-4 focus-within:ring-${step.color}-500 focus-within:ring-opacity-50`}
+                  className={`group relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border ${colors.border} ${colors.hoverBorder} transition-all duration-300 hover:shadow-md hover:-translate-y-1 focus-within:ring-2 focus-within:ring-${step.color}-400 focus-within:ring-opacity-50`}
                   role="article"
                   aria-label={`Step ${index + 1}: ${step.title}`}
                   tabIndex={0}
@@ -174,7 +174,7 @@ export default function SprintTimeline() {
                       <div className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 rounded-full ${colors.dot}`} />
                     </div>
                     <div>
-                      <div className={`text-sm font-semibold ${colors.text} uppercase tracking-wide`}>
+                      <div className={`text-sm font-medium ${colors.text} tracking-wide`}>
                         {step.days}
                       </div>
                       <div className="text-xs text-gray-500">

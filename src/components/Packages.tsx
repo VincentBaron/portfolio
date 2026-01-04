@@ -181,7 +181,7 @@ export default function Packages() {
         {/* Section Header */}
         
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-900 mb-3 sm:mb-4 lg:mb-6 uppercase tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4 lg:mb-6 tracking-tight">
             {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
           </h1>
         </div>
@@ -337,7 +337,7 @@ export default function Packages() {
                           <button
                             type="submit"
                             disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
-                            className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-gray-800 font-medium shadow-sm border border-gray-200 transition-all duration-200 hover:shadow-md disabled:opacity-40 disabled:cursor-not-allowed`}
+                            className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-md`}
                           >
                             {language === 'fr' ? 'Calculer le coût' : 'Calculate Cost'}
                           </button>
@@ -376,7 +376,7 @@ export default function Packages() {
 
                         {/* CTA Button */}
                         <button
-                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-gray-800 font-medium shadow-sm border border-gray-200 transition-all duration-200 hover:shadow-md text-sm`}
+                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 text-sm`}
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
@@ -424,7 +424,7 @@ export default function Packages() {
 
                         {/* CTA Button */}
                         <button
-                          className={`w-full py-3 px-6 rounded-lg bg-gradient-to-r ${pkg.color.gradient} text-gray-800 font-medium shadow-sm border border-gray-200 transition-all duration-200 hover:shadow-md text-sm`}
+                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 text-sm`}
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');

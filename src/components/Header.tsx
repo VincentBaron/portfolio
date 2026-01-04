@@ -69,7 +69,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     { code: 'fr', label: 'FR', flag: '🇫🇷', sr: 'French / Français' },
   ];
   const renderLanguageSelector = () => (
-    <div className="flex items-center gap-1.5 rounded-full border-2 border-gray-300 bg-white px-2 py-1.5 shadow-sm">
+    <div className="flex items-center gap-1 rounded-lg border border-gray-200 bg-white/80 backdrop-blur-sm px-1.5 py-1 shadow-sm">
       {languageOptions.map(({ code, label, flag, sr }) => {
         const isActive = language === code;
         return (
@@ -77,16 +77,16 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             key={code}
             type="button"
             onClick={() => setLanguage(code)}
-            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
               isActive
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
             aria-pressed={isActive}
             aria-label={sr}
             title={sr}
           >
-            <span aria-hidden="true" className="text-base">{flag}</span>
+            <span aria-hidden="true" className="text-sm">{flag}</span>
             <span>{label}</span>
           </button>
         );
@@ -200,7 +200,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex items-center gap-4">
           <nav
-            className="relative bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-200 flex-1"
+            className="relative bg-white/95 backdrop-blur-md rounded-xl shadow-sm border border-gray-200/80 flex-1"
             aria-label="Main navigation"
           >
             <div className="flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20">
@@ -234,10 +234,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                         key={link.href}
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                        className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
                           isCurrent
-                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
-                            : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
+                            ? 'text-gray-900 bg-gradient-to-r from-blue-50 to-indigo-50'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                         }`}
                         aria-current={isCurrent ? 'page' : undefined}
                       >
@@ -304,7 +304,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
         <div className="hidden md:block">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200"
+            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md hover:shadow-lg transition-all duration-200"
           >
             {copy.bookCall}
           </button>
@@ -329,10 +329,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`block px-4 py-3 rounded-lg text-base font-black uppercase tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                className={`block px-4 py-3 rounded-lg text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
                   isCurrent
-                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
-                    : 'text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600'
+                    ? 'text-gray-900 bg-gradient-to-r from-blue-50 to-indigo-50'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
                 aria-current={isCurrent ? 'page' : undefined}
               >
@@ -349,7 +349,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 setIsMobileMenuOpen(false);
                 setIsModalOpen(true);
               }}
-              className="block w-full text-center px-5 py-3 rounded-lg text-base font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900 transition-all duration-200"
+              className="block w-full text-center px-5 py-3 rounded-lg text-base font-semibold tracking-wide text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md transition-all duration-200"
             >
               {copy.bookCall}
             </button>

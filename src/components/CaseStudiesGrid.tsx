@@ -24,7 +24,7 @@ export default function CaseStudiesGrid({
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-900 mb-3 sm:mb-4 lg:mb-6 uppercase tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4 lg:mb-6 tracking-tight">
             {sectionHeading}
           </h1>
         </div>

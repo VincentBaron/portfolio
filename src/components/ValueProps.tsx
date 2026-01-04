@@ -152,7 +152,7 @@ export default function ValueProps() {
           {values.map((value, index) => (
             <div
               key={index}
-              className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-gray-200 hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full"
+              className="group bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex flex-col h-full"
             >
               {/* Icon */}
               <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">

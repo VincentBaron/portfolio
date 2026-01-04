@@ -39,7 +39,7 @@ export default function ServicesMainCTA() {
             />
             <a
               href="#work"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 border-2 border-gray-300 hover:border-blue-600 transition-all duration-200"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-50 border border-gray-300 hover:border-gray-400 transition-all duration-200"
             >
               {copy.view}
             </a>

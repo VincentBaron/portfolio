@@ -32,15 +32,15 @@ export default function PartnerOrganizations() {
   return (
     <div className="mt-6 sm:mt-8 lg:mt-12">
       {/* Funding Counter */}
-      <div className="mb-6 sm:mb-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 sm:p-6 border-2 border-blue-100">
+      <div className="mb-6 sm:mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-6 border border-gray-200 shadow-sm">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex-1">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-2">
               {totalLabel}
             </h3>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-blue-700">
               {formattedAmount}
             </div>
           </div>
