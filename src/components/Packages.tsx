@@ -8,6 +8,7 @@ const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
 interface Package {
   id: number;
   name: string;
+  shortDescription: string;
   description: string;
   outputs: string[];
   price: string;
@@ -23,6 +24,7 @@ const packages: Package[] = [
   {
     id: 1,
     name: 'Audit Dino',
+    shortDescription: 'Deep dive into your operational bottlenecks',
     description: 'A comprehensive deep dive into your agency\'s current state. We map your entire operational structure, tool stack, and team workflows to identify the exact bottlenecks causing "tool fatigue". This is designed for leaders who feel overwhelmed by multiple tools (ATS, CRM, spreadsheets) and lack a clear operational system.',
     outputs: [
       'Operational Map: A visual breakdown of your current friction points.',
@@ -39,6 +41,7 @@ const packages: Package[] = [
   {
     id: 2,
     name: 'Cost Cutter Dino',
+    shortDescription: 'Calculate the real cost of your manual processes',
     description: 'Calculate the real cost of your manual processes.',
     outputs: [
       'Instant Cost Analysis: See monthly and annual costs of manual processes.',
@@ -56,12 +59,15 @@ const packages: Package[] = [
   {
     id: 3,
     name: 'Offensive Dino',
-    description: 'An AI-powered agent designed for aggressive growth. This tool scans competitor job listings and uses advanced logic to identify the end clients behind the postings. It moves you from a reactive to a proactive sales posture.',
+    shortDescription: 'AI-driven lead engine: 1 mandate per 3 calls',
+    description: '• Scans competitor job listings to identify real end clients\n• Converts 1 mandate per 3 calls (vs. 1 per 100 traditionally)\n• Plugs directly into your CRM\n• Designed for revenue per call, not activity metrics',
     outputs: [
-      'Lead Generation Engine: Automated identification of target accounts currently hiring.',
-      'Competitor Insights: Real-time data on where your competitors are winning business.'
+      'Demand-Triggered Lead Engine: Automatically identifies companies already spending on your competitors, turning job posts into high-intent entry points rather than speculative cold calls.',
+      '33× Mandate Conversion Uplift: Moves performance from 1 mandate per 100 cold calls to 1 per 3 calls, slashing call volume while increasing pipeline reliability.',
+      'Competitive Spend Intelligence: Reveals where competitors are actively placing talent, exposing who is buying, right now, and in which domains.',
+      'Revenue-Driven Pipeline Control: Transforms sourcing into a measurable, forecastable funnel — enabling you to scale revenue by improving probabilities, not by burning more leads.'
     ],
-    price: 'Custom Pricing',
+    price: '€3,000 Setup',
     color: {
       gradient: 'from-purple-50 to-purple-100',
       bg: 'bg-purple-50/50',
@@ -71,6 +77,7 @@ const packages: Package[] = [
   {
     id: 4,
     name: 'Protective Dino',
+    shortDescription: 'Protect your client relationships from competitors',
     description: 'Defensive AI for your intellectual property. We analyze your existing job listings to see if they are vulnerable to the same reverse-sourcing techniques used by competitors. This ensures your hard-earned client relationships stay protected.',
     outputs: [
       'Vulnerability Report: Analysis of which listings reveal too much client data.',
@@ -86,6 +93,7 @@ const packages: Package[] = [
   {
     id: 5,
     name: 'Sprint Dino',
+    shortDescription: 'Production-ready custom solutions in weeks',
     description: 'Focused, high-impact implementation for agencies ready to scale. Whether you need to integrate messy tools or build custom AI agents, we deliver production-ready code using a modern stack (React, TypeScript, Golang, Python). This is for Level 2 or 3 agencies needing specific, heavy-lifting solutions.',
     outputs: [
       'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
@@ -101,6 +109,7 @@ const packages: Package[] = [
   {
     id: 6,
     name: 'Fractional Dino',
+    shortDescription: 'Ongoing operational excellence & automation',
     description: 'Ongoing operational excellence. You get a fractional COO to continuously optimize your systems, automate repetitive tasks, and elevate how your team operates. We think like operators, not just tool-pushers, ensuring your tech evolves with your business.',
     outputs: [
       'Monthly Optimization: Continuous refinement of workflows and AI agents.',
@@ -198,7 +207,7 @@ export default function Packages() {
                 className={`relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
                     ? `shadow-lg ${pkg.color.bg} border border-gray-200`
-                    : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full min-h-[420px]'
+                    : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full min-h-[280px]'
                 }`}
                 onClick={() => togglePackage(pkg.id)}
               >
@@ -393,38 +402,61 @@ export default function Packages() {
                       <>
                         {/* Description */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-2 tracking-wide text-sm">
-                            {language === 'fr' ? 'Description' : 'Description'}
-                          </h4>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {pkg.description}
-                          </p>
+                          {/* Check if description contains bullet points */}
+                          {pkg.description.includes('•') ? (
+                            <ul className="space-y-2.5">
+                              {pkg.description.split('\n').map((line, idx) => (
+                                <li key={idx} className="flex items-start gap-3 text-sm">
+                                  <svg className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                  </svg>
+                                  <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                              {pkg.description}
+                            </p>
+                          )}
                         </div>
 
-                        {/* Outputs */}
-                        <div>
-                          <h4 className="font-semibold text-gray-900 mb-3 tracking-wide text-sm">
-                            {language === 'fr' ? 'Livrables' : 'Output'}
-                          </h4>
-                          <ul className="space-y-2">
-                            {pkg.outputs.map((output, idx) => (
-                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-600">
-                                <svg
-                                  className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5 opacity-70`}
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                                <span>{output}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        {/* Special Infographic for Offensive Dino */}
+                        {pkg.id === 3 && (
+                          <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
+                            <div className="flex items-center justify-center gap-8 mb-4">
+                              {/* Before */}
+                              <div className="text-center">
+                                <div className="text-xs font-medium text-gray-500 mb-2">
+                                  {language === 'fr' ? 'Avant' : 'Before'}
+                                </div>
+                                <div className="text-4xl font-bold text-gray-400">1/100</div>
+                                <div className="text-xs text-gray-500 mt-1">1%</div>
+                              </div>
+
+                              {/* Arrow */}
+                              <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                              </svg>
+
+                              {/* After */}
+                              <div className="text-center">
+                                <div className="text-xs font-medium text-gray-500 mb-2">
+                                  {language === 'fr' ? 'Après' : 'After'}
+                                </div>
+                                <div className="text-4xl font-bold text-purple-600">1/3</div>
+                                <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
+                              </div>
+                            </div>
+
+                            {/* Impact Badge */}
+                            <div className="text-center pt-4 border-t border-purple-200">
+                              <span className="text-sm font-bold text-purple-700">
+                                33× {language === 'fr' ? 'Efficacité' : 'Efficiency'}
+                              </span>
+                            </div>
+                          </div>
+                        )}
 
                         {/* CTA Button */}
                         <button
@@ -443,18 +475,20 @@ export default function Packages() {
 
                 {/* Collapsed Preview */}
                 {expandedId !== pkg.id && (
-                  <div className="p-8 flex-grow flex flex-col relative">
+                  <div className="p-6 flex-grow flex flex-col relative">
                     {/* Subtle corner decoration */}
-                    <div className="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-gray-200 opacity-30"></div>
+                    <div className="absolute bottom-6 right-6 w-12 h-12 border-r border-b border-gray-200 opacity-20"></div>
                     
-                    <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed flex-grow">
-                      {pkg.description}
+                    {/* Short one-line description */}
+                    <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+                      {pkg.shortDescription}
                     </p>
-                    <div className={`mt-5 text-sm font-medium ${pkg.color.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
+                    
+                    <div className={`mt-4 text-sm font-medium ${pkg.color.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
                       <span>
                         {pkg.hasCalculator 
-                          ? (language === 'fr' ? 'Calculer maintenant' : 'Calculate now')
-                          : (language === 'fr' ? 'En savoir plus' : 'Learn more')
+                          ? (language === 'fr' ? 'Calculer' : 'Calculate')
+                          : (language === 'fr' ? 'Voir plus' : 'Learn more')
                         }
                       </span>
                       <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
