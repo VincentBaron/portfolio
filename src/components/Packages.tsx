@@ -18,6 +18,7 @@ interface Package {
     text: string;
   };
   hasCalculator?: boolean;
+  creditNote?: string;
 }
 
 const packages: Package[] = [
@@ -25,13 +26,14 @@ const packages: Package[] = [
     id: 1,
     name: 'Audit Dino',
     shortDescription: 'Deep dive into your operational bottlenecks',
-    description: 'A comprehensive deep dive into your agency\'s current state. We map your entire operational structure, tool stack, and team workflows to identify the exact bottlenecks causing "tool fatigue". This is designed for leaders who feel overwhelmed by multiple tools (ATS, CRM, spreadsheets) and lack a clear operational system.',
+    description: '• Map your entire operational structure and tool stack\n• Identify exact bottlenecks causing "tool fatigue"\n• Get prioritized roadmap ranked by business impact',
     outputs: [
       'Operational Map: A visual breakdown of your current friction points.',
       'Prioritized Roadmap: Opportunities ranked by business impact (Time-to-Hire, Cost-per-Hire).',
       'ROI Business Case: Quantification of operational waste transformed into a clear implementation plan.'
     ],
     price: '€3,000',
+    creditNote: '100% credit from 1st implementation later',
     color: {
       gradient: 'from-blue-50 to-blue-100',
       bg: 'bg-blue-50/50',
@@ -83,7 +85,7 @@ const packages: Package[] = [
       'Vulnerability Report: Analysis of which listings reveal too much client data.',
       'Optimization Playbook: Guidelines for writing listings that attract talent without leaking client identities.'
     ],
-    price: 'Custom Pricing',
+    price: '€3,000 Setup',
     color: {
       gradient: 'from-indigo-50 to-indigo-100',
       bg: 'bg-indigo-50/50',
@@ -99,7 +101,7 @@ const packages: Package[] = [
       'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
       'System Documentation: Full hand-over of the new workflow or tool.'
     ],
-    price: '€7,000 – €15,000',
+    price: 'ROI-Based',
     color: {
       gradient: 'from-rose-50 to-rose-100',
       bg: 'bg-rose-50/50',
@@ -240,14 +242,25 @@ export default function Packages() {
 
                 {/* Price Badge with Minimal Design */}
                 <div className="px-8 py-5 border-b border-gray-100 relative">
-                  <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${pkg.color.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
-                    <svg className={`w-5 h-5 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className={`font-semibold text-base ${pkg.color.text}`}>{pkg.price}</span>
+                  <div className="flex items-center gap-4">
+                    <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${pkg.color.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
+                      <svg className={`w-5 h-5 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className={`font-semibold text-base ${pkg.color.text}`}>{pkg.price}</span>
+                    </div>
+                    {pkg.creditNote && (
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 border border-emerald-200/80 shadow-sm">
+                        <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-xs font-medium text-emerald-700">{pkg.creditNote}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
+                {/* Expandable Content */}
                 {/* Expandable Content */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
