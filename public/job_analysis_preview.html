@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings & Company Analysis Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header .meta {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+        .content {
+            padding: 40px;
+        }
+        .summary {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .summary h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .job-card {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .job-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .job-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .companies-grid {
+            display: grid;
+            gap: 15px;
+        }
+        .company {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            transition: border-color 0.2s;
+        }
+        .company:hover {
+            border-left-color: #764ba2;
+        }
+        .company.rank-1 {
+            border-left-color: #28a745;
+            background: #f1f9f4;
+        }
+        .company.rank-2 {
+            border-left-color: #ffc107;
+            background: #fffbf0;
+        }
+        .company.rank-3 {
+            border-left-color: #17a2b8;
+            background: #f0f9fa;
+        }
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .company-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .probability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .rank-1 .probability-badge {
+            color: #28a745;
+        }
+        .rank-2 .probability-badge {
+            color: #ffc107;
+        }
+        .rank-3 .probability-badge {
+            color: #17a2b8;
+        }
+        .score {
+            font-size: 1.2em;
+        }
+        .company-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 12px;
+        }
+        .company-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.95em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        .company-links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        .rank-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .rank-1 .rank-badge {
+            background: #28a745;
+        }
+        .rank-2 .rank-badge {
+            background: #ffc107;
+        }
+        .rank-3 .rank-badge {
+            background: #17a2b8;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .job-title {
+                font-size: 1.4em;
+            }
+            .company-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Job Listings & Company Analysis</h1>
+            <div class="meta">
+                <p>Generated: 1/4/2026, 5:41:34 PM</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="summary">
+                <h2>Summary</h2>
+                <p><strong>Total Jobs Analyzed:</strong> 5</p>
+                <p>Results sorted by highest probability score of top-ranked company</p>
+            </div>
+            
+            
+            <div class="job-card">
+                <div class="job-title">🎯 Conducteur·trice d'Opérations H/F</div>
+                
+                <div class="companies-grid">
+                    
+                    <div class="company rank-1">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #1</span>
+                                <div class="company-name">A2MO</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">10/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/a2mo/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.a2mo.fr" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                    <div class="company rank-2">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #2</span>
+                                <div class="company-name">ALTYN Groupe</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">4/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/altyn-groupe/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.altyn-groupe.com" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-title">🎯 Vendeur en Prêt-À-Porter H/F</div>
+                
+                <div class="companies-grid">
+                    
+                    <div class="company rank-1">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #1</span>
+                                <div class="company-name">BESTSELLER A/S</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">10/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/bestseller-group/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.bestseller.com" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                    <div class="company rank-2">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #2</span>
+                                <div class="company-name">BESTSELLER STORES FRANCE SAS</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">9/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/bestseller-stores-france/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.bestsellerfrance.com" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                    <div class="company rank-3">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #3</span>
+                                <div class="company-name">Jack & Jones (BESTSELLER brand)</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">7/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/jack-and-jones/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.jackjones.com" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-title">🎯 Dessinateur Projeteur - Projeteur Synthèse Technique H/F</div>
+                
+                <div class="companies-grid">
+                    
+                    <div class="company rank-1">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #1</span>
+                                <div class="company-name">BEST - Bureau d'Études Synthèse et Technique</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">10/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/best-bureau-d%27etudes-synthese-et-technique/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.agence-best.fr" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-title">🎯 Vendeurses Temps Plein H/F</div>
+                
+                <div class="companies-grid">
+                    
+                    <div class="company rank-1">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #1</span>
+                                <div class="company-name">Fnac Darty SA</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">10/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/fnac-darty/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.fnacdarty.com" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="job-card">
+                <div class="job-title">🎯 Ingénieur Confirmé Métier Courant Fort - Faible H/F</div>
+                
+                <div class="companies-grid">
+                    
+                    <div class="company rank-1">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #1</span>
+                                <div class="company-name">Assystem</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">9/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/assystem/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.assystem.com/" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                    <div class="company rank-2">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #2</span>
+                                <div class="company-name">EDF (Électricité de France)</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">6/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/edf/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.edf.fr/" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                    <div class="company rank-3">
+                        <div class="company-header">
+                            <div>
+                                <span class="rank-badge">Rank #3</span>
+                                <div class="company-name">Orano</div>
+                            </div>
+                            <div class="probability-badge">
+                                <span>Probability:</span>
+                                <span class="score">5/10</span>
+                            </div>
+                        </div>
+                        <div class="company-links">
+                            <a href="https://www.linkedin.com/company/orano/" target="_blank">🔗 LinkedIn</a>
+                            <a href="https://www.orano.fr/" target="_blank">🌐 Website</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>Generated by n8n workflow automation | 5 jobs processed</p>
+        </div>
+    </div>
+</body>
+</html>

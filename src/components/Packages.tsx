@@ -436,39 +436,56 @@ export default function Packages() {
 
                         {/* Special Infographic for Offensive Dino */}
                         {pkg.id === 3 && (
-                          <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
-                            <div className="flex items-center justify-center gap-8 mb-4">
-                              {/* Before */}
-                              <div className="text-center">
-                                <div className="text-xs font-medium text-gray-500 mb-2">
-                                  {language === 'fr' ? 'Avant' : 'Before'}
+                          <>
+                            <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
+                              <div className="flex items-center justify-center gap-8 mb-4">
+                                {/* Before */}
+                                <div className="text-center">
+                                  <div className="text-xs font-medium text-gray-500 mb-2">
+                                    {language === 'fr' ? 'Avant' : 'Before'}
+                                  </div>
+                                  <div className="text-4xl font-bold text-gray-400">1/100</div>
+                                  <div className="text-xs text-gray-500 mt-1">1%</div>
                                 </div>
-                                <div className="text-4xl font-bold text-gray-400">1/100</div>
-                                <div className="text-xs text-gray-500 mt-1">1%</div>
+
+                                {/* Arrow */}
+                                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+
+                                {/* After */}
+                                <div className="text-center">
+                                  <div className="text-xs font-medium text-gray-500 mb-2">
+                                    {language === 'fr' ? 'Après' : 'After'}
+                                  </div>
+                                  <div className="text-4xl font-bold text-purple-600">1/3</div>
+                                  <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
+                                </div>
                               </div>
 
-                              {/* Arrow */}
-                              <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                              {/* Impact Badge */}
+                              <div className="text-center pt-4 border-t border-purple-200">
+                                <span className="text-sm font-bold text-purple-700">
+                                  33× {language === 'fr' ? 'Efficacité' : 'Efficiency'}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Preview Link */}
+                            <a
+                              href="/job_analysis_preview.html"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 hover:border-purple-300 font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
-
-                              {/* After */}
-                              <div className="text-center">
-                                <div className="text-xs font-medium text-gray-500 mb-2">
-                                  {language === 'fr' ? 'Après' : 'After'}
-                                </div>
-                                <div className="text-4xl font-bold text-purple-600">1/3</div>
-                                <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
-                              </div>
-                            </div>
-
-                            {/* Impact Badge */}
-                            <div className="text-center pt-4 border-t border-purple-200">
-                              <span className="text-sm font-bold text-purple-700">
-                                33× {language === 'fr' ? 'Efficacité' : 'Efficiency'}
-                              </span>
-                            </div>
-                          </div>
+                              {language === 'fr' ? 'Voir l\'exemple d\'analyse' : 'View Sample Analysis'}
+                            </a>
+                          </>
                         )}
 
                         {/* CTA Button */}
