@@ -206,7 +206,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     stats: {
       projects: 'Projects Delivered',
       satisfaction: 'Client Satisfaction',
-      sprint: 'Average Sprint Time',
+      sprint: 'Avg Time to Market',
       rating: 'Average Rating',
     },
     companiesTitle: 'Companies we worked with',
@@ -445,7 +445,7 @@ export default function Hero({
               </div>
               <div className="flex flex-col items-center">
                 <div className="text-2xl font-semibold text-blue-700">
-                  {language === 'fr' ? '2 semaines' : '2 Weeks'}
+                  {language === 'fr' ? '1 semaine' : '1 Week'}
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{copy.stats.sprint}</p>
               </div>
