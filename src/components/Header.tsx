@@ -215,9 +215,9 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                   <img 
                     src="/logoBrand.png" 
                     alt="StudioDino" 
-                    className="h-10 w-auto transform group-hover:scale-105 transition-transform"
+                    className="h-8 w-auto transform group-hover:scale-105 transition-transform"
                   />
-                  <span className="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-200 -ml-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', color: '#4a3c5e' }}>
+                  <span className="text-xl font-light tracking-wide text-gray-700 group-hover:text-gray-900 transition-all duration-300 -ml-1" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', fontWeight: '300' }}>
                     StudioDino
                   </span>
                 </a>

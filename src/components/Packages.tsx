@@ -198,7 +198,7 @@ export default function Packages() {
                 className={`relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
                     ? `shadow-lg ${pkg.color.bg} border border-gray-200`
-                    : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full'
+                    : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full min-h-[420px]'
                 }`}
                 onClick={() => togglePackage(pkg.id)}
               >
@@ -258,7 +258,7 @@ export default function Packages() {
                           </p>
                         </div>
 
-                        <form onSubmit={handleCalculatorSubmit} className="space-y-4">
+                        <form onSubmit={handleCalculatorSubmit} className="space-y-4" onClick={(e) => e.stopPropagation()}>
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
                               <label htmlFor="hours" className="block text-sm font-medium text-gray-700 mb-2">
@@ -274,6 +274,7 @@ export default function Packages() {
                                   setHoursPerWeek(e.target.value);
                                   setError('');
                                 }}
+                                onClick={(e) => e.stopPropagation()}
                                 placeholder={language === 'fr' ? 'ex. 6' : 'e.g. 6'}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                               />
@@ -293,6 +294,7 @@ export default function Packages() {
                                   setPeopleCount(e.target.value);
                                   setError('');
                                 }}
+                                onClick={(e) => e.stopPropagation()}
                                 placeholder={language === 'fr' ? 'ex. 3' : 'e.g. 3'}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                               />
@@ -313,6 +315,7 @@ export default function Packages() {
                                 setMonthlyCostPerPerson(e.target.value);
                                 setError('');
                               }}
+                              onClick={(e) => e.stopPropagation()}
                               placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
                               className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                             />
@@ -327,6 +330,7 @@ export default function Packages() {
                               type="text"
                               value={processDescription}
                               onChange={(e) => setProcessDescription(e.target.value)}
+                              onClick={(e) => e.stopPropagation()}
                               placeholder={language === 'fr' ? 'ex. Validation des heures' : 'e.g. Time-tracking validation'}
                               className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                             />
