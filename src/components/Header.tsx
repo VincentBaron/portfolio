@@ -288,7 +288,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
         <div className="hidden md:block">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md hover:shadow-lg transition-all duration-200"
+            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm tracking-wide text-white bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md hover:shadow-lg transition-all duration-200 hover:shadow-xl transition-all duration-200 hover:scale-105"
           >
             {copy.bookCall}
           </button>
