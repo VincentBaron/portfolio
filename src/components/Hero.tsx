@@ -328,7 +328,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
 };
 
-const DINO_WORDS = ['ScanDino', 'CostDino', 'HuntDino', 'GuardDino', 'SprintDino', 'ProDino'];
+const DINO_WORDS = ['ScanDino', 'HuntDino', 'SprintDino', 'ProDino'];
 
 const DINO_COLORS: Record<string, string> = {
   'AI': 'bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent',

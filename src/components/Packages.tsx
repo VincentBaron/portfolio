@@ -488,6 +488,22 @@ export default function Packages() {
                           </>
                         )}
 
+                        {/* GuardDino Preview Link */}
+                        {pkg.id === 4 && (
+                          <a
+                            href="/guard_dino_preview.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-cyan-700 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
+                            {language === 'fr' ? 'Voir l\'exemple de rapport' : 'View Sample Report'}
+                          </a>
+                        )}
+
                         {/* CTA Button */}
                         <button
                           className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 text-sm`}
