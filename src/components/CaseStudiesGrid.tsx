@@ -1,6 +1,5 @@
 import { caseStudies, type LocalizedString } from '../data/caseStudies';
 import CaseStudyCard from './CaseStudyCard';
-import ServicesCTA from './ServicesCTA';
 import { useLanguage } from '../lib/language';
 
 interface CaseStudiesGridProps {
@@ -43,19 +42,6 @@ export default function CaseStudiesGrid({
             />
           ))}
         </div>
-
-        {/* Empty State / Coming Soon */}
-        {showCTA && (
-          <div className="mt-6 sm:mt-8 lg:mt-10 text-center">
-            <div className="flex justify-center">
-              <ServicesCTA
-                variant="purple"
-                label={ctaLabel}
-                showArrow={true}
-              />
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
