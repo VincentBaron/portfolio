@@ -117,69 +117,53 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     }
   };
 
-
-
+  // Simple hash-based active section tracking
   const [activeSection, setActiveSection] = useState('home');
 
+  // Initialize from URL hash on mount
   useEffect(() => {
-    if (currentPath !== '/') {
-      return;
-    }
-
-    const handleScroll = () => {
-      const sections = ['home', 'packages', 'work'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            if (activeSection !== section) {
-              setActiveSection(section);
-              // Update URL hash without triggering navigation
-              window.history.replaceState(null, '', `#${section}`);
-            }
-            break;
-          }
-        }
-      }
-    };
-
-    // Set initial active section from URL hash
-    const hash = window.location.hash.replace('#', '');
-    if (hash && ['home', 'packages', 'work'].includes(hash)) {
+    const hash = window.location.hash.replace('#', '') || 'home';
+    if (['home', 'packages', 'work'].includes(hash)) {
       setActiveSection(hash);
     }
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection, currentPath]);
+  }, []);
 
   const isCurrentPage = (href: string) => {
+    // If we're on a work detail page, highlight work tab
     if (href === '#work' && currentPath.startsWith('/work')) {
       return true;
     }
-
-    const section = href.replace('#', '');
-    return currentPath === '/' && section === activeSection;
+    
+    // On home page, check active section
+    if (currentPath === '/') {
+      const section = href.replace('#', '');
+      return section === activeSection;
+    }
+    
+    return false;
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+    
     if (href.startsWith('#')) {
+      // If not on home page, navigate to home first
       if (currentPath !== '/') {
         window.location.href = `/${href}`;
         return;
       }
+      
       const targetId = href.replace('#', '');
       const target = document.getElementById(targetId);
+      
       if (target) {
+        // Immediately update active section for instant feedback
+        setActiveSection(targetId);
+        
         // Update URL hash
         window.history.pushState(null, '', href);
-        setActiveSection(targetId);
+        
         // Smooth scroll to target
         target.scrollIntoView({
           behavior: 'smooth',
