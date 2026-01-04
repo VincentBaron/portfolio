@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import CalendlyModal from './CalendlyModal';
+import CalculatorModal from './CalculatorModal';
 import { useLanguage, type Language } from '../lib/language';
 
 const EMPLOYER_CHARGE_RATE = 0.44;
@@ -344,6 +345,7 @@ export default function Hero({
   calendarLink = 'https://cal.com/vincent-baron/30mins-meeting',
 }: HeroProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState(false);
   const [capturedPainpoint, setCapturedPainpoint] = useState('');
   const { language } = useLanguage();
   const copy = HERO_COPY[language];
@@ -465,6 +467,25 @@ export default function Hero({
                 </h1>
               </div>
 
+            </div>
+
+            {/* CTA Section */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+              <button
+                onClick={handleBookCall}
+                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-lg"
+              >
+                <span className="relative z-10">
+                  {language === 'en' ? 'Book a Free Audit' : 'Réserver un Audit Gratuit'}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+              </button>
+              <button
+                onClick={() => setIsCalculatorModalOpen(true)}
+                className="px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border-2 border-gray-200 hover:border-orange-300 text-lg"
+              >
+                {language === 'en' ? 'Calculate Your Costs' : 'Calculer Vos Coûts'}
+              </button>
             </div>
           </div>
 
@@ -638,6 +659,12 @@ export default function Hero({
           onClose={() => setIsModalOpen(false)}
           painpoint={capturedPainpoint}
           calendarLink={calendarLink}
+        />
+
+        {/* Calculator Modal */}
+        <CalculatorModal
+          isOpen={isCalculatorModalOpen}
+          onClose={() => setIsCalculatorModalOpen(false)}
         />
       </section>
     );

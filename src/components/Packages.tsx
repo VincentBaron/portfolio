@@ -41,24 +41,6 @@ const packages: Package[] = [
     }
   },
   {
-    id: 2,
-    name: 'CostDino',
-    shortDescription: 'Calculate the real cost of your manual processes',
-    description: 'Calculate the real cost of your manual processes.',
-    outputs: [
-      'Instant Cost Analysis: See monthly and annual costs of manual processes.',
-      'Full Breakdown: Includes gross salary + employer charges (44%).',
-      'Custom Report: Get a detailed audit and implementation recommendations via email.'
-    ],
-    price: 'Free Tool',
-    color: {
-      gradient: 'from-amber-50 to-amber-100',
-      bg: 'bg-amber-50/50',
-      text: 'text-amber-700'
-    },
-    hasCalculator: true
-  },
-  {
     id: 3,
     name: 'HuntDino',
     shortDescription: 'AI-driven lead engine: 1 mandate per 3 calls',
