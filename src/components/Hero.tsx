@@ -328,13 +328,14 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
 };
 
-const DINO_WORDS = ['ScanDino', 'HuntDino', 'GuardDino', 'SprintDino', 'ProDino'];
+const DINO_WORDS = ['ScanDino', 'CostDino', 'HuntDino', 'GuardDino', 'SprintDino', 'ProDino'];
 
 const DINO_COLORS: Record<string, string> = {
   'AI': 'bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent',
   'ScanDino': 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent',
+  'CostDino': 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 bg-clip-text text-transparent',
   'HuntDino': 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 bg-clip-text text-transparent',
-  'GuardDino': 'bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 bg-clip-text text-transparent',
+  'GuardDino': 'bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 bg-clip-text text-transparent',
   'SprintDino': 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 bg-clip-text text-transparent',
   'ProDino': 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 bg-clip-text text-transparent'
 };
@@ -449,7 +450,7 @@ export default function Hero({
                       <span className="inline-flex items-center justify-start gap-2 w-full overflow-visible">
                         <span className="relative">
                           Per Recruiter with
-                          <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold whitespace-nowrap absolute left-[calc(100%+0.5rem)] top-0`}>
+                          <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold whitespace-nowrap absolute left-[calc(100%+1rem)] top-0`}>
                             {displayText}
                           </span>
                         </span>

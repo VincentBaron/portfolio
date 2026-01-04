@@ -87,9 +87,9 @@ const packages: Package[] = [
     ],
     price: '€3,000 Setup',
     color: {
-      gradient: 'from-indigo-50 to-indigo-100',
-      bg: 'bg-indigo-50/50',
-      text: 'text-indigo-700'
+      gradient: 'from-cyan-50 to-cyan-100',
+      bg: 'bg-cyan-50/50',
+      text: 'text-cyan-700'
     }
   },
   {
