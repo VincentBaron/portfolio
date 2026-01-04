@@ -7,12 +7,18 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  keywords?: string;
+  author?: string;
+  type?: 'website' | 'article';
 }
 
 const {
-  title = "StudioDino",
+  title = "StudioDino - AI-Powered Recruiting Systems | Boost Net Margin Per Recruiter",
   description = 'Increase your Net Margin Per Recruiter with AI. We build AI-powered recruiting systems in 14 days that boost margins without hiring more staff.',
   ogImage = '/portfolio-case-study-cover.svg',
+  keywords = 'AI recruiting, recruiting automation, staffing software, recruiting systems, net margin per recruiter, AI staffing solutions, recruiting technology',
+  author = 'Vincent Baron',
+  type = 'website',
 } = Astro.props;
 
 const siteOrigin = Astro.url.origin;
@@ -35,17 +41,24 @@ const resolvedOgImage = ogImage.startsWith('http')
     <link rel="apple-touch-icon" href="/logoBrand.png" sizes="180x180"/>
     <meta name="generator" content={Astro.generator} />
     
-    <!-- SEO Meta Tags -->
+    <!-- Primary SEO Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:site_name" content="StudioDino" />
+    <meta property="og:locale" content="en_US" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -53,6 +66,26 @@ const resolvedOgImage = ogImage.startsWith('http')
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={resolvedOgImage} />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "StudioDino",
+        "alternateName": "2 Weeks to Solve It",
+        "url": "https://2weekstosolve.it",
+        "logo": "https://2weekstosolve.it/logoBrand.png",
+        "description": "AI-powered recruiting systems that boost net margin per recruiter",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "FR"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/vincent-baron-tech"
+        ]
+      }
+    </script>
     
     <!-- Plausible Analytics (cookieless) -->
     <script is:inline defer data-domain="2weekstosolve.it" src="https://plausible.io/js/script.js"></script>

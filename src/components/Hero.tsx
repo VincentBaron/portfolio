@@ -443,23 +443,21 @@ export default function Hero({
               
               {/* Main Headline */}
               <div className="space-y-6 relative z-10 flex justify-center w-full">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] text-center">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] text-center px-2">
                   {language === 'en' ? (
                     <>
                       Increase your Net Margin<br />
-                      <span className="inline-flex items-center justify-start gap-2 w-full overflow-visible">
-                        <span className="relative">
-                          Per Recruiter with
-                          <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold whitespace-nowrap absolute left-[calc(100%+1rem)] top-0`}>
-                            {displayText}
-                          </span>
+                      <span className="inline-block">
+                        Per Recruiter with{' '}
+                        <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold whitespace-nowrap inline-block min-w-[80px] sm:min-w-[120px] md:min-w-[150px] lg:min-w-[180px] text-left align-baseline`}>
+                          {displayText}
                         </span>
                       </span>
                     </>
                   ) : (
                     <>
                       {copy.headline.primary}{' '}
-                      <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold inline-block min-w-[180px] text-left`}>
+                      <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold inline-block min-w-[80px] sm:min-w-[120px] md:min-w-[150px] lg:min-w-[180px] text-left`}>
                         avec {displayText}
                       </span>
                     </>

@@ -5,9 +5,17 @@ import Packages from '../components/Packages';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
 import PartnerOrganizations from '../components/PartnerOrganizations';
 import ImpactIntro from '../components/ImpactIntro';
+
+const pageTitle = "StudioDino - AI-Powered Recruiting Systems | 7-Day Implementation";
+const pageDescription = "Increase your Net Margin Per Recruiter with AI. We build AI-powered recruiting systems in 14 days that boost margins without hiring more staff. Proven solutions for staffing agencies.";
+const pageKeywords = "AI recruiting systems, recruiting automation, staffing software, net margin per recruiter, AI staffing solutions, recruiting technology, staffing agency software, recruiting efficiency";
 ---
 
-<BaseLayout>
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription}
+  keywords={pageKeywords}
+>
   <!-- Home Section with Packages -->
   <section id="home" class="pt-16 sm:pt-20 lg:pt-24 pb-0">
     <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" showWithTestimonials={true} />
