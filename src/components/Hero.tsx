@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CalendlyModal from './CalendlyModal';
 import { useLanguage, type Language } from '../lib/language';
 
@@ -328,6 +328,8 @@ const HERO_COPY: Record<Language, HeroCopy> = {
   },
 };
 
+const DINO_WORDS = ['ScanDino', 'HuntDino', 'GuardDino', 'SprintDino', 'ProDino'];
+
 export default function Hero({ 
   calendarLink = 'https://cal.com/vincent-baron/30mins-meeting',
 }: HeroProps) {
@@ -335,6 +337,63 @@ export default function Hero({
   const [capturedPainpoint, setCapturedPainpoint] = useState('');
   const { language } = useLanguage();
   const copy = HERO_COPY[language];
+  
+  // Typing animation state
+  const [displayText, setDisplayText] = useState('AI');
+  const [phase, setPhase] = useState<'waiting' | 'erasing' | 'typing'>('waiting');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [targetText, setTargetText] = useState(DINO_WORDS[0]);
+  const [showCaret, setShowCaret] = useState(true);
+  
+  useEffect(() => {
+    // Blink caret
+    const caretInterval = setInterval(() => {
+      setShowCaret(prev => !prev);
+    }, 530);
+    
+    return () => clearInterval(caretInterval);
+  }, []);
+  
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    
+    if (phase === 'waiting') {
+      // Wait 2 seconds then start erasing
+      timeout = setTimeout(() => {
+        setPhase('erasing');
+      }, 2000);
+    } else if (phase === 'erasing') {
+      if (displayText.length > 0) {
+        // Erase one character
+        timeout = setTimeout(() => {
+          setDisplayText(prev => prev.slice(0, -1));
+        }, 100);
+      } else {
+        // Done erasing, start typing
+        setPhase('typing');
+      }
+    } else if (phase === 'typing') {
+      if (displayText.length < targetText.length) {
+        // Type one character
+        timeout = setTimeout(() => {
+          setDisplayText(targetText.slice(0, displayText.length + 1));
+        }, 150);
+      } else {
+        // Done typing, switch to next word and wait
+        if (targetText === 'AI') {
+          setTargetText(DINO_WORDS[0]);
+          setCurrentIndex(0);
+        } else {
+          const nextIndex = (currentIndex + 1) % DINO_WORDS.length;
+          setCurrentIndex(nextIndex);
+          setTargetText(nextIndex === 0 ? 'AI' : DINO_WORDS[nextIndex]);
+        }
+        setPhase('waiting');
+      }
+    }
+    
+    return () => clearTimeout(timeout);
+  }, [phase, displayText, targetText, currentIndex]);
   const headlineFocusToken = HIGHLIGHT_FOCUS_TOKENS.find((token) =>
     copy.headline.highlight.toLowerCase().includes(token.toLowerCase()),
   );
@@ -366,7 +425,7 @@ export default function Hero({
           {/* Hero Content */}
           <div className="flex flex-col gap-6 sm:gap-8 items-center mb-2">
             {/* Headline and Text */}
-            <div className="text-center flex flex-col gap-10 sm:gap-12 max-w-6xl mx-auto relative">
+            <div className="text-center flex flex-col gap-10 sm:gap-12 max-w-6xl mx-auto relative w-full">
               
               {/* Blur effect background */}
               <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -374,21 +433,25 @@ export default function Hero({
               </div>
               
               {/* Main Headline */}
-              <div className="space-y-6 relative z-10">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] px-4">
+              <div className="space-y-6 relative z-10 flex justify-center w-full">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] text-center">
                   {language === 'en' ? (
                     <>
                       Increase your Net Margin<br />
-                      Per Recruiter{' '}
-                      <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold whitespace-nowrap">
-                        with AI
+                      <span className="inline-flex items-center justify-start gap-2 w-full overflow-visible">
+                        <span className="relative">
+                          Per Recruiter with
+                          <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold whitespace-nowrap absolute left-[calc(100%+0.5rem)] top-0">
+                            {displayText}
+                          </span>
+                        </span>
                       </span>
                     </>
                   ) : (
                     <>
                       {copy.headline.primary}{' '}
-                      <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold">
-                        avec l'IA
+                      <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold inline-block min-w-[180px] text-left">
+                        avec {displayText}
                       </span>
                     </>
                   )}

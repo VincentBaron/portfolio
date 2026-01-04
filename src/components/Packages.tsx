@@ -24,7 +24,7 @@ interface Package {
 const packages: Package[] = [
   {
     id: 1,
-    name: 'Audit Dino',
+    name: 'ScanDino',
     shortDescription: 'Deep dive into your operational bottlenecks',
     description: '• Map your entire operational structure and tool stack\n• Identify exact bottlenecks causing "tool fatigue"\n• Get prioritized roadmap ranked by business impact',
     outputs: [
@@ -42,7 +42,7 @@ const packages: Package[] = [
   },
   {
     id: 2,
-    name: 'Cost Cutter Dino',
+    name: 'CostDino',
     shortDescription: 'Calculate the real cost of your manual processes',
     description: 'Calculate the real cost of your manual processes.',
     outputs: [
@@ -60,7 +60,7 @@ const packages: Package[] = [
   },
   {
     id: 3,
-    name: 'Offensive Dino',
+    name: 'HuntDino',
     shortDescription: 'AI-driven lead engine: 1 mandate per 3 calls',
     description: '• Scans competitor job listings to identify real end clients\n• Converts 1 mandate per 3 calls (vs. 1 per 100 traditionally)\n• Plugs directly into your CRM\n• Designed for revenue per call, not activity metrics',
     outputs: [
@@ -78,7 +78,7 @@ const packages: Package[] = [
   },
   {
     id: 4,
-    name: 'Protective Dino',
+    name: 'GuardDino',
     shortDescription: 'Protect your client relationships from competitors',
     description: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities\n• Provides automated recommendations to shield client identities while maintaining candidate appeal',
     outputs: [
@@ -94,7 +94,7 @@ const packages: Package[] = [
   },
   {
     id: 5,
-    name: 'Sprint Dino',
+    name: 'SprintDino',
     shortDescription: 'Production-ready custom solutions in weeks',
     description: '• Month-long sprint delivering a new production feature every week\n• Four complete features with comprehensive training and documentation',
     outputs: [
@@ -110,7 +110,7 @@ const packages: Package[] = [
   },
   {
     id: 6,
-    name: 'Fractional Dino',
+    name: 'ProDino',
     shortDescription: 'Ongoing operational excellence & automation',
     description: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
     outputs: [
