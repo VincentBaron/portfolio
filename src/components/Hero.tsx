@@ -172,7 +172,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
     testimonials: [
       {
         quote:
-          'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes. His focus on operational efficiency had a clear impact on how we delivered projects.',
+          'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes.',
         author: 'Holy Sicard-Razaka',
         role: 'Head of Product @ Randstad',
         image: '/holy.jpeg',
@@ -183,7 +183,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       },
       {
         quote:
-          'Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates. It streamlined our delivery process and reduced manual coordination.',
+          'Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates.',
         author: 'Alexis Doroszkiewicz',
         role: 'Full-Stack Developer @ Side',
         image: '/alexis.jpeg',
@@ -194,7 +194,7 @@ const HERO_COPY: Record<Language, HeroCopy> = {
       },
       {
         quote:
-          'Vincent proved highly effective at navigating our microservices environment to ensure smooth implementation. His work was crucial for expanding our platform’s capabilities.',
+          'Vincent’s work on optimising our internal processes was crucial for expanding our platform’s capabilities.',
         author: 'Guillaume Forgue',
         role: 'Lead Developer @ Qomon',
         image: '/guillaume.jpeg',
