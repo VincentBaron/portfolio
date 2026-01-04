@@ -80,7 +80,7 @@ const packages: Package[] = [
     id: 4,
     name: 'Protective Dino',
     shortDescription: 'Protect your client relationships from competitors',
-    description: 'Defensive AI for your intellectual property. We analyze your existing job listings to see if they are vulnerable to the same reverse-sourcing techniques used by competitors. This ensures your hard-earned client relationships stay protected.',
+    description: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities\n• Provides automated recommendations to shield client identities while maintaining candidate appeal',
     outputs: [
       'Vulnerability Report: Analysis of which listings reveal too much client data.',
       'Optimization Playbook: Guidelines for writing listings that attract talent without leaking client identities.'
@@ -96,7 +96,7 @@ const packages: Package[] = [
     id: 5,
     name: 'Sprint Dino',
     shortDescription: 'Production-ready custom solutions in weeks',
-    description: 'Focused, high-impact implementation for agencies ready to scale. Whether you need to integrate messy tools or build custom AI agents, we deliver production-ready code using a modern stack (React, TypeScript, Golang, Python). This is for Level 2 or 3 agencies needing specific, heavy-lifting solutions.',
+    description: '• Month-long sprint delivering a new production feature every week\n• Four complete features with comprehensive training and documentation',
     outputs: [
       'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
       'System Documentation: Full hand-over of the new workflow or tool.'
@@ -112,7 +112,7 @@ const packages: Package[] = [
     id: 6,
     name: 'Fractional Dino',
     shortDescription: 'Ongoing operational excellence & automation',
-    description: 'Ongoing operational excellence. You get a fractional COO to continuously optimize your systems, automate repetitive tasks, and elevate how your team operates. We think like operators, not just tool-pushers, ensuring your tech evolves with your business.',
+    description: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
     outputs: [
       'Monthly Optimization: Continuous refinement of workflows and AI agents.',
       'Team Onboarding & Training: Managing tool provisioning and internal knowledge bases (Notion).',
@@ -241,7 +241,7 @@ export default function Packages() {
                 </div>
 
                 {/* Price Badge with Minimal Design */}
-                <div className="px-8 py-5 border-b border-gray-100 relative">
+                <div className="px-8 py-5 relative">
                   <div className="flex items-center gap-4">
                     <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${pkg.color.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
                       <svg className={`w-5 h-5 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,7 +267,7 @@ export default function Packages() {
                     expandedId === pkg.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="p-8 space-y-6">
+                  <div className="px-8 pb-8 space-y-6">
                     {/* Calculator for Cost Cutter Dino */}
                     {pkg.hasCalculator && expandedId === pkg.id ? (
                       <div className="space-y-6">
