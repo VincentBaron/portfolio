@@ -193,15 +193,15 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 <a
                   href="#home"
                   onClick={(e) => handleNavClick(e, '#home')}
-                  className="flex items-end group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+                  className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
                   aria-label={copy.logoAria}
                 >
                   <img 
                     src="/logoBrand.png" 
                     alt="StudioDino" 
-                    className="h-8 w-auto transform group-hover:scale-105 transition-transform"
+                    className="h-12 w-auto transform group-hover:scale-105 transition-transform"
                   />
-                  <span className="text-xl font-light tracking-wide text-gray-700 group-hover:text-gray-900 transition-all duration-300 -ml-1" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', fontWeight: '300' }}>
+                  <span className="text-xl font-light tracking-wide text-gray-700 group-hover:text-gray-900 transition-all duration-300 -ml-3 relative top-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', fontWeight: '300' }}>
                     StudioDino
                   </span>
                 </a>
