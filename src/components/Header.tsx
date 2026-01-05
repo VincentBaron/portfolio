@@ -270,7 +270,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}
       >
-        <div className="px-8 pt-2 pb-6 space-y-3">
+        <div className="mx-4 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 px-8 pt-2 pb-6 space-y-3">
           {navLinks.map((link) => {
             const isCurrent = isCurrentPage(link.href);
             return (
