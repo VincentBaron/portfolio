@@ -50,7 +50,7 @@ export default function Hero({
   
   // Get the current word being shown/typed
   const getCurrentWord = () => {
-    return currentIndex === -1 ? 'AI' : DINO_WORDS[currentIndex];
+    return currentIndex === -1 ? `${t.hero.headline.highlight}` : DINO_WORDS[currentIndex];
   };
   
   useEffect(() => {
