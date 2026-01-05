@@ -1,151 +1,68 @@
 export type Language = 'en' | 'fr';
 
-export interface Translations {
-  // Header
-  header: {
-    nav: {
-      home: string;
-      packages: string;
-      work: string;
-    };
-    bookCall: string;
-    logoAria: string;
-    mobileOpen: string;
-    mobileClose: string;
-    toggleMenuAria: string;
-  };
+// ============================================================================
+// MULTILINGUAL CONTENT (Language keys within each item)
+// ============================================================================
 
-  // Hero
-  hero: {
-    calculator: {
-      title: string;
-      hoursLabel: string;
-      hoursPlaceholder: string;
-      peopleLabel: string;
-      peoplePlaceholder: string;
-      salaryLabel: string;
-      salaryPlaceholder: string;
-      descriptionLabel: string;
-      descriptionPlaceholder: string;
-      submitCta: string;
-      resultTitle: string;
-      monthlyLabel: string;
-      annualLabel: string;
-      assumption: string;
-      currencySymbol: string;
-    };
-    headline: {
-      primary: string;
-      highlight: string;
-    };
-    intro: {
-      primary: string;
-      secondary: string;
-    };
-    validation: {
-      empty: string;
-      short: string;
-      long: string;
-      emailEmpty: string;
-      emailInvalid: string;
-      missingPainpoint: string;
-      submissionFailed: string;
-      unexpected: string;
-    };
-    emailStep: {
-      badge: string;
-      heading: string;
-      capturedLabel: string;
-      instructions: string;
-      emailLabel: string;
-      emailPlaceholder: string;
-      phoneLabel: string;
-      phoneOptional: string;
-      phonePlaceholder: string;
-      sending: string;
-      send: string;
-      shareAnother: string;
-      unlockHint: string;
-      formHint: string;
-    };
-    emailSubmitted: {
-      badge: string;
-      headingTemplate: string;
-      reviewingLabel: string;
-      followUp: string;
-      buttons: {
-        bookCall: string;
-        shareAnother: string;
-      };
-    };
-    testimonialsTitle: string;
-    testimonials: Array<{
-      quote: string;
-      author: string;
-      role: string;
-      image: string;
-      alt: Record<Language, string>;
-    }>;
-    stats: {
-      projects: string;
-      satisfaction: string;
-      sprint: string;
-      rating: string;
-    };
-    companiesTitle: string;
-    cta: {
-      bookAudit: string;
-      calculateCosts: string;
-    };
-  };
-
-  // Packages
-  packages: {
-    title: string;
-    calculator: {
-      title: string;
-      hoursLabel: string;
-      hoursPlaceholder: string;
-      peopleLabel: string;
-      peoplePlaceholder: string;
-      salaryLabel: string;
-      salaryPlaceholder: string;
-      descriptionLabel: string;
-      descriptionPlaceholder: string;
-      calculateCta: string;
-      estimatedCost: string;
-      monthly: string;
-      annually: string;
-      assumption: string;
-      discussResults: string;
-      allFieldsRequired: string;
-      positiveValues: string;
-    };
-    learnMore: string;
-    calculate: string;
-    bookCall: string;
-    before: string;
-    after: string;
-    efficiency: string;
-    viewSampleAnalysis: string;
-    viewSampleReport: string;
-  };
-
-  // Footer
-  footer: {
-    rights: string;
-    pledgePrefix: string;
-    privacy: string;
-    terms: string;
-  };
-
-  // Case Studies
-  caseStudies: {
-    title: string;
-    readCaseStudy: string;
-    startProject: string;
-  };
+// Testimonials with multilingual content
+export interface Testimonial {
+  quote: Record<Language, string>;
+  author: string;
+  role: Record<Language, string>;
+  image: string;
+  alt: Record<Language, string>;
 }
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: {
+      en: 'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes.',
+      fr: 'Vincent a amélioré nos outils internes et nos workflows, permettant à l\'équipe Ops de gagner un temps considérable au quotidien. Son focus en efficacité opérationnelle a eu un impact direct sur notre delivery.',
+    },
+    author: 'Holy Sicard-Razaka',
+    role: {
+      en: 'Head of Product @ Randstad',
+      fr: 'Head of Product chez Side',
+    },
+    image: '/holy.jpeg',
+    alt: {
+      en: 'Holy Sicard-Razaka, Head of Product at Randstads',
+      fr: 'Holy Sicard-Razaka, Head of Product chez Randstads',
+    },
+  },
+  {
+    quote: {
+      en: 'Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates.',
+      fr: 'Vincent a mis en place des automatisations pour synchroniser les sorties produit entre la tech et le produit — Slack, GitLab, etc. Cela a fluidifié notre delivery et réduit la coordination manuelle.',
+    },
+    author: 'Alexis Doroszkiewicz',
+    role: {
+      en: 'Full-Stack Developer @ Side',
+      fr: 'Développeur full-stack chez Side',
+    },
+    image: '/alexis.jpeg',
+    alt: {
+      en: 'Alexis Doroszkiewicz, Full-Stack Developer at Side',
+      fr: 'Alexis Doroszkiewicz, développeur full-stack chez Side',
+    },
+  },
+  {
+    quote: {
+      en: 'Vincent\'s work on optimising our internal processes was crucial for expanding our platform\'s capabilities.',
+      fr: 'Vincent s\'est montré très efficace pour naviguer dans notre environnement microservices et assurer une implémentation fluide. Son travail a été crucial pour étendre les capacités de notre plateforme.',
+    },
+    author: 'Guillaume Forgue',
+    role: {
+      en: 'Lead Developer @ Qomon',
+      fr: 'Lead developer chez Qomon',
+    },
+    image: '/guillaume.jpeg',
+    alt: {
+      en: 'Guillaume Forgue, Lead Developer at Qomon',
+      fr: 'Guillaume Forgue, lead developer chez Qomon',
+    },
+  },
+];
 
 // Package items with multilingual content
 export interface PackageItem {
@@ -303,6 +220,150 @@ export const packageItems: PackageItem[] = [
   },
 ];
 
+// ============================================================================
+// STATIC TRANSLATIONS (Simple key-value per language)
+// ============================================================================
+
+export interface Translations {
+  // Header
+  header: {
+    nav: {
+      home: string;
+      packages: string;
+      work: string;
+    };
+    bookCall: string;
+    logoAria: string;
+    mobileOpen: string;
+    mobileClose: string;
+    toggleMenuAria: string;
+  };
+
+  // Hero
+  hero: {
+    calculator: {
+      title: string;
+      hoursLabel: string;
+      hoursPlaceholder: string;
+      peopleLabel: string;
+      peoplePlaceholder: string;
+      salaryLabel: string;
+      salaryPlaceholder: string;
+      descriptionLabel: string;
+      descriptionPlaceholder: string;
+      submitCta: string;
+      resultTitle: string;
+      monthlyLabel: string;
+      annualLabel: string;
+      assumption: string;
+      currencySymbol: string;
+    };
+    headline: {
+      primary: string;
+      highlight: string;
+    };
+    intro: {
+      primary: string;
+      secondary: string;
+    };
+    validation: {
+      empty: string;
+      short: string;
+      long: string;
+      emailEmpty: string;
+      emailInvalid: string;
+      missingPainpoint: string;
+      submissionFailed: string;
+      unexpected: string;
+    };
+    emailStep: {
+      badge: string;
+      heading: string;
+      capturedLabel: string;
+      instructions: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      phoneLabel: string;
+      phoneOptional: string;
+      phonePlaceholder: string;
+      sending: string;
+      send: string;
+      shareAnother: string;
+      unlockHint: string;
+      formHint: string;
+    };
+    emailSubmitted: {
+      badge: string;
+      headingTemplate: string;
+      reviewingLabel: string;
+      followUp: string;
+      buttons: {
+        bookCall: string;
+        shareAnother: string;
+      };
+    };
+    testimonialsTitle: string;
+    stats: {
+      projects: string;
+      satisfaction: string;
+      sprint: string;
+      rating: string;
+    };
+    companiesTitle: string;
+    cta: {
+      bookAudit: string;
+      calculateCosts: string;
+    };
+  };
+
+  // Packages
+  packages: {
+    title: string;
+    calculator: {
+      title: string;
+      hoursLabel: string;
+      hoursPlaceholder: string;
+      peopleLabel: string;
+      peoplePlaceholder: string;
+      salaryLabel: string;
+      salaryPlaceholder: string;
+      descriptionLabel: string;
+      descriptionPlaceholder: string;
+      calculateCta: string;
+      estimatedCost: string;
+      monthly: string;
+      annually: string;
+      assumption: string;
+      discussResults: string;
+      allFieldsRequired: string;
+      positiveValues: string;
+    };
+    learnMore: string;
+    calculate: string;
+    bookCall: string;
+    before: string;
+    after: string;
+    efficiency: string;
+    viewSampleAnalysis: string;
+    viewSampleReport: string;
+  };
+
+  // Footer
+  footer: {
+    rights: string;
+    pledgePrefix: string;
+    privacy: string;
+    terms: string;
+  };
+
+  // Case Studies
+  caseStudies: {
+    title: string;
+    readCaseStudy: string;
+    startProject: string;
+  };
+}
+
 export const translations: Record<Language, Translations> = {
   en: {
     header: {
@@ -381,38 +442,6 @@ export const translations: Record<Language, Translations> = {
         },
       },
       testimonialsTitle: 'They Trusted Us',
-      testimonials: [
-        {
-          quote: 'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes.',
-          author: 'Holy Sicard-Razaka',
-          role: 'Head of Product @ Randstad',
-          image: '/holy.jpeg',
-          alt: {
-            en: 'Holy Sicard-Razaka, Head of Product at Randstads',
-            fr: 'Holy Sicard-Razaka, Head of Product chez Randstads',
-          },
-        },
-        {
-          quote: 'Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates.',
-          author: 'Alexis Doroszkiewicz',
-          role: 'Full-Stack Developer @ Side',
-          image: '/alexis.jpeg',
-          alt: {
-            en: 'Alexis Doroszkiewicz, Full-Stack Developer at Side',
-            fr: 'Alexis Doroszkiewicz, développeur full-stack chez Side',
-          },
-        },
-        {
-          quote: 'Vincent\'s work on optimising our internal processes was crucial for expanding our platform\'s capabilities.',
-          author: 'Guillaume Forgue',
-          role: 'Lead Developer @ Qomon',
-          image: '/guillaume.jpeg',
-          alt: {
-            en: 'Guillaume Forgue, Lead Developer at Qomon',
-            fr: 'Guillaume Forgue, lead developer chez Qomon',
-          },
-        },
-      ],
       stats: {
         projects: 'Projects Delivered',
         satisfaction: 'Client Satisfaction',
@@ -548,38 +577,6 @@ export const translations: Record<Language, Translations> = {
         },
       },
       testimonialsTitle: 'Ils m\'ont fait confiance',
-      testimonials: [
-        {
-          quote: 'Vincent a amélioré nos outils internes et nos workflows, permettant à l\'équipe Ops de gagner un temps considérable au quotidien. Son focus en efficacité opérationnelle a eu un impact direct sur notre delivery.',
-          author: 'Holy Sicard-Razaka',
-          role: 'Head of Product chez Side',
-          image: '/holy.jpeg',
-          alt: {
-            en: 'Holy Sicard-Razaka, Head of Product at Side',
-            fr: 'Holy Sicard-Razaka, Head of Product chez Side',
-          },
-        },
-        {
-          quote: 'Vincent a mis en place des automatisations pour synchroniser les sorties produit entre la tech et le produit — Slack, GitLab, etc. Cela a fluidifié notre delivery et réduit la coordination manuelle.',
-          author: 'Alexis Doroszkiewicz',
-          role: 'Développeur full-stack chez Side',
-          image: '/alexis.jpeg',
-          alt: {
-            en: 'Alexis Doroszkiewicz, Full-Stack Developer at Side',
-            fr: 'Alexis Doroszkiewicz, développeur full-stack chez Side',
-          },
-        },
-        {
-          quote: 'Vincent s\'est montré très efficace pour naviguer dans notre environnement microservices et assurer une implémentation fluide. Son travail a été crucial pour étendre les capacités de notre plateforme.',
-          author: 'Guillaume Forgue',
-          role: 'Lead developer chez Qomon',
-          image: '/guillaume.jpeg',
-          alt: {
-            en: 'Guillaume Forgue, Lead Developer at Qomon',
-            fr: 'Guillaume Forgue, lead developer chez Qomon',
-          },
-        },
-      ],
       stats: {
         projects: 'Projets livrés',
         satisfaction: 'Satisfaction client',
