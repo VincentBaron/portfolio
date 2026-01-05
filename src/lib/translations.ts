@@ -187,7 +187,7 @@ export const packageItems: PackageItem[] = [
     },
     price: {
       en: 'ROI-Based',
-      fr: 'Basé sur le ROI',
+      fr: 'Basé sur ROI',
     },
   },
   {
