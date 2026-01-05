@@ -20,15 +20,15 @@ interface HeroProps {
   showWithTestimonials?: boolean;
 }
 
-const DINO_WORDS = ['ScanDino', 'HuntDino', 'SprintDino', 'ProDino'];
+const DINO_WORDS = ['AuditDino', 'MandateDino', 'CustomDino', 'ProDino'];
 
 const DINO_COLORS: Record<string, string> = {
   'AI': 'bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent',
-  'ScanDino': 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent',
+  'AuditDino': 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent',
   'CostDino': 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 bg-clip-text text-transparent',
-  'HuntDino': 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 bg-clip-text text-transparent',
-  'GuardDino': 'bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 bg-clip-text text-transparent',
-  'SprintDino': 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 bg-clip-text text-transparent',
+  'MandateDino': 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 bg-clip-text text-transparent',
+  'ProtectDino': 'bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 bg-clip-text text-transparent',
+  'CustomDino': 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 bg-clip-text text-transparent',
   'ProDino': 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 bg-clip-text text-transparent'
 };
 

@@ -78,7 +78,7 @@ export interface PackageItem {
 export const packageItems: PackageItem[] = [
   {
     id: 1,
-    name: 'ScanDino',
+    name: 'AuditDino',
     shortDescription: {
       en: 'Audit your operations and get an actionable ROI-based roadmap',
       fr: 'Auditez vos opérations et obtenez une feuille de route ROI actionnable',
@@ -110,7 +110,7 @@ export const packageItems: PackageItem[] = [
   },
   {
     id: 3,
-    name: 'HuntDino',
+    name: 'MandateDino',
     shortDescription: {
       en: 'AI-driven lead engine: 1 mandate per 3 calls',
       fr: 'Moteur de leads IA : 1 mandat pour 3 appels',
@@ -140,7 +140,7 @@ export const packageItems: PackageItem[] = [
   },
   {
     id: 4,
-    name: 'GuardDino',
+    name: 'ProtectDino',
     shortDescription: {
       en: 'Protect your mandates from competition',
       fr: 'Protégez vos mandats de la concurrence',
@@ -166,7 +166,7 @@ export const packageItems: PackageItem[] = [
   },
   {
     id: 5,
-    name: 'SprintDino',
+    name: 'CustomDino',
     shortDescription: {
       en: 'Production-ready custom solutions in weeks',
       fr: 'Solutions sur mesure prêtes pour la production en quelques semaines',
