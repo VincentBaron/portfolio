@@ -80,12 +80,12 @@ export const packageItems: PackageItem[] = [
     id: 1,
     name: 'ScanDino',
     shortDescription: {
-      en: 'Deep dive into your operational bottlenecks',
-      fr: 'Analyse approfondie de vos goulets d\'étranglement opérationnels',
+      en: 'Audit your operations and get an actionable ROI-based roadmap',
+      fr: 'Auditez vos opérations et obtenez une feuille de route ROI actionnable',
     },
     description: {
-      en: '• Map your entire operational structure and tool stack\n• Identify exact bottlenecks causing "tool fatigue"\n• Get prioritized roadmap ranked by business impact',
-      fr: '• Cartographie de toute votre structure opérationnelle et pile d\'outils\n• Identification des goulets d\'étranglement causant la "fatigue des outils"\n• Feuille de route priorisée selon l\'impact business',
+      en: '• Visibility on existing processes, time and money leaks\n• Audit of your current tech stack\n• Actionable ROI-based roadmap to start eliminating inefficiencies',
+      fr: '• Visibilité sur les processus existants, fuites de temps et d\'argent\n• Audit de votre pile technologique actuelle\n• Feuille de route ROI actionnable pour éliminer les inefficacités',
     },
     outputs: {
       en: [
@@ -101,11 +101,11 @@ export const packageItems: PackageItem[] = [
     },
     price: {
       en: '€3,000',
-      fr: '€3,000',
+      fr: '3 000 €',
     },
     creditNote: {
-      en: '100% credit from 1st implementation later',
-      fr: 'Crédit 100% sur la 1ère implémentation',
+      en: '100% credit',
+      fr: '100% crédité',
     },
   },
   {
@@ -134,16 +134,16 @@ export const packageItems: PackageItem[] = [
       ],
     },
     price: {
-      en: '€3,000 Setup',
-      fr: '€3,000 Installation',
+      en: '€6,000 Setup',
+      fr: '€6,000 Installation',
     },
   },
   {
     id: 4,
     name: 'GuardDino',
     shortDescription: {
-      en: 'Protect your client relationships from competitors',
-      fr: 'Protégez vos relations clients de la concurrence',
+      en: 'Protect your mandates from competition',
+      fr: 'Protégez vos mandats de la concurrence',
     },
     description: {
       en: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities\n• Provides automated recommendations to shield client identities while maintaining candidate appeal',
@@ -320,6 +320,7 @@ export interface Translations {
   // Packages
   packages: {
     title: string;
+    cta: string;
     calculator: {
       title: string;
       hoursLabel: string;
@@ -459,6 +460,7 @@ export const translations: Record<Language, Translations> = {
 
     packages: {
       title: 'Our Packages',
+      cta: 'Choose your custom package',
       calculator: {
         title: 'Calculate Your Cost',
         hoursLabel: 'Hours/week',
@@ -594,7 +596,8 @@ export const translations: Record<Language, Translations> = {
     },
 
     packages: {
-      title: 'Nos Forfaits',
+      title: 'Nos Packages',
+      cta: 'Choissisez votre package',
       calculator: {
         title: 'Calculez votre coût',
         hoursLabel: 'Heures/semaine',
@@ -634,7 +637,7 @@ export const translations: Record<Language, Translations> = {
     caseStudies: {
       title: 'Études de cas',
       readCaseStudy: 'Voir le projet',
-      startProject: 'Lancer votre projet',
+      startProject: 'Lancez votre projet',
     },
   },
 };

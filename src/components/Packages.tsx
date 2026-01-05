@@ -2,77 +2,52 @@ import { useState } from 'react';
 import { useLanguage } from '../lib/language';
 import { getTranslations, packageItems } from '../lib/translations';
 
-const EMPLOYER_CHARGE_RATE = 0.44;
-const EMPLOYER_CHARGE_PERCENT = Math.round(EMPLOYER_CHARGE_RATE * 100);
-const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
-
 export default function Packages() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const { language } = useLanguage();
   const t = getTranslations(language);
   
-  // Package colors configuration
+  // Package colors configuration - matching hero animations
   const packageColors = [
-    { gradient: 'from-blue-50 to-blue-100', bg: 'bg-blue-50/50', text: 'text-blue-700' },
-    { gradient: 'from-purple-50 to-purple-100', bg: 'bg-purple-50/50', text: 'text-purple-700' },
-    { gradient: 'from-cyan-50 to-cyan-100', bg: 'bg-cyan-50/50', text: 'text-cyan-700' },
-    { gradient: 'from-rose-50 to-rose-100', bg: 'bg-rose-50/50', text: 'text-rose-700' },
-    { gradient: 'from-emerald-50 to-emerald-100', bg: 'bg-emerald-50/50', text: 'text-emerald-700' },
+    { 
+      gradient: 'from-blue-50 to-blue-100', 
+      bg: 'bg-blue-50/50', 
+      text: 'text-blue-700',
+      button: 'from-blue-600 via-blue-500 to-blue-400',
+      buttonHover: 'from-blue-700 via-blue-600 to-blue-500'
+    },
+    { 
+      gradient: 'from-purple-50 to-purple-100', 
+      bg: 'bg-purple-50/50', 
+      text: 'text-purple-700',
+      button: 'from-purple-600 via-purple-500 to-purple-400',
+      buttonHover: 'from-purple-700 via-purple-600 to-purple-500'
+    },
+    { 
+      gradient: 'from-cyan-50 to-cyan-100', 
+      bg: 'bg-cyan-50/50', 
+      text: 'text-cyan-700',
+      button: 'from-cyan-600 via-cyan-500 to-cyan-400',
+      buttonHover: 'from-cyan-700 via-cyan-600 to-cyan-500'
+    },
+    { 
+      gradient: 'from-rose-50 to-rose-100', 
+      bg: 'bg-rose-50/50', 
+      text: 'text-rose-700',
+      button: 'from-rose-600 via-rose-500 to-rose-400',
+      buttonHover: 'from-rose-700 via-rose-600 to-rose-500'
+    },
+    { 
+      gradient: 'from-emerald-50 to-emerald-100', 
+      bg: 'bg-emerald-50/50', 
+      text: 'text-emerald-700',
+      button: 'from-emerald-600 via-emerald-500 to-emerald-400',
+      buttonHover: 'from-emerald-700 via-emerald-600 to-emerald-500'
+    },
   ];
-
-  // Calculator state
-  const [hoursPerWeek, setHoursPerWeek] = useState('');
-  const [peopleCount, setPeopleCount] = useState('');
-  const [monthlyCostPerPerson, setMonthlyCostPerPerson] = useState('');
-  const [processDescription, setProcessDescription] = useState('');
-  const [calculatedMonthlyCost, setCalculatedMonthlyCost] = useState<number | null>(null);
-  const [calculatedAnnualCost, setCalculatedAnnualCost] = useState<number | null>(null);
-  const [error, setError] = useState('');
 
   const togglePackage = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
-    // Reset calculator when closing
-    if (expandedId === id) {
-      setHoursPerWeek('');
-      setPeopleCount('');
-      setMonthlyCostPerPerson('');
-      setProcessDescription('');
-      setCalculatedMonthlyCost(null);
-      setCalculatedAnnualCost(null);
-      setError('');
-    }
-  };
-
-  const handleCalculatorSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const hours = parseFloat(hoursPerWeek);
-    const people = Math.round(parseFloat(peopleCount));
-    const grossSalary = parseFloat(monthlyCostPerPerson);
-
-    if (!Number.isFinite(hours) || !Number.isFinite(people) || !Number.isFinite(grossSalary)) {
-      setError(t.packages.calculator.allFieldsRequired);
-      return;
-    }
-    if (hours <= 0 || people <= 0 || grossSalary <= 0) {
-      setError(t.packages.calculator.positiveValues);
-      return;
-    }
-
-    const monthlyEmployerCostPerPerson = grossSalary * EMPLOYER_MULTIPLIER;
-    const monthlyCost = monthlyEmployerCostPerPerson * (hours / 40) * people;
-    const annualCost = monthlyCost * 12;
-
-    setError('');
-    setCalculatedMonthlyCost(monthlyCost);
-    setCalculatedAnnualCost(annualCost);
-  };
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'en-US', {
-      style: 'currency',
-      currency: 'EUR',
-      maximumFractionDigits: 0,
-    }).format(Math.round(value));
   };
 
   return (
@@ -152,179 +127,35 @@ export default function Packages() {
                 </div>
 
                 {/* Expandable Content */}
-                {/* Expandable Content */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
                     expandedId === pkg.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="px-8 pb-8 space-y-6">
-                    {/* Calculator for ScanDino (id: 1) */}
-                    {pkg.id === 1 && expandedId === pkg.id ? (
-                      <div className="space-y-6">
-                        <div>
-                          <h4 className="font-semibold text-gray-900 mb-2 tracking-wide text-sm">
-                            {t.packages.calculator.title}
-                          </h4>
-                          <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                            {pkg.description[language]}
-                          </p>
-                        </div>
+                    {/* Description */}
+                    <div>
+                      {/* Check if description contains bullet points */}
+                      {pkg.description[language].includes('•') ? (
+                        <ul className="space-y-2.5">
+                          {pkg.description[language].split('\n').map((line: string, idx: number) => (
+                            <li key={idx} className="flex items-start gap-3 text-sm">
+                              <svg className={`w-5 h-5 ${pkgColor.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {pkg.description[language]}
+                        </p>
+                      )}
+                    </div>
 
-                        <form onSubmit={handleCalculatorSubmit} className="space-y-4" onClick={(e) => e.stopPropagation()}>
-                          <div className="grid gap-4 sm:grid-cols-2">
-                            <div>
-                              <label htmlFor="hours" className="block text-sm font-medium text-gray-700 mb-2">
-                                {t.packages.calculator.hoursLabel}
-                              </label>
-                              <input
-                                id="hours"
-                                type="number"
-                                min="0"
-                                step="0.5"
-                                value={hoursPerWeek}
-                                onChange={(e) => {
-                                  setHoursPerWeek(e.target.value);
-                                  setError('');
-                                }}
-                                onClick={(e) => e.stopPropagation()}
-                                placeholder={t.packages.calculator.hoursPlaceholder}
-                                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                              />
-                            </div>
-
-                            <div>
-                              <label htmlFor="people" className="block text-sm font-medium text-gray-700 mb-2">
-                                {t.packages.calculator.peopleLabel}
-                              </label>
-                              <input
-                                id="people"
-                                type="number"
-                                min="1"
-                                step="1"
-                                value={peopleCount}
-                                onChange={(e) => {
-                                  setPeopleCount(e.target.value);
-                                  setError('');
-                                }}
-                                onClick={(e) => e.stopPropagation()}
-                                placeholder={t.packages.calculator.peoplePlaceholder}
-                                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <label htmlFor="salary" className="block text-sm font-medium text-gray-700 mb-2">
-                              {t.packages.calculator.salaryLabel}
-                            </label>
-                            <input
-                              id="salary"
-                              type="number"
-                              min="0"
-                              step="any"
-                              value={monthlyCostPerPerson}
-                              onChange={(e) => {
-                                setMonthlyCostPerPerson(e.target.value);
-                                setError('');
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                              placeholder={t.packages.calculator.salaryPlaceholder}
-                              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                            />
-                          </div>
-
-                          <div>
-                            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                              {t.packages.calculator.descriptionLabel}
-                            </label>
-                            <input
-                              id="description"
-                              type="text"
-                              value={processDescription}
-                              onChange={(e) => setProcessDescription(e.target.value)}
-                              onClick={(e) => e.stopPropagation()}
-                              placeholder={t.packages.calculator.descriptionPlaceholder}
-                              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                            />
-                          </div>
-
-                          {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
-
-                          <button
-                            type="submit"
-                            disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
-                            className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-md`}
-                          >
-                            {t.packages.calculator.calculateCta}
-                          </button>
-                        </form>
-
-                        {calculatedMonthlyCost !== null && calculatedAnnualCost !== null && (
-                          <div className={`${pkgColor.bg} border border-gray-200 rounded-xl p-5 space-y-3 shadow-sm`}>
-                            <h5 className={`font-semibold ${pkgColor.text} text-sm`}>
-                              {t.packages.calculator.estimatedCost}
-                            </h5>
-                            <div className="grid gap-3 sm:grid-cols-2">
-                              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                                <p className="text-xs text-gray-600 font-medium mb-1">
-                                  {t.packages.calculator.monthly}
-                                </p>
-                                <p className={`text-2xl font-semibold ${pkgColor.text}`}>
-                                  {formatCurrency(calculatedMonthlyCost)}
-                                </p>
-                              </div>
-                              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                                <p className="text-xs text-gray-600 font-medium mb-1">
-                                  {t.packages.calculator.annually}
-                                </p>
-                                <p className={`text-2xl font-semibold ${pkgColor.text}`}>
-                                  {formatCurrency(calculatedAnnualCost)}
-                                </p>
-                              </div>
-                            </div>
-                            <p className="text-xs text-gray-500 italic">
-                              {t.packages.calculator.assumption.replace('{{percent}}', EMPLOYER_CHARGE_PERCENT.toString())}
-                            </p>
-                          </div>
-                        )}
-
-                        {/* CTA Button */}
-                        <button
-                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 text-sm`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
-                          }}
-                        >
-                          {t.packages.calculator.discussResults}
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        {/* Description */}
-                        <div>
-                          {/* Check if description contains bullet points */}
-                          {pkg.description[language].includes('•') ? (
-                            <ul className="space-y-2.5">
-                              {pkg.description[language].split('\n').map((line: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-3 text-sm">
-                                  <svg className={`w-5 h-5 ${pkgColor.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                  </svg>
-                                  <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          ) : (
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                              {pkg.description[language]}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Special Infographic for Offensive Dino */}
-                        {pkg.id === 3 && (
+                    {/* Special Infographic for HuntDino (Offensive Dino) */}
+                    {pkg.id === 3 && (
                           <>
                             <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
                               <div className="flex items-center justify-center gap-8 mb-4">
@@ -365,7 +196,7 @@ export default function Packages() {
                               href="/job_analysis_preview.html"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 hover:border-purple-300 font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                              className={`block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-medium text-sm transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
                               onClick={(e) => e.stopPropagation()}
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -383,7 +214,7 @@ export default function Packages() {
                             href="/guard_dino_preview.html"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-cyan-700 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                            className={`block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-medium text-sm transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
                             onClick={(e) => e.stopPropagation()}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -395,7 +226,7 @@ export default function Packages() {
 
                         {/* CTA Button */}
                         <button
-                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 text-sm`}
+                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-sm`}
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
@@ -403,8 +234,6 @@ export default function Packages() {
                         >
                           {t.packages.bookCall}
                         </button>
-                      </>
-                    )}
                   </div>
                 </div>
 
@@ -420,12 +249,7 @@ export default function Packages() {
                     </p>
                     
                     <div className={`mt-4 text-sm font-medium ${pkgColor.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
-                      <span>
-                        {pkg.id === 1
-                          ? t.packages.calculate
-                          : t.packages.learnMore
-                        }
-                      </span>
+                      <span>{t.packages.learnMore}</span>
                       <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
@@ -436,6 +260,19 @@ export default function Packages() {
             </div>
             );
           })}
+        </div>
+
+        {/* Section CTA */}
+        <div className="mt-12 sm:mt-16 text-center">
+          <button
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-lg"
+            onClick={() => window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank')}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {t.packages.cta}
+          </button>
         </div>
       </div>
     </section>
