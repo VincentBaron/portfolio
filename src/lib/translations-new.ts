@@ -101,7 +101,7 @@ export const packageItems: PackageItem[] = [
     },
     price: {
       en: '€3,000',
-      fr: '€3,000',
+      fr: '3 000 €',
     },
     creditNote: {
       en: '100% credit from 1st implementation later',
@@ -135,7 +135,7 @@ export const packageItems: PackageItem[] = [
     },
     price: {
       en: '€3,000 Setup',
-      fr: '€3,000 Installation',
+      fr: '3 000 € Setup',
     },
   },
   {
@@ -161,7 +161,7 @@ export const packageItems: PackageItem[] = [
     },
     price: {
       en: '€3,000 Setup',
-      fr: '€3,000 Installation',
+      fr: '3 000 € Setup',
     },
   },
   {
@@ -260,7 +260,6 @@ export interface Translations {
     };
     headline: {
       primary: string;
-      secondary: string;
       highlight: string;
     };
     intro: {
@@ -399,9 +398,8 @@ export const translations: Record<Language, Translations> = {
         currencySymbol: '€',
       },
       headline: {
-        primary: 'Increase your Net Margin\n',
-        secondary: 'Per Recruiter with',
-        highlight: 'AI',
+        primary: 'Increase your Net Margin\nPer Recruiter',
+        highlight: 'I audit your recruiting operations and implement AI-powered systems in 14 days to boost margins without hiring more staff.',
       },
       intro: {
         primary: 'Manual recruiting processes drain productivity and compress margins. Profile sourcing, candidate screening, follow-ups, reporting… repetitive tasks that limit your recruiters\' capacity and revenue per head.',
@@ -535,9 +533,8 @@ export const translations: Record<Language, Translations> = {
         currencySymbol: '€',
       },
       headline: {
-        primary: 'Augmentez votre Marge Net',
-        secondary: ' Par Recruteur avec',
-        highlight: 'l\'IA',
+        primary: 'Votre back-office perd jusqu\'à 35h/semaine dans des process manuels.',
+        highlight: 'J\'audite vos opérations internes et je mets en place un premier système en 14 jours pour vous permettre de scaler sans recruter.',
       },
       intro: {
         primary: 'Ces pertes de temps dans le back-office représentent souvent plusieurs dizaines de milliers d\'euros par an en salaires, retards et opportunités manquées. Devis, relances, saisies, reporting… autant de tâches répétitives qui saturent vos équipes et freinent votre croissance.',
