@@ -17,7 +17,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: {
       en: 'Vincent improved our internal tools and workflows, helping the Ops team save significant time on daily processes.',
-      fr: 'Vincent a amélioré nos outils internes et nos workflows, permettant à l\'équipe Ops de gagner un temps considérable au quotidien. Son focus en efficacité opérationnelle a eu un impact direct sur notre delivery.',
+      fr: 'Vincent a amélioré nos outils internes et nos workflows, permettant à l\'équipe Ops de gagner un temps considérable.',
     },
     author: 'Holy Sicard-Razaka',
     role: {
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: {
       en: 'Vincent built automations to sync product releases between tech and product — including Slack posts and GitLab updates.',
-      fr: 'Vincent a mis en place des automatisations pour synchroniser les sorties produit entre la tech et le produit — Slack, GitLab, etc. Cela a fluidifié notre delivery et réduit la coordination manuelle.',
+      fr: 'Vincent a mis en place des automatisations pour synchroniser les sorties produit entre la tech et le produit.',
     },
     author: 'Alexis Doroszkiewicz',
     role: {
@@ -49,7 +49,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: {
       en: 'Vincent\'s work on optimising our internal processes was crucial for expanding our platform\'s capabilities.',
-      fr: 'Vincent s\'est montré très efficace pour naviguer dans notre environnement microservices et assurer une implémentation fluide. Son travail a été crucial pour étendre les capacités de notre plateforme.',
+      fr: 'Vincent s\'est montré très efficace pour optimiser nos process de delivery dans notre environnement microservices.',
     },
     author: 'Guillaume Forgue',
     role: {
@@ -579,7 +579,7 @@ export const translations: Record<Language, Translations> = {
           shareAnother: 'Recalculer un autre process',
         },
       },
-      testimonialsTitle: 'Ils m\'ont fait confiance',
+      testimonialsTitle: 'Ils nous ont fait confiance',
       stats: {
         projects: 'Projets livrés',
         satisfaction: 'Satisfaction client',
