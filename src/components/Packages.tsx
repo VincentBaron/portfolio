@@ -1,117 +1,24 @@
 import { useState } from 'react';
 import { useLanguage } from '../lib/language';
+import { getTranslations, packageItems } from '../lib/translations';
 
 const EMPLOYER_CHARGE_RATE = 0.44;
 const EMPLOYER_CHARGE_PERCENT = Math.round(EMPLOYER_CHARGE_RATE * 100);
 const EMPLOYER_MULTIPLIER = 1 + EMPLOYER_CHARGE_RATE;
 
-interface Package {
-  id: number;
-  name: string;
-  shortDescription: string;
-  description: string;
-  outputs: string[];
-  price: string;
-  color: {
-    gradient: string;
-    bg: string;
-    text: string;
-  };
-  hasCalculator?: boolean;
-  creditNote?: string;
-}
-
-const packages: Package[] = [
-  {
-    id: 1,
-    name: 'ScanDino',
-    shortDescription: 'Deep dive into your operational bottlenecks',
-    description: '• Map your entire operational structure and tool stack\n• Identify exact bottlenecks causing "tool fatigue"\n• Get prioritized roadmap ranked by business impact',
-    outputs: [
-      'Operational Map: A visual breakdown of your current friction points.',
-      'Prioritized Roadmap: Opportunities ranked by business impact (Time-to-Hire, Cost-per-Hire).',
-      'ROI Business Case: Quantification of operational waste transformed into a clear implementation plan.'
-    ],
-    price: '€3,000',
-    creditNote: '100% credit from 1st implementation later',
-    color: {
-      gradient: 'from-blue-50 to-blue-100',
-      bg: 'bg-blue-50/50',
-      text: 'text-blue-700'
-    }
-  },
-  {
-    id: 3,
-    name: 'HuntDino',
-    shortDescription: 'AI-driven lead engine: 1 mandate per 3 calls',
-    description: '• Scans competitor job listings to identify real end clients\n• Converts 1 mandate per 3 calls (vs. 1 per 100 traditionally)\n• Plugs directly into your CRM\n• Designed for revenue per call, not activity metrics',
-    outputs: [
-      'Demand-Triggered Lead Engine: Automatically identifies companies already spending on your competitors, turning job posts into high-intent entry points rather than speculative cold calls.',
-      '33× Mandate Conversion Uplift: Moves performance from 1 mandate per 100 cold calls to 1 per 3 calls, slashing call volume while increasing pipeline reliability.',
-      'Competitive Spend Intelligence: Reveals where competitors are actively placing talent, exposing who is buying, right now, and in which domains.',
-      'Revenue-Driven Pipeline Control: Transforms sourcing into a measurable, forecastable funnel — enabling you to scale revenue by improving probabilities, not by burning more leads.'
-    ],
-    price: '€3,000 Setup',
-    color: {
-      gradient: 'from-purple-50 to-purple-100',
-      bg: 'bg-purple-50/50',
-      text: 'text-purple-700'
-    }
-  },
-  {
-    id: 4,
-    name: 'GuardDino',
-    shortDescription: 'Protect your client relationships from competitors',
-    description: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities\n• Provides automated recommendations to shield client identities while maintaining candidate appeal',
-    outputs: [
-      'Vulnerability Report: Analysis of which listings reveal too much client data.',
-      'Optimization Playbook: Guidelines for writing listings that attract talent without leaking client identities.'
-    ],
-    price: '€3,000 Setup',
-    color: {
-      gradient: 'from-cyan-50 to-cyan-100',
-      bg: 'bg-cyan-50/50',
-      text: 'text-cyan-700'
-    }
-  },
-  {
-    id: 5,
-    name: 'SprintDino',
-    shortDescription: 'Production-ready custom solutions in weeks',
-    description: '• Month-long sprint delivering a new production feature every week\n• Four complete features with comprehensive training and documentation',
-    outputs: [
-      'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
-      'System Documentation: Full hand-over of the new workflow or tool.'
-    ],
-    price: 'ROI-Based',
-    color: {
-      gradient: 'from-rose-50 to-rose-100',
-      bg: 'bg-rose-50/50',
-      text: 'text-rose-700'
-    }
-  },
-  {
-    id: 6,
-    name: 'ProDino',
-    shortDescription: 'Ongoing operational excellence & automation',
-    description: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
-    outputs: [
-      'Monthly Optimization: Continuous refinement of workflows and AI agents.',
-      'Team Onboarding & Training: Managing tool provisioning and internal knowledge bases (Notion).',
-      'Performance Tracking: Implementation of formal KPI dashboards (Time-to-Hire, etc.).'
-    ],
-    price: '€5,000 / Month',
-    color: {
-      gradient: 'from-emerald-50 to-emerald-100',
-      bg: 'bg-emerald-50/50',
-      text: 'text-emerald-700'
-    }
-  }
-];
-
 export default function Packages() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const { language } = useLanguage();
+  const t = getTranslations(language);
+  
+  // Package colors configuration
+  const packageColors = [
+    { gradient: 'from-blue-50 to-blue-100', bg: 'bg-blue-50/50', text: 'text-blue-700' },
+    { gradient: 'from-purple-50 to-purple-100', bg: 'bg-purple-50/50', text: 'text-purple-700' },
+    { gradient: 'from-cyan-50 to-cyan-100', bg: 'bg-cyan-50/50', text: 'text-cyan-700' },
+    { gradient: 'from-rose-50 to-rose-100', bg: 'bg-rose-50/50', text: 'text-rose-700' },
+    { gradient: 'from-emerald-50 to-emerald-100', bg: 'bg-emerald-50/50', text: 'text-emerald-700' },
+  ];
 
   // Calculator state
   const [hoursPerWeek, setHoursPerWeek] = useState('');
@@ -143,11 +50,11 @@ export default function Packages() {
     const grossSalary = parseFloat(monthlyCostPerPerson);
 
     if (!Number.isFinite(hours) || !Number.isFinite(people) || !Number.isFinite(grossSalary)) {
-      setError(language === 'fr' ? 'Merci de remplir tous les champs.' : 'Please fill in all fields.');
+      setError(t.packages.calculator.allFieldsRequired);
       return;
     }
     if (hours <= 0 || people <= 0 || grossSalary <= 0) {
-      setError(language === 'fr' ? 'Les valeurs doivent être positives.' : 'Values must be positive.');
+      setError(t.packages.calculator.positiveValues);
       return;
     }
 
@@ -175,13 +82,15 @@ export default function Packages() {
         
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4 lg:mb-6 tracking-tight">
-            {language === 'fr' ? 'Nos Forfaits' : 'Our Packages'}
+            {t.packages.title}
           </h1>
         </div>
 
         {/* Packages Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-start">
-          {packages.map((pkg) => (
+          {packageItems.map((pkg, index) => {
+            const pkgColor = packageColors[index] || packageColors[0];
+            return (
             <div
               key={pkg.id}
               className="group relative flex"
@@ -190,7 +99,7 @@ export default function Packages() {
               <div
                 className={`relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
-                    ? `shadow-lg ${pkg.color.bg} border border-gray-200`
+                    ? `shadow-lg ${pkgColor.bg} border border-gray-200`
                     : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full min-h-[280px]'
                 }`}
                 onClick={() => togglePackage(pkg.id)}
@@ -202,7 +111,7 @@ export default function Packages() {
                 </div>
 
                 {/* Minimal Header with Subtle Gradient */}
-                <div className={`bg-gradient-to-br ${pkg.color.gradient} p-8 text-gray-800 relative overflow-hidden`}>
+                <div className={`bg-gradient-to-br ${pkgColor.gradient} p-8 text-gray-800 relative overflow-hidden`}>
                   {/* Subtle Abstract Shapes */}
                   <div className="absolute inset-0 overflow-hidden opacity-30">
                     <div className="absolute -top-8 -right-8 w-24 h-24 border border-gray-300/20 rotate-45 rounded-lg"></div>
@@ -225,18 +134,18 @@ export default function Packages() {
                 {/* Price Badge with Minimal Design */}
                 <div className="px-8 py-5 relative">
                   <div className="flex items-center gap-4">
-                    <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${pkg.color.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
-                      <svg className={`w-5 h-5 ${pkg.color.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${pkgColor.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
+                      <svg className={`w-5 h-5 ${pkgColor.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span className={`font-semibold text-base ${pkg.color.text}`}>{pkg.price}</span>
+                      <span className={`font-semibold text-base ${pkgColor.text}`}>{pkg.price[language]}</span>
                     </div>
                     {pkg.creditNote && (
                       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 border border-emerald-200/80 shadow-sm">
                         <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-xs font-medium text-emerald-700">{pkg.creditNote}</span>
+                        <span className="text-xs font-medium text-emerald-700">{pkg.creditNote[language]}</span>
                       </div>
                     )}
                   </div>
@@ -250,15 +159,15 @@ export default function Packages() {
                   }`}
                 >
                   <div className="px-8 pb-8 space-y-6">
-                    {/* Calculator for Cost Cutter Dino */}
-                    {pkg.hasCalculator && expandedId === pkg.id ? (
+                    {/* Calculator for ScanDino (id: 1) */}
+                    {pkg.id === 1 && expandedId === pkg.id ? (
                       <div className="space-y-6">
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-2 tracking-wide text-sm">
-                            {language === 'fr' ? 'Calculez votre coût' : 'Calculate Your Cost'}
+                            {t.packages.calculator.title}
                           </h4>
                           <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                            {pkg.description}
+                            {pkg.description[language]}
                           </p>
                         </div>
 
@@ -266,7 +175,7 @@ export default function Packages() {
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
                               <label htmlFor="hours" className="block text-sm font-medium text-gray-700 mb-2">
-                                {language === 'fr' ? 'Heures/semaine' : 'Hours/week'}
+                                {t.packages.calculator.hoursLabel}
                               </label>
                               <input
                                 id="hours"
@@ -279,14 +188,14 @@ export default function Packages() {
                                   setError('');
                                 }}
                                 onClick={(e) => e.stopPropagation()}
-                                placeholder={language === 'fr' ? 'ex. 6' : 'e.g. 6'}
+                                placeholder={t.packages.calculator.hoursPlaceholder}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                               />
                             </div>
 
                             <div>
                               <label htmlFor="people" className="block text-sm font-medium text-gray-700 mb-2">
-                                {language === 'fr' ? 'Personnes' : 'People'}
+                                {t.packages.calculator.peopleLabel}
                               </label>
                               <input
                                 id="people"
@@ -299,7 +208,7 @@ export default function Packages() {
                                   setError('');
                                 }}
                                 onClick={(e) => e.stopPropagation()}
-                                placeholder={language === 'fr' ? 'ex. 3' : 'e.g. 3'}
+                                placeholder={t.packages.calculator.peoplePlaceholder}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                               />
                             </div>
@@ -307,7 +216,7 @@ export default function Packages() {
 
                           <div>
                             <label htmlFor="salary" className="block text-sm font-medium text-gray-700 mb-2">
-                              {language === 'fr' ? 'Salaire brut/mois (€)' : 'Gross salary/mo (€)'}
+                              {t.packages.calculator.salaryLabel}
                             </label>
                             <input
                               id="salary"
@@ -320,14 +229,14 @@ export default function Packages() {
                                 setError('');
                               }}
                               onClick={(e) => e.stopPropagation()}
-                              placeholder={language === 'fr' ? 'ex. 4000' : 'e.g. 4000'}
+                              placeholder={t.packages.calculator.salaryPlaceholder}
                               className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                             />
                           </div>
 
                           <div>
                             <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                              {language === 'fr' ? 'Description du processus' : 'Process description'}
+                              {t.packages.calculator.descriptionLabel}
                             </label>
                             <input
                               id="description"
@@ -335,7 +244,7 @@ export default function Packages() {
                               value={processDescription}
                               onChange={(e) => setProcessDescription(e.target.value)}
                               onClick={(e) => e.stopPropagation()}
-                              placeholder={language === 'fr' ? 'ex. Validation des heures' : 'e.g. Time-tracking validation'}
+                              placeholder={t.packages.calculator.descriptionPlaceholder}
                               className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
                             />
                           </div>
@@ -347,37 +256,35 @@ export default function Packages() {
                             disabled={!hoursPerWeek || !peopleCount || !monthlyCostPerPerson}
                             className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-md`}
                           >
-                            {language === 'fr' ? 'Calculer le coût' : 'Calculate Cost'}
+                            {t.packages.calculator.calculateCta}
                           </button>
                         </form>
 
                         {calculatedMonthlyCost !== null && calculatedAnnualCost !== null && (
-                          <div className={`${pkg.color.bg} border border-gray-200 rounded-xl p-5 space-y-3 shadow-sm`}>
-                            <h5 className={`font-semibold ${pkg.color.text} text-sm`}>
-                              {language === 'fr' ? 'Coût estimé' : 'Estimated Cost'}
+                          <div className={`${pkgColor.bg} border border-gray-200 rounded-xl p-5 space-y-3 shadow-sm`}>
+                            <h5 className={`font-semibold ${pkgColor.text} text-sm`}>
+                              {t.packages.calculator.estimatedCost}
                             </h5>
                             <div className="grid gap-3 sm:grid-cols-2">
                               <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
                                 <p className="text-xs text-gray-600 font-medium mb-1">
-                                  {language === 'fr' ? 'Par mois' : 'Monthly'}
+                                  {t.packages.calculator.monthly}
                                 </p>
-                                <p className={`text-2xl font-semibold ${pkg.color.text}`}>
+                                <p className={`text-2xl font-semibold ${pkgColor.text}`}>
                                   {formatCurrency(calculatedMonthlyCost)}
                                 </p>
                               </div>
                               <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
                                 <p className="text-xs text-gray-600 font-medium mb-1">
-                                  {language === 'fr' ? 'Par an' : 'Annually'}
+                                  {t.packages.calculator.annually}
                                 </p>
-                                <p className={`text-2xl font-semibold ${pkg.color.text}`}>
+                                <p className={`text-2xl font-semibold ${pkgColor.text}`}>
                                   {formatCurrency(calculatedAnnualCost)}
                                 </p>
                               </div>
                             </div>
                             <p className="text-xs text-gray-500 italic">
-                              {language === 'fr' 
-                                ? `Hypothèse : 40h/semaine + ${EMPLOYER_CHARGE_PERCENT}% de charges patronales`
-                                : `Assumes 40h/week + ${EMPLOYER_CHARGE_PERCENT}% employer charges`}
+                              {t.packages.calculator.assumption.replace('{{percent}}', EMPLOYER_CHARGE_PERCENT.toString())}
                             </p>
                           </div>
                         )}
@@ -390,7 +297,7 @@ export default function Packages() {
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
                           }}
                         >
-                          {language === 'fr' ? 'Discuter de mes résultats' : 'Discuss My Results'}
+                          {t.packages.calculator.discussResults}
                         </button>
                       </div>
                     ) : (
@@ -398,11 +305,11 @@ export default function Packages() {
                         {/* Description */}
                         <div>
                           {/* Check if description contains bullet points */}
-                          {pkg.description.includes('•') ? (
+                          {pkg.description[language].includes('•') ? (
                             <ul className="space-y-2.5">
-                              {pkg.description.split('\n').map((line, idx) => (
+                              {pkg.description[language].split('\n').map((line: string, idx: number) => (
                                 <li key={idx} className="flex items-start gap-3 text-sm">
-                                  <svg className={`w-5 h-5 ${pkg.color.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                                  <svg className={`w-5 h-5 ${pkgColor.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                   </svg>
                                   <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
@@ -411,7 +318,7 @@ export default function Packages() {
                             </ul>
                           ) : (
                             <p className="text-gray-600 text-sm leading-relaxed">
-                              {pkg.description}
+                              {pkg.description[language]}
                             </p>
                           )}
                         </div>
@@ -424,7 +331,7 @@ export default function Packages() {
                                 {/* Before */}
                                 <div className="text-center">
                                   <div className="text-xs font-medium text-gray-500 mb-2">
-                                    {language === 'fr' ? 'Avant' : 'Before'}
+                                    {t.packages.before}
                                   </div>
                                   <div className="text-4xl font-bold text-gray-400">1/100</div>
                                   <div className="text-xs text-gray-500 mt-1">1%</div>
@@ -438,7 +345,7 @@ export default function Packages() {
                                 {/* After */}
                                 <div className="text-center">
                                   <div className="text-xs font-medium text-gray-500 mb-2">
-                                    {language === 'fr' ? 'Après' : 'After'}
+                                    {t.packages.after}
                                   </div>
                                   <div className="text-4xl font-bold text-purple-600">1/3</div>
                                   <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
@@ -448,7 +355,7 @@ export default function Packages() {
                               {/* Impact Badge */}
                               <div className="text-center pt-4 border-t border-purple-200">
                                 <span className="text-sm font-bold text-purple-700">
-                                  33× {language === 'fr' ? 'Efficacité' : 'Efficiency'}
+                                  33× {t.packages.efficiency}
                                 </span>
                               </div>
                             </div>
@@ -465,7 +372,7 @@ export default function Packages() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
-                              {language === 'fr' ? 'Voir l\'exemple d\'analyse' : 'View Sample Analysis'}
+                              {t.packages.viewSampleAnalysis}
                             </a>
                           </>
                         )}
@@ -482,7 +389,7 @@ export default function Packages() {
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                             </svg>
-                            {language === 'fr' ? 'Voir l\'exemple de rapport' : 'View Sample Report'}
+                            {t.packages.viewSampleReport}
                           </a>
                         )}
 
@@ -494,7 +401,7 @@ export default function Packages() {
                             window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
                           }}
                         >
-                          {language === 'fr' ? 'Réserver un appel' : 'Book a Call'}
+                          {t.packages.bookCall}
                         </button>
                       </>
                     )}
@@ -509,14 +416,14 @@ export default function Packages() {
                     
                     {/* Short one-line description */}
                     <p className="text-gray-600 text-sm leading-relaxed flex-grow">
-                      {pkg.shortDescription}
+                      {pkg.shortDescription[language]}
                     </p>
                     
-                    <div className={`mt-4 text-sm font-medium ${pkg.color.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
+                    <div className={`mt-4 text-sm font-medium ${pkgColor.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
                       <span>
-                        {pkg.hasCalculator 
-                          ? (language === 'fr' ? 'Calculer' : 'Calculate')
-                          : (language === 'fr' ? 'Voir plus' : 'Learn more')
+                        {pkg.id === 1
+                          ? t.packages.calculate
+                          : t.packages.learnMore
                         }
                       </span>
                       <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -527,7 +434,8 @@ export default function Packages() {
                 )}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

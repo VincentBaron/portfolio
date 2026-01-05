@@ -1,6 +1,7 @@
 import { caseStudies, type LocalizedString } from '../data/caseStudies';
 import CaseStudyCard from './CaseStudyCard';
 import { useLanguage } from '../lib/language';
+import { getTranslations } from '../lib/translations';
 
 interface CaseStudiesGridProps {
   heading?: LocalizedString;
@@ -14,8 +15,8 @@ export default function CaseStudiesGrid({
   showCTA = true,
 }: CaseStudiesGridProps) {
   const { language } = useLanguage();
-  const sectionHeading = heading ? heading[language] : language === 'fr' ? 'Études de cas' : 'Case Studies';
-  const ctaLabel = language === 'fr' ? 'Lancer votre projet' : 'Start Your Project';
+  const t = getTranslations(language);
+  const sectionHeading = heading ? heading[language] : t.caseStudies.title;
   const items = typeof limit === 'number' ? caseStudies.slice(0, limit) : caseStudies;
 
   return (
@@ -38,7 +39,7 @@ export default function CaseStudiesGrid({
               slug={study.slug}
               thumbnail={study.heroImage}
               tags={study.tags}
-              readLabel={language === 'fr' ? 'Voir le projet' : 'Read case study'}
+              readLabel={t.caseStudies.readCaseStudy}
             />
           ))}
         </div>

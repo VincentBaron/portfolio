@@ -1,24 +1,11 @@
 import { useLanguage } from '../lib/language';
-
-const FOOTER_COPY = {
-  en: {
-    rights: 'All rights reserved.',
-    pledgePrefix: '7.5% of net profit donated to',
-    privacy: 'Privacy',
-    terms: 'Terms',
-  },
-  fr: {
-    rights: 'Tous droits réservés.',
-    pledgePrefix: '7.5% du bénéfice net reversé à',
-    privacy: 'Confidentialité',
-    terms: 'Conditions',
-  },
-} as const;
+import { getTranslations } from '../lib/translations';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { language } = useLanguage();
-  const copy = FOOTER_COPY[language];
+  const t = getTranslations(language);
+  const copy = t.footer;
 
   return (
     <footer className="w-full py-8 px-4 sm:px-6 lg:px-8">

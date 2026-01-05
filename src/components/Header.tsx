@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import CalendlyModal from './CalendlyModal';
 import { useLanguage, type Language } from '../lib/language';
+import { getTranslations } from '../lib/translations';
 
 interface NavItem {
   id: 'home' | 'packages' | 'work';
@@ -13,43 +14,6 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'work', href: '#work' },
 ];
 
-const HEADER_COPY: Record<
-  Language,
-  {
-    nav: Record<NavItem['id'], string>;
-    bookCall: string;
-    logoAria: string;
-    mobileOpen: string;
-    mobileClose: string;
-    toggleMenuAria: string;
-  }
-> = {
-  en: {
-    nav: {
-      home: 'Home',
-      packages: 'Packages',
-      work: 'Work',
-    },
-    bookCall: 'Book a Call',
-    logoAria: '2 Weeks to Solve It - Home',
-    mobileOpen: 'Open menu',
-    mobileClose: 'Close menu',
-    toggleMenuAria: 'Toggle navigation menu',
-  },
-  fr: {
-    nav: {
-      home: 'Accueil',
-      packages: 'Forfaits',
-      work: 'Projets',
-    },
-    bookCall: 'Réserver un appel',
-    logoAria: '2 Weeks to Solve It - Accueil',
-    mobileOpen: 'Ouvrir le menu',
-    mobileClose: 'Fermer le menu',
-    toggleMenuAria: 'Basculer le menu de navigation',
-  },
-};
-
 interface HeaderProps {
   currentPath?: string;
 }
@@ -59,7 +23,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
-  const copy = HEADER_COPY[language];
+  const t = getTranslations(language);
+  const copy = t.header;
   const navLinks = NAV_ITEMS.map((item) => ({
     href: item.href,
     label: copy.nav[item.id],
