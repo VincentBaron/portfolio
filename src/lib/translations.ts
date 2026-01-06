@@ -1,5 +1,40 @@
 export type Language = 'en' | 'fr';
 
+// Job sectors for MandateDino test modal
+export interface JobSector {
+  value: string;
+  label: Record<Language, string>;
+}
+
+export const jobSectors: JobSector[] = [
+  { value: 'Inform_SSII', label: { en: 'IT Services • ESN', fr: 'Secteur informatique • ESN' } },
+  { value: 'Agri_peche', label: { en: 'Agriculture • Fishing', fr: 'Agriculture • Pêche' } },
+  { value: 'BTP', label: { en: 'Construction', fr: 'BTP' } },
+  { value: 'Banq_assur_finan', label: { en: 'Banking • Insurance • Finance', fr: 'Banque • Assurance • Finance' } },
+  { value: 'Distrib_commerce', label: { en: 'Distribution • Wholesale', fr: 'Distribution • Commerce de gros' } },
+  { value: 'Enseign_forma', label: { en: 'Education • Training', fr: 'Enseignement • Formation' } },
+  { value: 'Immo', label: { en: 'Real Estate', fr: 'Immobilier' } },
+  { value: 'Ind_agro', label: { en: 'Agri-food Industry', fr: 'Industrie Agro • alimentaire' } },
+  { value: 'Ind_auto_meca_nav', label: { en: 'Auto • Mechanical • Naval Industry', fr: 'Industrie Auto • Meca • Navale' } },
+  { value: 'Ind_aero', label: { en: 'Aerospace Industry', fr: 'Industrie Aéronautique • Aérospatial' } },
+  { value: 'Ind_manufact', label: { en: 'Manufacturing Industry', fr: 'Industrie Manufacturière' } },
+  { value: 'Ind_pharma_bio_chim', label: { en: 'Pharma • Biotech • Chemistry', fr: 'Industrie Pharmaceutique • Biotechn. • Chimie' } },
+  { value: 'Ind_petro', label: { en: 'Oil & Gas Industry', fr: 'Industrie Pétrolière • Pétrochimie' } },
+  { value: 'Ind_hightech_telecom', label: { en: 'High-tech • Telecom Industry', fr: 'Industrie high • tech • Telecom' } },
+  { value: 'Media_internet_com', label: { en: 'Media • Internet • Communication', fr: 'Média • Internet • Communication' } },
+  { value: 'Resto', label: { en: 'Restaurant Industry', fr: 'Restauration' } },
+  { value: 'Sante_social', label: { en: 'Healthcare • Social • NGO', fr: 'Santé • Social • Association' } },
+  { value: 'Energie_envir', label: { en: 'Energy • Environment', fr: 'Secteur Energie • Environnement' } },
+  { value: 'Serv_public_autre', label: { en: 'Other Public Services', fr: 'Service public autres' } },
+  { value: 'Serv_public_etat', label: { en: 'State Public Service', fr: 'Service public d\'état' } },
+  { value: 'Serv_public_collec_terri', label: { en: 'Local Government Services', fr: 'Service public des collectivités territoriales' } },
+  { value: 'Serv_public_hosp', label: { en: 'Hospital Public Service', fr: 'Service public hospitalier' } },
+  { value: 'Serv_entreprise', label: { en: 'Business Services', fr: 'Services aux Entreprises' } },
+  { value: 'Serv_pers_part', label: { en: 'Personal Services', fr: 'Services aux Personnes • Particuliers' } },
+  { value: 'Tourism_hotel_loisir', label: { en: 'Tourism • Hospitality • Leisure', fr: 'Tourisme • Hôtellerie • Loisirs' } },
+  { value: 'Transport_logist', label: { en: 'Transport • Logistics', fr: 'Transport • Logistique' } },
+];
+
 // ============================================================================
 // MULTILINGUAL CONTENT (Language keys within each item)
 // ============================================================================
@@ -348,6 +383,31 @@ export interface Translations {
     efficiency: string;
     viewSampleAnalysis: string;
     viewSampleReport: string;
+    mandateDinoTest: {
+      buttonLabel: string;
+      modalTitle: string;
+      modalSubtitle: string;
+      selectSectors: string;
+      runTest: string;
+      freeResults: string;
+      seeMore: string;
+      seeMoreDescription: string;
+      resultsTitle: string;
+      noSectorSelected: string;
+      searchSteps: string[];
+      complete: string;
+      postedAgo: string;
+      competitor: string;
+      contactHR: string;
+      location: string;
+      salary: string;
+      description: string;
+      profile: string;
+      demoRestriction: string;
+      demoRestrictionDesc: string;
+      moreResults1: string;
+      moreResults2: string;
+    };
   };
 
   // Footer
@@ -488,6 +548,38 @@ export const translations: Record<Language, Translations> = {
       efficiency: 'Efficiency',
       viewSampleAnalysis: 'View Sample Analysis',
       viewSampleReport: 'View Sample Report',
+      mandateDinoTest: {
+        buttonLabel: 'Test the Tool',
+        modalTitle: 'Test MandateDino',
+        modalSubtitle: 'Reverse-source clients from competitor job postings in the last 24 hours',
+        selectSectors: 'Select job sectors to scan',
+        runTest: 'Run Test',
+        freeResults: '5 Free Results',
+        seeMore: 'Book an appointment',
+        seeMoreDescription: 'Book a call to set up the tool for your specific business needs',
+        resultsTitle: 'Reverse-sourced leads',
+        noSectorSelected: 'Please select at least one sector',
+        searchSteps: [
+          'Connecting to job boards...',
+          'Scanning competitor listings for selected sectors...',
+          'Analyzing job postings from last 24h...',
+          'Extracting end client information...',
+          'Cross-referencing company data...',
+          'Ranking leads by conversion potential...',
+        ],
+        complete: 'Complete! Found {{count}} potential leads',
+        postedAgo: 'Posted {{time}} ago',
+        competitor: 'via competitor',
+        contactHR: 'Contact HR on LinkedIn',
+        location: 'Location',
+        salary: 'Salary',
+        description: 'Job Description',
+        profile: 'Required Profile',
+        demoRestriction: 'Demo Mode',
+        demoRestrictionDesc: 'This is a demo limited to IT Services sector. Book a call to set up the tool for your specific business needs and unlock all sectors.',
+        moreResults1: '+{{count}} more results available',
+        moreResults2: 'Full agent capacity only available to customers.'
+      },
     },
 
     footer: {
@@ -625,6 +717,38 @@ export const translations: Record<Language, Translations> = {
       efficiency: 'Efficacité',
       viewSampleAnalysis: 'Voir l\'exemple d\'analyse',
       viewSampleReport: 'Voir l\'exemple de rapport',
+      mandateDinoTest: {
+        buttonLabel: 'Tester l\'outil',
+        modalTitle: 'Tester MandateDino',
+        modalSubtitle: 'Identifiez les clients finaux à partir des offres concurrentes des dernières 24h',
+        selectSectors: 'Sélectionnez les secteurs à analyser',
+        runTest: 'Lancer le test',
+        freeResults: '5 résultats gratuits',
+        seeMore: 'Réservez ub appel',
+        seeMoreDescription: 'Réservez un appel pour configurer l\'outil selon vos besoins',
+        resultsTitle: 'Leads identifiés',
+        noSectorSelected: 'Veuillez sélectionner au moins un secteur',
+        searchSteps: [
+          'Connexion aux job boards...',
+          'Scan des offres concurrentes pour les secteurs sélectionnés...',
+          'Analyse des offres des dernières 24h...',
+          'Extraction des informations clients...',
+          'Recoupement des données entreprises...',
+          'Classement des leads par potentiel de conversion...',
+        ],
+        complete: 'Terminé ! {{count}} leads potentiels trouvés',
+        postedAgo: 'Publié il y a {{time}}',
+        competitor: 'via concurrent',
+        contactHR: 'Contacter RH sur LinkedIn',
+        location: 'Localisation',
+        salary: 'Salaire',
+        description: 'Description du poste',
+        profile: 'Profil recherché',
+        demoRestriction: 'Mode démo',
+        demoRestrictionDesc: 'Cette démo est limitée au secteur IT/ESN. Réservez un appel pour configurer l\'outil selon vos besoins et débloquer tous les secteurs.',
+        moreResults1: '+{{count}} résultats supplémentaires disponibles',
+        moreResults2: 'Capacité complète de l\'agent uniquement disponible pour les clients.',
+      },
     },
 
     footer: {

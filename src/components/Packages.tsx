@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useLanguage } from '../lib/language';
 import { getTranslations, packageItems } from '../lib/translations';
+import MandateDinoTestModal from './MandateDinoTestModal';
 
 export default function Packages() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [isTestModalOpen, setIsTestModalOpen] = useState(false);
   const { language } = useLanguage();
   const t = getTranslations(language);
   
@@ -154,9 +156,24 @@ export default function Packages() {
                       )}
                     </div>
 
-                    {/* Special Infographic for HuntDino (Offensive Dino) */}
+                    {/* Special content for MandateDino */}
                     {pkg.id === 3 && (
                           <>
+                            {/* Test the Tool Button - Primary CTA */}
+                            <button
+                              className={`w-full py-3 px-6 mb-6 rounded-lg text-center text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-semibold text-sm transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setIsTestModalOpen(true);
+                              }}
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              </svg>
+                              {t.packages.mandateDinoTest.buttonLabel}
+                            </button>
+
+                            {/* Infographic */}
                             <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
                               <div className="flex items-center justify-center gap-8 mb-4">
                                 {/* Before */}
@@ -190,21 +207,6 @@ export default function Packages() {
                                 </span>
                               </div>
                             </div>
-
-                            {/* Preview Link */}
-                            <a
-                              href="/job_analysis_preview.html"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`block w-full py-2.5 px-4 mb-4 rounded-lg text-center text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-medium text-sm transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                              </svg>
-                              {t.packages.viewSampleAnalysis}
-                            </a>
                           </>
                         )}
 
@@ -224,16 +226,18 @@ export default function Packages() {
                           </a>
                         )}
 
-                        {/* CTA Button */}
-                        <button
-                          className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-sm`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
-                          }}
-                        >
-                          {t.packages.bookCall}
-                        </button>
+                        {/* CTA Button - Hidden for MandateDino (uses Test button instead) */}
+                        {pkg.id !== 3 && (
+                          <button
+                            className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r ${pkgColor.button} hover:${pkgColor.buttonHover} font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-sm`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
+                            }}
+                          >
+                            {t.packages.bookCall}
+                          </button>
+                        )}
                   </div>
                 </div>
 
@@ -275,6 +279,12 @@ export default function Packages() {
           </button>
         </div>
       </div>
+
+      {/* MandateDino Test Modal */}
+      <MandateDinoTestModal
+        isOpen={isTestModalOpen}
+        onClose={() => setIsTestModalOpen(false)}
+      />
     </section>
   );
 }
