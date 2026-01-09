@@ -113,7 +113,7 @@ export interface PackageItem {
 export const packageItems: PackageItem[] = [
   {
     id: 1,
-    name: 'AuditDino',
+    name: 'Audit',
     shortDescription: {
       en: 'Audit your operations and get an actionable ROI-based roadmap',
       fr: 'Auditez vos opérations et obtenez une feuille de route ROI actionnable',
@@ -135,8 +135,8 @@ export const packageItems: PackageItem[] = [
       ],
     },
     price: {
-      en: '€3,000',
-      fr: '3 000 €',
+      en: '€2,000',
+      fr: '2 000 €',
     },
     creditNote: {
       en: '100% credit',
@@ -144,8 +144,64 @@ export const packageItems: PackageItem[] = [
     },
   },
   {
+    id: 6,
+    name: 'Partner',
+    shortDescription: {
+      en: 'Ongoing operational excellence & automation',
+      fr: 'Excellence opérationnelle continue et automatisation',
+    },
+    description: {
+      en: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
+      fr: '• COO fractionné améliorant et faisant évoluer continuellement vos systèmes existants\n• Maintenance proactive et ajustement de toutes les automatisations et workflows\n• Ateliers rétrospectifs d\'équipe bihebdomadaires pour favoriser l\'amélioration continue',
+    },
+    outputs: {
+      en: [
+        'Monthly Optimization: Continuous refinement of workflows and AI agents.',
+        'Team Onboarding & Training: Managing tool provisioning and internal knowledge bases (Notion).',
+        'Performance Tracking: Implementation of formal KPI dashboards (Time-to-Hire, etc.).'
+      ],
+      fr: [
+        'Optimisation Mensuelle : Raffinement continu des workflows et agents IA.',
+        'Onboarding et Formation d\'Équipe : Gestion de l\'approvisionnement en outils et des bases de connaissances internes (Notion).',
+        'Suivi des Performances : Mise en place de tableaux de bord KPI formels (Time-to-Hire, etc.).'
+      ],
+    },
+    price: {
+      en: '€5,000 / Month',
+      fr: '5 000 € / Mois',
+    },
+  },
+  {
+    id: 5,
+    name: 'Custom Solutions',
+    shortDescription: {
+      en: 'Production-ready custom solutions in weeks (Audit included)',
+      fr: 'Solutions sur mesure prêtes pour la production en quelques semaines (Audit inclus)',
+    },
+    description: {
+      en: '• Includes full Audit package (€2,000 value)\n• Month-long sprint delivering a new production feature every week\n• Four complete features with comprehensive training and documentation',
+      fr: '• Inclut le package Audit complet (valeur 2 000 €)\n• Sprint d\'un mois livrant une nouvelle fonctionnalité de production chaque semaine\n• Quatre fonctionnalités complètes avec formation et documentation complètes',
+    },
+    outputs: {
+      en: [
+        'Operational Audit: Full audit package included (Operational Map, Prioritized Roadmap, ROI Business Case).',
+        'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
+        'System Documentation: Full hand-over of the new workflow or tool.'
+      ],
+      fr: [
+        'Audit Opérationnel : Package Audit complet inclus (Cartographie Opérationnelle, Feuille de Route Priorisée, Business Case ROI).',
+        'Livrable Sur Mesure : Peut inclure un moteur de matching IA (Radar), des pipelines de facturation automatisés ou des intégrations ATS/CRM personnalisées.',
+        'Documentation Système : Transfert complet du nouveau workflow ou outil.'
+      ],
+    },
+    price: {
+      en: 'ROI-Based',
+      fr: 'Basé sur ROI',
+    },
+  },
+  {
     id: 3,
-    name: 'MandateDino',
+    name: 'Lead Engine',
     shortDescription: {
       en: 'AI-driven lead engine: 1 mandate per 3 calls',
       fr: 'Moteur de leads IA : 1 mandat pour 3 appels',
@@ -175,7 +231,7 @@ export const packageItems: PackageItem[] = [
   },
   {
     id: 4,
-    name: 'ProtectDino',
+    name: 'Client Protection',
     shortDescription: {
       en: 'Protect your mandates from competition',
       fr: 'Protégez vos mandats de la concurrence',
@@ -199,60 +255,6 @@ export const packageItems: PackageItem[] = [
       fr: '€3,000 Installation',
     },
   },
-  {
-    id: 5,
-    name: 'CustomDino',
-    shortDescription: {
-      en: 'Production-ready custom solutions in weeks',
-      fr: 'Solutions sur mesure prêtes pour la production en quelques semaines',
-    },
-    description: {
-      en: '• Month-long sprint delivering a new production feature every week\n• Four complete features with comprehensive training and documentation',
-      fr: '• Sprint d\'un mois livrant une nouvelle fonctionnalité de production chaque semaine\n• Quatre fonctionnalités complètes avec formation et documentation complètes',
-    },
-    outputs: {
-      en: [
-        'Custom Deliverable: Could include an AI matching engine (Radar), automated billing pipelines, or custom ATS/CRM integrations.',
-        'System Documentation: Full hand-over of the new workflow or tool.'
-      ],
-      fr: [
-        'Livrable Sur Mesure : Peut inclure un moteur de matching IA (Radar), des pipelines de facturation automatisés ou des intégrations ATS/CRM personnalisées.',
-        'Documentation Système : Transfert complet du nouveau workflow ou outil.'
-      ],
-    },
-    price: {
-      en: 'ROI-Based',
-      fr: 'Basé sur ROI',
-    },
-  },
-  {
-    id: 6,
-    name: 'ProDino',
-    shortDescription: {
-      en: 'Ongoing operational excellence & automation',
-      fr: 'Excellence opérationnelle continue et automatisation',
-    },
-    description: {
-      en: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
-      fr: '• COO fractionné améliorant et faisant évoluer continuellement vos systèmes existants\n• Maintenance proactive et ajustement de toutes les automatisations et workflows\n• Ateliers rétrospectifs d\'équipe bihebdomadaires pour favoriser l\'amélioration continue',
-    },
-    outputs: {
-      en: [
-        'Monthly Optimization: Continuous refinement of workflows and AI agents.',
-        'Team Onboarding & Training: Managing tool provisioning and internal knowledge bases (Notion).',
-        'Performance Tracking: Implementation of formal KPI dashboards (Time-to-Hire, etc.).'
-      ],
-      fr: [
-        'Optimisation Mensuelle : Raffinement continu des workflows et agents IA.',
-        'Onboarding et Formation d\'Équipe : Gestion de l\'approvisionnement en outils et des bases de connaissances internes (Notion).',
-        'Suivi des Performances : Mise en place de tableaux de bord KPI formels (Time-to-Hire, etc.).'
-      ],
-    },
-    price: {
-      en: '€5,000 / Month',
-      fr: '5 000 € / Mois',
-    },
-  },
 ];
 
 // ============================================================================
@@ -265,6 +267,7 @@ export interface Translations {
     nav: {
       home: string;
       packages: string;
+      agents: string;
       work: string;
     };
     bookCall: string;
@@ -297,6 +300,7 @@ export interface Translations {
       primary: string;
       secondary: string;
       highlight: string;
+      highlightWords: string[];
     };
     intro: {
       primary: string;
@@ -355,6 +359,7 @@ export interface Translations {
   // Packages
   packages: {
     title: string;
+    agentsTitle: string;
     cta: string;
     calculator: {
       title: string;
@@ -432,6 +437,7 @@ export const translations: Record<Language, Translations> = {
       nav: {
         home: 'Home',
         packages: 'Packages',
+        agents: 'Agents',
         work: 'Work',
       },
       bookCall: 'Book a Call',
@@ -462,7 +468,8 @@ export const translations: Record<Language, Translations> = {
       headline: {
         primary: 'Increase your Net Margin\n',
         secondary: 'Per Recruiter with',
-        highlight: 'AI',
+        highlight: 'AI agents',
+        highlightWords: ["more mandates", "seemless automations"],
       },
       intro: {
         primary: 'Manual recruiting processes drain productivity and compress margins. Profile sourcing, candidate screening, follow-ups, reporting… repetitive tasks that limit your recruiters\' capacity and revenue per head.',
@@ -520,6 +527,7 @@ export const translations: Record<Language, Translations> = {
 
     packages: {
       title: 'Our Packages',
+      agentsTitle: 'Our Agents',
       cta: 'Choose your custom package',
       calculator: {
         title: 'Calculate Your Cost',
@@ -550,7 +558,7 @@ export const translations: Record<Language, Translations> = {
       viewSampleReport: 'View Sample Report',
       mandateDinoTest: {
         buttonLabel: 'Test the Tool',
-        modalTitle: 'Test MandateDino',
+        modalTitle: 'MandateDino',
         modalSubtitle: 'Reverse-source clients from competitor job postings in the last 24 hours',
         selectSectors: 'Select job sectors to scan',
         runTest: 'Run Test',
@@ -600,7 +608,8 @@ export const translations: Record<Language, Translations> = {
     header: {
       nav: {
         home: 'Accueil',
-        packages: 'Forfaits',
+        packages: 'Packages',
+        agents: 'Agents',
         work: 'Projets',
       },
       bookCall: 'Réserver un appel',
@@ -632,6 +641,7 @@ export const translations: Record<Language, Translations> = {
         primary: 'Augmentez votre Marge Net',
         secondary: ' Par Recruteur avec',
         highlight: 'l\'IA',
+        highlightWords: ['plus de mandats', 'de l\'automatisation'],
       },
       intro: {
         primary: 'Ces pertes de temps dans le back-office représentent souvent plusieurs dizaines de milliers d\'euros par an en salaires, retards et opportunités manquées. Devis, relances, saisies, reporting… autant de tâches répétitives qui saturent vos équipes et freinent votre croissance.',
@@ -689,6 +699,7 @@ export const translations: Record<Language, Translations> = {
 
     packages: {
       title: 'Nos Packages',
+      agentsTitle: 'Nos Agents',
       cta: 'Choissisez votre package',
       calculator: {
         title: 'Calculez votre coût',
@@ -719,7 +730,7 @@ export const translations: Record<Language, Translations> = {
       viewSampleReport: 'Voir l\'exemple de rapport',
       mandateDinoTest: {
         buttonLabel: 'Tester l\'outil',
-        modalTitle: 'Tester MandateDino',
+        modalTitle: 'MandateDino',
         modalSubtitle: 'Identifiez les clients finaux à partir des offres concurrentes des dernières 24h',
         selectSectors: 'Sélectionnez les secteurs à analyser',
         runTest: 'Lancer le test',

@@ -4,7 +4,7 @@ import { useLanguage, type Language } from '../lib/language';
 import { getTranslations } from '../lib/translations';
 
 interface NavItem {
-  id: 'home' | 'packages' | 'work';
+  id: 'home' | 'packages' | 'agents' | 'work';
   href: string;
 }
 
@@ -88,7 +88,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
   // Initialize from URL hash on mount
   useEffect(() => {
     const hash = window.location.hash.replace('#', '') || 'home';
-    if (['home', 'packages', 'work'].includes(hash)) {
+    if (['home', 'packages', 'agents', 'work'].includes(hash)) {
       setActiveSection(hash);
     }
   }, []);

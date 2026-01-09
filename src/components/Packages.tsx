@@ -56,45 +56,76 @@ export default function Packages() {
     <section className="px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        
+
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4 lg:mb-6 tracking-tight">
             {t.packages.title}
           </h1>
         </div>
 
-        {/* Packages Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-start">
+        {/* All Packages Grid (including agents) */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {packageItems.map((pkg, index) => {
-            const pkgColor = packageColors[index] || packageColors[0];
+            const pkgColor = packageColors[index % packageColors.length];
+            const isAgent = pkg.id === 3 || pkg.id === 4;
             return (
             <div
               key={pkg.id}
               className="group relative flex"
             >
+              {/* AI Agent Badge - Only for agents */}
+              {isAgent && (
+                <div className="absolute -top-3 left-6 z-20">
+                  <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${pkgColor.button} text-white text-xs font-semibold shadow-lg`}>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    AI Agent
+                  </div>
+                </div>
+              )}
+
               {/* Package Card */}
               <div
                 className={`relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer flex flex-col w-full ${
                   expandedId === pkg.id
-                    ? `shadow-lg ${pkgColor.bg} border border-gray-200`
-                    : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300 h-full min-h-[280px]'
+                    ? `shadow-lg ${pkgColor.bg} border ${isAgent ? `border-2 ${pkgColor.text.replace('text-', 'border-')}` : 'border-gray-200'}`
+                    : `${isAgent ? 'border-2 border-dashed border-gray-300 hover:shadow-xl hover:border-gray-400' : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300'} h-[350px]`
                 }`}
                 onClick={() => togglePackage(pkg.id)}
               >
-                {/* Subtle Abstract Background Pattern */}
-                <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-gray-400 to-transparent rounded-full blur-3xl"></div>
-                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-gray-300 to-transparent rounded-full blur-3xl"></div>
-                </div>
+                {/* Background Pattern - Different for agents */}
+                {isAgent ? (
+                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-400 to-transparent rounded-full blur-3xl animate-pulse"></div>
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-blue-400 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-gray-400 to-transparent rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-gray-300 to-transparent rounded-full blur-3xl"></div>
+                  </div>
+                )}
 
                 {/* Minimal Header with Subtle Gradient */}
                 <div className={`bg-gradient-to-br ${pkgColor.gradient} p-8 text-gray-800 relative overflow-hidden`}>
-                  {/* Subtle Abstract Shapes */}
-                  <div className="absolute inset-0 overflow-hidden opacity-30">
-                    <div className="absolute -top-8 -right-8 w-24 h-24 border border-gray-300/20 rotate-45 rounded-lg"></div>
-                    <div className="absolute -bottom-6 -left-6 w-20 h-20 border border-gray-300/20 rotate-12 rounded-lg"></div>
-                    <div className="absolute top-1/2 right-6 w-12 h-12 bg-gray-300/10 rotate-45 rounded-md"></div>
-                  </div>
+                  {/* Abstract Shapes - Different for agents */}
+                  {isAgent ? (
+                    <div className="absolute inset-0 overflow-hidden opacity-20">
+                      <div className="absolute -top-8 -right-8 w-24 h-24 border-2 border-gray-300/30 rotate-45 rounded-lg"></div>
+                      <div className="absolute -bottom-6 -left-6 w-20 h-20 border-2 border-gray-300/30 rotate-12 rounded-lg"></div>
+                      <div className="absolute top-1/2 right-6 w-12 h-12 bg-gray-300/20 rotate-45 rounded-md"></div>
+                      {/* Circuit-like dots */}
+                      <div className="absolute top-1/4 left-8 w-2 h-2 bg-gray-400/30 rounded-full"></div>
+                      <div className="absolute top-3/4 right-12 w-2 h-2 bg-gray-400/30 rounded-full"></div>
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 overflow-hidden opacity-30">
+                      <div className="absolute -top-8 -right-8 w-24 h-24 border border-gray-300/20 rotate-45 rounded-lg"></div>
+                      <div className="absolute -bottom-6 -left-6 w-20 h-20 border border-gray-300/20 rotate-12 rounded-lg"></div>
+                      <div className="absolute top-1/2 right-6 w-12 h-12 bg-gray-300/10 rotate-45 rounded-md"></div>
+                    </div>
+                  )}
 
                   {/* Dino Icon and Title - Horizontally Aligned */}
                   <div className="flex items-center gap-4 mb-3 relative z-10">

@@ -20,17 +20,17 @@ interface HeroProps {
   showWithTestimonials?: boolean;
 }
 
-const DINO_WORDS = ['AuditDino', 'MandateDino', 'CustomDino', 'ProDino'];
+const DINO_WORDS = ["more mandates", "automated operations"];
 
-const DINO_COLORS: Record<string, string> = {
-  'AI': 'bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent',
-  'AuditDino': 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent',
-  'CostDino': 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 bg-clip-text text-transparent',
-  'MandateDino': 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 bg-clip-text text-transparent',
-  'ProtectDino': 'bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 bg-clip-text text-transparent',
-  'CustomDino': 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 bg-clip-text text-transparent',
-  'ProDino': 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 bg-clip-text text-transparent'
-};
+const DINO_COLORS =  [
+  'bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 bg-clip-text text-transparent',
+  'bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 bg-clip-text text-transparent'
+];
 
 export default function Hero({ 
   calendarLink = 'https://cal.com/vincent-baron/30mins-meeting',
@@ -50,7 +50,7 @@ export default function Hero({
   
   // Get the current word being shown/typed
   const getCurrentWord = () => {
-    return currentIndex === -1 ? `${t.hero.headline.highlight}` : DINO_WORDS[currentIndex];
+    return currentIndex === -1 ? `${t.hero.headline.highlight}` : t.hero.headline.highlightWords[currentIndex];
   };
   
   useEffect(() => {
@@ -139,10 +139,10 @@ export default function Hero({
               <div className="space-y-6 relative z-10 flex justify-center w-full">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-700 leading-[1.1] tracking-[-0.015em] text-center px-2">
                       {t.hero.headline.primary}<br />
-                      <span className="inline-block">
+                      <span className="inline-block flex flex-col">
                         {t.hero.headline.secondary}{' '}
-                        <span className={`${DINO_COLORS[getCurrentWord()] || DINO_COLORS['AI']} font-bold whitespace-nowrap inline-block min-w-[80px] sm:min-w-[120px] md:min-w-[150px] lg:min-w-[180px] text-left align-baseline`}>
-                          {displayText}
+                        <span className={`${DINO_COLORS[0] || DINO_COLORS[0]} font-bold whitespace-nowrap inline-block align-baseline`}>
+                          {displayText || "\u200b"}
                         </span>
                       </span>
                 </h1>
