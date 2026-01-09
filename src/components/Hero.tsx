@@ -141,7 +141,7 @@ export default function Hero({
                       {t.hero.headline.primary}<br />
                       <span className="inline-block flex flex-col">
                         {t.hero.headline.secondary}{' '}
-                        <span className={`${DINO_COLORS[0] || DINO_COLORS[0]} font-bold whitespace-nowrap inline-block align-baseline`}>
+                        <span className={`${DINO_COLORS[0] || DINO_COLORS[0]} font-bold whitespace-nowrap inline-block align-baseline pb-2`}>
                           {displayText || "\u200b"}
                         </span>
                       </span>
