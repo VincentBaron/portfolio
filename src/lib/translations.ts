@@ -251,7 +251,7 @@ export const packageItems: PackageItem[] = [
       fr: 'Moteur de leads IA : 1 mandat pour 3 appels',
     },
     description: {
-      en: '• Scans competitor job listings to identify real end clients\n• Converts 1 mandate per 3 calls (vs. 1 per 100 traditionally)\n• Plugs directly into your CRM\n• Designed for revenue per call, not activity metrics',
+      en: '• Scans competitor job listings to identify real end clients',
       fr: '• Scanne les offres d\'emploi concurrentes pour identifier les vrais clients finaux\n• Convertit 1 mandat pour 3 appels (vs 1 pour 100 traditionnellement)\n• S\'intègre directement dans votre CRM\n• Conçu pour le revenu par appel, pas les métriques d\'activité',
     },
     outputs: {
@@ -281,8 +281,8 @@ export const packageItems: PackageItem[] = [
       fr: 'Protégez vos mandats de la concurrence',
     },
     description: {
-      en: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities\n• Provides automated recommendations to shield client identities while maintaining candidate appeal',
-      fr: '• Surveille en continu vos offres d\'emploi pour détecter les vulnérabilités de reverse-sourcing\n• Fournit des recommandations automatisées pour protéger les identités des clients tout en maintenant l\'attrait pour les candidats',
+      en: '• Continuously monitors your job listings for reverse-sourcing vulnerabilities',
+      fr: '• Surveille en continu vos offres d\'emploi pour détecter les vulnérabilités de reverse-sourcing',
     },
     outputs: {
       en: [
@@ -434,8 +434,11 @@ export interface Translations {
     before: string;
     after: string;
     efficiency: string;
+    metricLabel: string;
+    clientProtectionMetricLabel: string;
     viewSampleAnalysis: string;
     viewSampleReport: string;
+    protection: string;
     mandateDinoTest: {
       buttonLabel: string;
       modalTitle: string;
@@ -603,14 +606,17 @@ export const translations: Record<Language, Translations> = {
       before: 'Before',
       after: 'After',
       efficiency: 'Efficiency',
+      metricLabel: 'Calls to sign 1 mandate',
+      clientProtectionMetricLabel: 'Monthly Poached Mandates',
       viewSampleAnalysis: 'View Sample Analysis',
       viewSampleReport: 'View Sample Report',
+      protection: 'Protection',
       sectionTitle: 'Our Packages',
       bundleTitle: 'Bundles',
       bundleSubtitle: 'Complete solutions for your business growth',
       mandateDinoTest: {
         buttonLabel: 'Test the Tool',
-        modalTitle: 'MandateDino',
+        modalTitle: 'Lead Engine',
         modalSubtitle: 'Reverse-source clients from competitor job postings in the last 24 hours',
         selectSectors: 'Select job sectors to scan',
         runTest: 'Run Test',
@@ -779,14 +785,18 @@ export const translations: Record<Language, Translations> = {
       before: 'Avant',
       after: 'Après',
       efficiency: 'Efficacité',
+      metricLabel: 'Appels pour signer 1 mandat',
+      clientProtectionMetricLabel: 'Mandats Détournés / Mois',
       viewSampleAnalysis: 'Voir l\'exemple d\'analyse',
-      viewSampleReport: 'View Sample Report',
+      viewSampleReport: 'Voir un exemple de rapport',
+      protection: 'Protection',
+
       sectionTitle: 'Nos Packages',
       bundleTitle: 'Bundles',
       bundleSubtitle: 'Solutions complètes pour la croissance de votre entreprise',
       mandateDinoTest: {
         buttonLabel: 'Tester l\'outil',
-        modalTitle: 'MandateDino',
+        modalTitle: 'Lead Engine',
         modalSubtitle: 'Identifiez les clients finaux à partir des offres concurrentes des dernières 24h',
         selectSectors: 'Sélectionnez les secteurs à analyser',
         runTest: 'Lancer le test',

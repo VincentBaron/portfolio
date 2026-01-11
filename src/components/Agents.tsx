@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { useLanguage } from '../lib/language';
 import { getTranslations, packageItems } from '../lib/translations';
 import PackageCard from './PackageCard';
 
 export default function Agents() {
-    const [expandedId, setExpandedId] = useState<number | null>(null);
     const { language } = useLanguage();
     const t = getTranslations(language);
 
@@ -47,10 +45,6 @@ export default function Agents() {
         },
     ];
 
-    const togglePackage = (id: number) => {
-        setExpandedId(expandedId === id ? null : id);
-    };
-
     // Filter only agents (id 3 and 4)
     const agentPackages = packageItems.filter(pkg => pkg.id === 3 || pkg.id === 4);
 
@@ -82,8 +76,6 @@ export default function Agents() {
 
                                 <PackageCard
                                     pkg={pkg}
-                                    expandedId={expandedId}
-                                    togglePackage={togglePackage}
                                     packageColor={pkgColor}
                                     isAgent={true}
                                 />

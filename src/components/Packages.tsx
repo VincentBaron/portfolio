@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { useLanguage } from '../lib/language';
 import { getTranslations, packageItems, bundleItems } from '../lib/translations';
 import PackageCard from './PackageCard';
 
 export default function Packages() {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
   const { language } = useLanguage();
   const t = getTranslations(language);
 
@@ -46,10 +44,6 @@ export default function Packages() {
       buttonHover: 'from-emerald-700 via-emerald-600 to-emerald-500'
     },
   ];
-
-  const togglePackage = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
 
   // Filter out agents (id 3 and 4)
   const regularPackages = packageItems.filter(pkg => pkg.id !== 3 && pkg.id !== 4);
@@ -196,7 +190,6 @@ export default function Packages() {
                       <div className="text-gray-500 text-xs mb-6">
                         Per Month
                       </div>
-
                       <button
                         className={`w-full py-3.5 rounded-xl font-bold text-base text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 bg-gradient-to-r ${bundleTheme.button} hover:${bundleTheme.buttonHover}`}
                         onClick={() => window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank')}
@@ -233,8 +226,6 @@ export default function Packages() {
                 </div>
                 <PackageCard
                   pkg={pkg}
-                  expandedId={expandedId}
-                  togglePackage={togglePackage}
                   packageColor={pkgColor}
                   isAgent={false}
                 />

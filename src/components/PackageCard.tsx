@@ -5,8 +5,6 @@ import MandateDinoTestModal from './MandateDinoTestModal';
 
 interface PackageCardProps {
     pkg: PackageItem;
-    expandedId: number | null;
-    togglePackage: (id: number) => void;
     packageColor: {
         gradient: string;
         bg: string;
@@ -17,7 +15,7 @@ interface PackageCardProps {
     isAgent?: boolean;
 }
 
-export default function PackageCard({ pkg, expandedId, togglePackage, packageColor, isAgent }: PackageCardProps) {
+export default function PackageCard({ pkg, packageColor, isAgent }: PackageCardProps) {
     const { language } = useLanguage();
     const t = getTranslations(language);
     const [isTestModalOpen, setIsTestModalOpen] = useState(false);
@@ -25,11 +23,7 @@ export default function PackageCard({ pkg, expandedId, togglePackage, packageCol
     return (
         <>
             <div
-                className={`relative overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer flex flex-col w-full ${expandedId === pkg.id
-                    ? `shadow-lg ${packageColor.bg} border ${isAgent ? `border-2 ${packageColor.text.replace('text-', 'border-')}` : 'border-gray-200'}`
-                    : `${isAgent ? 'border-2 border-dashed border-gray-300 hover:shadow-xl hover:border-gray-400' : 'border border-gray-200 bg-white hover:shadow-md hover:border-gray-300'} h-[350px]`
-                    }`}
-                onClick={() => togglePackage(pkg.id)}
+                className={`relative overflow-hidden rounded-2xl transition-all duration-500 flex flex-col w-full shadow-lg ${packageColor.bg} border ${isAgent ? `border-2 ${packageColor.text.replace('text-', 'border-')}` : 'border-gray-200'}`}
             >
                 {/* Background Pattern - Different for agents */}
                 {isAgent ? (
@@ -96,89 +90,89 @@ export default function PackageCard({ pkg, expandedId, togglePackage, packageCol
                     </div>
                 </div>
 
-                {/* Expandable Content */}
-                <div
-                    className={`overflow-hidden transition-all duration-300 ${expandedId === pkg.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                >
-                    <div className="px-8 pb-8 space-y-6">
-                        {/* Description */}
-                        <div>
-                            {/* Check if description contains bullet points */}
-                            {pkg.description[language].includes('•') ? (
-                                <ul className="space-y-2.5">
-                                    {pkg.description[language].split('\n').map((line: string, idx: number) => (
-                                        <li key={idx} className="flex items-start gap-3 text-sm">
-                                            <svg className={`w-5 h-5 ${packageColor.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                            </svg>
-                                            <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {pkg.description[language]}
-                                </p>
-                            )}
-                        </div>
-
-                        {/* Special content for MandateDino */}
-                        {pkg.id === 3 && (
-                            <>
-                                {/* Test the Tool Button - Primary CTA */}
-                                <button
-                                    className={`w-full py-3 px-6 mb-6 rounded-lg text-center text-white bg-gradient-to-r ${packageColor.button} hover:${packageColor.buttonHover} font-semibold text-sm transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setIsTestModalOpen(true);
-                                    }}
-                                >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                    {t.packages.mandateDinoTest.buttonLabel}
-                                </button>
-
-                                {/* Infographic */}
-                                <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
-                                    <div className="flex items-center justify-center gap-8 mb-4">
-                                        {/* Before */}
-                                        <div className="text-center">
-                                            <div className="text-xs font-medium text-gray-500 mb-2">
-                                                {t.packages.before}
-                                            </div>
-                                            <div className="text-4xl font-bold text-gray-400">1/100</div>
-                                            <div className="text-xs text-gray-500 mt-1">1%</div>
-                                        </div>
-
-                                        {/* Arrow */}
-                                        <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                {/* Content - Always Visible */}
+                <div className="px-8 pb-8 space-y-6">
+                    {/* Description */}
+                    <div>
+                        {/* Check if description contains bullet points */}
+                        {pkg.description[language].includes('•') ? (
+                            <ul className="space-y-2.5">
+                                {pkg.description[language].split('\n').map((line: string, idx: number) => (
+                                    <li key={idx} className="flex items-start gap-3 text-sm">
+                                        <svg className={`w-5 h-5 ${packageColor.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                         </svg>
+                                        <span className="text-gray-600 leading-relaxed">{line.replace('• ', '')}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                {pkg.description[language]}
+                            </p>
+                        )}
+                    </div>
 
-                                        {/* After */}
-                                        <div className="text-center">
-                                            <div className="text-xs font-medium text-gray-500 mb-2">
-                                                {t.packages.after}
-                                            </div>
-                                            <div className="text-4xl font-bold text-purple-600">1/3</div>
-                                            <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
+                    {/* Special content for MandateDino */}
+                    {pkg.id === 3 && (
+                        <>
+                            {/* Test the Tool Button - Primary CTA */}
+                            <button
+                                className={`w-full py-3 px-6 mb-6 rounded-lg text-center text-white bg-gradient-to-r ${packageColor.button} hover:${packageColor.buttonHover} font-semibold text-sm transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsTestModalOpen(true);
+                                }}
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                {t.packages.mandateDinoTest.buttonLabel}
+                            </button>
+
+                            {/* Infographic */}
+                            <div className="my-6 p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200/50">
+                                <div className="text-center text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">
+                                    {t.packages.metricLabel}
+                                </div>
+                                <div className="flex items-center justify-center gap-8 mb-4">
+                                    {/* Before */}
+                                    <div className="text-center">
+                                        <div className="text-xs font-medium text-gray-500 mb-2">
+                                            {t.packages.before}
                                         </div>
+                                        <div className="text-4xl font-bold text-gray-400">1/100</div>
+                                        <div className="text-xs text-gray-500 mt-1">1%</div>
                                     </div>
 
-                                    {/* Impact Badge */}
-                                    <div className="text-center pt-4 border-t border-purple-200">
-                                        <span className="text-sm font-bold text-purple-700">
-                                            33× {t.packages.efficiency}
-                                        </span>
+                                    {/* Arrow */}
+                                    <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+
+                                    {/* After */}
+                                    <div className="text-center">
+                                        <div className="text-xs font-medium text-gray-500 mb-2">
+                                            {t.packages.after}
+                                        </div>
+                                        <div className="text-4xl font-bold text-purple-600">1/3</div>
+                                        <div className="text-xs text-purple-600 mt-1 font-semibold">33%</div>
                                     </div>
                                 </div>
-                            </>
-                        )}
 
-                        {/* GuardDino Preview Link */}
-                        {pkg.id === 4 && (
+                                {/* Impact Badge */}
+                                <div className="text-center pt-4 border-t border-purple-200">
+                                    <span className="text-sm font-bold text-purple-700">
+                                        33× {t.packages.efficiency}
+                                    </span>
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    {/* GuardDino Preview Link */}
+                    {pkg.id === 4 && (
+                        <>
                             <a
                                 href="/guard_dino_preview.html"
                                 target="_blank"
@@ -191,48 +185,52 @@ export default function PackageCard({ pkg, expandedId, togglePackage, packageCol
                                 </svg>
                                 {t.packages.viewSampleReport}
                             </a>
-                        )}
 
-                        {/* CTA Button - Hidden for MandateDino (uses Test button instead) */}
-                        {pkg.id !== 3 && (
-                            <button
-                                className={`w-full py-3 px-6 rounded-lg text-white bg-gradient-to-r ${packageColor.button} hover:${packageColor.buttonHover} font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-sm`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank');
-                                }}
-                            >
-                                {t.packages.bookCall}
-                            </button>
-                        )}
-                    </div>
+                            {/* Infographic */}
+                            <div className="my-6 p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-200/50">
+                                <div className="text-center text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">
+                                    {t.packages.clientProtectionMetricLabel}
+                                </div>
+                                <div className="flex items-center justify-center gap-8 mb-4">
+                                    {/* Before */}
+                                    <div className="text-center">
+                                        <div className="text-xs font-medium text-gray-500 mb-2">
+                                            {t.packages.before}
+                                        </div>
+                                        <div className="text-4xl font-bold text-gray-400">3-5</div>
+                                    </div>
+
+                                    {/* Arrow */}
+                                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+
+                                    {/* After */}
+                                    <div className="text-center">
+                                        <div className="text-xs font-medium text-gray-500 mb-2">
+                                            {t.packages.after}
+                                        </div>
+                                        <div className="text-4xl font-bold text-blue-600">0</div>
+                                    </div>
+                                </div>
+
+                                {/* Impact Badge */}
+                                <div className="text-center pt-4 border-t border-blue-200">
+                                    <span className="text-sm font-bold text-blue-700">
+                                        100% {t.packages.protection}
+                                    </span>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
-
-                {/* Collapsed Preview */}
-                {expandedId !== pkg.id && (
-                    <div className="p-6 flex-grow flex flex-col relative">
-                        {/* Subtle corner decoration */}
-                        <div className="absolute bottom-6 right-6 w-12 h-12 border-r border-b border-gray-200 opacity-20"></div>
-
-                        {/* Short one-line description */}
-                        <p className="text-gray-600 text-sm leading-relaxed flex-grow">
-                            {pkg.shortDescription[language]}
-                        </p>
-
-                        <div className={`mt-4 text-sm font-medium ${packageColor.text} flex items-center gap-2 group-hover:gap-3 transition-all`}>
-                            <span>{t.packages.learnMore}</span>
-                            <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-                    </div>
-                )}
-            </div>
+            </div >
 
             {/* MandateDino Test Modal - Needed for the test button to work */}
-            <MandateDinoTestModal
+            < MandateDinoTestModal
                 isOpen={isTestModalOpen}
-                onClose={() => setIsTestModalOpen(false)}
+                onClose={() => setIsTestModalOpen(false)
+                }
             />
         </>
     );

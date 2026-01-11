@@ -165,8 +165,8 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
 
   const renderPremiumUpsell = () => (
     <div className="flex flex-col h-full bg-white p-6 justify-center items-center text-center">
-      <div className="w-16 h-16 bg-gradient-to-br from-rose-100 to-rose-200 rounded-full flex items-center justify-center mb-6 shadow-sm">
-        <svg className="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-6 shadow-sm">
+        <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       </div>
@@ -196,7 +196,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
       <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
         <button
           onClick={handleSeeMore}
-          className="flex-1 py-3 px-6 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700 transition-colors shadow-lg"
+          className="flex-1 py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
         >
           Book a Demo Call
         </button>
@@ -231,7 +231,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
         ) : (
           <>
             {/* Header */}
-            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-br from-rose-50 to-rose-100 flex-shrink-0">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-br from-blue-50 to-blue-100 flex-shrink-0">
               <div className="flex-1 min-w-0">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   {t.packages.mandateDinoTest.modalTitle}
@@ -291,10 +291,10 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                               }
                             }}
                             className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all flex items-center gap-2 ${isSelected
-                              ? 'bg-rose-50 border-rose-300 text-rose-700'
+                              ? 'bg-blue-50 border-blue-300 text-blue-700'
                               : isPremium
                                 ? 'bg-gray-50 border-gray-200 text-gray-400 hover:border-gray-300'
-                                : 'bg-white border-gray-200 text-gray-600 hover:border-rose-200'
+                                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-200'
                               }`}
                           >
                             {limit} Jobs
@@ -326,9 +326,9 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                             <label
                               key={sector.value}
                               className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${isSelected
-                                ? 'bg-rose-50 border-rose-300'
+                                ? 'bg-blue-50 border-blue-300'
                                 : isFree
-                                  ? 'bg-white border-gray-200 hover:border-rose-200'
+                                  ? 'bg-white border-gray-200 hover:border-blue-200'
                                   : 'bg-gray-50 border-gray-200 opacity-70 hover:opacity-90'
                                 }`}
                               onClick={(e) => {
@@ -341,7 +341,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                                 name="sector"
                                 checked={isSelected}
                                 readOnly
-                                className={`w-4 h-4 text-rose-600 border-gray-300 focus:ring-rose-500 ${!isFree ? 'cursor-not-allowed' : ''
+                                className={`w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 ${!isFree ? 'cursor-not-allowed' : ''
                                   }`}
                               />
                               <span className="text-sm text-gray-700 flex-1">{sector.label}</span>
@@ -362,7 +362,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                     onClick={handleRunTest}
                     disabled={!selectedSector}
                     className={`w-full py-3 px-6 rounded-lg text-white font-semibold shadow-lg transition-all duration-200 ${selectedSector
-                      ? 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 hover:from-rose-700 hover:via-rose-600 hover:to-rose-500 hover:scale-105 hover:shadow-xl'
+                      ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 hover:from-blue-700 hover:via-blue-600 hover:to-blue-500 hover:scale-105 hover:shadow-xl'
                       : 'bg-gray-300 cursor-not-allowed'
                       }`}
                   >
@@ -377,10 +377,10 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                   <div className="flex flex-col items-center">
                     {/* Animated Spinner */}
                     <div className="relative mb-8">
-                      <div className="w-16 h-16 border-4 border-rose-200 rounded-full"></div>
-                      <div className="absolute top-0 left-0 w-16 h-16 border-4 border-rose-600 rounded-full border-t-transparent animate-spin"></div>
+                      <div className="w-16 h-16 border-4 border-blue-200 rounded-full"></div>
+                      <div className="absolute top-0 left-0 w-16 h-16 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <svg className="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                       </div>
@@ -400,9 +400,9 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                         >
                           <div
                             className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${index < currentStep
-                              ? 'bg-rose-600'
+                              ? 'bg-blue-600'
                               : index === currentStep
-                                ? 'bg-rose-600 animate-pulse'
+                                ? 'bg-blue-600 animate-pulse'
                                 : 'bg-gray-300'
                               }`}
                           >
@@ -415,7 +415,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                             )}
                           </div>
                           <span
-                            className={`text-sm ${index === currentStep ? 'text-rose-700 font-medium' : 'text-gray-600'
+                            className={`text-sm ${index === currentStep ? 'text-blue-700 font-medium' : 'text-gray-600'
                               }`}
                           >
                             {step}
@@ -428,7 +428,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                     <div className="w-full max-w-md mt-6">
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-rose-600 to-rose-400 transition-all duration-500 ease-out"
+                          className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-500 ease-out"
                           style={{
                             width: `${(currentStep / t.packages.mandateDinoTest.searchSteps.length) * 100}%`,
                           }}
@@ -459,7 +459,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                       <h3 className="text-sm font-semibold text-gray-700">
                         {t.packages.mandateDinoTest.resultsTitle}
                       </h3>
-                      <span className="text-xs font-medium text-rose-600 bg-rose-50 px-2 py-1 rounded-full">
+                      <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
                         Showing 4 of {totalResults}
                       </span>
                     </div>
@@ -482,8 +482,8 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                               onClick={() => toggleResultExpansion(index)}
                             >
                               <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center">
-                                  <svg className="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                   </svg>
                                 </div>
@@ -498,7 +498,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                               </div>
                               <div className="flex items-center gap-3">
                                 <div className="text-right">
-                                  <p className="text-xs text-rose-600 font-medium">
+                                  <p className="text-xs text-blue-600 font-medium">
                                     Via {result.agencyName || 'Competitor'}
                                   </p>
                                 </div>
@@ -607,7 +607,7 @@ export default function MandateDinoTestModal({ isOpen, onClose }: MandateDinoTes
                           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-b from-transparent via-white/40 to-white/90">
                             <button
                               onClick={() => setViewState('premium_upsell')}
-                              className="px-6 py-3 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700 transition-colors shadow-lg transform hover:scale-105"
+                              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg transform hover:scale-105"
                             >
                               See All Results
                             </button>
