@@ -1,6 +1,7 @@
 import { useLanguage } from '../lib/language';
 import { getTranslations, packageItems, bundleItems } from '../lib/translations';
 import PackageCard from './PackageCard';
+import MarginEvolutionGraph from './MarginEvolutionGraph';
 
 export default function Packages() {
   const { language } = useLanguage();
@@ -173,6 +174,14 @@ export default function Packages() {
                           </div>
                         </div>
                       )}
+
+
+                      {/* Margin Evolution Graph (Only for Pro Bundle) */}
+                      {bundle.id === 2 && (
+                        <div className="mt-8 pt-6 border-t border-orange-100/50">
+                          <MarginEvolutionGraph />
+                        </div>
+                      )}
                     </div>
 
                     {/* Right Side: Pricing & CTA */}
@@ -241,6 +250,6 @@ export default function Packages() {
           </button>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
