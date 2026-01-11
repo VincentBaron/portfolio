@@ -9,8 +9,10 @@ export interface Category {
 export interface Company {
     companyName: string;
     probability_score: number;
+    probability_ranking: number;
     linkedin_url?: string;
     company_website?: string;
+    reasoning?: string;
 }
 
 export interface JobResult {
