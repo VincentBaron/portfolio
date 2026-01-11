@@ -11,6 +11,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { id: 'home', href: '#home' },
   { id: 'packages', href: '#packages' },
+  { id: 'agents', href: '#agents' },
   { id: 'work', href: '#work' },
 ];
 
@@ -42,11 +43,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             key={code}
             type="button"
             onClick={() => setLanguage(code)}
-            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
-              isActive
+            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${isActive
                 ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-            }`}
+              }`}
             aria-pressed={isActive}
             aria-label={sr}
             title={sr}
@@ -98,37 +98,37 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
     if (href === '#work' && currentPath.startsWith('/work')) {
       return true;
     }
-    
+
     // On home page, check active section
     if (currentPath === '/') {
       const section = href.replace('#', '');
       return section === activeSection;
     }
-    
+
     return false;
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
+
     if (href.startsWith('#')) {
       // If not on home page, navigate to home first
       if (currentPath !== '/') {
         window.location.href = `/${href}`;
         return;
       }
-      
+
       const targetId = href.replace('#', '');
       const target = document.getElementById(targetId);
-      
+
       if (target) {
         // Immediately update active section for instant feedback
         setActiveSection(targetId);
-        
+
         // Update URL hash
         window.history.pushState(null, '', href);
-        
+
         // Smooth scroll to target
         target.scrollIntoView({
           behavior: 'smooth',
@@ -161,9 +161,9 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                   className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
                   aria-label={copy.logoAria}
                 >
-                  <img 
-                    src="/logoBrand.png" 
-                    alt="StudioDino" 
+                  <img
+                    src="/logoBrand.png"
+                    alt="StudioDino"
                     className="h-12 w-auto transform group-hover:scale-105 transition-transform"
                   />
                   <span className="text-xl font-light tracking-wide text-gray-700 group-hover:text-gray-900 transition-all duration-300 -ml-3 relative top-2" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, -apple-system, sans-serif', fontWeight: '300' }}>
@@ -183,11 +183,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                         key={link.href}
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
-                          isCurrent
+                        className={`px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${isCurrent
                             ? 'text-gray-900 bg-gradient-to-r from-blue-50 to-indigo-50'
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                        }`}
+                          }`}
                         aria-current={isCurrent ? 'page' : undefined}
                       >
                         {link.label}
@@ -218,57 +217,56 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                       className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              )}
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </div>
+          </nav>
+
+          {/* CTA Button - Desktop - Separated */}
+          <div className="hidden md:block">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm tracking-wide text-white bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md hover:shadow-lg transition-all duration-200 hover:shadow-xl transition-all duration-200 hover:scale-105"
+            >
+              {copy.bookCall}
             </button>
           </div>
         </div>
-        </nav>
-
-        {/* CTA Button - Desktop - Separated */}
-        <div className="hidden md:block">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm tracking-wide text-white bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 shadow-md hover:shadow-lg transition-all duration-200 hover:shadow-xl transition-all duration-200 hover:scale-105"
-          >
-            {copy.bookCall}
-          </button>
-        </div>
-      </div>
       </div>
 
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
-        className={`md:hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen
+        className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen
             ? 'max-h-screen opacity-100'
             : 'max-h-0 opacity-0 overflow-hidden'
-        }`}
+          }`}
       >
         <div className="mx-4 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 px-8 pt-2 pb-6 space-y-3">
           {navLinks.map((link) => {
@@ -278,11 +276,10 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${
-                  isCurrent
+                className={`block px-4 py-3 rounded-lg text-base font-medium tracking-wide transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 ${isCurrent
                     ? 'text-gray-900 bg-gradient-to-r from-blue-50 to-indigo-50'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                }`}
+                  }`}
                 aria-current={isCurrent ? 'page' : undefined}
               >
                 {link.label}

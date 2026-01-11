@@ -110,6 +110,50 @@ export interface PackageItem {
   creditNote?: Record<Language, string>;
 }
 
+// Bundle items with multilingual content
+export interface BundleItem {
+  id: number;
+  name: string;
+  tagline: Record<Language, string>;
+  description: Record<Language, string>;
+  includes: Record<Language, string[]>;
+  price: Record<Language, string>;
+  isPopular?: boolean;
+}
+
+export const bundleItems: BundleItem[] = [
+
+  {
+    id: 2,
+    name: 'Pro Plan Bundle',
+    isPopular: true,
+    tagline: {
+      en: 'The ultimate operational excellence partner',
+      fr: 'Le partenaire ultime d\'excellence opérationnelle',
+    },
+    description: {
+      en: 'For companies serious about scaling. Get a fractional COO, continuous improvement, and discounted future developments.',
+      fr: 'Pour les entreprises sérieuses au sujet du passage à l\'échelle. Obtenez un COO fractionné, une amélioration continue et des développements futurs à prix réduit.',
+    },
+    includes: {
+      en: [
+        'Everything in Partner Package',
+        'Everything in Audit Package',
+        '30% Discount on all future implementations'
+      ],
+      fr: [
+        'Tout le package Partenaire',
+        'Tout le package Audit',
+        '30% de réduction sur toutes les implémentations futures'
+      ]
+    },
+    price: {
+      en: '€7,000',
+      fr: '7 000 €',
+    }
+  }
+];
+
 export const packageItems: PackageItem[] = [
   {
     id: 1,
@@ -358,9 +402,13 @@ export interface Translations {
 
   // Packages
   packages: {
+    sectionTitle: string;
     title: string;
+    bundleTitle: string;
+    bundleSubtitle: string;
     agentsTitle: string;
     cta: string;
+    agentsCta: string;
     calculator: {
       title: string;
       hoursLabel: string;
@@ -528,7 +576,8 @@ export const translations: Record<Language, Translations> = {
     packages: {
       title: 'Our Packages',
       agentsTitle: 'Our Agents',
-      cta: 'Choose your custom package',
+      cta: 'Choose your Package',
+      agentsCta: 'Book a demo',
       calculator: {
         title: 'Calculate Your Cost',
         hoursLabel: 'Hours/week',
@@ -556,6 +605,9 @@ export const translations: Record<Language, Translations> = {
       efficiency: 'Efficiency',
       viewSampleAnalysis: 'View Sample Analysis',
       viewSampleReport: 'View Sample Report',
+      sectionTitle: 'Our Packages',
+      bundleTitle: 'Bundles',
+      bundleSubtitle: 'Complete solutions for your business growth',
       mandateDinoTest: {
         buttonLabel: 'Test the Tool',
         modalTitle: 'MandateDino',
@@ -700,7 +752,8 @@ export const translations: Record<Language, Translations> = {
     packages: {
       title: 'Nos Packages',
       agentsTitle: 'Nos Agents',
-      cta: 'Choissisez votre package',
+      cta: 'Choisissez votre package',
+      agentsCta: 'Réserver une démo',
       calculator: {
         title: 'Calculez votre coût',
         hoursLabel: 'Heures/semaine',
@@ -727,7 +780,10 @@ export const translations: Record<Language, Translations> = {
       after: 'Après',
       efficiency: 'Efficacité',
       viewSampleAnalysis: 'Voir l\'exemple d\'analyse',
-      viewSampleReport: 'Voir l\'exemple de rapport',
+      viewSampleReport: 'View Sample Report',
+      sectionTitle: 'Nos Packages',
+      bundleTitle: 'Bundles',
+      bundleSubtitle: 'Solutions complètes pour la croissance de votre entreprise',
       mandateDinoTest: {
         buttonLabel: 'Tester l\'outil',
         modalTitle: 'MandateDino',

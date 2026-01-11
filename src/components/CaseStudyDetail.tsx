@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { CaseStudy } from '../data/caseStudies';
 import { useLanguage } from '../lib/language';
+import SystemSchema from './SystemSchema';
 
 interface CaseStudyDetailProps {
   caseStudy: CaseStudy;
@@ -139,6 +140,13 @@ export default function CaseStudyDetail({ caseStudy, relatedStudies }: CaseStudy
                   {paragraph[language]}
                 </p>
               ))}
+              {section.schemaConfig && (
+                <SystemSchema
+                  nodes={section.schemaConfig.nodes}
+                  connections={section.schemaConfig.connections}
+                  title={section.schemaConfig.title}
+                />
+              )}
             </section>
           ))}
         </div>

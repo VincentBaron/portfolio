@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
 import Packages from '../components/Packages';
+import Agents from '../components/Agents';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
 
 const pageTitle = "StudioDino - AI-Powered Recruiting Systems | 7-Day Implementation";
@@ -22,6 +23,11 @@ const pageKeywords = "AI recruiting systems, recruiting automation, staffing sof
   <!-- Packages Section -->
   <section id="packages" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
     <Packages client:load />
+  </section>
+
+  <!-- Agents Section -->
+  <section id="agents" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
+    <Agents client:load />
   </section>
 
     <!-- Work Section -->
