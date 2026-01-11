@@ -80,7 +80,7 @@ export default function Packages() {
               const customPkg = packageItems.find(p => p.name === 'Custom Solutions');
 
               const includedPackages = [
-                { pkg: auditPkg, label: 'Audit' },
+                { pkg: auditPkg, label: 'Audit', badge: language === 'fr' ? 'Offert' : 'Free' },
                 { pkg: partnerPkg, label: 'Partner' },
                 { pkg: customPkg, label: 'Custom', badge: '-30%' }
               ].filter(item => item.pkg);
@@ -115,9 +115,6 @@ export default function Packages() {
                             Best Value
                           </span>
                         </div>
-                        <p className="text-sm font-bold text-orange-600 mb-3 uppercase tracking-wider">
-                          {bundle.tagline[language]}
-                        </p>
 
                         <div className="grid md:grid-cols-2 gap-6 mb-6">
                           <p className="text-base text-gray-600 leading-relaxed">
@@ -145,9 +142,6 @@ export default function Packages() {
                       {/* Package Miniatures */}
                       {includedPackages.length > 0 && (
                         <div className="mt-4 pt-6 border-t border-orange-100/50">
-                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                            Includes full access to:
-                          </p>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {includedPackages.map((item, idx) => (
                               <div key={item.pkg?.id} className="relative group/card flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white/60 backdrop-blur-sm shadow-sm hover:shadow-md transition-all hover:bg-white">
@@ -171,7 +165,7 @@ export default function Packages() {
                                 <div className="min-w-0">
                                   <div className="font-semibold text-gray-900 text-sm truncate">{item.pkg?.name}</div>
                                   <div className="text-[10px] text-gray-500 truncate">
-                                    {item.badge ? 'Discounted future builds' : item.pkg?.price[language].includes('/') ? 'Monthly Plan' : 'One-time Audit'}
+                                    {item.label === 'Custom' ? 'Discounted future builds' : item.pkg?.price[language].includes('/') ? 'Monthly Plan' : 'One-time Audit'}
                                   </div>
                                 </div>
                               </div>

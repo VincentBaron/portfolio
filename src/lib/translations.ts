@@ -114,7 +114,7 @@ export interface PackageItem {
 export interface BundleItem {
   id: number;
   name: string;
-  tagline: Record<Language, string>;
+  // tagline: Record<Language, string>;
   description: Record<Language, string>;
   includes: Record<Language, string[]>;
   price: Record<Language, string>;
@@ -125,14 +125,10 @@ export const bundleItems: BundleItem[] = [
 
   {
     id: 2,
-    name: 'Pro Plan Bundle',
+    name: 'Pro Plan',
     isPopular: true,
-    tagline: {
-      en: 'The ultimate operational excellence partner',
-      fr: 'Le partenaire ultime d\'excellence opérationnelle',
-    },
     description: {
-      en: 'For companies serious about scaling. Get a fractional COO, continuous improvement, and discounted future developments.',
+      en: 'For companies serious about scaling. Get a Tech Partner, continuous improvement, and discounted future developments.',
       fr: 'Pour les entreprises sérieuses au sujet du passage à l\'échelle. Obtenez un COO fractionné, une amélioration continue et des développements futurs à prix réduit.',
     },
     includes: {
