@@ -92,111 +92,121 @@ export default function Packages() {
               ].filter(item => item.pkg);
 
               return (
-                <div
-                  key={bundle.id}
-                  className={`relative rounded-3xl border-2 ${bundleTheme.border} flex flex-col lg:flex-row overflow-hidden transition-all duration-300 hover:shadow-2xl shadow-xl bg-white group`}
-                >
-                  {/* Decorative Background Elements */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-amber-50/50 opacity-50" />
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-
-                  {/* Left Side: Content & Miniatures */}
-                  <div className="p-6 sm:p-8 flex-grow relative z-10 lg:w-3/4 flex flex-col justify-between">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-3 mb-2">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-                          {bundle.name}
-                        </h3>
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-700 border border-orange-200 uppercase tracking-wider">
-                          Best Value
-                        </span>
-                      </div>
-                      <p className="text-sm font-bold text-orange-600 mb-3 uppercase tracking-wider">
-                        {bundle.tagline[language]}
-                      </p>
-
-                      <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        <p className="text-base text-gray-600 leading-relaxed">
-                          {bundle.description[language]}
-                        </p>
-
-                        {/* Features List moved next to description for compactness */}
-                        <ul className="grid grid-cols-1 gap-2">
-                          {bundle.includes[language].map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
-                                <svg className="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                              </div>
-                              <span className="text-sm text-gray-600 font-medium">
-                                {item}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                <div key={bundle.id} className="relative group mt-6">
+                  {/* Bundle Badge */}
+                  <div className="absolute -top-3 left-6 z-20">
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${bundleTheme.button} text-white text-xs font-semibold shadow-lg`}>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                      </svg>
+                      Bundle
                     </div>
+                  </div>
+                  <div
+                    className={`relative rounded-3xl border-2 ${bundleTheme.border} flex flex-col lg:flex-row overflow-hidden transition-all duration-300 hover:shadow-2xl shadow-xl bg-white group`}
+                  >
+                    {/* Decorative Background Elements */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-amber-50/50 opacity-50" />
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
-                    {/* Package Miniatures */}
-                    {includedPackages.length > 0 && (
-                      <div className="mt-4 pt-6 border-t border-orange-100/50">
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                          Includes full access to:
+                    {/* Left Side: Content & Miniatures */}
+                    <div className="p-6 sm:p-8 flex-grow relative z-10 lg:w-3/4 flex flex-col justify-between">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 mb-2">
+                          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                            {bundle.name}
+                          </h3>
+                          <span className="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-700 border border-orange-200 uppercase tracking-wider">
+                            Best Value
+                          </span>
+                        </div>
+                        <p className="text-sm font-bold text-orange-600 mb-3 uppercase tracking-wider">
+                          {bundle.tagline[language]}
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                          {includedPackages.map((item, idx) => (
-                            <div key={item.pkg?.id} className="relative group/card flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white/60 backdrop-blur-sm shadow-sm hover:shadow-md transition-all hover:bg-white">
-                              {/* Badge */}
-                              {item.badge && (
-                                <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold shadow-sm z-10">
-                                  {item.badge}
-                                </div>
-                              )}
 
-                              <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${idx === 0 ? 'bg-blue-50 text-blue-600' : idx === 1 ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-orange-600'}`}>
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                  {idx === 0
-                                    ? <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    : idx === 1
-                                      ? <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" />
-                                      : <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                                  }
-                                </svg>
-                              </div>
-                              <div className="min-w-0">
-                                <div className="font-semibold text-gray-900 text-sm truncate">{item.pkg?.name}</div>
-                                <div className="text-[10px] text-gray-500 truncate">
-                                  {item.badge ? 'Discounted future builds' : item.pkg?.price[language].includes('/') ? 'Monthly Plan' : 'One-time Audit'}
+                        <div className="grid md:grid-cols-2 gap-6 mb-6">
+                          <p className="text-base text-gray-600 leading-relaxed">
+                            {bundle.description[language]}
+                          </p>
+
+                          {/* Features List moved next to description for compactness */}
+                          <ul className="grid grid-cols-1 gap-2">
+                            {bundle.includes[language].map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-2.5">
+                                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                                  <svg className="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
                                 </div>
-                              </div>
-                            </div>
-                          ))}
+                                <span className="text-sm text-gray-600 font-medium">
+                                  {item}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Right Side: Pricing & CTA */}
-                  <div className="relative z-10 lg:w-1/4 p-6 sm:p-8 bg-gray-50/50 border-t lg:border-t-0 lg:border-l border-gray-100 flex flex-col justify-center items-center text-center">
-                    <div className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Value Package</div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1 tracking-tight">
-                      {bundle.price[language]}
-                    </div>
-                    <div className="text-gray-500 text-xs mb-6">
-                      Per Month
+                      {/* Package Miniatures */}
+                      {includedPackages.length > 0 && (
+                        <div className="mt-4 pt-6 border-t border-orange-100/50">
+                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                            Includes full access to:
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {includedPackages.map((item, idx) => (
+                              <div key={item.pkg?.id} className="relative group/card flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white/60 backdrop-blur-sm shadow-sm hover:shadow-md transition-all hover:bg-white">
+                                {/* Badge */}
+                                {item.badge && (
+                                  <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold shadow-sm z-10">
+                                    {item.badge}
+                                  </div>
+                                )}
+
+                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${idx === 0 ? 'bg-blue-50 text-blue-600' : idx === 1 ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-orange-600'}`}>
+                                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    {idx === 0
+                                      ? <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                      : idx === 1
+                                        ? <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        : <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                    }
+                                  </svg>
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="font-semibold text-gray-900 text-sm truncate">{item.pkg?.name}</div>
+                                  <div className="text-[10px] text-gray-500 truncate">
+                                    {item.badge ? 'Discounted future builds' : item.pkg?.price[language].includes('/') ? 'Monthly Plan' : 'One-time Audit'}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
-                    <button
-                      className={`w-full py-3.5 rounded-xl font-bold text-base text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 bg-gradient-to-r ${bundleTheme.button} hover:${bundleTheme.buttonHover}`}
-                      onClick={() => window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank')}
-                    >
-                      {t.packages.bookCall}
-                    </button>
-                    <p className="mt-3 text-[10px] text-gray-400">
-                      No commitment required. Free initial consultation.
-                    </p>
+                    {/* Right Side: Pricing & CTA */}
+                    <div className="relative z-10 lg:w-1/4 p-6 sm:p-8 bg-gray-50/50 border-t lg:border-t-0 lg:border-l border-gray-100 flex flex-col justify-center items-center text-center">
+                      <div className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Value Package</div>
+                      <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1 tracking-tight">
+                        {bundle.price[language]}
+                      </div>
+                      <div className="text-gray-500 text-xs mb-6">
+                        Per Month
+                      </div>
+
+                      <button
+                        className={`w-full py-3.5 rounded-xl font-bold text-base text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 bg-gradient-to-r ${bundleTheme.button} hover:${bundleTheme.buttonHover}`}
+                        onClick={() => window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank')}
+                      >
+                        {t.packages.bookCall}
+                      </button>
+                      <p className="mt-3 text-[10px] text-gray-400">
+                        No commitment required. Free initial consultation.
+                      </p>
+                    </div>
                   </div>
                 </div>
               );
@@ -212,6 +222,15 @@ export default function Packages() {
             const pkgColor = packageColors[index % packageColors.length];
             return (
               <div key={pkg.id} className="group relative flex">
+                {/* Package Badge */}
+                <div className="absolute -top-3 left-6 z-20">
+                  <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${pkgColor.button} text-white text-xs font-semibold shadow-lg`}>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                    Package
+                  </div>
+                </div>
                 <PackageCard
                   pkg={pkg}
                   expandedId={expandedId}
