@@ -60,6 +60,31 @@ export default function Packages() {
           </h1>
         </div>
 
+        {/* Regular Packages Grid (NO agents) */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-20">
+          {regularPackages.map((pkg, index) => {
+            const pkgColor = packageColors[index % packageColors.length];
+            return (
+              <div key={pkg.id} className="group relative flex">
+                {/* Package Badge */}
+                <div className="absolute -top-3 left-6 z-20">
+                  <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${pkgColor.button} text-white text-xs font-semibold shadow-lg`}>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                    Package
+                  </div>
+                </div>
+                <PackageCard
+                  pkg={pkg}
+                  packageColor={pkgColor}
+                  isAgent={false}
+                />
+              </div>
+            );
+          })}
+        </div>
+
         {/* --- BUNDLES SECTION --- */}
         <div className="mb-20">
 
@@ -81,9 +106,9 @@ export default function Packages() {
               const customPkg = packageItems.find(p => p.name === 'Custom Solutions');
 
               const includedPackages = [
-                { pkg: auditPkg, label: 'Audit', badge: language === 'fr' ? 'Offert' : 'Free' },
+                { pkg: auditPkg, label: 'Audit' },
                 { pkg: partnerPkg, label: 'Partner' },
-                { pkg: customPkg, label: 'Custom', badge: '-30%' }
+                { pkg: customPkg, label: 'Custom', badge: '30% OFF' }
               ].filter(item => item.pkg);
 
               return (
@@ -148,7 +173,7 @@ export default function Packages() {
                               <div key={item.pkg?.id} className="relative group/card flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white/60 backdrop-blur-sm shadow-sm hover:shadow-md transition-all hover:bg-white">
                                 {/* Badge */}
                                 {item.badge && (
-                                  <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold shadow-sm z-10">
+                                  <div className={`absolute -top-3 -right-2 px-3 py-1 rounded-full ${item.label === 'Custom' ? 'bg-red-600 text-xs shadow-md scale-110' : 'bg-red-500 text-[10px]'} text-white font-bold shadow-sm z-10`}>
                                     {item.badge}
                                   </div>
                                 )}
@@ -176,33 +201,10 @@ export default function Packages() {
                       )}
 
 
-                      {/* Margin Evolution Graph (Only for Pro Bundle) */}
-                      {bundle.id === 2 && (
-                        <div className="mt-8 pt-6 border-t border-orange-100/50">
-                          <MarginEvolutionGraph />
-                        </div>
-                      )}
+
                     </div>
 
-                    {/* Right Side: Pricing & CTA */}
-                    <div className="relative z-10 lg:w-1/4 p-6 sm:p-8 bg-gray-50/50 border-t lg:border-t-0 lg:border-l border-gray-100 flex flex-col justify-center items-center text-center">
-                      <div className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Value Package</div>
-                      <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1 tracking-tight">
-                        {bundle.price[language]}
-                      </div>
-                      <div className="text-gray-500 text-xs mb-6">
-                        Per Month
-                      </div>
-                      <button
-                        className={`w-full py-3.5 rounded-xl font-bold text-base text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 bg-gradient-to-r ${bundleTheme.button} hover:${bundleTheme.buttonHover}`}
-                        onClick={() => window.open('https://cal.com/vincent-baron/30mins-meeting', '_blank')}
-                      >
-                        {t.packages.bookCall}
-                      </button>
-                      <p className="mt-3 text-[10px] text-gray-400">
-                        No commitment required. Free initial consultation.
-                      </p>
-                    </div>
+
                   </div>
                 </div>
               );
@@ -212,30 +214,7 @@ export default function Packages() {
 
 
 
-        {/* Regular Packages Grid (NO agents) */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {regularPackages.map((pkg, index) => {
-            const pkgColor = packageColors[index % packageColors.length];
-            return (
-              <div key={pkg.id} className="group relative flex">
-                {/* Package Badge */}
-                <div className="absolute -top-3 left-6 z-20">
-                  <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${pkgColor.button} text-white text-xs font-semibold shadow-lg`}>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                    </svg>
-                    Package
-                  </div>
-                </div>
-                <PackageCard
-                  pkg={pkg}
-                  packageColor={pkgColor}
-                  isAgent={false}
-                />
-              </div>
-            );
-          })}
-        </div>
+
 
         {/* Section CTA */}
         <div className="mt-12 sm:mt-16 text-center">

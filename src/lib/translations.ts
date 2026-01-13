@@ -128,8 +128,8 @@ export const bundleItems: BundleItem[] = [
     name: 'Pro Plan',
     isPopular: true,
     description: {
-      en: 'For companies serious about scaling. Get a Tech Partner, continuous improvement, and discounted future developments.',
-      fr: 'Pour les entreprises sérieuses au sujet du passage à l\'échelle. Obtenez un COO fractionné, une amélioration continue et des développements futurs à prix réduit.',
+      en: 'For companies serious about scaling. Get a Fractional CTO, continuous improvement, AI training and discount on all future solutions.',
+      fr: 'Pour les entreprises sérieuses au sujet du passage à l\'échelle. Obtenez un CTO fractionné, de l\amélioration continue, de la formation IA et des solutions à prix réduit.',
     },
     includes: {
       en: [
@@ -191,8 +191,8 @@ export const packageItems: PackageItem[] = [
       fr: 'Excellence opérationnelle continue et automatisation',
     },
     description: {
-      en: '• Fractional COO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
-      fr: '• COO fractionné améliorant et faisant évoluer continuellement vos systèmes existants\n• Maintenance proactive et ajustement de toutes les automatisations et workflows\n• Ateliers rétrospectifs d\'équipe bihebdomadaires pour favoriser l\'amélioration continue',
+      en: '• Fractional CTO continuously improving and evolving your existing systems\n• Proactive maintenance and fine-tuning of all automations and workflows\n• Bi-weekly team retrospective workshops to drive continuous improvement',
+      fr: '• CTO fractionné améliorant et faisant évoluer continuellement vos systèmes existants\n• Maintenance proactive et ajustement de toutes les automatisations et workflows\n• Ateliers rétrospectifs d\'équipe bihebdomadaires pour favoriser l\'amélioration continue',
     },
     outputs: {
       en: [
@@ -575,7 +575,7 @@ export const translations: Record<Language, Translations> = {
     packages: {
       title: 'Our Packages',
       agentsTitle: 'Our Agents',
-      cta: 'Choose your Package',
+      cta: 'Discuss Your Needs',
       agentsCta: 'Book a demo',
       calculator: {
         title: 'Calculate Your Cost',
@@ -754,7 +754,7 @@ export const translations: Record<Language, Translations> = {
     packages: {
       title: 'Nos Packages',
       agentsTitle: 'Nos Agents',
-      cta: 'Choisissez votre package',
+      cta: 'Discuter de vos besoins',
       agentsCta: 'Réserver une démo',
       calculator: {
         title: 'Calculez votre coût',

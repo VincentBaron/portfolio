@@ -70,28 +70,8 @@ export default function PackageCard({ pkg, packageColor, isAgent }: PackageCardP
                     <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300/30 to-gray-300/50"></div>
                 </div>
 
-                {/* Price Badge with Minimal Design */}
-                <div className="px-8 py-5 relative">
-                    <div className="flex items-center gap-4">
-                        <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${packageColor.bg} border border-gray-200/80 shadow-sm transition-all duration-200`}>
-                            <svg className={`w-5 h-5 ${packageColor.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span className={`font-semibold text-base ${packageColor.text}`}>{pkg.price[language]}</span>
-                        </div>
-                        {pkg.creditNote && (
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 border border-emerald-200/80 shadow-sm">
-                                <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span className="text-xs font-medium text-emerald-700">{pkg.creditNote[language]}</span>
-                            </div>
-                        )}
-                    </div>
-                </div>
-
                 {/* Content - Always Visible */}
-                <div className="px-8 pb-8 space-y-6">
+                <div className="px-8 py-8 space-y-6">
                     {/* Description */}
                     <div>
                         {/* Check if description contains bullet points */}
