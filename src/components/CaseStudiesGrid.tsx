@@ -20,7 +20,7 @@ export default function CaseStudiesGrid({
   const sectionHeading = heading ? heading[language] : t.caseStudies.title;
   const items = typeof limit === 'number' ? caseStudies.slice(0, limit) : caseStudies;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
 
   // Handle scroll detection for active index
   useEffect(() => {
@@ -58,8 +58,16 @@ export default function CaseStudiesGrid({
       });
     };
 
+    // Initial scroll to center the active index (1)
+    if (container && activeIndex === 1) {
+      // Small timeout to ensure layout is done
+      setTimeout(() => {
+        scrollToIndex(1);
+      }, 100);
+    }
+
     container.addEventListener('scroll', handleScroll);
-    // Initial calculation
+    // Initial calculation for state sync
     handleScroll();
 
     return () => {
@@ -120,17 +128,17 @@ export default function CaseStudiesGrid({
         <div className="relative">
           {/* Navigation Arrows Overlay - Centered on Active Item */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-            <div className="w-full max-w-[85vw] sm:max-w-[400px] flex justify-between items-center px-4 sm:px-0 sm:-mx-12">
+            <div className="w-full max-w-[95vw] sm:max-w-[560px] flex justify-between items-center px-2 sm:px-0">
               <button
                 onClick={() => scrollToIndex(activeIndex - 1)}
                 disabled={activeIndex === 0}
                 className={`transform transition-all duration-200 pointer-events-auto
                   p-3 rounded-full border border-gray-200/50 bg-white/80 backdrop-blur-md shadow-lg 
-                  text-gray-700 hover:text-gray-900 hover:bg-white hover:scale-105 active:scale-95
+                  text-gray-700 hover:text-gray-900 hover:bg-white hover:scale-110 active:scale-95
                   disabled:opacity-0 disabled:cursor-not-allowed`}
                 aria-label="Previous"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -140,11 +148,11 @@ export default function CaseStudiesGrid({
                 disabled={activeIndex === items.length - 1}
                 className={`transform transition-all duration-200 pointer-events-auto
                   p-3 rounded-full border border-gray-200/50 bg-white/80 backdrop-blur-md shadow-lg 
-                  text-gray-700 hover:text-gray-900 hover:bg-white hover:scale-105 active:scale-95
+                  text-gray-700 hover:text-gray-900 hover:bg-white hover:scale-110 active:scale-95
                   disabled:opacity-0 disabled:cursor-not-allowed`}
                 aria-label="Next"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
