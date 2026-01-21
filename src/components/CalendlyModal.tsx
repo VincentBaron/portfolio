@@ -52,7 +52,7 @@ export default function CalendlyModal({ isOpen, onClose, painpoint, calendarLink
             calendlyContainer.innerHTML = '';
             
             // Build Calendly URL with painpoint if provided
-            const baseUrl = calendarLink ?? 'https://calendly.com/vbaron4220/new-meeting';
+            const baseUrl = calendarLink ?? 'https://cal.com/vincent-baron/30mins-meeting';
             let calendlyUrl = baseUrl;
             const urlParams = new URLSearchParams();
             

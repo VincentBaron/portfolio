@@ -3,9 +3,24 @@ export interface LocalizedString {
   fr: string;
 }
 
+export interface SchemaConfig {
+  nodes: Array<{
+    id: string;
+    label: string;
+    type?: 'source' | 'process' | 'destination' | 'default';
+  }>;
+  connections: Array<{
+    from: string;
+    to: string;
+    label?: string;
+  }>;
+  title?: string;
+}
+
 export interface CaseStudyContentSection {
   heading: LocalizedString;
   body: LocalizedString[];
+  schemaConfig?: SchemaConfig;
 }
 
 export interface CaseStudyMetric {
@@ -84,6 +99,22 @@ export const caseStudies: CaseStudy[] = [
             'Intégration d’alertes et de rapports dans les tableaux de bord internes pour permettre aux équipes finance et opérations d’agir immédiatement ou de déclencher un nettoyage automatisé et des ajustements de facturation lorsque c’était possible.',
           ),
         ],
+        schemaConfig: {
+          title: 'Reconciliation Workflow',
+          nodes: [
+            { id: 'sales', label: 'Sales System\n(Client References)', type: 'source' },
+            { id: 'infra', label: 'Cloud Infrastructure\n(Live State)', type: 'source' },
+            { id: 'agent', label: 'Reconciliation Agent\n(Temporal.io)', type: 'process' },
+            { id: 'classify', label: 'Classification Engine\n(Orphaned/Unbilled)', type: 'process' },
+            { id: 'dashboard', label: 'Internal Dashboard\n(Alerts & Reports)', type: 'destination' },
+          ],
+          connections: [
+            { from: 'sales', to: 'agent', label: 'Client data' },
+            { from: 'infra', to: 'agent', label: 'Infrastructure state' },
+            { from: 'agent', to: 'classify', label: 'Detected discrepancies' },
+            { from: 'classify', to: 'dashboard', label: 'Classified issues' },
+          ],
+        },
       },
       {
         heading: localized('Impact', 'Impact'),
@@ -161,6 +192,22 @@ export const caseStudies: CaseStudy[] = [
             'Intégration de Customer.io pour l’outreach automatisé, en déclenchant des notifications personnalisées aux travailleurs correspondant à la mission et en collectant automatiquement les confirmations.',
           ),
         ],
+        schemaConfig: {
+          title: 'Matching Pipeline',
+          nodes: [
+            { id: 'dashboard', label: 'Ops Dashboard\n(Mission Parameters)', type: 'source' },
+            { id: 'matching', label: 'Matching Engine\n(Go)', type: 'process' },
+            { id: 'database', label: 'Worker Database\n(Profiles)', type: 'source' },
+            { id: 'customerio', label: 'Customer.io\n(Notifications)', type: 'process' },
+            { id: 'workers', label: 'Workers\n(Confirmations)', type: 'destination' },
+          ],
+          connections: [
+            { from: 'dashboard', to: 'matching', label: 'Mission criteria' },
+            { from: 'database', to: 'matching', label: 'Worker profiles' },
+            { from: 'matching', to: 'customerio', label: 'Matched candidates' },
+            { from: 'customerio', to: 'workers', label: 'Personalized notifications' },
+          ],
+        },
       },
       {
         heading: localized('Impact', 'Impact'),
@@ -242,6 +289,22 @@ export const caseStudies: CaseStudy[] = [
             'Déploiement d’une interface dédiée aux travailleurs pour qu’ils confirment ou corrigent directement leurs heures, supprimant l’intervention manuelle des ops.',
           ),
         ],
+        schemaConfig: {
+          title: 'Validation Flow',
+          nodes: [
+            { id: 'client', label: 'Client Upload\n(Excel Files)', type: 'source' },
+            { id: 'llm', label: 'LLM Reformatter\n(N8n)', type: 'process' },
+            { id: 'pipeline', label: 'Validation Pipeline\n(Go/Python)', type: 'process' },
+            { id: 'database', label: 'Mission Database\n(Internal Records)', type: 'source' },
+            { id: 'workers', label: 'Worker Interface\n(Confirmations)', type: 'destination' },
+          ],
+          connections: [
+            { from: 'client', to: 'llm', label: 'Raw files' },
+            { from: 'llm', to: 'pipeline', label: 'Normalized data' },
+            { from: 'database', to: 'pipeline', label: 'Mission records' },
+            { from: 'pipeline', to: 'workers', label: 'Hours to confirm' },
+          ],
+        },
       },
       {
         heading: localized('Impact', 'Impact'),
@@ -257,6 +320,99 @@ export const caseStudies: CaseStudy[] = [
           localized(
             'Freed operations bandwidth to focus on strategic client relationships and scaling mission volume without adding headcount.',
             'Libération de la capacité des ops pour se concentrer sur la relation client stratégique et absorber plus de volume sans recruter.',
+          ),
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'real-time-retail-pricing',
+    title: localized(
+      'Real-Time Retail Pricing Data Analyst — Competitive Intelligence for French Food Retail',
+      'Analyste de données de prix en temps réel — intelligence concurrentielle pour la grande distribution alimentaire française',
+    ),
+    summary: localized(
+      'Built a real-time competitive pricing intelligence system for the French food retail market. The platform automatically scrapes competitor websites, processes pricing data, and delivers actionable insights through an interactive dashboard, saving €50K+ monthly through optimized pricing strategies.',
+      'Développement d\'un système d\'intelligence concurrentielle des prix en temps réel pour le marché français de la grande distribution alimentaire. La plateforme scrape automatiquement les sites concurrents, traite les données de prix et fournit des insights actionnables via un tableau de bord interactif, économisant plus de 50 K€ par mois grâce à des stratégies de prix optimisées.',
+    ),
+    publishedAt: '2024-08-15',
+    tags: ['Python', 'Web Scraping', 'Data Analytics', 'Dashboards', 'Competitive Intelligence'],
+    heroImage: '/intermarche.png',
+    metrics: [
+      {
+        label: localized('Monthly savings through pricing optimization', 'Économies mensuelles via optimisation des prix'),
+        value: localized('€50K+', 'Plus de 50 K€'),
+      },
+      {
+        label: localized('Weekly time saved on market research', 'Temps hebdomadaire économisé en veille marché'),
+        value: localized('40+ hours', 'Plus de 40 heures'),
+      },
+      {
+        label: localized('Data freshness', 'Fraîcheur des données'),
+        value: localized('Real-time (4h cycles)', 'Temps réel (cycles de 4h)'),
+      },
+    ],
+    contentSections: [
+      {
+        heading: localized('Problem', 'Problème'),
+        body: [
+          localized(
+            'A major French food retailer needed to stay competitive in a fast-moving market where pricing strategies directly impact margins and customer loyalty.',
+            'Un acteur majeur de la grande distribution alimentaire française devait rester compétitif dans un marché dynamique où les stratégies de prix impactent directement les marges et la fidélité client.',
+          ),
+          localized(
+            'The manual process of tracking competitor prices across multiple chains and thousands of SKUs consumed over 40 hours per week and often resulted in outdated insights by the time decisions were made.',
+            'Le processus manuel de suivi des prix concurrents sur plusieurs enseignes et milliers de références consommait plus de 40 heures par semaine et aboutissait souvent à des insights obsolètes au moment de la prise de décision.',
+          ),
+        ],
+      },
+      {
+        heading: localized('Approach', 'Approche'),
+        body: [
+          localized(
+            'Designed and deployed a fully automated web scraping system targeting major French food retail competitors (Carrefour, Leclerc, Auchan, etc.).',
+            'Conception et déploiement d\'un système de scraping web entièrement automatisé ciblant les principaux concurrents de la grande distribution alimentaire française (Carrefour, Leclerc, Auchan, etc.).',
+          ),
+          localized(
+            'Built a Python-based data processing pipeline that normalizes, deduplicates, and enriches pricing data, matching products across different retailer catalogs.',
+            'Développement d\'un pipeline de traitement de données en Python qui normalise, déduplique et enrichit les données de prix, en rapprochant les produits entre les catalogues des différentes enseignes.',
+          ),
+          localized(
+            'Created an interactive dashboard with real-time visualizations, price trend analysis, and automated alerts for significant competitor price changes.',
+            'Création d\'un tableau de bord interactif avec visualisations en temps réel, analyse des tendances de prix et alertes automatisées pour les changements de prix significatifs chez les concurrents.',
+          ),
+        ],
+        schemaConfig: {
+          title: 'Data Flow Architecture',
+          nodes: [
+            { id: 'competitors', label: 'Competitor Websites\n(Carrefour, Leclerc, etc.)', type: 'source' },
+            { id: 'scraper', label: 'Web Scraper\n(Python)', type: 'process' },
+            { id: 'processor', label: 'Data Processor\n(Normalization)', type: 'process' },
+            { id: 'database', label: 'Pricing Database\n(Historical Data)', type: 'destination' },
+            { id: 'dashboard', label: 'Analytics Dashboard\n(Insights)', type: 'destination' },
+          ],
+          connections: [
+            { from: 'competitors', to: 'scraper', label: 'Product pages' },
+            { from: 'scraper', to: 'processor', label: 'Raw pricing data' },
+            { from: 'processor', to: 'database', label: 'Normalized records' },
+            { from: 'database', to: 'dashboard', label: 'Trend analysis' },
+          ],
+        },
+      },
+      {
+        heading: localized('Impact', 'Impact'),
+        body: [
+          localized(
+            'Enabled data-driven pricing decisions that recovered €50K+ monthly through competitive positioning and margin optimization.',
+            'Permis des décisions de prix basées sur les données qui ont récupéré plus de 50 K€ par mois grâce au positionnement concurrentiel et à l\'optimisation des marges.',
+          ),
+          localized(
+            'Reduced manual market research time from 40+ hours to near-zero, freeing the pricing team to focus on strategic analysis rather than data collection.',
+            'Réduction du temps de veille marché manuel de plus de 40 heures à quasi zéro, libérant l\'  équipe pricing pour se concentrer sur l\'analyse stratégique plutôt que la collecte de données.',
+          ),
+          localized(
+            'Provided real-time competitive intelligence with 4-hour refresh cycles, enabling rapid response to market changes and promotional activities.',
+            'Fourniture d\'intelligence concurrentielle en temps réel avec des cycles de rafraîchissement de 4 heures, permettant une réponse rapide aux changements de marché et aux activités promotionnelles.',
           ),
         ],
       },

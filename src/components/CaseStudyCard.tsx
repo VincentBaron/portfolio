@@ -18,23 +18,23 @@ export default function CaseStudyCard({
   return (
     <a
       href={`/work/${slug}`}
-      className="group block bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+      className="group block bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
       aria-label={`${readLabel}: ${title}`}
     >
       {/* Thumbnail */}
       {thumbnail ? (
-        <div className="relative h-28 sm:h-32 lg:h-40 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100">
+        <div className="relative h-28 sm:h-32 lg:h-40 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           <img
             src={thumbnail}
             alt=""
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       ) : (
-        <div className="h-28 sm:h-32 lg:h-40 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
+        <div className="h-28 sm:h-32 lg:h-40 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
           <svg
-            className="w-16 h-16 text-gray-400 group-hover:text-blue-500 transition-colors duration-300"
+            className="w-12 h-12 text-gray-300 group-hover:text-blue-400 transition-colors duration-300"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
@@ -57,7 +57,7 @@ export default function CaseStudyCard({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-md"
+                className="inline-block px-2 py-1 text-xs font-medium tracking-wide bg-blue-50 text-blue-700 rounded-md border border-blue-100"
               >
                 {tag}
               </span>
@@ -66,7 +66,7 @@ export default function CaseStudyCard({
         )}
 
         {/* Title */}
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors tracking-tight">
           {title}
         </h3>
 
@@ -76,10 +76,10 @@ export default function CaseStudyCard({
         </p>
 
         {/* Read More Link */}
-        <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
+        <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 text-sm">
           <span>{readLabel}</span>
           <svg
-            className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
+            className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="2"

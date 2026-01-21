@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const pageTitle = "Vincent Baron - Software Engineer CV | AI & Automation Specialist";
+const pageDescription = "Full-stack software engineer with 5+ years experience in Go, Python, React. Specializing in AI-powered recruiting systems, workflow automation, and MVP development.";
+const pageKeywords = "Vincent Baron, software engineer, Go developer, Python developer, AI automation, recruiting systems, n8n workflows, full-stack developer";
+
+const contactDetails = [
+  { label: 'Email', value: 'vbaron4220@gmail.com', href: 'mailto:vbaron4220@gmail.com' },
+  { label: 'Phone', value: '+33 7 68 55 53 70', href: 'tel:+33768555370' },
+  { label: 'Portfolio', value: 'vincentbaron.me', href: 'https://www.vincentbaron.me' },
+];
+
+const summaryText =
+  'With over five years of experience as a software engineer, I combine deep technical expertise with a business-first mindset to uncover inefficiencies and deliver practical, production-ready MVPs in focused two-week sprints.';
+
+const experiences = [
+  {
+    company: 'Free Pro',
+    role: 'Software Developer',
+    location: 'Marseille, France',
+    period: 'Jun 2025 – Oct 2025',
+    bullets: [
+      "Developed reconciliation workflows using Temporal.io to synchronize the existing cloud infrastructure state with contractual data in our CRM.",
+      "Built a Golang API to expose real-time data from our VMware infrastructure.",
+    ],
+  },
+  {
+    company: 'Side',
+    role: 'Software Developer',
+    location: 'Paris, France',
+    period: 'Apr 2023 – Oct 2025',
+    bullets: [
+      "Developed a profile sourcing application for the Ops team with advanced custom filtering capabilities.",
+      "Implemented workflows using n8n and Golang to optimize cross-team processes and automate marketing campaigns.",
+    ],
+  },
+  {
+    company: 'Qomon',
+    role: 'Back End Developer',
+    location: 'Bordeaux, France',
+    period: 'Oct 2022 – Mar 2023',
+    bullets: [
+      'Developed a service for creating and managing online petitions (Reactjs/Go).',
+      'Created workflows in n8n for customer onboarding and offboarding.',
+    ],
+  },
+  {
+    company: 'Freelance',
+    role: 'Software Engineer',
+    location: 'Paris, France',
+    period: 'Apr 2020 – Nov 2022',
+    bullets: [
+      'no-code workflows using n8n to automatise processes around sales, billing and ops.',
+      'Created APIs in Go',
+    ],
+  },
+  {
+    company: 'PMP Strategy',
+    role: 'Data Engineer',
+    location: 'Paris, France',
+    period: 'Apr 2020 – Nov 2020',
+    bullets: [
+      'Delivered Python scrapers capturing live food-service market signals for Drive Offer stakeholders.',
+      'Automated enrichment pipelines and dashboards that informed pricing and merchandising.',
+    ],
+  },
+  {
+    company: 'Mitsubishi Hitachi Power Systems Europe',
+    role: 'Field Service Engineer',
+    location: 'Madrid, Spain',
+    period: 'May 2018 – Dec 2019',
+    bullets: [
+      'Coordinated turbine maintenance and commissioning across European combined-cycle sites.',
+      'Created field manuals and repair playbooks that cut turnaround on critical components.',
+    ],
+  },
+];
+
+const techBadges = [
+  { emoji: '🐹', label: 'Go' },
+  { emoji: '🐍', label: 'Python' },
+  { emoji: '🐳', label: 'Docker' },
+  { emoji: '🤖', label: 'n8n' },
+];
+
+const education = [
+  {
+    school: '42',
+    program: 'Programming — Computer Programming',
+    period: '2020 – 2023',
+    location: 'Paris, France',
+  },
+  {
+    school: 'The University of Sheffield',
+    program: 'BEng Aerospace Engineering',
+    period: '2014 – 2017',
+    location: 'Sheffield, United Kingdom',
+  },
+];
+
+const references = [
+  {
+    name: 'Holy Sicard-Razaka',
+    role: 'Head of Product · Side',
+    link: 'https://www.linkedin.com/in/holy-sicard-razaka-b581946b/',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} author="Vincent Baron">
+  <style is:global>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      background: #f5f6fb;
+    }
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        background: #ffffff;
+        font-size: 0.86rem;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .screen-only {
+        display: none !important;
+      }
+      main {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        padding: 12mm 14mm !important;
+        box-shadow: none !important;
+        border: 0 !important;
+        margin: 0 auto !important;
+        max-height: 297mm !important;
+        overflow: visible !important;
+      }
+      .cv-header {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .cv-header-inner {
+        padding: 12mm 14mm 10mm 14mm !important;
+        background-color: #2563eb !important;
+        background-image: linear-gradient(to right, #2563eb, #4f46e5, #7c3aed) !important;
+        color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .cv-header-contacts {
+        padding: 5mm 14mm 5mm 14mm !important;
+        background-color: #eef2ff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .cv-summary {
+        margin-top: 6px !important;
+        line-height: 1.4 !important;
+      }
+      .cv-columns {
+        column-count: 2;
+        column-gap: 8mm;
+        padding-right: 0;
+      }
+      .cv-experience-entry {
+        margin-bottom: 6px !important;
+      }
+      .cv-experience-entry ul {
+        margin-top: 4px !important;
+      }
+      .cv-section {
+        margin-top: 8mm !important;
+      }
+      .cv-section > * + * {
+        margin-top: 6px !important;
+      }
+      .cv-education-list {
+        column-count: 2;
+        column-gap: 8mm;
+      }
+      .cv-education-entry {
+        margin-bottom: 6px !important;
+      }
+      .cv-references-grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 4px !important;
+        }
+        .cv-section-divider {
+          display: inline-block;
+          flex: 1 1 auto;
+        }
+        .cv-banner-photo {
+          width: 120px !important;
+          height: 120px !important;
+        }
+        h1 {
+          font-size: 32px !important;
+          line-height: 1.1 !important;
+        }
+        h3 {
+          font-size: 16px !important;
+        }
+      }
+      .cv-columns article {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .cv-section-divider {
+        display: inline-block;
+        flex: 1 1 auto;
+      }
+    </style>
+
+  <div class="bg-white font-sans text-gray-900 antialiased">
+    <div class="cv-page mx-auto my-10 w-full max-w-[940px] rounded-3xl border border-gray-100 bg-white px-10 py-12 shadow-2xl shadow-blue-100 print:m-0 print:max-w-none print:border-0 print:px-0 print:py-0 print:shadow-none">
+      <header class="cv-header overflow-hidden rounded-3xl border border-blue-100 shadow-lg shadow-blue-100">
+        <div class="cv-header-inner bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-white md:px-10 md:py-8">
+          <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between md:gap-6">
+            <div class="flex items-center gap-5">
+              <div>
+                <h1 class="text-4xl font-semibold tracking-tight md:text-[2.75rem]">Vincent Baron</h1>
+                <p class="mt-2 text-lg font-medium text-blue-100 md:text-xl">Software Engineer · Automation &amp; AI Systems</p>
+                <p class="text-sm text-blue-100/80 md:text-base">Marseille, France · Open to global collaborations (remote-friendly)</p>
+              </div>
+            </div>
+            <div class="tech-badges flex flex-wrap gap-2">
+              {techBadges.map((tech) => (
+                <span class="rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
+                  <span class="mr-1 text-base">{tech.emoji}</span>
+                  {tech.label}
+                </span>
+              ))}
+            </div>
+          </div>
+          <p class="cv-summary mt-4 max-w-2xl text-sm text-blue-50 md:mt-5 md:text-[0.95rem]">
+            {summaryText}
+          </p>
+        </div>
+        <div class="cv-header-contacts grid gap-2 bg-white px-8 py-5 sm:grid-cols-3 md:gap-3 md:px-10 md:py-6">
+          {contactDetails.map((item) => (
+            <div class="flex flex-col gap-1 text-sm">
+              <span class="text-xs font-semibold uppercase tracking-[0.28em] text-gray-400">{item.label}</span>
+              <a href={item.href} class="truncate font-medium text-blue-700 hover:underline">
+                {item.value}
+              </a>
+            </div>
+          ))}
+        </div>
+      </header>
+
+      <section aria-labelledby="experience-heading" class="cv-section mt-8 space-y-4 md:mt-10 md:space-y-6">
+        <div class="flex items-center gap-3">
+          <h2 id="experience-heading" class="text-lg font-semibold uppercase tracking-[0.3em] text-blue-600">Experience</h2>
+          <span class="cv-section-divider h-px flex-1 bg-gradient-to-r from-blue-200 via-purple-200 to-transparent"></span>
+        </div>
+        <div class="cv-columns columns-1 md:columns-2 md:[column-gap:1.2rem]">
+          {experiences.map((job) => (
+            <article class="cv-experience-entry break-inside-avoid">
+              <h3 class="text-sm font-semibold text-gray-900">{job.role}</h3>
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600">{job.company}</p>
+              <p class="text-xs text-gray-400">
+                {job.period}
+                <span class="mx-2 text-gray-300">|</span>
+                {job.location}
+              </p>
+              <ul class="mt-2 list-disc pl-4 text-xs leading-relaxed text-gray-700 space-y-1">
+                {job.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="education-heading" class="cv-section mt-8 space-y-4 md:mt-10 md:space-y-6">
+        <div class="flex items-center gap-3">
+          <h2 id="education-heading" class="text-lg font-semibold uppercase tracking-[0.3em] text-blue-600">Education</h2>
+          <span class="cv-section-divider h-px flex-1 bg-gradient-to-r from-blue-200 via-purple-200 to-transparent"></span>
+        </div>
+        <div class="cv-columns cv-education-list columns-1 md:columns-2 md:[column-gap:1.2rem]">
+          {education.map((item) => (
+            <article class="cv-education-entry break-inside-avoid text-xs leading-relaxed text-gray-700">
+              <h3 class="text-sm font-semibold text-gray-900">{item.school}</h3>
+              <p>{item.program}</p>
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-gray-500">{item.period} · {item.location}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="references-heading" class="cv-section mt-6 space-y-3 md:space-y-4">
+        <div class="flex items-center gap-3">
+          <h2 id="references-heading" class="text-lg font-semibold uppercase tracking-[0.3em] text-blue-600">References</h2>
+          <span class="cv-section-divider h-px flex-1 bg-gradient-to-r from-blue-200 via-purple-200 to-transparent"></span>
+        </div>
+        <div class="cv-references-grid grid gap-3 md:grid-cols-2 md:gap-4">
+          {references.map((ref) => (
+            <div class="text-xs leading-relaxed text-gray-700">
+              <p class="text-sm font-semibold text-gray-900">
+                {ref.name}
+              </p>
+              <p>{ref.role}</p>
+              {ref.link && (
+                <p class="mt-1 text-[0.68rem] text-gray-500">{ref.link}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,36 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
-import SprintTimeline from '../components/SprintTimeline';
+import Packages from '../components/Packages';
+import Agents from '../components/Agents';
 import CaseStudiesGrid from '../components/CaseStudiesGrid';
-import PartnerOrganizations from '../components/PartnerOrganizations';
-import ImpactIntro from '../components/ImpactIntro';
+
+const pageTitle = "StudioDino - AI-Powered Recruiting Systems | 7-Day Implementation";
+const pageDescription = "Increase your Net Margin Per Recruiter with AI. We build AI-powered recruiting systems in 14 days that boost margins without hiring more staff. Proven solutions for staffing agencies.";
+const pageKeywords = "AI recruiting systems, recruiting automation, staffing software, net margin per recruiter, AI staffing solutions, recruiting technology, staffing agency software, recruiting efficiency";
 ---
 
-<BaseLayout>
-  <!-- Home Section -->
-  <section id="home" class="pt-12 sm:pt-16 lg:pt-20 min-h-[70vh] lg:min-h-[80vh] xl:min-h-screen pb-0">
-    <Hero client:load calendarLink="https://calendly.com/vbaron4220/30min" />
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription}
+  keywords={pageKeywords}
+>
+  <!-- Home Section with Packages -->
+  <section id="home" class="pt-16 sm:pt-20 lg:pt-24 pb-0">
+    <Hero client:load calendarLink="https://cal.com/vincent-baron/30mins-meeting" showWithTestimonials={true} />
   </section>
 
-    <!-- Process Section -->
-    <section id="process" class="py-8 sm:py-12 lg:py-16">
-      <SprintTimeline client:load />
-    </section>
+  <!-- Packages Section -->
+  <section id="packages" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
+    <Packages client:load />
+  </section>
+
+  <!-- Agents Section -->
+  <section id="agents" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
+    <Agents client:load />
+  </section>
 
     <!-- Work Section -->
-    <section id="work" class="py-4 sm:py-6 lg:py-8 scroll-mt-20">
+    <section id="work" class="py-16 sm:py-20 lg:py-24 scroll-mt-20">
       <CaseStudiesGrid client:load />
-    </section>
-
-    <!-- Impact Section -->
-    <section id="impact" class="py-6 sm:py-8 lg:py-12 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-      <div class="max-w-6xl mx-auto">
-        <ImpactIntro client:load />
-
-        <!-- Partner Organizations -->
-        <PartnerOrganizations client:load />
-      </div>
     </section>
 </BaseLayout>
 

@@ -4,8 +4,18 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
+const getNotionSecret = () =>
+  process.env.NOTION_SECRET ??
+  process.env.PUBLIC_NOTION_SECRET ??
+  import.meta.env.PUBLIC_NOTION_SECRET;
+
+const getDatabaseId = () =>
+  process.env.NOTION_DATABASE_ID ??
+  process.env.PUBLIC_NOTION_DATABASE_ID ??
+  import.meta.env.PUBLIC_NOTION_DATABASE_ID;
+
 const buildClient = () => {
-  const secret = import.meta.env.NOTION_SECRET;
+  const secret = getNotionSecret();
   if (!secret) return null;
   return new Client({ auth: secret });
 };
@@ -13,6 +23,7 @@ const buildClient = () => {
 type LeadPayload = {
   email?: unknown;
   painpoint?: unknown;
+  phone?: unknown;
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -54,6 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const email = typeof payload.email === 'string' ? payload.email.trim() : '';
   const painpoint = typeof payload.painpoint === 'string' ? payload.painpoint.trim() : '';
+  const phone = typeof payload.phone === 'string' ? payload.phone.trim() : '';
 
   if (!email || !painpoint) {
     return new Response(JSON.stringify({ error: 'Email and painpoint are required.' }), {
@@ -62,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const databaseId = import.meta.env.NOTION_DATABASE_ID;
+  const databaseId = getDatabaseId();
   if (!databaseId) {
     return new Response(JSON.stringify({ error: 'Notion database ID is missing on the server.' }), {
       status: 500,
@@ -80,11 +92,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const properties: CreatePageParameters['properties'] = {
     email: {
-      title: [
-        {
-          text: { content: email },
-        },
-      ],
+      email: email,
     },
     painpoint: {
       rich_text: [
@@ -93,7 +101,22 @@ export const POST: APIRoute = async ({ request }) => {
         },
       ],
     },
+    Source: {
+      select: { name: 'website' },
+    },
+    Priority: {
+      select: { name: 'High' },
+    },
+    Status: {
+      select: { name: 'Lead' },
+    },
   };
+
+  if (phone) {
+    properties.phone = {
+      phone_number: phone,
+    };
+  }
 
   try {
     const page = await client.pages.create({

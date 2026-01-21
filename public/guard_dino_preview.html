@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guard Dino - Analyse de Sécurité d'Annonce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .dino-icon {
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .risk-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .risk-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .risk-card h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+        
+        .risk-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .risk-critical { color: #e53e3e; }
+        .risk-high { color: #dd6b20; }
+        .risk-medium { color: #d69e2e; }
+        .risk-low { color: #38a169; }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .vulnerability {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .vulnerability.high {
+            background: #fffaf0;
+            border-left-color: #dd6b20;
+        }
+        
+        .vulnerability.medium {
+            background: #fffff0;
+            border-left-color: #d69e2e;
+        }
+        
+        .vulnerability.low {
+            background: #f0fff4;
+            border-left-color: #38a169;
+        }
+        
+        .vulnerability-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .vulnerability-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge-critical {
+            background: #e53e3e;
+            color: white;
+        }
+        
+        .badge-high {
+            background: #dd6b20;
+            color: white;
+        }
+        
+        .badge-medium {
+            background: #d69e2e;
+            color: white;
+        }
+        
+        .badge-low {
+            background: #38a169;
+            color: white;
+        }
+        
+        .vulnerability h3 {
+            font-size: 1.125rem;
+            color: #1a202c;
+            flex: 1;
+        }
+        
+        .original-text {
+            background: #fafafa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .original-text strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .highlight {
+            background: #fed7d7;
+            padding: 0.125rem 0.25rem;
+            border-radius: 2px;
+        }
+        
+        .highlight.high {
+            background: #feebc8;
+        }
+        
+        .highlight.medium {
+            background: #fefcbf;
+        }
+        
+        .highlight.low {
+            background: #c6f6d5;
+        }
+        
+        .risk-explanation {
+            margin: 1rem 0;
+            color: #4a5568;
+        }
+        
+        .suggestion {
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 2px solid #48bb78;
+            margin-top: 1rem;
+        }
+        
+        .suggestion strong {
+            color: #2f855a;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .suggestion-text {
+            color: #2d3748;
+            font-style: italic;
+        }
+        
+        .poaching-methods {
+            background: #edf2f7;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .poaching-methods h4 {
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        .poaching-methods ul {
+            list-style-position: inside;
+            color: #4a5568;
+        }
+        
+        .poaching-methods li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .summary h2 {
+            color: white;
+            border: none;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .summary-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .summary-item h4 {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-item p {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+            font-size: 0.875rem;
+            background: #f8f9fa;
+        }
+        
+        .icon {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span class="dino-icon">🦕</span>
+                Guard Dino - Analyse de Sécurité
+            </h1>
+            <p>Rapport de vulnérabilité au poaching competitive</p>
+        </div>
+        
+        <div class="risk-overview">
+            <div class="risk-card">
+                <h3>Score Global</h3>
+                <div class="risk-score risk-critical">8.5/10</div>
+                <p>Risque CRITIQUE</p>
+            </div>
+            <div class="risk-card">
+                <h3>Vulnérabilités</h3>
+                <div class="risk-score risk-high">12</div>
+                <p>Identifiées</p>
+            </div>
+            <div class="risk-card">
+                <h3>Identifiabilité</h3>
+                <div class="risk-score risk-critical">95%</div>
+                <p>Client identifiable</p>
+            </div>
+            <div class="risk-card">
+                <h3>Urgence</h3>
+                <div class="risk-score risk-critical">⚠️</div>
+                <p>Action immédiate</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🎯 Résumé Exécutif</h2>
+                <div class="vulnerability">
+                    <p><strong>⚠️ ALERTE CRITIQUE :</strong> Cette annonce contient suffisamment d'informations pour identifier le client avec une précision de 95%. La combinaison de la localisation géographique précise, du secteur ultra-spécialisé, et des détails organisationnels crée une "empreinte digitale" unique qui expose le client à un risque élevé de poaching par les concurrents.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔍 Vulnérabilités Identifiées</h2>
+                
+                <!-- Vulnerability 1 -->
+                <div class="vulnerability">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-critical">CRITIQUE</span>
+                        <h3>1. Localisation Ultra-Précise</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "basé à <span class="highlight">Balaruc-les-Bains (Hérault)</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Balaruc-les-Bains est une très petite commune (environ 7 000 habitants). Le secteur de l'aquaculture marine y est extrêmement restreint. Cette précision géographique permet d'identifier immédiatement le client via une simple recherche Google Maps ou LinkedIn.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Recherche Google Maps : "aquaculture Balaruc-les-Bains"</li>
+                            <li>Recherche LinkedIn d'employés dans cette ville + secteur aquaculture</li>
+                            <li>Base de données SIRET/SIREN filtrée par commune + code NAF</li>
+                            <li>Contacts avec les chambres de commerce locales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"basé dans le <strong>Sud de la France</strong>, département de l'Hérault" ou encore mieux "basé en <strong>région Occitanie</strong>, littoral méditerranéen"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 2 -->
+                <div class="vulnerability">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-critical">CRITIQUE</span>
+                        <h3>2. Description Ultra-Spécifique du Secteur</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "filiale d'un <span class="highlight">groupe européen leader en aquaculture</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Il n'existe qu'une poignée de groupes européens leaders en aquaculture. Combiné à la localisation et aux autres détails, cette information réduit drastiquement le nombre de candidats possibles (probablement 1-3 entreprises maximum).
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Liste des top 10 groupes aquacoles européens + filtrage par présence en France</li>
+                            <li>Croisement avec bases de données sectorielles (FranceAgriMer, CIPA)</li>
+                            <li>Analyse des rapports annuels des leaders du secteur</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"pour une <strong>entreprise établie dans le secteur de l'aquaculture</strong>" ou "pour un <strong>acteur majeur de la production aquacole</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 3 -->
+                <div class="vulnerability high">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-high">ÉLEVÉ</span>
+                        <h3>3. Fonction Organisationnelle Spécifique</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "Sous la responsabilité de la <span class="highlight high">Responsable Production Amont</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Cette information révèle la structure organisationnelle précise de l'entreprise. Un concurrent ou chasseur de têtes peut identifier le supérieur hiérarchique sur LinkedIn et remonter à l'entreprise.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Recherche LinkedIn du titre "Responsable Production Amont" + aquaculture + Hérault</li>
+                            <li>Analyse de l'organigramme via les profils LinkedIn interconnectés</li>
+                            <li>Identification des personnes ayant ce titre dans les entreprises cibles</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"Sous la responsabilité du <strong>Responsable de Production</strong>" ou "Rattaché(e) à la <strong>Direction des Opérations</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 4 -->
+                <div class="vulnerability high">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-high">ÉLEVÉ</span>
+                        <h3>4. Détails de l'Équipe à Manager</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "Manager une équipe de <span class="highlight high">3 personnes</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> La taille précise de l'équipe combinée aux autres informations permet de confirmer l'identification de l'entreprise en vérifiant les effectifs via LinkedIn ou d'autres sources.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Comptage des employés sur LinkedIn dans le département concerné</li>
+                            <li>Confirmation de l'identification par recoupement avec d'autres indices</li>
+                            <li>Ciblage précis des membres de l'équipe pour approche directe</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"Manager une <strong>petite équipe</strong>" ou "Encadrer une <strong>équipe de techniciens</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 5 -->
+                <div class="vulnerability high">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-high">ÉLEVÉ</span>
+                        <h3>5. Spécialité Technique Ultra-Niche</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "Responsable <span class="highlight high">Géniteur et Sélection</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> La sélection génétique en aquaculture est une activité hyper-spécialisée pratiquée par très peu d'entreprises en France. Cette spécialité combinée à la localisation rend l'identification quasi certaine.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Liste des centres de sélection génétique aquacole en France (très limitée)</li>
+                            <li>Croisement avec entreprises pratiquant la sélection + localisation</li>
+                            <li>Identification via publications scientifiques et conférences sectorielles</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"Responsable <strong>Production et Développement Génétique</strong>" ou "Manager <strong>Amélioration Génétique</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 6 -->
+                <div class="vulnerability medium">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-medium">MOYEN</span>
+                        <h3>6. Détails Salariaux Précis</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "Package salarial : à partir de <span class="highlight medium">38K€ brut annuel</span>, primes de fin d'année (<span class="highlight medium">60% du brut mensuel sur une base de 35h</span>), prime d'objectif et participation"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Les détails très précis sur la rémunération (notamment le pourcentage exact de la prime de fin d'année) peuvent être utilisés pour confirmer l'identification de l'entreprise en questionnant des employés actuels ou passés sur leurs conditions salariales.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Confirmation via Glassdoor ou sites d'avis d'employés</li>
+                            <li>Discussion informelle avec employés actuels ou anciens</li>
+                            <li>Analyse des pratiques RH spécifiques à l'entreprise</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"Package salarial : <strong>à partir de 38K€</strong>, avec <strong>avantages incluant primes de fin d'année, prime d'objectif et participation</strong>" (retirer les pourcentages précis)</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 7 -->
+                <div class="vulnerability medium">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-medium">MOYEN</span>
+                        <h3>7. Répartition du Temps de Travail</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "1/ Gestion du cheptel et des lignées sélectionnées <span class="highlight medium">(40%)</span><br>
+                        2/ Gestion sanitaire et technique <span class="highlight medium">(10%)</span><br>
+                        3/ Gestion administrative, financière et R&D <span class="highlight medium">(20%)</span><br>
+                        4/ Encadrement, management et communication <span class="highlight medium">(30%)</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Ces pourcentages révèlent la structure organisationnelle précise du poste et les priorités de l'entreprise. Un employé actuel reconnaîtrait immédiatement cette répartition spécifique.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Reconnaissance par employés actuels de leur fiche de poste</li>
+                            <li>Comparaison avec documents internes ayant fuité</li>
+                            <li>Confirmation de l'entreprise par des détails organisationnels uniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">Remplacer les pourcentages par des priorités : "Vos <strong>missions principales</strong> incluront :" sans quantification précise.</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 8 -->
+                <div class="vulnerability medium">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-medium">MOYEN</span>
+                        <h3>8. Références aux Services Internes</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "en coordination avec le vétérinaire et le <span class="highlight medium">service QHSE</span>"<br>
+                        "en lien avec les <span class="highlight medium">services QHSE et techniques</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> La mention répétée d'un "service QHSE" (plutôt qu'un responsable unique) indique une structure organisationnelle d'une certaine taille et peut aider à confirmer l'identification de l'entreprise.
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"en coordination avec <strong>les équipes qualité et sécurité</strong>" ou "en lien avec <strong>les fonctions support</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 9 -->
+                <div class="vulnerability medium">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-medium">MOYEN</span>
+                        <h3>9. Référence au CODIR</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "pour les équipes R&D, le <span class="highlight medium">CODIR</span> et lors des revues de direction"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> La mention explicite d'un comité de direction indique la taille et la structure de gouvernance de l'entreprise, information qui peut être croisée avec d'autres données pour confirmer l'identification.
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"pour les équipes R&D et <strong>la direction</strong>" ou "pour <strong>le management et les parties prenantes</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 10 -->
+                <div class="vulnerability low">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-low">FAIBLE</span>
+                        <h3>10. Valeurs Spécifiques de l'Entreprise</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "animé(e) par des valeurs de <span class="highlight low">durabilité, de responsabilité et de progrès</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Ces valeurs, bien que génériques, peuvent être comparées aux valeurs affichées sur les sites web des entreprises candidates pour confirmation.
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">Conserver des valeurs génériques du secteur ou utiliser "passionné(e) par <strong>l'innovation et le développement durable</strong>"</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 11 -->
+                <div class="vulnerability low">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-low">FAIBLE</span>
+                        <h3>11. Type de Contrat et Durée</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "pour un poste en <span class="highlight low">CDI</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Risque faible en soi, mais combiné aux autres informations, peut aider à filtrer les recherches.
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">Peut être conservé, c'est une information standard nécessaire.</p>
+                    </div>
+                </div>
+                
+                <!-- Vulnerability 12 -->
+                <div class="vulnerability high">
+                    <div class="vulnerability-header">
+                        <span class="vulnerability-badge badge-high">ÉLEVÉ</span>
+                        <h3>12. Phrase de Conclusion Identifiable</h3>
+                    </div>
+                    
+                    <div class="original-text">
+                        <strong>Texte Original :</strong>
+                        "Rejoindre notre client, c'est intégrer un <span class="highlight high">acteur français engagé, respectueux des Hommes, des Poissons et de l'Environnement</span>"
+                    </div>
+                    
+                    <div class="risk-explanation">
+                        <strong class="icon">⚠️</strong>
+                        <strong>Risque :</strong> Cette formulation avec les majuscules spécifiques à "Hommes, Poissons et Environnement" ressemble fortement à un slogan ou une charte d'entreprise. Une recherche Google avec cette phrase exacte pourrait mener directement au client.
+                    </div>
+                    
+                    <div class="poaching-methods">
+                        <h4>💡 Méthodes d'identification possibles :</h4>
+                        <ul>
+                            <li>Recherche Google de la phrase exacte entre guillemets</li>
+                            <li>Recherche sur les sites web d'entreprises aquacoles françaises</li>
+                            <li>Analyse des chartes RSE et documents de communication</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="suggestion">
+                        <strong>✅ Suggestion de modification :</strong>
+                        <p class="suggestion-text">"Rejoindre cette entreprise, c'est intégrer un <strong>acteur engagé dans une aquaculture responsable et durable</strong>"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🎯 Scénario de Poaching Probable</h2>
+                <div class="vulnerability">
+                    <h3>Étape par Étape : Comment un concurrent identifierait votre client</h3>
+                    <ol style="margin-left: 1.5rem; color: #4a5568;">
+                        <li style="margin: 1rem 0;"><strong>Recherche initiale (5 minutes) :</strong> Google "aquaculture Balaruc-les-Bains" → Identifie 1-2 entreprises correspondantes</li>
+                        <li style="margin: 1rem 0;"><strong>Confirmation (10 minutes) :</strong> Recherche LinkedIn des employés de ces entreprises avec le titre "Responsable Production Amont" → Confirme l'entreprise cible</li>
+                        <li style="margin: 1rem 0;"><strong>Cartographie de l'équipe (20 minutes) :</strong> Analyse de l'organigramme via LinkedIn → Identifie les 3 personnes de l'équipe actuelle et leur manager</li>
+                        <li style="margin: 1rem 0;"><strong>Vérification croisée (15 minutes) :</strong> Consultation des rapports annuels, site web, et Glassdoor → Confirme les détails salariaux et la structure organisationnelle</li>
+                        <li style="margin: 1rem 0;"><strong>Action de poaching (immédiat) :</strong> Contact direct avec les employés cibles via LinkedIn ou email professionnel avec une offre compétitive</li>
+                    </ol>
+                    <p style="margin-top: 1rem; padding: 1rem; background: #fff5f5; border-radius: 4px;"><strong>⏱️ Temps total d'identification : 50 minutes maximum</strong></p>
+                </div>
+            </div>
+            
+            <div class="summary">
+                <h2>📊 Recommandations Prioritaires</h2>
+                
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h4>🚨 URGENT - À modifier immédiatement</h4>
+                        <p>• Localisation précise<br>
+                        • Description "groupe européen leader"<br>
+                        • Titre "Responsable Géniteur et Sélection"<br>
+                        • Phrase "Hommes, Poissons, Environnement"</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h4>⚠️ IMPORTANT - À modifier rapidement</h4>
+                        <p>• Taille de l'équipe (3 personnes)<br>
+                        • Titre du manager "Responsable Production Amont"<br>
+                        • Pourcentages de répartition du temps<br>
+                        • Détails salariaux ultra-précis</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h4>✅ Bonnes pratiques générales</h4>
+                        <p>• Utiliser des zones géographiques larges<br>
+                        • Éviter les superlatifs ("leader", "n°1")<br>
+                        • Généraliser les titres de postes<br>
+                        • Rester vague sur la structure org.</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h4>🎯 Objectif de réécriture</h4>
+                        <p>Réduire le score de risque de <strong>8.5/10</strong> à maximum <strong>4/10</strong><br>
+                        Identifiabilité cible : <strong>&lt;30%</strong><br>
+                        Tout en gardant l'annonce attractive</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" style="margin-top: 2rem;">
+                <h2>📝 Version Sécurisée Recommandée</h2>
+                <div style="background: #f0fff4; padding: 2rem; border-radius: 8px; border: 2px solid #48bb78;">
+                    <h3 style="color: #2f855a; margin-bottom: 1rem;">Annonce réécrite - Risque réduit à 3.5/10</h3>
+                    
+                    <div style="background: white; padding: 1.5rem; border-radius: 4px; line-height: 1.8;">
+                        <p style="margin-bottom: 1rem;"><strong>Les missions du poste</strong></p>
+                        
+                        <p style="margin-bottom: 1rem;">Exaltan RH Bordeaux, le cabinet de recrutement indépendant spécialiste des profils Experts & Cadres, résolument tourné vers l'émergence du potentiel de tous les talents qu'il accompagne.</p>
+                        
+                        <p style="margin-bottom: 1rem;">Nous recherchons, pour l'un de nos clients, <strong>acteur reconnu dans le secteur de l'aquaculture marine</strong>, un <strong>Responsable Production et Sélection Génétique F/H</strong>, basé en <strong>région Occitanie (Hérault)</strong>, pour un poste en CDI. Si vous êtes animé(e) par l'innovation et le développement durable, ce poste est fait pour vous.</p>
+                        
+                        <p style="margin-bottom: 1rem;"><strong>Vos missions :</strong></p>
+                        
+                        <p style="margin-bottom: 1rem;">Sous la responsabilité de la Direction des Opérations, vous occuperez un rôle clé dans la gestion de l'activité de sélection et de production :</p>
+                        
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li>Garantir la santé et la sécurité des géniteurs et des lignées sélectionnées</li>
+                            <li>Organiser et superviser les manipulations pour produire et sélectionner les larves</li>
+                            <li>Assurer la production conformément aux exigences du plan et des programmes de sélection</li>
+                            <li>Superviser le contrôle sanitaire du cheptel</li>
+                            <li>Garantir le bon entretien des installations et du matériel</li>
+                            <li>Gérer les stocks et participer aux projets R&D</li>
+                            <li>Analyser et communiquer les résultats techniques</li>
+                            <li>Encadrer et manager une équipe de techniciens</li>
+                        </ul>
+                        
+                        <p style="margin-bottom: 1rem;"><strong>Le profil recherché :</strong></p>
+                        
+                        <p style="margin-bottom: 1rem;">Diplômé(e) en aquaculture ou dans un domaine similaire, avec une expérience significative dans le secteur de l'aquaculture marine. Compétences en gestion sanitaire, biosécurité, et management d'équipe. Anglais scientifique apprécié.</p>
+                        
+                        <p style="margin-bottom: 1rem;"><strong>Package :</strong> À partir de 38K€ brut annuel, avec avantages incluant primes annuelles, prime d'objectif et participation.</p>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(47, 133, 90, 0.1); border-radius: 4px;">
+                        <p><strong>✅ Améliorations apportées :</strong></p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #2d3748;">
+                            <li>Localisation élargie à "région Occitanie"</li>
+                            <li>Suppression de "groupe européen leader" → "acteur reconnu"</li>
+                            <li>Titre générique "Production et Sélection Génétique"</li>
+                            <li>Suppression des pourcentages de répartition</li>
+                            <li>Suppression du nombre précis de personnes dans l'équipe</li>
+                            <li>Manager généralisé en "Direction des Opérations"</li>
+                            <li>Suppression de la phrase identifiable "Hommes, Poissons, Environnement"</li>
+                            <li>Conservation des informations essentielles pour attirer les bons candidats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>🦕 Guard Dino</strong> - Protection contre le poaching compétitif</p>
+            <p style="margin-top: 0.5rem;">Rapport généré le 4 janvier 2026 | Analyse basée sur 12 critères de vulnérabilité</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem; opacity: 0.7;">Ce rapport est confidentiel et destiné uniquement à un usage interne par Exaltan RH</p>
+        </div>
+    </div>
+</body>
+</html>
