@@ -91,10 +91,18 @@ export default function CaseStudiesGrid({
         // offsetLeft is relative to the scroll container's scrolling content (start)
         // But we need to account for padding.
         // Easier method: use scrollIntoView with block: 'nearest', inline: 'center'
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
+        // Calculate scroll position to center the element within the container
+        // This avoids using scrollIntoView which might scroll the main window if the section is off-screen
+        const container = current;
+        const cardLeft = targetElement.offsetLeft;
+        const cardWidth = targetElement.offsetWidth;
+        const containerWidth = container.offsetWidth;
+
+        const targetScrollLeft = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+
+        container.scrollTo({
+          left: targetScrollLeft,
+          behavior: 'smooth'
         });
       }
     }
